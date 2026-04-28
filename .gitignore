@@ -1,36 +1,34 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
 
 # next.js
 /.next/
 /out/
 
-# production
+# turbopack cache
+/.turbo
+
+# production build
 /build
+
+# prisma generated client (regenerated on build via `prisma generate`)
+/app/generated/prisma
+
+# env — keep .env.example committed; ignore everything else
+.env
+.env.local
+.env.*.local
+
+# vercel
+.vercel
 
 # misc
 .DS_Store
 *.pem
 
-# debug
+# debug logs
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# local env files
-.env*.local
-.env
-
-# vercel
-.vercel
-
-# typescript
+# typescript incremental build info
 *.tsbuildinfo
 next-env.d.ts
