@@ -25,9 +25,14 @@ export default function Navbar({ locale }: { locale: string }) {
             {t("opportunities")}
           </Link>
           {session && (
-            <Link href={`/${locale}/dashboard`} className="hover:text-green-700 transition">
-              {t("dashboard")}
-            </Link>
+            <>
+              <Link href={`/${locale}/dashboard`} className="hover:text-green-700 transition">
+                {t("dashboard")}
+              </Link>
+              <Link href={`/${locale}/profile`} className="hover:text-green-700 transition">
+                {t("profile")}
+              </Link>
+            </>
           )}
         </nav>
 

@@ -32,6 +32,11 @@
   },
   "opportunities": {
     "title": "Volunteer Opportunities",
+<<<<<<< HEAD
+=======
+    "intro": "Browse nearby volunteer tasks. This side is for volunteers who want to find something to join.",
+    "joinAsVolunteer": "Join as a volunteer",
+>>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
     "filter": {
       "all": "All",
       "oneTime": "One-time",
@@ -49,6 +54,10 @@
     },
     "new": {
       "title": "Post an Opportunity",
+<<<<<<< HEAD
+=======
+      "intro": "Create a request for volunteers. This side is for employers, organizers, and local groups.",
+>>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
       "aiDraftBtn": "Draft with AI",
       "fields": {
         "title": "Title",
@@ -60,6 +69,13 @@
         "endAt": "End date & time",
         "volunteersNeeded": "Volunteers needed"
       },
+<<<<<<< HEAD
+=======
+      "placeholders": {
+        "title": "e.g. Help clean the community garden",
+        "description": "Describe the work, schedule, location, and what volunteers should know."
+      },
+>>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
       "submit": "Publish",
       "saveDraft": "Save as Draft"
     },
@@ -97,12 +113,73 @@
   },
   "auth": {
     "signInTitle": "Sign in to Go Touch Grass",
+    "loginTab": "Sign in",
+    "registerTab": "Register",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
     "emailLabel": "Email address",
     "emailPlaceholder": "you@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "signInWithPassword": "Sign in",
+    "signingIn": "Signing in...",
+    "createVolunteerAccount": "Create volunteer account",
+    "createRequesterAccount": "Create employer account",
+    "creatingAccount": "Creating account...",
+    "volunteerRegisterNote": "You are creating a volunteer account for browsing and applying to opportunities.",
+    "requesterRegisterNote": "You are creating an employer account for posting volunteer opportunities.",
+    "emailPasswordIncorrect": "Email or password is incorrect.",
     "continueWithGoogle": "Continue with Google",
-    "continueWithEmail": "Continue with Email",
-    "checkEmail": "Check your email for a sign-in link.",
-    "noAccount": "Don't have an account? Sign in to create one automatically."
+    "noAccount": "Sign in or create a volunteer account to continue."
+  },
+  "profile": {
+    "setupTitle": "Set up your profile",
+    "editTitle": "Edit profile",
+    "volunteerSetupIntro": "Tell the platform what you are interested in, where you are, and when you can usually help.",
+    "requesterSetupIntro": "Tell volunteers who is posting the opportunity and what kind of environment they can expect.",
+    "volunteerEditIntro": "Update your volunteer details so future recommendations and applications fit you better.",
+    "requesterEditIntro": "Update your organizer profile so volunteers understand your group and location.",
+    "savedMessage": "Profile saved.",
+    "finishSetup": "Finish setup",
+    "saveChanges": "Save changes",
+    "fields": {
+      "name": "Display name",
+      "email": "Email",
+      "prefecture": "Prefecture",
+      "city": "City / area",
+      "bio": "Bio",
+      "availability": "General availability",
+      "environment": "Preferred environment",
+      "interests": "Interest tags",
+      "skills": "Skill tags",
+      "languages": "Languages",
+      "preferredTaskTypes": "Preferred task types",
+      "organizationName": "Organization name",
+      "organizationType": "Organization type",
+      "description": "Description",
+      "website": "Website",
+      "address": "Address"
+    },
+    "placeholders": {
+      "availability": "weekends, evenings",
+      "interests": "gardening, cooking, crafts",
+      "skills": "teaching, translation, repair",
+      "languages": "Japanese, English",
+      "preferredTaskTypes": "outdoor, event support"
+    },
+    "environment": {
+      "either": "Either",
+      "relaxed": "Relaxed",
+      "structured": "Structured",
+      "mixed": "Mixed"
+    },
+    "organizationTypes": {
+      "individual": "Individual",
+      "company": "Company / small business",
+      "npo": "NPO",
+      "community": "Community group",
+      "municipal": "Municipality"
+    }
   },
   "common": {
     "loading": "Loading…",

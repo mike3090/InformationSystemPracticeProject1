@@ -32,6 +32,11 @@
   },
   "opportunities": {
     "title": "ボランティア募集一覧",
+<<<<<<< HEAD
+=======
+    "intro": "参加できるボランティア募集を探せます。このページはボランティア向けです。",
+    "joinAsVolunteer": "ボランティアとして登録",
+>>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
     "filter": {
       "all": "すべて",
       "oneTime": "単発",
@@ -49,6 +54,10 @@
     },
     "new": {
       "title": "ボランティア募集を投稿する",
+<<<<<<< HEAD
+=======
+      "intro": "ボランティアを募集する依頼を作成します。このページは依頼者・主催者向けです。",
+>>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
       "aiDraftBtn": "AIで下書きを作成",
       "fields": {
         "title": "タイトル",
@@ -60,6 +69,13 @@
         "endAt": "終了日時",
         "volunteersNeeded": "募集人数"
       },
+<<<<<<< HEAD
+=======
+      "placeholders": {
+        "title": "例：地域の花壇整備を手伝ってほしい",
+        "description": "作業内容、日時、場所、ボランティアに伝えたいことを記入してください。"
+      },
+>>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
       "submit": "公開する",
       "saveDraft": "下書き保存"
     },
@@ -97,12 +113,73 @@
   },
   "auth": {
     "signInTitle": "Go Touch Grass にログイン",
+    "loginTab": "ログイン",
+    "registerTab": "登録",
+    "nameLabel": "名前",
+    "namePlaceholder": "あなたの名前",
     "emailLabel": "メールアドレス",
     "emailPlaceholder": "example@email.com",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワード",
+    "signInWithPassword": "ログイン",
+    "signingIn": "ログイン中...",
+    "createVolunteerAccount": "ボランティア登録",
+    "createRequesterAccount": "依頼者登録",
+    "creatingAccount": "登録中...",
+    "volunteerRegisterNote": "ボランティア募集を探して応募するためのアカウントを作成します。",
+    "requesterRegisterNote": "ボランティア募集を投稿する依頼者アカウントを作成します。",
+    "emailPasswordIncorrect": "メールアドレスまたはパスワードが正しくありません。",
     "continueWithGoogle": "Googleでログイン",
-    "continueWithEmail": "メールでログイン",
-    "checkEmail": "ログイン用のリンクをメールで送信しました。",
-    "noAccount": "アカウントをお持ちでない方はログイン時に自動作成されます。"
+    "noAccount": "ログインまたはボランティア登録をしてください。"
+  },
+  "profile": {
+    "setupTitle": "プロフィール設定",
+    "editTitle": "プロフィール編集",
+    "volunteerSetupIntro": "興味のある活動、地域、参加しやすい時間帯を設定します。",
+    "requesterSetupIntro": "ボランティアに表示される依頼者・団体情報を設定します。",
+    "volunteerEditIntro": "おすすめや応募に使うボランティア情報を更新できます。",
+    "requesterEditIntro": "ボランティアが安心して応募できるよう、団体情報や場所を更新できます。",
+    "savedMessage": "プロフィールを保存しました。",
+    "finishSetup": "設定を完了",
+    "saveChanges": "保存",
+    "fields": {
+      "name": "表示名",
+      "email": "メールアドレス",
+      "prefecture": "都道府県",
+      "city": "市区町村・エリア",
+      "bio": "自己紹介",
+      "availability": "参加しやすい時間帯",
+      "environment": "希望する雰囲気",
+      "interests": "興味タグ",
+      "skills": "スキルタグ",
+      "languages": "対応言語",
+      "preferredTaskTypes": "希望する活動タイプ",
+      "organizationName": "団体名",
+      "organizationType": "団体タイプ",
+      "description": "説明",
+      "website": "Webサイト",
+      "address": "住所"
+    },
+    "placeholders": {
+      "availability": "週末, 平日夜",
+      "interests": "園芸, 料理, クラフト",
+      "skills": "教育, 翻訳, 修理",
+      "languages": "日本語, 英語",
+      "preferredTaskTypes": "屋外作業, イベント補助"
+    },
+    "environment": {
+      "either": "どちらでもよい",
+      "relaxed": "ゆったり",
+      "structured": "きっちり",
+      "mixed": "混合"
+    },
+    "organizationTypes": {
+      "individual": "個人",
+      "company": "会社・小規模事業者",
+      "npo": "NPO",
+      "community": "地域団体",
+      "municipal": "自治体"
+    }
   },
   "common": {
     "loading": "読み込み中…",

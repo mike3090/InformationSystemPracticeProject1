@@ -33,6 +33,7 @@ enum OpportunityStatus {
 enum ApplicationStatus {
   PENDING
   ACCEPTED
+  WAITLISTED
   REJECTED
   WITHDRAWN
 }
@@ -87,6 +88,7 @@ model VerificationToken {
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
+  passwordHash  String?
   emailVerified DateTime?
   name          String?
   image         String?
@@ -105,33 +107,40 @@ model User {
 }
 
 model VolunteerProfile {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  bio          String?  @db.Text
-  skills       String[]
-  languages    String[]
-  availability String?
-  prefecture   String?
-  city         String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                        String   @id @default(cuid())
+  userId                    String   @unique
+  bio                       String?  @db.Text
+  skills                    String[] @default([])
+  interests                 String[] @default([])
+  languages                 String[] @default([])
+  availability              String?
+  preferredTaskTypes        String[] @default([])
+  preferredEnvironmentStyle String   @default("either")
+  profileCompleted          Boolean  @default(false)
+  prefecture                String?
+  city                      String?
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Organization {
-  id          String           @id @default(cuid())
-  userId      String           @unique
-  name        String
-  nameJa      String?
-  type        OrganizationType @default(INDIVIDUAL)
-  description String?          @db.Text
-  prefecture  String?
-  city        String?
-  address     String?
-  website     String?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id               String           @id @default(cuid())
+  userId           String           @unique
+  name             String
+  nameJa           String?
+  contactName      String?
+  type             OrganizationType @default(INDIVIDUAL)
+  description      String?          @db.Text
+  environmentStyle String           @default("mixed")
+  prefecture       String?
+  city             String?
+  address          String?
+  website          String?
+  profileCompleted Boolean          @default(false)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
   user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   opportunities Opportunity[]
@@ -153,6 +162,7 @@ model Opportunity {
   endAt            DateTime?
   recurrenceRule   String?
   volunteersNeeded Int               @default(1)
+  allowMultipleTaskSelection Boolean  @default(false)
   requesterId      String
   organizationId   String?
   aiDrafted        Boolean           @default(false)
@@ -169,10 +179,16 @@ model Application {
   opportunityId String
   volunteerId   String
   status        ApplicationStatus @default(PENDING)
+  selectedTaskItems Json          @default("[]")
+  confirmedTimeCommitment Boolean @default(false)
+  skillTags     String[]          @default([])
+  experienceNote String?          @db.Text
   message       String?           @db.Text
+  waitlistPosition Int?
   matchScore    Float?
   aiRecommended Boolean           @default(false)
   reviewedAt    DateTime?
+  withdrawnAt   DateTime?
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
