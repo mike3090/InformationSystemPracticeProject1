@@ -1,0 +1,186 @@
+{
+  "nav": {
+    "home": "Home",
+    "opportunities": "Opportunities",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "postOpportunity": "Post an Opportunity"
+  },
+  "home": {
+    "hero": {
+      "title": "Connect with Your Community",
+      "subtitle": "Go Touch Grass bridges volunteers and local needs across small-town Japan.",
+      "ctaVolunteer": "Find Opportunities",
+      "ctaRequester": "Post a Need"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1Title": "Post a Need",
+      "step1Desc": "Residents, businesses, and organisations post volunteer opportunities with location, time, and skills needed.",
+      "step2Title": "Browse & Apply",
+      "step2Desc": "Volunteers browse nearby opportunities, filter by skill and schedule, and apply with a message.",
+      "step3Title": "AI Matching",
+      "step3Desc": "Our AI agent reviews applicants, scores matches, and helps requesters confirm the best fit."
+    },
+    "stats": {
+      "opportunities": "Opportunities",
+      "volunteers": "Volunteers",
+      "towns": "Towns"
+    }
+  },
+  "opportunities": {
+    "title": "Volunteer Opportunities",
+    "intro": "Browse nearby volunteer tasks. This side is for volunteers who want to find something to join.",
+    "joinAsVolunteer": "Join as a volunteer",
+    "filter": {
+      "all": "All",
+      "oneTime": "One-time",
+      "recurring": "Recurring",
+      "event": "Event",
+      "search": "Search by keyword or location…",
+      "skills": "Skills"
+    },
+    "card": {
+      "apply": "Apply",
+      "applied": "Applied",
+      "viewDetails": "View Details",
+      "spotsLeft": "{count} spot(s) left",
+      "deadline": "By {date}"
+    },
+    "new": {
+      "title": "Post an Opportunity",
+      "intro": "Create a request for volunteers. This side is for employers, organizers, and local groups.",
+      "aiDraftBtn": "Draft with AI",
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "type": "Type",
+        "skills": "Skills needed (comma-separated)",
+        "location": "City / Town",
+        "startAt": "Start date & time",
+        "endAt": "End date & time",
+        "volunteersNeeded": "Volunteers needed"
+      },
+      "placeholders": {
+        "title": "e.g. Help clean the community garden",
+        "description": "Describe the work, schedule, location, and what volunteers should know."
+      },
+      "submit": "Publish",
+      "saveDraft": "Save as Draft"
+    },
+    "status": {
+      "DRAFT": "Draft",
+      "OPEN": "Open",
+      "FILLED": "Filled",
+      "CANCELLED": "Cancelled",
+      "COMPLETED": "Completed"
+    }
+  },
+  "application": {
+    "title": "Apply to Volunteer",
+    "messagePlaceholder": "Tell the requester why you're a great fit…",
+    "submit": "Submit Application",
+    "status": {
+      "PENDING": "Pending",
+      "ACCEPTED": "Accepted",
+      "REJECTED": "Not selected",
+      "WITHDRAWN": "Withdrawn"
+    }
+  },
+  "dashboard": {
+    "requester": {
+      "title": "Requester Dashboard",
+      "myOpportunities": "My Opportunities",
+      "applicants": "Applicants",
+      "runAiMatch": "Run AI Match"
+    },
+    "volunteer": {
+      "title": "Volunteer Dashboard",
+      "myApplications": "My Applications",
+      "recommended": "Recommended for You"
+    }
+  },
+  "auth": {
+    "signInTitle": "Sign in to Go Touch Grass",
+    "loginTab": "Sign in",
+    "registerTab": "Register",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "signInWithPassword": "Sign in",
+    "signingIn": "Signing in...",
+    "createVolunteerAccount": "Create volunteer account",
+    "createRequesterAccount": "Create employer account",
+    "creatingAccount": "Creating account...",
+    "volunteerRegisterNote": "You are creating a volunteer account for browsing and applying to opportunities.",
+    "requesterRegisterNote": "You are creating an employer account for posting volunteer opportunities.",
+    "emailPasswordIncorrect": "Email or password is incorrect.",
+    "continueWithGoogle": "Continue with Google",
+    "noAccount": "Sign in or create a volunteer account to continue."
+  },
+  "profile": {
+    "setupTitle": "Set up your profile",
+    "editTitle": "Edit profile",
+    "volunteerSetupIntro": "Tell the platform what you are interested in, where you are, and when you can usually help.",
+    "requesterSetupIntro": "Tell volunteers who is posting the opportunity and what kind of environment they can expect.",
+    "volunteerEditIntro": "Update your volunteer details so future recommendations and applications fit you better.",
+    "requesterEditIntro": "Update your organizer profile so volunteers understand your group and location.",
+    "savedMessage": "Profile saved.",
+    "finishSetup": "Finish setup",
+    "saveChanges": "Save changes",
+    "fields": {
+      "name": "Display name",
+      "email": "Email",
+      "prefecture": "Prefecture",
+      "city": "City / area",
+      "bio": "Bio",
+      "availability": "General availability",
+      "environment": "Preferred environment",
+      "interests": "Interest tags",
+      "skills": "Skill tags",
+      "languages": "Languages",
+      "preferredTaskTypes": "Preferred task types",
+      "organizationName": "Organization name",
+      "organizationType": "Organization type",
+      "description": "Description",
+      "website": "Website",
+      "address": "Address"
+    },
+    "placeholders": {
+      "availability": "weekends, evenings",
+      "interests": "gardening, cooking, crafts",
+      "skills": "teaching, translation, repair",
+      "languages": "Japanese, English",
+      "preferredTaskTypes": "outdoor, event support"
+    },
+    "environment": {
+      "either": "Either",
+      "relaxed": "Relaxed",
+      "structured": "Structured",
+      "mixed": "Mixed"
+    },
+    "organizationTypes": {
+      "individual": "Individual",
+      "company": "Company / small business",
+      "npo": "NPO",
+      "community": "Community group",
+      "municipal": "Municipality"
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit"
+  }
+}
