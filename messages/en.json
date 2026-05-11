@@ -90,16 +90,31 @@
     }
   },
   "dashboard": {
+    "eyebrow": "Dashboard",
     "requester": {
       "title": "Requester Dashboard",
+      "intro": "Review your posted opportunities and keep an eye on incoming applicants.",
       "myOpportunities": "My Opportunities",
       "applicants": "Applicants",
-      "runAiMatch": "Run AI Match"
+      "runAiMatch": "Run AI Match",
+      "empty": "Posted opportunities will appear here after you publish or save one.",
+      "postOpportunity": "Post an opportunity"
     },
     "volunteer": {
       "title": "Volunteer Dashboard",
+      "intro": "Track every activity you applied for, with status, schedule, location, and task details.",
       "myApplications": "My Applications",
-      "recommended": "Recommended for You"
+      "applicationSummary": "{count} application(s) on your account",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "noUpcoming": "No upcoming applications.",
+      "noPast": "Past activities will be shown here after they finish.",
+      "listView": "List",
+      "calendarView": "Calendar",
+      "calendarEmpty": "No applications scheduled in this month.",
+      "recommended": "Recommended for You",
+      "recommendedIntro": "Your profile and application history can be used for recommendations as more matching logic is added.",
+      "findMore": "Find opportunities"
     }
   },
   "auth": {

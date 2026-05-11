@@ -90,16 +90,31 @@
     }
   },
   "dashboard": {
+    "eyebrow": "ダッシュボード",
     "requester": {
       "title": "依頼者ダッシュボード",
+      "intro": "投稿した募集と応募状況を確認できます。",
       "myOpportunities": "自分の募集",
       "applicants": "応募者",
-      "runAiMatch": "AIマッチングを実行"
+      "runAiMatch": "AIマッチングを実行",
+      "empty": "募集を公開または下書き保存すると、ここに表示されます。",
+      "postOpportunity": "募集を投稿する"
     },
     "volunteer": {
       "title": "ボランティアダッシュボード",
+      "intro": "応募した活動のステータス、日時、場所、担当タスクを確認できます。",
       "myApplications": "応募履歴",
-      "recommended": "おすすめの募集"
+      "applicationSummary": "このアカウントの応募 {count} 件",
+      "upcoming": "今後の予定",
+      "past": "過去の活動",
+      "noUpcoming": "今後の応募はありません。",
+      "noPast": "活動終了後、過去の応募がここに表示されます。",
+      "listView": "リスト",
+      "calendarView": "カレンダー",
+      "calendarEmpty": "この月に予定されている応募はありません。",
+      "recommended": "おすすめの募集",
+      "recommendedIntro": "今後マッチング機能が増えると、プロフィールや応募履歴を使っておすすめを表示できます。",
+      "findMore": "募集を探す"
     }
   },
   "auth": {
