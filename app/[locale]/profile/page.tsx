@@ -29,12 +29,16 @@ export default async function ProfilePage({
   }
 
   const t = await getTranslations("profile");
+  const profileType =
+    user.role === "REQUESTER" || user.role === "BOTH" || user.role === "ADMIN"
+      ? "requester"
+      : "volunteer";
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-10">
       <h1 className="text-3xl font-bold text-stone-900">{t("editTitle")}</h1>
       <p className="mt-2 max-w-2xl text-sm text-stone-600">
-        {user.role === "REQUESTER" ? t("requesterEditIntro") : t("volunteerEditIntro")}
+        {profileType === "requester" ? t("requesterEditIntro") : t("volunteerEditIntro")}
       </p>
       {saved === "1" && (
         <div className="mt-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800">
@@ -46,6 +50,7 @@ export default async function ProfilePage({
         locale={locale}
         next={`/${locale}/profile`}
         mode="edit"
+        profileType={profileType}
         labels={profileLabels(t)}
       />
     </div>

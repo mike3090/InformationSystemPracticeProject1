@@ -113,6 +113,10 @@
   },
   "auth": {
     "signInTitle": "Sign in to Go Touch Grass",
+    "volunteerSignInTitle": "Sign in as a volunteer",
+    "requesterSignInTitle": "Sign in as an employer",
+    "volunteerSignInIntro": "Use this entrance to find opportunities and apply as a volunteer.",
+    "requesterSignInIntro": "Use this entrance to post needs and manage volunteer opportunities.",
     "loginTab": "Sign in",
     "registerTab": "Register",
     "nameLabel": "Name",
@@ -130,7 +134,7 @@
     "requesterRegisterNote": "You are creating an employer account for posting volunteer opportunities.",
     "emailPasswordIncorrect": "Email or password is incorrect.",
     "continueWithGoogle": "Continue with Google",
-    "noAccount": "Sign in or create a volunteer account to continue."
+    "noAccount": "Sign in or create an account to continue."
   },
   "profile": {
     "setupTitle": "Set up your profile",
@@ -142,6 +146,12 @@
     "savedMessage": "Profile saved.",
     "finishSetup": "Finish setup",
     "saveChanges": "Save changes",
+    "becomeRequesterTitle": "Add employer access",
+    "becomeRequesterBody": "Your current account is set up for volunteering. To post a need, add an employer profile to this same account. Your volunteer profile will stay available.",
+    "becomeRequesterSubmit": "Continue as employer",
+    "becomeVolunteerTitle": "Add volunteer access",
+    "becomeVolunteerBody": "Your current account is set up for posting needs. To apply for opportunities, add a volunteer profile to this same account. Your employer profile will stay available.",
+    "becomeVolunteerSubmit": "Continue as volunteer",
     "fields": {
       "name": "Display name",
       "email": "Email",

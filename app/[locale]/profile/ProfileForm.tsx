@@ -15,20 +15,23 @@ export default function ProfileForm({
   locale,
   next,
   mode,
+  profileType,
   labels,
 }: {
   user: ProfileUser;
   locale: string;
   next: string;
   mode: "setup" | "edit";
+  profileType: "volunteer" | "requester";
   labels: Record<string, string>;
 }) {
-  const isRequester = user.role === "REQUESTER";
+  const isRequester = profileType === "requester";
 
   return (
     <form action={saveProfile} className="mt-8 space-y-6 rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
       <input type="hidden" name="next" value={next} />
       <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="profileType" value={profileType} />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">

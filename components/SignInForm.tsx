@@ -12,14 +12,13 @@ const initialRegisterState: RegisterState = {
 export default function SignInForm({
   locale,
   callbackUrl,
+  accountIntent,
 }: {
   locale: string;
   callbackUrl: string;
+  accountIntent: "volunteer" | "requester";
 }) {
   const t = useTranslations("auth");
-  const accountType = callbackUrl.includes("/opportunities/new")
-    ? "requester"
-    : "volunteer";
   const [mode, setMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +46,7 @@ export default function SignInForm({
         return;
       }
 
-      window.location.href = `/${locale}/profile/setup?next=${encodeURIComponent(callbackUrl)}`;
+      window.location.href = `/${locale}/profile/setup?intent=${accountIntent}&next=${encodeURIComponent(callbackUrl)}`;
     });
   }
 
@@ -114,9 +113,9 @@ export default function SignInForm({
       ) : (
         <form action={registerAction} className="space-y-3">
           <input type="hidden" name="locale" value={locale} />
-          <input type="hidden" name="accountType" value={accountType} />
+          <input type="hidden" name="accountType" value={accountIntent} />
           <p className="rounded-lg border border-green-100 bg-green-50 px-3 py-2 text-sm text-green-800">
-            {accountType === "requester"
+            {accountIntent === "requester"
               ? t("requesterRegisterNote")
               : t("volunteerRegisterNote")}
           </p>
@@ -167,7 +166,7 @@ export default function SignInForm({
           >
             {isRegisterPending
               ? t("creatingAccount")
-              : accountType === "requester"
+              : accountIntent === "requester"
                 ? t("createRequesterAccount")
                 : t("createVolunteerAccount")}
           </button>
@@ -177,7 +176,7 @@ export default function SignInForm({
       <button
         onClick={() =>
           signIn("google", {
-            callbackUrl: `/${locale}/profile/setup?next=${encodeURIComponent(callbackUrl)}`,
+            callbackUrl: `/${locale}/profile/setup?intent=${accountIntent}&next=${encodeURIComponent(callbackUrl)}`,
           })
         }
         className="w-full flex items-center justify-center gap-3 border border-stone-300 rounded-lg px-4 py-3 text-sm font-medium hover:bg-stone-50 transition"
