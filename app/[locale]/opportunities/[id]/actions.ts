@@ -162,7 +162,7 @@ export async function submitEventApplication(
             WHERE "opportunityId" = ${opportunityId}
               AND "status" = 'WAITLISTED'
           `
-        )[0]?.count ?? 0n,
+        )[0]?.count ?? BigInt(0),
       ) + 1
     : null;
 

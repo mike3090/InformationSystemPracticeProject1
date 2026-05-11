@@ -46,6 +46,7 @@ export default function OpportunityDiscovery({
   const [selectedDurations, setSelectedDurations] = useState<DurationFilter[]>([]);
   const [selectedEfforts, setSelectedEfforts] = useState<EffortFilter[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [currentTime] = useState(() => Date.now());
 
   const categories = useMemo(
     () => unique(opportunities.map((opportunity) => opportunity.category)),
@@ -65,7 +66,7 @@ export default function OpportunityDiscovery({
 
   const filteredOpportunities = useMemo(() => {
     return opportunities
-      .filter((opportunity) => new Date(opportunity.startsAt).getTime() > Date.now())
+      .filter((opportunity) => new Date(opportunity.startsAt).getTime() > currentTime)
       .filter((opportunity) =>
         selectedCategories.length === 0
           ? true
@@ -135,6 +136,7 @@ export default function OpportunityDiscovery({
       )
       .slice(0, 20);
   }, [
+    currentTime,
     opportunities,
     query,
     selectedCategories,
