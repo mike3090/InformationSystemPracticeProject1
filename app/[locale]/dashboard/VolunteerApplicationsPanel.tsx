@@ -16,6 +16,7 @@ export type DashboardApplicationView = {
   waitlistPosition: number | null;
   createdAt: string;
   opportunity: {
+    id: string;
     title: string;
     city: string | null;
     prefecture: string | null;
@@ -51,11 +52,26 @@ export default function VolunteerApplicationsPanel({
 }: VolunteerApplicationsPanelProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [now] = useState(() => new Date());
-  const upcomingApplications = applications.filter((application) => {
+  const confirmedApplications = applications.filter(
+    (application) => application.status === "ACCEPTED",
+  );
+  const activeApplications = applications.filter(
+    (application) =>
+      application.status !== "ACCEPTED" &&
+      application.status !== "REJECTED" &&
+      application.status !== "WITHDRAWN",
+  );
+  const cancelledApplications = applications.filter(
+    (application) =>
+      application.status === "REJECTED" ||
+      application.status === "WITHDRAWN" ||
+      application.opportunity.status === "CANCELLED",
+  );
+  const upcomingApplications = confirmedApplications.filter((application) => {
     const endAt = parseDate(application.opportunity.endAt);
     return !endAt || endAt >= now;
   });
-  const pastApplications = applications.filter((application) => {
+  const pastApplications = confirmedApplications.filter((application) => {
     const endAt = parseDate(application.opportunity.endAt);
     return endAt ? endAt < now : false;
   });
@@ -111,16 +127,38 @@ export default function VolunteerApplicationsPanel({
       ) : (
         <div className="mt-6 space-y-8">
           <ApplicationSection
-            title={labels.upcoming}
+            title={locale === "en" ? "My Events" : "参加予定のイベント"}
             applications={upcomingApplications}
             locale={locale}
             emptyText={labels.noUpcoming}
+            linkTarget="event"
+          />
+          <ApplicationSection
+            title={locale === "en" ? "My Applications" : "応募中"}
+            applications={activeApplications}
+            locale={locale}
+            emptyText={
+              locale === "en"
+                ? "Pending and waitlisted applications will appear here."
+                : "審査中・ウェイトリストの応募がここに表示されます。"
+            }
           />
           <ApplicationSection
             title={labels.past}
             applications={pastApplications}
             locale={locale}
             emptyText={labels.noPast}
+            linkTarget="event"
+          />
+          <ApplicationSection
+            title={locale === "en" ? "Cancelled" : "キャンセル"}
+            applications={cancelledApplications}
+            locale={locale}
+            emptyText={
+              locale === "en"
+                ? "Cancelled or withdrawn activities will appear here."
+                : "キャンセル・辞退した活動がここに表示されます。"
+            }
           />
         </div>
       )}
@@ -269,11 +307,13 @@ function ApplicationSection({
   applications,
   locale,
   emptyText,
+  linkTarget = "application",
 }: {
   title: string;
   applications: DashboardApplicationView[];
   locale: string;
   emptyText: string;
+  linkTarget?: "application" | "event";
 }) {
   return (
     <section>
@@ -289,6 +329,7 @@ function ApplicationSection({
               key={application.id}
               application={application}
               locale={locale}
+              linkTarget={linkTarget}
             />
           ))}
         </div>
@@ -300,9 +341,11 @@ function ApplicationSection({
 function ApplicationCard({
   application,
   locale,
+  linkTarget,
 }: {
   application: DashboardApplicationView;
   locale: string;
+  linkTarget: "application" | "event";
 }) {
   const statusView = getApplicationStatusView(
     application.status,
@@ -317,7 +360,11 @@ function ApplicationCard({
 
   return (
     <Link
-      href={`/${locale}/dashboard/applications/${application.id}`}
+      href={
+        linkTarget === "event"
+          ? `/${locale}/opportunities/${application.opportunity.id}`
+          : `/${locale}/dashboard/applications/${application.id}`
+      }
       className="grid gap-4 rounded-lg border border-stone-200 p-4 transition hover:border-green-300 hover:bg-green-50/40 md:grid-cols-[1fr_auto]"
     >
       <div>
@@ -343,7 +390,13 @@ function ApplicationCard({
         </p>
       </div>
       <div className="text-sm font-semibold text-green-700">
-        {locale === "en" ? "View details" : "詳細を見る"}
+        {linkTarget === "event"
+          ? locale === "en"
+            ? "Open event"
+            : "イベントを見る"
+          : locale === "en"
+            ? "View details"
+            : "詳細を見る"}
       </div>
     </Link>
   );

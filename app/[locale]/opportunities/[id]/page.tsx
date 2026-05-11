@@ -8,6 +8,10 @@ import {
   getMockOpportunity,
   getOpportunityCoverImage,
 } from "@/lib/mockOpportunities";
+import {
+  hasArrivalGuidance,
+  type ArrivalGuidance,
+} from "@/lib/preEventCommunication";
 
 type ExistingApplication = {
   status: string;
@@ -68,6 +72,10 @@ export default async function OpportunityDetailPage({
   const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
     opportunity.address,
   )}&output=embed`;
+  const arrivalGuidance = getMockArrivalGuidance(opportunity);
+  const showArrivalGuidance =
+    existingApplication?.status === "ACCEPTED" &&
+    hasArrivalGuidance(arrivalGuidance);
 
   return (
     <div className="bg-stone-50 pb-28 md:pb-0">
@@ -175,6 +183,13 @@ export default async function OpportunityDetailPage({
             </div>
           </section>
 
+          {showArrivalGuidance && (
+            <ArrivalGuidanceSection
+              guidance={arrivalGuidance}
+              locale={locale}
+            />
+          )}
+
           <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
@@ -238,6 +253,85 @@ export default async function OpportunityDetailPage({
         hasScheduleConflict={hasScheduleConflict}
       />
     </div>
+  );
+}
+
+function getMockArrivalGuidance(
+  opportunity: NonNullable<ReturnType<typeof getMockOpportunity>>,
+): ArrivalGuidance {
+  return {
+    arrivalGuidance: opportunity.arrivalGuidance ?? null,
+    firstLandmarkDescription: opportunity.firstLandmarkDescription ?? null,
+    firstLandmarkImageUrl: opportunity.firstLandmarkImageUrl ?? null,
+    firstContactName: opportunity.firstContactName ?? null,
+    firstContactRole: opportunity.firstContactRole ?? null,
+    firstContactImageUrl: opportunity.firstContactImageUrl ?? null,
+    thingsToBring: opportunity.thingsToBring ?? [],
+  };
+}
+
+function ArrivalGuidanceSection({
+  guidance,
+  locale,
+}: {
+  guidance: ArrivalGuidance;
+  locale: string;
+}) {
+  return (
+    <section className="rounded-lg border border-green-200 bg-green-50 p-6 shadow-sm">
+      <SectionLabel
+        number="3A"
+        title={locale === "en" ? "When you arrive" : "到着したら"}
+      />
+      <div className="mt-4 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          {guidance.arrivalGuidance && (
+            <p className="text-sm leading-6 text-green-950">
+              {guidance.arrivalGuidance}
+            </p>
+          )}
+          {guidance.firstLandmarkDescription && (
+            <div className="mt-4 rounded-lg border border-green-200 bg-white/70 p-4">
+              <h3 className="font-semibold text-green-950">
+                {locale === "en" ? "First landmark" : "最初の目印"}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-green-900">
+                {guidance.firstLandmarkDescription}
+              </p>
+            </div>
+          )}
+          {(guidance.firstContactName || guidance.firstContactRole) && (
+            <div className="mt-4 flex items-center gap-4 rounded-lg border border-green-200 bg-white/70 p-4">
+              {guidance.firstContactImageUrl && (
+                <img
+                  src={guidance.firstContactImageUrl}
+                  alt=""
+                  className="h-16 w-16 rounded-lg object-cover"
+                />
+              )}
+              <div>
+                <h3 className="font-semibold text-green-950">
+                  {guidance.firstContactName ||
+                    (locale === "en" ? "First contact" : "最初に会う人")}
+                </h3>
+                {guidance.firstContactRole && (
+                  <p className="mt-1 text-sm text-green-900">
+                    {guidance.firstContactRole}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+        {guidance.firstLandmarkImageUrl && (
+          <img
+            src={guidance.firstLandmarkImageUrl}
+            alt=""
+            className="h-72 w-full rounded-lg object-cover"
+          />
+        )}
+      </div>
+    </section>
   );
 }
 

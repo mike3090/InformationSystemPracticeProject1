@@ -8,6 +8,14 @@ import {
   type ApplicationStatusView,
 } from "../../applicationStatus";
 import ApplicationReviewForm from "./ApplicationReviewForm";
+import {
+  OrganizerReplyForm,
+  OrganizerUpdateForm,
+} from "./OrganizerCommunicationForms";
+import {
+  getEventMessages,
+  type EventMessageView,
+} from "@/lib/preEventCommunication";
 
 type OpportunityReview = {
   id: string;
@@ -39,9 +47,10 @@ type ApplicantReview = {
   volunteerCity: string | null;
   volunteerPrefecture: string | null;
   volunteerBio: string | null;
+  messages: EventMessageView[];
 };
 
-type RawApplicantReview = ApplicantReview;
+type RawApplicantReview = Omit<ApplicantReview, "messages">;
 
 export default async function RequesterOpportunityReviewPage({
   params,
@@ -143,6 +152,18 @@ export default async function RequesterOpportunityReviewPage({
         </section>
 
         <section className="mt-6 rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-stone-950">
+            {locale === "en" ? "Send organizer update" : "主催者からのお知らせ"}
+          </h2>
+          <p className="mt-1 text-sm leading-6 text-stone-600">
+            {locale === "en"
+              ? "Broadcast a change or announcement to all confirmed volunteers."
+              : "参加確定者全員に変更やお知らせを送信できます。"}
+          </p>
+          <OrganizerUpdateForm locale={locale} opportunityId={opportunity.id} />
+        </section>
+
+        <section className="mt-6 rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="text-xl font-bold text-stone-950">
@@ -213,7 +234,12 @@ async function getApplicants(opportunityId: string): Promise<ApplicantReview[]> 
       a."createdAt" ASC
   `;
 
-  return rows;
+  return Promise.all(
+    rows.map(async (row) => ({
+      ...row,
+      messages: await getEventMessages(row.id),
+    })),
+  );
 }
 
 function ApplicantCard({
@@ -342,6 +368,46 @@ function ApplicantCard({
               )}`
             : ""}
         </p>
+
+        {applicant.status === "ACCEPTED" && (
+          <div className="mt-4 rounded-lg border border-stone-200 bg-stone-50 p-4">
+            <h4 className="font-semibold text-stone-950">
+              {locale === "en" ? "Message thread" : "メッセージ"}
+            </h4>
+            {applicant.messages.length === 0 ? (
+              <p className="mt-2 text-sm text-stone-600">
+                {locale === "en"
+                  ? "No direct messages yet."
+                  : "まだ直接メッセージはありません。"}
+              </p>
+            ) : (
+              <div className="mt-3 space-y-2">
+                {applicant.messages.map((message) => (
+                  <p
+                    key={message.id}
+                    className="rounded-lg border border-stone-200 bg-white p-3 text-sm text-stone-700"
+                  >
+                    <span className="font-semibold text-stone-950">
+                      {message.senderName ||
+                        (message.senderId === applicant.volunteerId
+                          ? volunteerName
+                          : locale === "en"
+                            ? "Organizer"
+                            : "主催者")}
+                      :{" "}
+                    </span>
+                    {message.body}
+                  </p>
+                ))}
+              </div>
+            )}
+            <OrganizerReplyForm
+              locale={locale}
+              opportunityId={opportunity.id}
+              applicationId={applicant.id}
+            />
+          </div>
+        )}
       </div>
 
       <div className="lg:w-56">

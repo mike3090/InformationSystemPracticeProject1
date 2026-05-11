@@ -81,6 +81,8 @@ function VolunteerFields({
   profile: VolunteerProfile | null;
   labels: Record<string, string>;
 }) {
+  const reminders = getReminderPreferences(profile);
+
   return (
     <>
       <div className="grid gap-5 sm:grid-cols-2">
@@ -170,7 +172,73 @@ function VolunteerFields({
           placeholder={labels.preferredTaskTypesPlaceholder}
         />
       </div>
+
+      <fieldset className="rounded-lg border border-stone-200 bg-stone-50 p-4">
+        <legend className="text-sm font-semibold text-stone-800">
+          {labels.notificationSettings}
+        </legend>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <CheckboxField
+            name="emailNotificationsEnabled"
+            label={labels.emailNotifications}
+            defaultChecked={reminders.emailNotificationsEnabled}
+          />
+          <CheckboxField
+            name="inAppNotificationsEnabled"
+            label={labels.inAppNotifications}
+            defaultChecked={reminders.inAppNotificationsEnabled}
+          />
+          <CheckboxField
+            name="reminder3DaysEnabled"
+            label={labels.reminder3Days}
+            defaultChecked={reminders.reminder3DaysEnabled}
+          />
+          <CheckboxField
+            name="reminder1DayEnabled"
+            label={labels.reminder1Day}
+            defaultChecked={reminders.reminder1DayEnabled}
+          />
+          <CheckboxField
+            name="reminderSameDayEnabled"
+            label={labels.reminderSameDay}
+            defaultChecked={reminders.reminderSameDayEnabled}
+          />
+        </div>
+      </fieldset>
     </>
+  );
+}
+
+function getReminderPreferences(profile: VolunteerProfile | null) {
+  const record = (profile ?? {}) as Record<string, unknown>;
+  return {
+    emailNotificationsEnabled: record.emailNotificationsEnabled !== false,
+    inAppNotificationsEnabled: record.inAppNotificationsEnabled !== false,
+    reminder3DaysEnabled: record.reminder3DaysEnabled !== false,
+    reminder1DayEnabled: record.reminder1DayEnabled !== false,
+    reminderSameDayEnabled: record.reminderSameDayEnabled !== false,
+  };
+}
+
+function CheckboxField({
+  name,
+  label,
+  defaultChecked,
+}: {
+  name: string;
+  label: string;
+  defaultChecked: boolean;
+}) {
+  return (
+    <label className="flex items-start gap-3 rounded-lg border border-stone-200 bg-white p-3 text-sm text-stone-700">
+      <input
+        name={name}
+        type="checkbox"
+        defaultChecked={defaultChecked}
+        className="mt-1"
+      />
+      <span>{label}</span>
+    </label>
   );
 }
 

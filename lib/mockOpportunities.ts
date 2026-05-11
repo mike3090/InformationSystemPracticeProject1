@@ -42,6 +42,13 @@ export type MockOpportunity = {
   description: string;
   coverImageUrl?: string;
   workspaceImageUrls: string[];
+  thingsToBring?: string[];
+  arrivalGuidance?: string;
+  firstLandmarkDescription?: string;
+  firstLandmarkImageUrl?: string;
+  firstContactName?: string;
+  firstContactRole?: string;
+  firstContactImageUrl?: string;
   aiGenerated: boolean;
   taskFlow: OpportunityTask[];
 };
@@ -75,6 +82,17 @@ export const mockOpportunities: MockOpportunity[] = [
       "https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80",
     ],
+    thingsToBring: ["Comfortable shoes", "Hat or sun cover", "Water bottle"],
+    arrivalGuidance:
+      "Meet at the north side of the delta, near the small wooden garden sign. The check-in table opens 10 minutes before the start time.",
+    firstLandmarkDescription:
+      "Look for a low wooden sign beside the herb beds and a folding table with green name tags.",
+    firstLandmarkImageUrl:
+      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=900&q=80",
+    firstContactName: "Sarah Tanaka",
+    firstContactRole: "volunteer check-in lead",
+    firstContactImageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
     aiGenerated: true,
     taskFlow: [
       {
@@ -163,6 +181,13 @@ export const mockOpportunities: MockOpportunity[] = [
       "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80",
     ],
+    thingsToBring: ["Comfortable shoes", "Small towel"],
+    arrivalGuidance:
+      "Enter through the cultural center main doors and follow the weekend market signs to the registration desk.",
+    firstLandmarkDescription:
+      "The first marker is a green market banner beside the entrance map.",
+    firstContactName: "Mika Yamamoto",
+    firstContactRole: "market floor coordinator",
     aiGenerated: true,
     taskFlow: [
       {
