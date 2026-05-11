@@ -264,7 +264,10 @@ function RequesterOpportunityRow({
   locale: string;
 }) {
   return (
-    <div className="rounded-lg border border-stone-200 p-4">
+    <Link
+      href={`/${locale}/dashboard/opportunities/${opportunity.id}`}
+      className="block rounded-lg border border-stone-200 p-4 transition hover:border-green-300 hover:bg-green-50/40"
+    >
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-semibold text-stone-950">{opportunity.title}</h3>
         <span className="rounded-sm bg-stone-100 px-2 py-1 text-xs font-semibold text-stone-600">
@@ -280,7 +283,10 @@ function RequesterOpportunityRow({
           ? `${opportunity._count.applications} applicant(s)`
           : `応募者 ${opportunity._count.applications} 名`}
       </p>
-    </div>
+      <p className="mt-2 text-sm font-semibold text-green-700">
+        {locale === "en" ? "Review applicants" : "応募者を確認"}
+      </p>
+    </Link>
   );
 }
 
