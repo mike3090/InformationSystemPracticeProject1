@@ -333,7 +333,14 @@ async function ensureMockOpportunityExists(
   try {
     await prisma.$executeRaw`
       UPDATE "Opportunity"
-      SET "allowMultipleTaskSelection" = ${opportunity.allowMultipleTaskSelection ?? false}
+      SET "allowMultipleTaskSelection" = ${opportunity.allowMultipleTaskSelection ?? false},
+          "thingsToBring" = ${opportunity.thingsToBring ?? []},
+          "arrivalGuidance" = ${opportunity.arrivalGuidance ?? null},
+          "firstLandmarkDescription" = ${opportunity.firstLandmarkDescription ?? null},
+          "firstLandmarkImageUrl" = ${opportunity.firstLandmarkImageUrl ?? null},
+          "firstContactName" = ${opportunity.firstContactName ?? null},
+          "firstContactRole" = ${opportunity.firstContactRole ?? null},
+          "firstContactImageUrl" = ${opportunity.firstContactImageUrl ?? null}
       WHERE "id" = ${opportunity.id}
     `;
   } catch {

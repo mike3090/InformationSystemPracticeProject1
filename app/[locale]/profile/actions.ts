@@ -129,9 +129,27 @@ export async function saveProfile(formData: FormData) {
         profileCompleted: true,
       },
     });
+
+    try {
+      await prisma.$executeRaw`
+        UPDATE "VolunteerProfile"
+        SET "emailNotificationsEnabled" = ${checkboxValue(formData, "emailNotificationsEnabled")},
+            "inAppNotificationsEnabled" = ${checkboxValue(formData, "inAppNotificationsEnabled")},
+            "reminder3DaysEnabled" = ${checkboxValue(formData, "reminder3DaysEnabled")},
+            "reminder1DayEnabled" = ${checkboxValue(formData, "reminder1DayEnabled")},
+            "reminderSameDayEnabled" = ${checkboxValue(formData, "reminderSameDayEnabled")}
+        WHERE "userId" = ${userId}
+      `;
+    } catch {
+      // Older databases do not have reminder preference columns until the migration runs.
+    }
   }
 
   redirect(savedRedirectPath(next));
+}
+
+function checkboxValue(formData: FormData, key: string) {
+  return String(formData.get(key) ?? "") === "on";
 }
 
 export async function addRequesterRole(formData: FormData) {

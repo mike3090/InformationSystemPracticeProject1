@@ -4,10 +4,21 @@ import type { OpportunityStatus } from "@/app/generated/prisma/client";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import {
+  getArrivalGuidance,
+  getEventMessages,
+  getEventUpdates,
+  hasArrivalGuidance,
+  type ArrivalGuidance,
+  type EventMessageView,
+  type EventUpdateView,
+} from "@/lib/preEventCommunication";
+import {
   getApplicationStatusCopy,
   getApplicationStatusView,
   parseSelectedTaskItems,
 } from "../../applicationStatus";
+import ApplicationCommunicationPanel from "./ApplicationCommunicationPanel";
+import DevApplicationTools from "./DevApplicationTools";
 
 type ApplicationDetail = {
   id: string;
@@ -77,10 +88,20 @@ export default async function ApplicationDetailPage({
     notFound();
   }
 
+  const [arrivalGuidance, updates, messages] = await Promise.all([
+    getArrivalGuidance(application.opportunity.id),
+    getEventUpdates(application.opportunity.id),
+    getEventMessages(application.id),
+  ]);
+
   return (
     <ApplicationDetailView
       application={application}
       locale={locale}
+      currentUserId={session.user.id}
+      arrivalGuidance={arrivalGuidance}
+      updates={updates}
+      messages={messages}
     />
   );
 }
@@ -150,9 +171,17 @@ async function getApplicationDetail(
 function ApplicationDetailView({
   application,
   locale,
+  currentUserId,
+  arrivalGuidance,
+  updates,
+  messages,
 }: {
   application: ApplicationDetail;
   locale: string;
+  currentUserId: string;
+  arrivalGuidance: ArrivalGuidance | null;
+  updates: EventUpdateView[];
+  messages: EventMessageView[];
 }) {
   const statusView = getApplicationStatusView(
     application.status,
@@ -161,6 +190,7 @@ function ApplicationDetailView({
   );
   const status = getApplicationStatusCopy(statusView, locale);
   const selectedTasks = parseSelectedTaskItems(application.selectedTaskItems);
+  const isConfirmed = statusView === "confirmed";
 
   return (
     <div className="bg-stone-50">
@@ -196,6 +226,10 @@ function ApplicationDetailView({
             </div>
           </div>
         </div>
+
+        {process.env.NODE_ENV !== "production" && !isConfirmed && (
+          <DevApplicationTools applicationId={application.id} locale={locale} />
+        )}
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
           <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
@@ -285,16 +319,15 @@ function ApplicationDetailView({
               </dl>
             </section>
 
-            {statusView === "confirmed" && (
+            {isConfirmed && hasArrivalGuidance(arrivalGuidance) && (
               <section className="rounded-lg border border-green-200 bg-green-50 p-6 shadow-sm">
                 <h2 className="text-lg font-bold text-green-950">
-                  {locale === "en" ? "Before you arrive" : "当日の準備"}
+                  {locale === "en" ? "When you arrive" : "到着したら"}
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-green-900">
-                  {locale === "en"
-                    ? "Arrive 10 minutes before the start time, check the location, and bring any items listed for your selected task."
-                    : "開始10分前を目安に到着し、場所を確認してください。選択したタスクに必要な持ち物があれば忘れずに持参してください。"}
-                </p>
+                <ArrivalGuidanceDetails
+                  guidance={arrivalGuidance}
+                  locale={locale}
+                />
               </section>
             )}
 
@@ -322,8 +355,124 @@ function ApplicationDetailView({
             </section>
           </aside>
         </div>
+
+        {isConfirmed && (
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+            <UpdatesPanel updates={updates} locale={locale} />
+            <ApplicationCommunicationPanel
+              applicationId={application.id}
+              locale={locale}
+              messages={messages}
+              currentUserId={currentUserId}
+              canMessage={isConfirmed}
+            />
+          </div>
+        )}
       </div>
     </div>
+  );
+}
+
+function ArrivalGuidanceDetails({
+  guidance,
+  locale,
+}: {
+  guidance: ArrivalGuidance | null;
+  locale: string;
+}) {
+  if (!guidance) return null;
+
+  return (
+    <div className="mt-3 space-y-4 text-sm leading-6 text-green-900">
+      {guidance.arrivalGuidance && <p>{guidance.arrivalGuidance}</p>}
+      {guidance.firstLandmarkDescription && (
+        <div>
+          <h3 className="font-semibold text-green-950">
+            {locale === "en" ? "First landmark" : "最初の目印"}
+          </h3>
+          <p>{guidance.firstLandmarkDescription}</p>
+        </div>
+      )}
+      {(guidance.firstContactName || guidance.firstContactRole) && (
+        <div className="flex items-center gap-3">
+          {guidance.firstContactImageUrl && (
+            <img
+              src={guidance.firstContactImageUrl}
+              alt=""
+              className="h-14 w-14 rounded-lg object-cover"
+            />
+          )}
+          <div>
+            <p className="font-semibold text-green-950">
+              {guidance.firstContactName ||
+                (locale === "en" ? "First contact" : "最初に会う人")}
+            </p>
+            {guidance.firstContactRole && <p>{guidance.firstContactRole}</p>}
+          </div>
+        </div>
+      )}
+      {guidance.thingsToBring.length > 0 && (
+        <div>
+          <h3 className="font-semibold text-green-950">
+            {locale === "en" ? "Bring" : "持ち物"}
+          </h3>
+          <p>{guidance.thingsToBring.join(", ")}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UpdatesPanel({
+  updates,
+  locale,
+}: {
+  updates: EventUpdateView[];
+  locale: string;
+}) {
+  return (
+    <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
+      <h2 className="text-lg font-bold text-stone-950">
+        {locale === "en" ? "Updates" : "お知らせ"}
+      </h2>
+      {updates.length === 0 ? (
+        <p className="mt-4 rounded-lg bg-stone-50 p-4 text-sm text-stone-600">
+          {locale === "en"
+            ? "No organizer updates yet."
+            : "主催者からのお知らせはまだありません。"}
+        </p>
+      ) : (
+        <div className="mt-4 space-y-3">
+          {updates.map((update) => (
+            <article
+              key={update.id}
+              className="rounded-lg border border-stone-200 p-4"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-sm bg-stone-100 px-2 py-1 text-xs font-bold text-stone-700">
+                  {update.type}
+                </span>
+                <span className="text-xs text-stone-500">
+                  {formatDateTime(update.createdAt, locale)}
+                </span>
+              </div>
+              {update.highlightedDetail && (
+                <p className="mt-3 rounded-lg bg-amber-50 p-3 text-sm font-semibold text-amber-900">
+                  {update.highlightedDetail}
+                </p>
+              )}
+              <p className="mt-3 text-sm leading-6 text-stone-700">
+                {update.message}
+              </p>
+              <p className="mt-2 text-xs text-stone-500">
+                {update.organizerName ||
+                  (locale === "en" ? "Organizer" : "主催者")}
+              </p>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
 

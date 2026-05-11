@@ -16,6 +16,7 @@ type DashboardApplication = {
   waitlistPosition: number | null;
   createdAt: Date;
   opportunity: {
+    id: string;
     title: string;
     city: string | null;
     prefecture: string | null;
@@ -34,6 +35,7 @@ type RawDashboardApplication = {
   waitlistPosition: number | null;
   createdAt: Date;
   opportunityTitle: string;
+  opportunityId: string;
   opportunityCity: string | null;
   opportunityPrefecture: string | null;
   opportunityAddress: string | null;
@@ -204,6 +206,7 @@ function serializeDashboardApplication(
     waitlistPosition: application.waitlistPosition,
     createdAt: application.createdAt.toISOString(),
     opportunity: {
+      id: application.opportunity.id,
       title: application.opportunity.title,
       city: application.opportunity.city,
       prefecture: application.opportunity.prefecture,
@@ -225,6 +228,7 @@ async function getDashboardApplications(userId: string): Promise<DashboardApplic
       a."waitlistPosition" AS "waitlistPosition",
       a."createdAt" AS "createdAt",
       o."title" AS "opportunityTitle",
+      o."id" AS "opportunityId",
       o."city" AS "opportunityCity",
       o."prefecture" AS "opportunityPrefecture",
       o."address" AS "opportunityAddress",
@@ -246,6 +250,7 @@ async function getDashboardApplications(userId: string): Promise<DashboardApplic
     createdAt: row.createdAt,
     opportunity: {
       title: row.opportunityTitle,
+      id: row.opportunityId,
       city: row.opportunityCity,
       prefecture: row.opportunityPrefecture,
       address: row.opportunityAddress,
