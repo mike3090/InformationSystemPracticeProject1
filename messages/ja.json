@@ -104,6 +104,10 @@
   },
   "auth": {
     "signInTitle": "Go Touch Grass にログイン",
+    "volunteerSignInTitle": "ボランティアとしてログイン",
+    "requesterSignInTitle": "依頼者としてログイン",
+    "volunteerSignInIntro": "ボランティア募集を探して応募するための入口です。",
+    "requesterSignInIntro": "ボランティア募集を投稿・管理するための入口です。",
     "loginTab": "ログイン",
     "registerTab": "登録",
     "nameLabel": "名前",
@@ -121,7 +125,7 @@
     "requesterRegisterNote": "ボランティア募集を投稿する依頼者アカウントを作成します。",
     "emailPasswordIncorrect": "メールアドレスまたはパスワードが正しくありません。",
     "continueWithGoogle": "Googleでログイン",
-    "noAccount": "ログインまたはボランティア登録をしてください。"
+    "noAccount": "ログインまたはアカウント登録をしてください。"
   },
   "profile": {
     "setupTitle": "プロフィール設定",
@@ -133,6 +137,12 @@
     "savedMessage": "プロフィールを保存しました。",
     "finishSetup": "設定を完了",
     "saveChanges": "保存",
+    "becomeRequesterTitle": "依頼者として利用を追加",
+    "becomeRequesterBody": "現在のアカウントはボランティア向けに設定されています。募集を投稿するには、この同じアカウントに依頼者プロフィールを追加します。ボランティアプロフィールはそのまま残ります。",
+    "becomeRequesterSubmit": "依頼者として続ける",
+    "becomeVolunteerTitle": "ボランティアとして利用を追加",
+    "becomeVolunteerBody": "現在のアカウントは依頼者向けに設定されています。募集に応募するには、この同じアカウントにボランティアプロフィールを追加します。依頼者プロフィールはそのまま残ります。",
+    "becomeVolunteerSubmit": "ボランティアとして続ける",
     "fields": {
       "name": "表示名",
       "email": "メールアドレス",

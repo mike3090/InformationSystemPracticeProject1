@@ -30,6 +30,9 @@ export default auth(async function middleware(request: NextRequest) {
         "callbackUrl",
         `${request.nextUrl.pathname}${request.nextUrl.search}`
       );
+      if (pathnameWithoutLocale.startsWith("/opportunities/new")) {
+        signInUrl.searchParams.set("intent", "requester");
+      }
       return NextResponse.redirect(signInUrl);
     }
   }

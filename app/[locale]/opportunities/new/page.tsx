@@ -1,6 +1,50 @@
 import { getTranslations } from "next-intl/server";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/db";
+import { redirect } from "next/navigation";
 
-export default async function NewOpportunityPage() {
+export default async function NewOpportunityPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect(
+      `/${locale}/auth/signin?intent=requester&callbackUrl=/${locale}/opportunities/new`
+    );
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      role: true,
+      organization: { select: { profileCompleted: true } },
+    },
+  });
+
+  if (!user) {
+    redirect(`/${locale}/auth/signin?intent=requester`);
+  }
+
+  if (
+    user.role !== "REQUESTER" &&
+    user.role !== "BOTH" &&
+    user.role !== "ADMIN"
+  ) {
+    redirect(
+      `/${locale}/profile/setup?intent=requester&next=/${locale}/opportunities/new`
+    );
+  }
+
+  if (!user.organization?.profileCompleted) {
+    redirect(
+      `/${locale}/profile/setup?intent=requester&next=/${locale}/opportunities/new`
+    );
+  }
+
   const t = await getTranslations("opportunities.new");
 
   return (
