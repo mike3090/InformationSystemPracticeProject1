@@ -25,9 +25,15 @@ export default auth(async function middleware(request: NextRequest) {
     const session = request.auth;
     if (!session) {
       const locale = pathname.startsWith("/en") ? "en" : "ja";
-      return NextResponse.redirect(
-        new URL(`/${locale}/auth/signin`, request.url)
+      const signInUrl = new URL(`/${locale}/auth/signin`, request.url);
+      signInUrl.searchParams.set(
+        "callbackUrl",
+        `${request.nextUrl.pathname}${request.nextUrl.search}`
       );
+      if (pathnameWithoutLocale.startsWith("/opportunities/new")) {
+        signInUrl.searchParams.set("intent", "requester");
+      }
+      return NextResponse.redirect(signInUrl);
     }
   }
 

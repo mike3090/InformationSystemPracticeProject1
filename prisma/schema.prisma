@@ -33,6 +33,7 @@ enum OpportunityStatus {
 enum ApplicationStatus {
   PENDING
   ACCEPTED
+  WAITLISTED
   REJECTED
   WITHDRAWN
 }
@@ -87,6 +88,7 @@ model VerificationToken {
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
+  passwordHash  String?
   emailVerified DateTime?
   name          String?
   image         String?
@@ -102,36 +104,52 @@ model User {
   opportunities  Opportunity[]
   applications   Application[]
   aiInteractions AiInteraction[]
+  notifications  Notification[]
+  eventUpdates   EventUpdate[]
+  sentEventMessages EventMessage[] @relation("SentEventMessages")
+  receivedEventMessages EventMessage[] @relation("ReceivedEventMessages")
 }
 
 model VolunteerProfile {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  bio          String?  @db.Text
-  skills       String[]
-  languages    String[]
-  availability String?
-  prefecture   String?
-  city         String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                        String   @id @default(cuid())
+  userId                    String   @unique
+  bio                       String?  @db.Text
+  skills                    String[] @default([])
+  interests                 String[] @default([])
+  languages                 String[] @default([])
+  availability              String?
+  preferredTaskTypes        String[] @default([])
+  preferredEnvironmentStyle String   @default("either")
+  emailNotificationsEnabled Boolean  @default(true)
+  inAppNotificationsEnabled Boolean  @default(true)
+  reminder3DaysEnabled      Boolean  @default(true)
+  reminder1DayEnabled       Boolean  @default(true)
+  reminderSameDayEnabled    Boolean  @default(true)
+  profileCompleted          Boolean  @default(false)
+  prefecture                String?
+  city                      String?
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Organization {
-  id          String           @id @default(cuid())
-  userId      String           @unique
-  name        String
-  nameJa      String?
-  type        OrganizationType @default(INDIVIDUAL)
-  description String?          @db.Text
-  prefecture  String?
-  city        String?
-  address     String?
-  website     String?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id               String           @id @default(cuid())
+  userId           String           @unique
+  name             String
+  nameJa           String?
+  contactName      String?
+  type             OrganizationType @default(INDIVIDUAL)
+  description      String?          @db.Text
+  environmentStyle String           @default("mixed")
+  prefecture       String?
+  city             String?
+  address          String?
+  website          String?
+  profileCompleted Boolean          @default(false)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
   user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   opportunities Opportunity[]
@@ -153,6 +171,14 @@ model Opportunity {
   endAt            DateTime?
   recurrenceRule   String?
   volunteersNeeded Int               @default(1)
+  allowMultipleTaskSelection Boolean  @default(false)
+  thingsToBring    String[]          @default([])
+  arrivalGuidance  String?           @db.Text
+  firstLandmarkDescription String?   @db.Text
+  firstLandmarkImageUrl String?
+  firstContactName String?
+  firstContactRole String?
+  firstContactImageUrl String?
   requesterId      String
   organizationId   String?
   aiDrafted        Boolean           @default(false)
@@ -162,6 +188,9 @@ model Opportunity {
   requester    User          @relation(fields: [requesterId], references: [id])
   organization Organization? @relation(fields: [organizationId], references: [id])
   applications Application[]
+  notifications Notification[]
+  eventUpdates  EventUpdate[]
+  eventMessages EventMessage[]
 }
 
 model Application {
@@ -169,18 +198,73 @@ model Application {
   opportunityId String
   volunteerId   String
   status        ApplicationStatus @default(PENDING)
+  selectedTaskItems Json          @default("[]")
+  confirmedTimeCommitment Boolean @default(false)
+  skillTags     String[]          @default([])
+  experienceNote String?          @db.Text
   message       String?           @db.Text
+  waitlistPosition Int?
   matchScore    Float?
   aiRecommended Boolean           @default(false)
   reviewedAt    DateTime?
+  withdrawnAt   DateTime?
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
   opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
   volunteer   User        @relation(fields: [volunteerId], references: [id])
   booking     Booking?
+  notifications Notification[]
+  eventMessages EventMessage[]
 
   @@unique([opportunityId, volunteerId])
+}
+
+model Notification {
+  id            String    @id @default(cuid())
+  userId        String
+  opportunityId String?
+  applicationId String?
+  type          String
+  title         String
+  body          String    @db.Text
+  channel       String    @default("IN_APP")
+  metadata      Json      @default("{}")
+  readAt        DateTime?
+  createdAt     DateTime  @default(now())
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunity Opportunity? @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model EventUpdate {
+  id            String   @id @default(cuid())
+  opportunityId String
+  organizerId   String
+  type          String   @default("GENERAL")
+  message       String   @db.Text
+  highlightedDetail String? @db.Text
+  createdAt     DateTime @default(now())
+
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  organizer   User        @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+}
+
+model EventMessage {
+  id            String    @id @default(cuid())
+  opportunityId String
+  applicationId String
+  senderId      String
+  recipientId   String
+  body          String    @db.Text
+  readAt        DateTime?
+  createdAt     DateTime  @default(now())
+
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  sender      User        @relation("SentEventMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  recipient   User        @relation("ReceivedEventMessages", fields: [recipientId], references: [id], onDelete: Cascade)
 }
 
 model Booking {

@@ -32,6 +32,8 @@
   },
   "opportunities": {
     "title": "Volunteer Opportunities",
+    "intro": "Browse nearby volunteer tasks. This side is for volunteers who want to find something to join.",
+    "joinAsVolunteer": "Join as a volunteer",
     "filter": {
       "all": "All",
       "oneTime": "One-time",
@@ -49,6 +51,7 @@
     },
     "new": {
       "title": "Post an Opportunity",
+      "intro": "Create a request for volunteers. This side is for employers, organizers, and local groups.",
       "aiDraftBtn": "Draft with AI",
       "fields": {
         "title": "Title",
@@ -59,6 +62,10 @@
         "startAt": "Start date & time",
         "endAt": "End date & time",
         "volunteersNeeded": "Volunteers needed"
+      },
+      "placeholders": {
+        "title": "e.g. Help clean the community garden",
+        "description": "Describe the work, schedule, location, and what volunteers should know."
       },
       "submit": "Publish",
       "saveDraft": "Save as Draft"
@@ -83,26 +90,118 @@
     }
   },
   "dashboard": {
+    "eyebrow": "Dashboard",
     "requester": {
       "title": "Requester Dashboard",
+      "intro": "Review your posted opportunities and keep an eye on incoming applicants.",
       "myOpportunities": "My Opportunities",
       "applicants": "Applicants",
-      "runAiMatch": "Run AI Match"
+      "runAiMatch": "Run AI Match",
+      "empty": "Posted opportunities will appear here after you publish or save one.",
+      "postOpportunity": "Post an opportunity"
     },
     "volunteer": {
       "title": "Volunteer Dashboard",
+      "intro": "Track every activity you applied for, with status, schedule, location, and task details.",
       "myApplications": "My Applications",
-      "recommended": "Recommended for You"
+      "applicationSummary": "{count} application(s) on your account",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "noUpcoming": "No upcoming applications.",
+      "noPast": "Past activities will be shown here after they finish.",
+      "listView": "List",
+      "calendarView": "Calendar",
+      "calendarEmpty": "No applications scheduled in this month.",
+      "recommended": "Recommended for You",
+      "recommendedIntro": "Your profile and application history can be used for recommendations as more matching logic is added.",
+      "findMore": "Find opportunities"
     }
   },
   "auth": {
     "signInTitle": "Sign in to Go Touch Grass",
+    "volunteerSignInTitle": "Sign in as a volunteer",
+    "requesterSignInTitle": "Sign in as an employer",
+    "volunteerSignInIntro": "Use this entrance to find opportunities and apply as a volunteer.",
+    "requesterSignInIntro": "Use this entrance to post needs and manage volunteer opportunities.",
+    "loginTab": "Sign in",
+    "registerTab": "Register",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
     "emailLabel": "Email address",
     "emailPlaceholder": "you@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "signInWithPassword": "Sign in",
+    "signingIn": "Signing in...",
+    "createVolunteerAccount": "Create volunteer account",
+    "createRequesterAccount": "Create employer account",
+    "creatingAccount": "Creating account...",
+    "volunteerRegisterNote": "You are creating a volunteer account for browsing and applying to opportunities.",
+    "requesterRegisterNote": "You are creating an employer account for posting volunteer opportunities.",
+    "emailPasswordIncorrect": "Email or password is incorrect.",
     "continueWithGoogle": "Continue with Google",
-    "continueWithEmail": "Continue with Email",
-    "checkEmail": "Check your email for a sign-in link.",
-    "noAccount": "Don't have an account? Sign in to create one automatically."
+    "noAccount": "Sign in or create an account to continue."
+  },
+  "profile": {
+    "setupTitle": "Set up your profile",
+    "editTitle": "Edit profile",
+    "volunteerSetupIntro": "Tell the platform what you are interested in, where you are, and when you can usually help.",
+    "requesterSetupIntro": "Tell volunteers who is posting the opportunity and what kind of environment they can expect.",
+    "volunteerEditIntro": "Update your volunteer details so future recommendations and applications fit you better.",
+    "requesterEditIntro": "Update your organizer profile so volunteers understand your group and location.",
+    "savedMessage": "Profile saved.",
+    "finishSetup": "Finish setup",
+    "saveChanges": "Save changes",
+    "becomeRequesterTitle": "Add employer access",
+    "becomeRequesterBody": "Your current account is set up for volunteering. To post a need, add an employer profile to this same account. Your volunteer profile will stay available.",
+    "becomeRequesterSubmit": "Continue as employer",
+    "becomeVolunteerTitle": "Add volunteer access",
+    "becomeVolunteerBody": "Your current account is set up for posting needs. To apply for opportunities, add a volunteer profile to this same account. Your employer profile will stay available.",
+    "becomeVolunteerSubmit": "Continue as volunteer",
+    "fields": {
+      "name": "Display name",
+      "email": "Email",
+      "prefecture": "Prefecture",
+      "city": "City / area",
+      "bio": "Bio",
+      "availability": "General availability",
+      "environment": "Preferred environment",
+      "interests": "Interest tags",
+      "skills": "Skill tags",
+      "languages": "Languages",
+      "preferredTaskTypes": "Preferred task types",
+      "notificationSettings": "Notification settings",
+      "emailNotifications": "Email notifications",
+      "inAppNotifications": "In-app notifications",
+      "reminder3Days": "Reminder 3 days before",
+      "reminder1Day": "Reminder 1 day before",
+      "reminderSameDay": "Morning-of reminder",
+      "organizationName": "Organization name",
+      "organizationType": "Organization type",
+      "description": "Description",
+      "website": "Website",
+      "address": "Address"
+    },
+    "placeholders": {
+      "availability": "weekends, evenings",
+      "interests": "gardening, cooking, crafts",
+      "skills": "teaching, translation, repair",
+      "languages": "Japanese, English",
+      "preferredTaskTypes": "outdoor, event support"
+    },
+    "environment": {
+      "either": "Either",
+      "relaxed": "Relaxed",
+      "structured": "Structured",
+      "mixed": "Mixed"
+    },
+    "organizationTypes": {
+      "individual": "Individual",
+      "company": "Company / small business",
+      "npo": "NPO",
+      "community": "Community group",
+      "municipal": "Municipality"
+    }
   },
   "common": {
     "loading": "Loading…",

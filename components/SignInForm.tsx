@@ -1,63 +1,189 @@
 "use client";
 
+import { registerAccount, type RegisterState } from "@/app/[locale]/auth/actions";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useActionState, useState, useTransition } from "react";
 
-export default function SignInForm({ locale }: { locale: string }) {
+const initialRegisterState: RegisterState = {
+  status: "idle",
+};
+
+export default function SignInForm({
+  locale,
+  callbackUrl,
+  accountIntent,
+}: {
+  locale: string;
+  callbackUrl: string;
+  accountIntent: "volunteer" | "requester";
+}) {
   const t = useTranslations("auth");
+  const [mode, setMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [isLoginPending, startLoginTransition] = useTransition();
+  const [registerState, registerAction, isRegisterPending] = useActionState(
+    registerAccount,
+    initialRegisterState
+  );
 
-  async function handleEmail(e: React.FormEvent) {
+  async function handlePasswordLogin(e: React.FormEvent) {
     e.preventDefault();
-    await signIn("resend", { email, redirect: false });
-    setSent(true);
-  }
+    setLoginError("");
 
-  if (sent) {
-    return (
-      <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center text-green-800">
-        {t("checkEmail")}
-      </div>
-    );
+    startLoginTransition(async () => {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        callbackUrl,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setLoginError(t("emailPasswordIncorrect"));
+        return;
+      }
+
+      window.location.href = `/${locale}/profile/setup?intent=${accountIntent}&next=${encodeURIComponent(callbackUrl)}`;
+    });
   }
 
   return (
     <div className="space-y-4">
+      <div className="grid grid-cols-2 rounded-lg border border-stone-200 bg-stone-100 p-1 text-sm font-medium">
+        <button
+          type="button"
+          onClick={() => setMode("login")}
+          className={`rounded-md px-3 py-2 transition ${
+            mode === "login" ? "bg-white text-green-700 shadow-sm" : "text-stone-500"
+          }`}
+        >
+          {t("loginTab")}
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode("register")}
+          className={`rounded-md px-3 py-2 transition ${
+            mode === "register" ? "bg-white text-green-700 shadow-sm" : "text-stone-500"
+          }`}
+        >
+          {t("registerTab")}
+        </button>
+      </div>
+
+      {mode === "login" ? (
+        <form onSubmit={handlePasswordLogin} className="space-y-3">
+          <label className="block text-sm font-medium text-stone-700">
+            {t("emailLabel")}
+          </label>
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t("emailPlaceholder")}
+            className="w-full border border-stone-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          <label className="block text-sm font-medium text-stone-700">
+            {t("passwordLabel")}
+          </label>
+          <input
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={t("passwordPlaceholder")}
+            className="w-full border border-stone-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {loginError && (
+            <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {loginError}
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={isLoginPending}
+            className="w-full bg-green-700 text-white rounded-lg px-4 py-3 text-sm font-semibold hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-stone-400 transition"
+          >
+            {isLoginPending ? t("signingIn") : t("signInWithPassword")}
+          </button>
+        </form>
+      ) : (
+        <form action={registerAction} className="space-y-3">
+          <input type="hidden" name="locale" value={locale} />
+          <input type="hidden" name="accountType" value={accountIntent} />
+          <p className="rounded-lg border border-green-100 bg-green-50 px-3 py-2 text-sm text-green-800">
+            {accountIntent === "requester"
+              ? t("requesterRegisterNote")
+              : t("volunteerRegisterNote")}
+          </p>
+          <label className="block text-sm font-medium text-stone-700">
+            {t("nameLabel")}
+          </label>
+          <input
+            name="name"
+            required
+            placeholder={t("namePlaceholder")}
+            className="w-full border border-stone-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          <label className="block text-sm font-medium text-stone-700">
+            {t("emailLabel")}
+          </label>
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder={t("emailPlaceholder")}
+            className="w-full border border-stone-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          <label className="block text-sm font-medium text-stone-700">
+            {t("passwordLabel")}
+          </label>
+          <input
+            name="password"
+            type="password"
+            required
+            placeholder={t("passwordPlaceholder")}
+            className="w-full border border-stone-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {registerState.message && (
+            <p
+              className={`rounded-lg border px-3 py-2 text-sm ${
+                registerState.status === "success"
+                  ? "border-green-200 bg-green-50 text-green-800"
+                  : "border-red-200 bg-red-50 text-red-700"
+              }`}
+            >
+              {registerState.message}
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={isRegisterPending}
+            className="w-full bg-green-700 text-white rounded-lg px-4 py-3 text-sm font-semibold hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-stone-400 transition"
+          >
+            {isRegisterPending
+              ? t("creatingAccount")
+              : accountIntent === "requester"
+                ? t("createRequesterAccount")
+                : t("createVolunteerAccount")}
+          </button>
+        </form>
+      )}
+
       <button
-        onClick={() => signIn("google", { callbackUrl: `/${locale}/dashboard` })}
-        className="w-full flex items-center justify-center gap-3 border border-stone-300 rounded-xl px-4 py-3 text-sm font-medium hover:bg-stone-50 transition"
+        onClick={() =>
+          signIn("google", {
+            callbackUrl: `/${locale}/profile/setup?intent=${accountIntent}&next=${encodeURIComponent(callbackUrl)}`,
+          })
+        }
+        className="w-full flex items-center justify-center gap-3 border border-stone-300 rounded-lg px-4 py-3 text-sm font-medium hover:bg-stone-50 transition"
       >
         <GoogleIcon />
         {t("continueWithGoogle")}
       </button>
-
-      <div className="flex items-center gap-3 text-xs text-stone-400">
-        <div className="flex-1 h-px bg-stone-200" />
-        or
-        <div className="flex-1 h-px bg-stone-200" />
-      </div>
-
-      <form onSubmit={handleEmail} className="space-y-3">
-        <label className="block text-sm font-medium text-stone-700">
-          {t("emailLabel")}
-        </label>
-        <input
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={t("emailPlaceholder")}
-          className="w-full border border-stone-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-        />
-        <button
-          type="submit"
-          className="w-full bg-green-700 text-white rounded-xl px-4 py-3 text-sm font-semibold hover:bg-green-600 transition"
-        >
-          {t("continueWithEmail")}
-        </button>
-      </form>
     </div>
   );
 }

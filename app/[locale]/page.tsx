@@ -8,7 +8,6 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   const t = await getTranslations("home");
-  const nav = await getTranslations("nav");
 
   return (
     <div>

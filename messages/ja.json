@@ -32,6 +32,8 @@
   },
   "opportunities": {
     "title": "ボランティア募集一覧",
+    "intro": "参加できるボランティア募集を探せます。このページはボランティア向けです。",
+    "joinAsVolunteer": "ボランティアとして登録",
     "filter": {
       "all": "すべて",
       "oneTime": "単発",
@@ -49,6 +51,7 @@
     },
     "new": {
       "title": "ボランティア募集を投稿する",
+      "intro": "ボランティアを募集する依頼を作成します。このページは依頼者・主催者向けです。",
       "aiDraftBtn": "AIで下書きを作成",
       "fields": {
         "title": "タイトル",
@@ -59,6 +62,10 @@
         "startAt": "開始日時",
         "endAt": "終了日時",
         "volunteersNeeded": "募集人数"
+      },
+      "placeholders": {
+        "title": "例：地域の花壇整備を手伝ってほしい",
+        "description": "作業内容、日時、場所、ボランティアに伝えたいことを記入してください。"
       },
       "submit": "公開する",
       "saveDraft": "下書き保存"
@@ -83,26 +90,118 @@
     }
   },
   "dashboard": {
+    "eyebrow": "ダッシュボード",
     "requester": {
       "title": "依頼者ダッシュボード",
+      "intro": "投稿した募集と応募状況を確認できます。",
       "myOpportunities": "自分の募集",
       "applicants": "応募者",
-      "runAiMatch": "AIマッチングを実行"
+      "runAiMatch": "AIマッチングを実行",
+      "empty": "募集を公開または下書き保存すると、ここに表示されます。",
+      "postOpportunity": "募集を投稿する"
     },
     "volunteer": {
       "title": "ボランティアダッシュボード",
+      "intro": "応募した活動のステータス、日時、場所、担当タスクを確認できます。",
       "myApplications": "応募履歴",
-      "recommended": "おすすめの募集"
+      "applicationSummary": "このアカウントの応募 {count} 件",
+      "upcoming": "今後の予定",
+      "past": "過去の活動",
+      "noUpcoming": "今後の応募はありません。",
+      "noPast": "活動終了後、過去の応募がここに表示されます。",
+      "listView": "リスト",
+      "calendarView": "カレンダー",
+      "calendarEmpty": "この月に予定されている応募はありません。",
+      "recommended": "おすすめの募集",
+      "recommendedIntro": "今後マッチング機能が増えると、プロフィールや応募履歴を使っておすすめを表示できます。",
+      "findMore": "募集を探す"
     }
   },
   "auth": {
     "signInTitle": "Go Touch Grass にログイン",
+    "volunteerSignInTitle": "ボランティアとしてログイン",
+    "requesterSignInTitle": "依頼者としてログイン",
+    "volunteerSignInIntro": "ボランティア募集を探して応募するための入口です。",
+    "requesterSignInIntro": "ボランティア募集を投稿・管理するための入口です。",
+    "loginTab": "ログイン",
+    "registerTab": "登録",
+    "nameLabel": "名前",
+    "namePlaceholder": "あなたの名前",
     "emailLabel": "メールアドレス",
     "emailPlaceholder": "example@email.com",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワード",
+    "signInWithPassword": "ログイン",
+    "signingIn": "ログイン中...",
+    "createVolunteerAccount": "ボランティア登録",
+    "createRequesterAccount": "依頼者登録",
+    "creatingAccount": "登録中...",
+    "volunteerRegisterNote": "ボランティア募集を探して応募するためのアカウントを作成します。",
+    "requesterRegisterNote": "ボランティア募集を投稿する依頼者アカウントを作成します。",
+    "emailPasswordIncorrect": "メールアドレスまたはパスワードが正しくありません。",
     "continueWithGoogle": "Googleでログイン",
-    "continueWithEmail": "メールでログイン",
-    "checkEmail": "ログイン用のリンクをメールで送信しました。",
-    "noAccount": "アカウントをお持ちでない方はログイン時に自動作成されます。"
+    "noAccount": "ログインまたはアカウント登録をしてください。"
+  },
+  "profile": {
+    "setupTitle": "プロフィール設定",
+    "editTitle": "プロフィール編集",
+    "volunteerSetupIntro": "興味のある活動、地域、参加しやすい時間帯を設定します。",
+    "requesterSetupIntro": "ボランティアに表示される依頼者・団体情報を設定します。",
+    "volunteerEditIntro": "おすすめや応募に使うボランティア情報を更新できます。",
+    "requesterEditIntro": "ボランティアが安心して応募できるよう、団体情報や場所を更新できます。",
+    "savedMessage": "プロフィールを保存しました。",
+    "finishSetup": "設定を完了",
+    "saveChanges": "保存",
+    "becomeRequesterTitle": "依頼者として利用を追加",
+    "becomeRequesterBody": "現在のアカウントはボランティア向けに設定されています。募集を投稿するには、この同じアカウントに依頼者プロフィールを追加します。ボランティアプロフィールはそのまま残ります。",
+    "becomeRequesterSubmit": "依頼者として続ける",
+    "becomeVolunteerTitle": "ボランティアとして利用を追加",
+    "becomeVolunteerBody": "現在のアカウントは依頼者向けに設定されています。募集に応募するには、この同じアカウントにボランティアプロフィールを追加します。依頼者プロフィールはそのまま残ります。",
+    "becomeVolunteerSubmit": "ボランティアとして続ける",
+    "fields": {
+      "name": "表示名",
+      "email": "メールアドレス",
+      "prefecture": "都道府県",
+      "city": "市区町村・エリア",
+      "bio": "自己紹介",
+      "availability": "参加しやすい時間帯",
+      "environment": "希望する雰囲気",
+      "interests": "興味タグ",
+      "skills": "スキルタグ",
+      "languages": "対応言語",
+      "preferredTaskTypes": "希望する活動タイプ",
+      "notificationSettings": "通知設定",
+      "emailNotifications": "メール通知",
+      "inAppNotifications": "アプリ内通知",
+      "reminder3Days": "3日前のリマインダー",
+      "reminder1Day": "1日前のリマインダー",
+      "reminderSameDay": "当日朝のリマインダー",
+      "organizationName": "団体名",
+      "organizationType": "団体タイプ",
+      "description": "説明",
+      "website": "Webサイト",
+      "address": "住所"
+    },
+    "placeholders": {
+      "availability": "週末, 平日夜",
+      "interests": "園芸, 料理, クラフト",
+      "skills": "教育, 翻訳, 修理",
+      "languages": "日本語, 英語",
+      "preferredTaskTypes": "屋外作業, イベント補助"
+    },
+    "environment": {
+      "either": "どちらでもよい",
+      "relaxed": "ゆったり",
+      "structured": "きっちり",
+      "mixed": "混合"
+    },
+    "organizationTypes": {
+      "individual": "個人",
+      "company": "会社・小規模事業者",
+      "npo": "NPO",
+      "community": "地域団体",
+      "municipal": "自治体"
+    }
   },
   "common": {
     "loading": "読み込み中…",
