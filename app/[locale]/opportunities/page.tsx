@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import OpportunityDiscovery from "./OpportunityDiscovery";
 import { mockOpportunities } from "@/lib/mockOpportunities";
+import { localizeMockOpportunities } from "@/lib/mockOpportunityI18n";
 
 export default async function OpportunitiesPage({
   params,
@@ -10,6 +11,7 @@ export default async function OpportunitiesPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations("opportunities");
+  const opportunities = localizeMockOpportunities(mockOpportunities, locale);
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
@@ -28,7 +30,7 @@ export default async function OpportunitiesPage({
         </Link>
       </div>
 
-      <OpportunityDiscovery locale={locale} opportunities={mockOpportunities} />
+      <OpportunityDiscovery locale={locale} opportunities={opportunities} />
     </div>
   );
 }

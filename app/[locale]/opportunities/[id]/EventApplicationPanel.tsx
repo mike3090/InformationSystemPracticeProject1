@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { useActionState, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   submitEventApplication,
   withdrawEventApplication,
@@ -32,13 +33,6 @@ const initialState: ApplicationFormState = {
   status: "idle",
 };
 
-const stepLabels: Record<Step, string> = {
-  tasks: "Task",
-  time: "Time",
-  skills: "Experience",
-  summary: "Review",
-};
-
 export default function EventApplicationPanel({
   locale,
   opportunity,
@@ -48,6 +42,7 @@ export default function EventApplicationPanel({
   profileSkills,
   hasScheduleConflict,
 }: EventApplicationPanelProps) {
+  const t = useTranslations("opportunities.applicationFlow");
   const router = useRouter();
   const isFull = opportunity.spotsRemaining <= 0;
   const [isOpen, setIsOpen] = useState(false);
@@ -74,6 +69,12 @@ export default function EventApplicationPanel({
     0,
   );
   const canChooseMultiple = opportunity.allowMultipleTaskSelection ?? false;
+  const stepLabels: Record<Step, string> = {
+    tasks: t("steps.task"),
+    time: t("steps.time"),
+    skills: t("steps.experience"),
+    summary: t("steps.review"),
+  };
 
   useEffect(() => {
     function handleTaskCardApply(event: Event) {
@@ -139,10 +140,10 @@ export default function EventApplicationPanel({
   }
 
   const actionLabel = existingApplication
-    ? "View Application"
+    ? t("actions.viewApplication")
     : isFull
-      ? "Join Waitlist"
-      : "Apply";
+      ? t("actions.joinWaitlist")
+      : t("actions.apply");
 
   return (
     <>
@@ -150,12 +151,19 @@ export default function EventApplicationPanel({
         <div className="mx-auto flex max-w-6xl flex-col gap-3 md:mx-0">
           <div>
             <p className="text-xs font-semibold uppercase text-stone-500">
-              {isFull ? "Waitlist available" : "Ready to join?"}
+              {isFull ? t("waitlistAvailable") : t("readyToJoin")}
             </p>
             <p className="mt-1 text-sm font-medium text-stone-800">
               {existingApplication
-                ? statusCopy(existingApplication.status, existingApplication.waitlistPosition)
-                : `${opportunity.spotsRemaining} spots left across ${opportunity.taskFlow.length} task options`}
+                ? statusCopy(
+                    existingApplication.status,
+                    existingApplication.waitlistPosition,
+                    locale,
+                  )
+                : t("spotsAcrossTasks", {
+                    spots: opportunity.spotsRemaining,
+                    tasks: opportunity.taskFlow.length,
+                  })}
             </p>
           </div>
 
@@ -194,7 +202,7 @@ export default function EventApplicationPanel({
             <div className="flex items-start justify-between gap-4 border-b border-stone-200 p-5">
               <div>
                 <p className="text-xs font-semibold uppercase text-green-700">
-                  {isFull ? "Waitlist application" : "Event application"}
+                  {isFull ? t("waitlistApplication") : t("eventApplication")}
                 </p>
                 <h2 className="mt-1 text-xl font-bold text-stone-950">
                   {opportunity.title}
@@ -205,7 +213,7 @@ export default function EventApplicationPanel({
                 onClick={closeFlow}
                 className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-50"
               >
-                Close
+                {t("actions.close")}
               </button>
             </div>
 
@@ -218,6 +226,7 @@ export default function EventApplicationPanel({
               />
             ) : state.status === "success" ? (
               <SuccessScreen
+                locale={locale}
                 opportunity={opportunity}
                 selectedTasks={selectedTasks}
                 message={state.message ?? ""}
@@ -269,6 +278,7 @@ export default function EventApplicationPanel({
                   {step === "tasks" && (
                     <TaskSelectionStep
                       tasks={opportunity.taskFlow}
+                      locale={locale}
                       selectedTaskIds={selectedTaskIds}
                       isWaitlist={isFull}
                       canChooseMultiple={canChooseMultiple}
@@ -279,6 +289,7 @@ export default function EventApplicationPanel({
                   {step === "time" && (
                     <TimeCommitmentStep
                       opportunity={opportunity}
+                      locale={locale}
                       selectedTasks={selectedTasks}
                       totalMinutes={totalMinutes}
                       timeConfirmed={timeConfirmed}
@@ -290,6 +301,7 @@ export default function EventApplicationPanel({
                   {step === "skills" && (
                     <SkillsStep
                       skills={skills}
+                      locale={locale}
                       skillDraft={skillDraft}
                       experienceNote={experienceNote}
                       onSkillDraftChange={setSkillDraft}
@@ -306,6 +318,7 @@ export default function EventApplicationPanel({
                   {step === "summary" && (
                     <SummaryStep
                       selectedTasks={selectedTasks}
+                      locale={locale}
                       totalMinutes={totalMinutes}
                       skills={skills}
                       experienceNote={experienceNote}
@@ -329,7 +342,7 @@ export default function EventApplicationPanel({
                     disabled={step === "tasks"}
                     className="rounded-lg border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-50 disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    Back
+                    {t("actions.back")}
                   </button>
 
                   {step === "summary" ? (
@@ -344,10 +357,10 @@ export default function EventApplicationPanel({
                       className="rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-stone-400"
                     >
                       {isPending
-                        ? "Submitting..."
+                        ? t("actions.submitting")
                         : isFull
-                          ? "Join Waitlist"
-                          : "Submit Application"}
+                          ? t("actions.joinWaitlist")
+                          : t("actions.submitApplication")}
                     </button>
                   ) : (
                     <button
@@ -359,7 +372,7 @@ export default function EventApplicationPanel({
                       }
                       className="rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-stone-400"
                     >
-                      Next
+                      {t("actions.next")}
                     </button>
                   )}
                 </div>
@@ -374,24 +387,27 @@ export default function EventApplicationPanel({
 
 function TaskSelectionStep({
   tasks,
+  locale,
   selectedTaskIds,
   isWaitlist,
   canChooseMultiple,
   onToggleTask,
 }: {
   tasks: OpportunityTask[];
+  locale: string;
   selectedTaskIds: string[];
   isWaitlist: boolean;
   canChooseMultiple: boolean;
   onToggleTask: (task: OpportunityTask) => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
   return (
     <div>
-      <h3 className="text-lg font-bold text-stone-950">Choose your task</h3>
+      <h3 className="text-lg font-bold text-stone-950">{t("task.title")}</h3>
       <p className="mt-1 text-sm text-stone-600">
         {canChooseMultiple
-          ? "You can select more than one task for this event."
-          : "Select one concrete role for this event."}
+          ? t("task.multiple")
+          : t("task.single")}
       </p>
       <div className="mt-4 grid gap-3">
         {tasks.map((task) => {
@@ -415,12 +431,16 @@ function TaskSelectionStep({
                 <div>
                   <h4 className="font-semibold text-stone-950">{task.name}</h4>
                   <p className="mt-1 text-sm text-stone-600">
-                    {task.startTime} · {task.durationMinutes} min ·{" "}
-                    {task.peopleNeeded} people
+                    {task.startTime} · {formatMinutes(task.durationMinutes, locale)} ·{" "}
+                    {t("people", { count: task.peopleNeeded })}
                   </p>
                 </div>
                 <span className="rounded-sm bg-stone-100 px-2 py-1 text-xs font-semibold text-stone-700">
-                  {taskIsFull ? (isWaitlist ? "Waitlist" : "Full") : `${task.spotsRemaining} left`}
+                  {taskIsFull
+                    ? isWaitlist
+                      ? t("task.waitlist")
+                      : t("task.full")
+                    : t("task.left", { count: task.spotsRemaining })}
                 </span>
               </div>
               <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-stone-700">
@@ -431,10 +451,10 @@ function TaskSelectionStep({
                   {task.environmentShape}
                 </span>
                 <span className="rounded-sm bg-stone-100 px-2 py-1">
-                  Physical {task.physicalEffort}
+                  {t("task.physical")} {task.physicalEffort}
                 </span>
                 <span className="rounded-sm bg-stone-100 px-2 py-1">
-                  Mental {task.mentalEffort}
+                  {t("task.mental")} {task.mentalEffort}
                 </span>
               </div>
             </button>
@@ -447,6 +467,7 @@ function TaskSelectionStep({
 
 function TimeCommitmentStep({
   opportunity,
+  locale,
   selectedTasks,
   totalMinutes,
   timeConfirmed,
@@ -454,31 +475,36 @@ function TimeCommitmentStep({
   onConfirmChange,
 }: {
   opportunity: MockOpportunity;
+  locale: string;
   selectedTasks: OpportunityTask[];
   totalMinutes: number;
   timeConfirmed: boolean;
   hasScheduleConflict: boolean;
   onConfirmChange: (value: boolean) => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
   return (
     <div>
-      <h3 className="text-lg font-bold text-stone-950">Confirm the time</h3>
+      <h3 className="text-lg font-bold text-stone-950">{t("time.title")}</h3>
       <dl className="mt-4 grid gap-3 rounded-lg border border-stone-200 bg-stone-50 p-4 text-sm sm:grid-cols-2">
-        <SummaryFact label="Event date" value={opportunity.scheduleLabel} />
-        <SummaryFact label="Arrival" value={formatTime(opportunity.startsAt)} />
-        <SummaryFact label="Event ends" value={formatTime(opportunity.endsAt)} />
-        <SummaryFact label="Selected time" value={formatMinutes(totalMinutes)} />
+        <SummaryFact
+          label={t("time.eventDate")}
+          value={formatDateRange(opportunity.startsAt, opportunity.endsAt, locale)}
+        />
+        <SummaryFact label={t("time.arrival")} value={formatTime(opportunity.startsAt, locale)} />
+        <SummaryFact label={t("time.eventEnds")} value={formatTime(opportunity.endsAt, locale)} />
+        <SummaryFact label={t("time.selectedTime")} value={formatMinutes(totalMinutes, locale)} />
       </dl>
       <div className="mt-4 space-y-2">
         {selectedTasks.map((task) => (
           <p key={task.id} className="text-sm text-stone-700">
-            {task.name}: {task.startTime}, {task.durationMinutes} min
+            {task.name}: {task.startTime}, {formatMinutes(task.durationMinutes, locale)}
           </p>
         ))}
       </div>
       {hasScheduleConflict && (
         <p className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-          You have another active application around this time. You can still submit.
+          {t("time.conflict")}
         </p>
       )}
       <label className="mt-5 flex items-start gap-3 rounded-lg border border-stone-200 p-4 text-sm text-stone-700">
@@ -488,7 +514,7 @@ function TimeCommitmentStep({
           onChange={(event) => onConfirmChange(event.target.checked)}
           className="mt-1"
         />
-        <span>I understand the time commitment for the selected task.</span>
+        <span>{t("time.confirm")}</span>
       </label>
     </div>
   );
@@ -496,6 +522,7 @@ function TimeCommitmentStep({
 
 function SkillsStep({
   skills,
+  locale,
   skillDraft,
   experienceNote,
   onSkillDraftChange,
@@ -504,6 +531,7 @@ function SkillsStep({
   onExperienceNoteChange,
 }: {
   skills: string[];
+  locale: string;
   skillDraft: string;
   experienceNote: string;
   onSkillDraftChange: (value: string) => void;
@@ -511,9 +539,11 @@ function SkillsStep({
   onRemoveSkill: (skill: string) => void;
   onExperienceNoteChange: (value: string) => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
+  void locale;
   return (
     <div>
-      <h3 className="text-lg font-bold text-stone-950">Skills and experience</h3>
+      <h3 className="text-lg font-bold text-stone-950">{t("skills.title")}</h3>
       <div className="mt-4 flex flex-wrap gap-2">
         {skills.length > 0 ? (
           skills.map((skill) => (
@@ -527,7 +557,7 @@ function SkillsStep({
             </button>
           ))
         ) : (
-          <p className="text-sm text-stone-500">No skill tags added.</p>
+          <p className="text-sm text-stone-500">{t("skills.noTags")}</p>
         )}
       </div>
       <div className="mt-4 flex gap-2">
@@ -541,19 +571,19 @@ function SkillsStep({
             }
           }}
           className="min-w-0 flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-          placeholder="Add a skill tag"
+          placeholder={t("skills.placeholder")}
         />
         <button
           type="button"
           onClick={onAddSkill}
           className="rounded-lg border border-green-700 px-4 py-2 text-sm font-semibold text-green-700 hover:bg-green-50"
         >
-          Add
+          {t("skills.add")}
         </button>
       </div>
       <label className="mt-5 block">
         <span className="text-sm font-semibold text-stone-800">
-          Anything else to share?
+          {t("skills.noteLabel")}
         </span>
         <textarea
           value={experienceNote}
@@ -561,7 +591,7 @@ function SkillsStep({
           onChange={(event) => onExperienceNoteChange(event.target.value)}
           rows={5}
           className="mt-2 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-          placeholder="Relevant experience, comfort level, or notes for the organizer"
+          placeholder={t("skills.notePlaceholder")}
         />
       </label>
       <p className="mt-1 text-right text-xs text-stone-500">
@@ -573,6 +603,7 @@ function SkillsStep({
 
 function SummaryStep({
   selectedTasks,
+  locale,
   totalMinutes,
   skills,
   experienceNote,
@@ -581,6 +612,7 @@ function SummaryStep({
   onEdit,
 }: {
   selectedTasks: OpportunityTask[];
+  locale: string;
   totalMinutes: number;
   skills: string[];
   experienceNote: string;
@@ -588,35 +620,36 @@ function SummaryStep({
   isWaitlist: boolean;
   onEdit: (step: Step) => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
   return (
     <div>
-      <h3 className="text-lg font-bold text-stone-950">Review your application</h3>
+      <h3 className="text-lg font-bold text-stone-950">{t("summary.title")}</h3>
       <div className="mt-4 space-y-4">
-        <SummarySection title="Selected task" onEdit={() => onEdit("tasks")}>
+        <SummarySection title={t("summary.selectedTask")} onEdit={() => onEdit("tasks")}>
           {selectedTasks.map((task) => (
             <p key={task.id} className="text-sm text-stone-700">
-              {task.name} · {task.startTime} · {task.durationMinutes} min
+              {task.name} · {task.startTime} · {formatMinutes(task.durationMinutes, locale)}
             </p>
           ))}
         </SummarySection>
-        <SummarySection title="Time commitment" onEdit={() => onEdit("time")}>
+        <SummarySection title={t("summary.timeCommitment")} onEdit={() => onEdit("time")}>
           <p className="text-sm text-stone-700">
-            {formatMinutes(totalMinutes)} total ·{" "}
-            {timeConfirmed ? "Confirmed" : "Not confirmed"}
+            {t("summary.total", { duration: formatMinutes(totalMinutes, locale) })} ·{" "}
+            {timeConfirmed ? t("summary.confirmed") : t("summary.notConfirmed")}
           </p>
         </SummarySection>
-        <SummarySection title="Skills and experience" onEdit={() => onEdit("skills")}>
+        <SummarySection title={t("summary.skills")} onEdit={() => onEdit("skills")}>
           <p className="text-sm text-stone-700">
-            {skills.length > 0 ? skills.join(", ") : "No skill tags"}
+            {skills.length > 0 ? skills.join(", ") : t("summary.noTags")}
           </p>
           <p className="mt-2 text-sm text-stone-700">
-            {experienceNote || "No extra note"}
+            {experienceNote || t("summary.noNote")}
           </p>
         </SummarySection>
       </div>
       {isWaitlist && (
         <p className="mt-4 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-800">
-          This will place you on the waitlist, not confirm your spot yet.
+          {t("summary.waitlistNotice")}
         </p>
       )}
     </div>
@@ -624,37 +657,43 @@ function SummaryStep({
 }
 
 function SuccessScreen({
+  locale,
   opportunity,
   selectedTasks,
   message,
   isWaitlist,
   onClose,
 }: {
+  locale: string;
   opportunity: MockOpportunity;
   selectedTasks: OpportunityTask[];
   message: string;
   isWaitlist: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
   return (
     <div className="p-6">
       <p className="text-xs font-semibold uppercase text-green-700">
-        {isWaitlist ? "Waitlist joined" : "Application submitted"}
+        {isWaitlist ? t("success.waitlistJoined") : t("success.submitted")}
       </p>
       <h3 className="mt-2 text-2xl font-bold text-stone-950">{message}</h3>
       <dl className="mt-5 grid gap-3 rounded-lg border border-stone-200 bg-stone-50 p-4 text-sm">
-        <SummaryFact label="Event" value={opportunity.title} />
+        <SummaryFact label={t("success.event")} value={opportunity.title} />
         <SummaryFact
-          label="Task"
+          label={t("success.task")}
           value={selectedTasks.map((task) => task.name).join(", ")}
         />
-        <SummaryFact label="Date and time" value={opportunity.scheduleLabel} />
         <SummaryFact
-          label="Next"
+          label={t("success.dateTime")}
+          value={formatDateRange(opportunity.startsAt, opportunity.endsAt, locale)}
+        />
+        <SummaryFact
+          label={t("success.next")}
           value={
             isWaitlist
-              ? "The organizer can confirm you if a spot opens."
-              : "The organizer will review and confirm your spot."
+              ? t("success.waitlistNext")
+              : t("success.pendingNext")
           }
         />
       </dl>
@@ -663,7 +702,7 @@ function SuccessScreen({
         onClick={onClose}
         className="mt-6 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-600"
       >
-        Done
+        {t("actions.done")}
       </button>
     </div>
   );
@@ -680,6 +719,7 @@ function ExistingApplicationScreen({
   existingApplication: NonNullable<ExistingApplication>;
   onClose: () => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
   const router = useRouter();
   const [message, setMessage] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -700,22 +740,30 @@ function ExistingApplicationScreen({
   return (
     <div className="p-6">
       <p className="text-xs font-semibold uppercase text-green-700">
-        Application status
+        {t("existing.status")}
       </p>
       <h3 className="mt-2 text-2xl font-bold text-stone-950">
-        {statusCopy(existingApplication.status, existingApplication.waitlistPosition)}
+        {statusCopy(
+          existingApplication.status,
+          existingApplication.waitlistPosition,
+          locale,
+        )}
       </h3>
       <div className="mt-5 rounded-lg border border-stone-200 bg-stone-50 p-4">
-        <h4 className="font-semibold text-stone-950">Selected task</h4>
+        <h4 className="font-semibold text-stone-950">
+          {t("existing.selectedTask")}
+        </h4>
         <div className="mt-3 space-y-2">
           {selectedTasks.length > 0 ? (
             selectedTasks.map((task, index) => (
               <p key={index} className="text-sm text-stone-700">
-                {formatSelectedTask(task)}
+                {formatSelectedTask(task, locale)}
               </p>
             ))
           ) : (
-            <p className="text-sm text-stone-700">No task details saved.</p>
+            <p className="text-sm text-stone-700">
+              {t("existing.noTaskDetails")}
+            </p>
           )}
         </div>
       </div>
@@ -732,7 +780,7 @@ function ExistingApplicationScreen({
             disabled={isPending}
             className="rounded-lg border border-red-300 px-5 py-2.5 text-sm font-semibold text-red-700 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {isPending ? "Leaving..." : "Leave waitlist"}
+            {isPending ? t("existing.leaving") : t("existing.leaveWaitlist")}
           </button>
         )}
         <button
@@ -740,7 +788,7 @@ function ExistingApplicationScreen({
           onClick={onClose}
           className="rounded-lg bg-stone-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-stone-700"
         >
-          Done
+          {t("actions.done")}
         </button>
       </div>
     </div>
@@ -756,6 +804,7 @@ function SummarySection({
   children: ReactNode;
   onEdit: () => void;
 }) {
+  const t = useTranslations("opportunities.applicationFlow");
   return (
     <section className="rounded-lg border border-stone-200 p-4">
       <div className="flex items-center justify-between gap-3">
@@ -765,7 +814,7 @@ function SummarySection({
           onClick={onEdit}
           className="text-sm font-semibold text-green-700 hover:text-green-600"
         >
-          Edit
+          {t("actions.edit")}
         </button>
       </div>
       <div className="mt-3">{children}</div>
@@ -782,16 +831,33 @@ function SummaryFact({ label, value }: { label: string; value: string }) {
   );
 }
 
-function statusCopy(status: string, waitlistPosition: number | null) {
+function statusCopy(status: string, waitlistPosition: number | null, locale: string) {
   if (status === "WAITLISTED") {
+    if (locale !== "en") {
+      return waitlistPosition
+        ? `ウェイトリスト ${waitlistPosition} 番目です。`
+        : "ウェイトリストに登録されています。";
+    }
     return waitlistPosition
       ? `You are on the waitlist at position ${waitlistPosition}.`
       : "You are on the waitlist.";
   }
-  if (status === "ACCEPTED") return "Your spot is confirmed.";
-  if (status === "REJECTED") return "The organizer did not select this application.";
-  if (status === "WITHDRAWN") return "This application was withdrawn.";
-  return "Your application is waiting for organizer review.";
+  if (status === "ACCEPTED") {
+    return locale === "en" ? "Your spot is confirmed." : "参加が確定しています。";
+  }
+  if (status === "REJECTED") {
+    return locale === "en"
+      ? "The organizer did not select this application."
+      : "この応募は不採用になりました。";
+  }
+  if (status === "WITHDRAWN") {
+    return locale === "en"
+      ? "This application was withdrawn."
+      : "この応募は取り下げ済みです。";
+  }
+  return locale === "en"
+    ? "Your application is waiting for organizer review."
+    : "主催者の確認待ちです。";
 }
 
 function previousStep(step: Step): Step {
@@ -808,19 +874,24 @@ function nextStep(step: Step): Step {
   return "summary";
 }
 
-function formatTime(value: string) {
-  return new Intl.DateTimeFormat("en", {
+function formatTime(value: string, locale: string) {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
     hour: "2-digit",
     minute: "2-digit",
   }).format(new Date(value));
 }
 
-function formatMinutes(minutes: number) {
+function formatMinutes(minutes: number, locale: string) {
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
-  if (hours === 0) return `${remainingMinutes} min`;
-  if (remainingMinutes === 0) return `${hours} hr`;
-  return `${hours} hr ${remainingMinutes} min`;
+  if (locale === "en") {
+    if (hours === 0) return `${remainingMinutes} min`;
+    if (remainingMinutes === 0) return `${hours} hr`;
+    return `${hours} hr ${remainingMinutes} min`;
+  }
+  if (hours === 0) return `${remainingMinutes}分`;
+  if (remainingMinutes === 0) return `${hours}時間`;
+  return `${hours}時間${remainingMinutes}分`;
 }
 
 function taskColorClass(color: OpportunityTask["typeColor"]) {
@@ -829,18 +900,37 @@ function taskColorClass(color: OpportunityTask["typeColor"]) {
   return "bg-orange-100 text-orange-800";
 }
 
-function formatSelectedTask(task: unknown) {
-  if (!task || typeof task !== "object") return "Saved task";
+function formatSelectedTask(task: unknown, locale: string) {
+  const fallback = locale === "en" ? "Saved task" : "保存されたタスク";
+  if (!task || typeof task !== "object") return fallback;
   const item = task as {
     name?: unknown;
     startTime?: unknown;
     durationMinutes?: unknown;
   };
-  const name = typeof item.name === "string" ? item.name : "Saved task";
+  const name = typeof item.name === "string" ? item.name : fallback;
   const startTime = typeof item.startTime === "string" ? item.startTime : "";
   const duration =
     typeof item.durationMinutes === "number"
-      ? ` · ${item.durationMinutes} min`
+      ? ` · ${formatMinutes(item.durationMinutes, locale)}`
       : "";
   return `${name}${startTime ? ` · ${startTime}` : ""}${duration}`;
+}
+
+function formatDateRange(startValue: string, endValue: string, locale: string) {
+  const start = new Date(startValue);
+  const end = new Date(endValue);
+  const startLabel = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(start);
+  const endLabel = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(end);
+
+  return `${startLabel} - ${endLabel}`;
 }

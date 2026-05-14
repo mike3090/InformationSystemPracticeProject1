@@ -32,11 +32,197 @@
   },
   "opportunities": {
     "title": "Volunteer Opportunities",
-<<<<<<< HEAD
-=======
     "intro": "Browse nearby volunteer tasks. This side is for volunteers who want to find something to join.",
     "joinAsVolunteer": "Join as a volunteer",
->>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
+    "discovery": {
+      "searchLabel": "Search",
+      "searchPlaceholder": "Search by title, category, task, or location",
+      "showFilters": "Show filters",
+      "hideFilters": "Hide filters",
+      "category": "Category",
+      "location": "Location",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "clearDates": "Clear dates",
+      "resetAll": "Reset all filters",
+      "mapView": "Map view",
+      "mapPlaceholderTitle": "Map placeholder",
+      "mapPlaceholderBody": "Pins will appear here after the project connects event latitude and longitude from the database.",
+      "showing": "Showing {count} upcoming event(s)",
+      "noMatchingTitle": "No matching events",
+      "noMatchingBody": "Try broadening the search, clearing a filter, or checking another date window.",
+      "clearFilters": "Clear filters",
+      "date": {
+        "label": "Date",
+        "thisWeek": "This week",
+        "thisWeekend": "This weekend",
+        "nextWeek": "Next week"
+      },
+      "duration": {
+        "label": "Duration",
+        "under2": "Under 2 hours",
+        "halfDay": "2-4 hours",
+        "fullDay": "4+ hours"
+      },
+      "effort": {
+        "label": "Effort",
+        "low": "Low effort",
+        "medium": "Moderate effort",
+        "high": "High effort"
+      },
+      "card": {
+        "location": "Location",
+        "when": "When",
+        "duration": "Duration",
+        "full": "Full",
+        "spotsLeft": "{count} spot(s) left",
+        "viewDetails": "View details"
+      }
+    },
+    "detail": {
+      "back": "Back to opportunities",
+      "spotsLeft": "{count} spot(s) left",
+      "people": "{count} people",
+      "capacityValue": "{remaining} of {total} spots remaining",
+      "facts": {
+        "dateTime": "Date & time",
+        "duration": "Duration",
+        "capacity": "Capacity",
+        "location": "Location"
+      },
+      "basic": {
+        "title": "Basic information",
+        "organizedBy": "Organized by {name}"
+      },
+      "location": {
+        "title": "Location",
+        "heading": "Plan the trip before applying",
+        "body": "The map opens with this destination pre-filled. If details change, the organizer will update the address before confirmation.",
+        "mapTitle": "Map preview for {title}"
+      },
+      "photos": {
+        "title": "Workspace photos",
+        "alt": "Workspace view {number}"
+      },
+      "flow": {
+        "title": "Task flow",
+        "heading": "How the day is structured",
+        "aiSuggested": "Plan suggested by Restarter AI"
+      },
+      "cards": {
+        "title": "Task cards",
+        "heading": "Choose the part that fits your energy",
+        "body": "Each task includes its effort level, working style, remaining places, and the practical details needed before applying."
+      }
+    },
+    "taskCards": {
+      "type": {
+        "green": "Plant / outdoor",
+        "blue": "Calm / indoor",
+        "orange": "Social / collaborative"
+      },
+      "effort": {
+        "low": "Low",
+        "medium": "Moderate",
+        "high": "High"
+      },
+      "environment": {
+        "relaxed": "Relaxed",
+        "structured": "Structured"
+      },
+      "minutes": "{count} min",
+      "people": "{count} people",
+      "spotsLeft": "{count} left",
+      "physical": "Physical",
+      "mental": "Mental",
+      "steps": "Steps",
+      "toolsProvided": "Tools provided",
+      "bring": "Bring",
+      "extraDetails": "Extra details",
+      "signUp": "Sign up for this task"
+    },
+    "applicationFlow": {
+      "steps": {
+        "task": "Task",
+        "time": "Time",
+        "experience": "Experience",
+        "review": "Review"
+      },
+      "actions": {
+        "viewApplication": "View Application",
+        "joinWaitlist": "Join Waitlist",
+        "apply": "Apply",
+        "close": "Close",
+        "back": "Back",
+        "next": "Next",
+        "submitting": "Submitting...",
+        "submitApplication": "Submit Application",
+        "done": "Done",
+        "edit": "Edit"
+      },
+      "readyToJoin": "Ready to join?",
+      "waitlistAvailable": "Waitlist available",
+      "spotsAcrossTasks": "{spots} spots left across {tasks} task options",
+      "eventApplication": "Event application",
+      "waitlistApplication": "Waitlist application",
+      "people": "{count} people",
+      "task": {
+        "title": "Choose your task",
+        "multiple": "You can select more than one task for this event.",
+        "single": "Select one concrete role for this event.",
+        "waitlist": "Waitlist",
+        "full": "Full",
+        "left": "{count} left",
+        "physical": "Physical",
+        "mental": "Mental"
+      },
+      "time": {
+        "title": "Confirm the time",
+        "eventDate": "Event date",
+        "arrival": "Arrival",
+        "eventEnds": "Event ends",
+        "selectedTime": "Selected time",
+        "conflict": "You have another active application around this time. You can still submit.",
+        "confirm": "I understand the time commitment for the selected task."
+      },
+      "skills": {
+        "title": "Skills and experience",
+        "noTags": "No skill tags added.",
+        "placeholder": "Add a skill tag",
+        "add": "Add",
+        "noteLabel": "Anything else to share?",
+        "notePlaceholder": "Relevant experience, comfort level, or notes for the organizer"
+      },
+      "summary": {
+        "title": "Review your application",
+        "selectedTask": "Selected task",
+        "timeCommitment": "Time commitment",
+        "skills": "Skills and experience",
+        "total": "{duration} total",
+        "confirmed": "Confirmed",
+        "notConfirmed": "Not confirmed",
+        "noTags": "No skill tags",
+        "noNote": "No extra note",
+        "waitlistNotice": "This will place you on the waitlist, not confirm your spot yet."
+      },
+      "success": {
+        "waitlistJoined": "Waitlist joined",
+        "submitted": "Application submitted",
+        "event": "Event",
+        "task": "Task",
+        "dateTime": "Date and time",
+        "next": "Next",
+        "waitlistNext": "The organizer can confirm you if a spot opens.",
+        "pendingNext": "The organizer will review and confirm your spot."
+      },
+      "existing": {
+        "status": "Application status",
+        "selectedTask": "Selected task",
+        "noTaskDetails": "No task details saved.",
+        "leaving": "Leaving...",
+        "leaveWaitlist": "Leave waitlist"
+      }
+    },
     "filter": {
       "all": "All",
       "oneTime": "One-time",
@@ -54,10 +240,7 @@
     },
     "new": {
       "title": "Post an Opportunity",
-<<<<<<< HEAD
-=======
       "intro": "Create a request for volunteers. This side is for employers, organizers, and local groups.",
->>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
       "aiDraftBtn": "Draft with AI",
       "fields": {
         "title": "Title",
@@ -69,13 +252,10 @@
         "endAt": "End date & time",
         "volunteersNeeded": "Volunteers needed"
       },
-<<<<<<< HEAD
-=======
       "placeholders": {
         "title": "e.g. Help clean the community garden",
         "description": "Describe the work, schedule, location, and what volunteers should know."
       },
->>>>>>> 91b933e ((partially) finished step 1 2 3 4 of the volunteer side)
       "submit": "Publish",
       "saveDraft": "Save as Draft"
     },
