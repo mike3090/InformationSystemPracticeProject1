@@ -34,6 +34,195 @@
     "title": "ボランティア募集一覧",
     "intro": "参加できるボランティア募集を探せます。このページはボランティア向けです。",
     "joinAsVolunteer": "ボランティアとして登録",
+    "discovery": {
+      "searchLabel": "検索",
+      "searchPlaceholder": "タイトル、カテゴリ、タスク、地域で検索",
+      "showFilters": "絞り込みを表示",
+      "hideFilters": "絞り込みを閉じる",
+      "category": "カテゴリ",
+      "location": "地域",
+      "startDate": "開始日",
+      "endDate": "終了日",
+      "clearDates": "日付をクリア",
+      "resetAll": "すべての絞り込みをリセット",
+      "mapView": "マップ表示",
+      "mapPlaceholderTitle": "マップ準備中",
+      "mapPlaceholderBody": "データベースにイベントの緯度・経度が接続されると、ここにピンが表示されます。",
+      "showing": "今後のイベント {count} 件を表示中",
+      "noMatchingTitle": "条件に合うイベントがありません",
+      "noMatchingBody": "検索条件を広げる、絞り込みを外す、別の日程を確認してみてください。",
+      "clearFilters": "絞り込みをクリア",
+      "date": {
+        "label": "日付",
+        "thisWeek": "今週",
+        "thisWeekend": "今週末",
+        "nextWeek": "来週"
+      },
+      "duration": {
+        "label": "所要時間",
+        "under2": "2時間未満",
+        "halfDay": "2〜4時間",
+        "fullDay": "4時間以上"
+      },
+      "effort": {
+        "label": "負荷",
+        "low": "軽め",
+        "medium": "ふつう",
+        "high": "高め"
+      },
+      "card": {
+        "location": "場所",
+        "when": "日時",
+        "duration": "所要時間",
+        "full": "満員",
+        "spotsLeft": "残り{count}名",
+        "viewDetails": "詳細を見る"
+      }
+    },
+    "detail": {
+      "back": "募集一覧へ戻る",
+      "spotsLeft": "残り{count}名",
+      "people": "{count}人",
+      "capacityValue": "残り{remaining}名 / 募集{total}名",
+      "facts": {
+        "dateTime": "日時",
+        "duration": "所要時間",
+        "capacity": "募集人数",
+        "location": "場所"
+      },
+      "basic": {
+        "title": "基本情報",
+        "organizedBy": "主催: {name}"
+      },
+      "location": {
+        "title": "場所",
+        "heading": "応募前に行き方を確認",
+        "body": "マップには目的地が入力された状態で表示されます。時間や場所が変更された場合は、確定前に主催者が情報を更新します。",
+        "mapTitle": "{title} のマッププレビュー"
+      },
+      "photos": {
+        "title": "活動場所の写真",
+        "alt": "活動場所の写真 {number}"
+      },
+      "flow": {
+        "title": "当日の流れ",
+        "heading": "一日の進み方",
+        "aiSuggested": "Restarter AI による提案プラン"
+      },
+      "cards": {
+        "title": "タスクカード",
+        "heading": "自分に合う担当を選ぶ",
+        "body": "各タスクには負荷、作業スタイル、残り枠、応募前に確認したい実務情報がまとまっています。"
+      }
+    },
+    "taskCards": {
+      "type": {
+        "green": "植物・屋外",
+        "blue": "落ち着いた屋内作業",
+        "orange": "交流・協働"
+      },
+      "effort": {
+        "low": "軽め",
+        "medium": "ふつう",
+        "high": "高め"
+      },
+      "environment": {
+        "relaxed": "ゆったり",
+        "structured": "きっちり"
+      },
+      "minutes": "{count}分",
+      "people": "{count}人",
+      "spotsLeft": "残り{count}名",
+      "physical": "身体的負荷",
+      "mental": "集中度",
+      "steps": "手順",
+      "toolsProvided": "用意される道具",
+      "bring": "持ち物",
+      "extraDetails": "補足情報",
+      "signUp": "このタスクに応募する"
+    },
+    "applicationFlow": {
+      "steps": {
+        "task": "タスク",
+        "time": "時間",
+        "experience": "経験",
+        "review": "確認"
+      },
+      "actions": {
+        "viewApplication": "応募内容を見る",
+        "joinWaitlist": "ウェイトリストに登録",
+        "apply": "応募する",
+        "close": "閉じる",
+        "back": "戻る",
+        "next": "次へ",
+        "submitting": "送信中...",
+        "submitApplication": "応募を送信",
+        "done": "完了",
+        "edit": "編集"
+      },
+      "readyToJoin": "参加しますか？",
+      "waitlistAvailable": "ウェイトリスト受付中",
+      "spotsAcrossTasks": "{tasks} 個のタスクで残り {spots} 名",
+      "eventApplication": "イベント応募",
+      "waitlistApplication": "ウェイトリスト応募",
+      "people": "{count}人",
+      "task": {
+        "title": "担当タスクを選択",
+        "multiple": "このイベントでは複数のタスクを選択できます。",
+        "single": "このイベントで担当したい役割を1つ選択してください。",
+        "waitlist": "ウェイトリスト",
+        "full": "満員",
+        "left": "残り{count}名",
+        "physical": "身体的負荷",
+        "mental": "集中度"
+      },
+      "time": {
+        "title": "参加時間を確認",
+        "eventDate": "イベント日時",
+        "arrival": "集合",
+        "eventEnds": "終了",
+        "selectedTime": "選択した作業時間",
+        "conflict": "この時間帯に別の有効な応募があります。必要であればこのまま送信できます。",
+        "confirm": "選択したタスクの参加時間を確認しました。"
+      },
+      "skills": {
+        "title": "スキル・経験",
+        "noTags": "スキルタグはまだありません。",
+        "placeholder": "スキルタグを追加",
+        "add": "追加",
+        "noteLabel": "主催者に伝えたいこと",
+        "notePlaceholder": "関連する経験、作業の得意・不得意、主催者へのメモなど"
+      },
+      "summary": {
+        "title": "応募内容を確認",
+        "selectedTask": "選択したタスク",
+        "timeCommitment": "参加時間",
+        "skills": "スキル・経験",
+        "total": "合計 {duration}",
+        "confirmed": "確認済み",
+        "notConfirmed": "未確認",
+        "noTags": "スキルタグなし",
+        "noNote": "追加メモなし",
+        "waitlistNotice": "これは参加確定ではなく、ウェイトリストへの登録です。"
+      },
+      "success": {
+        "waitlistJoined": "ウェイトリストに登録しました",
+        "submitted": "応募を送信しました",
+        "event": "イベント",
+        "task": "タスク",
+        "dateTime": "日時",
+        "next": "次に起こること",
+        "waitlistNext": "空きが出た場合、主催者が参加を確定できます。",
+        "pendingNext": "主催者が応募内容を確認し、参加可否を更新します。"
+      },
+      "existing": {
+        "status": "応募ステータス",
+        "selectedTask": "選択したタスク",
+        "noTaskDetails": "保存されたタスク詳細はありません。",
+        "leaving": "取り下げ中...",
+        "leaveWaitlist": "ウェイトリストを取り下げる"
+      }
+    },
     "filter": {
       "all": "すべて",
       "oneTime": "単発",

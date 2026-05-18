@@ -1,31 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { EffortLevel, OpportunityTask } from "@/lib/mockOpportunities";
-
-const colorStyles = {
-  green: {
-    rail: "border-l-green-600",
-    tint: "bg-green-50",
-    label: "Plant / outdoor",
-  },
-  blue: {
-    rail: "border-l-sky-600",
-    tint: "bg-sky-50",
-    label: "Calm / indoor",
-  },
-  orange: {
-    rail: "border-l-orange-500",
-    tint: "bg-orange-50",
-    label: "Social / collaborative",
-  },
-} as const;
-
-const effortLabels: Record<EffortLevel, string> = {
-  low: "Low",
-  medium: "Moderate",
-  high: "High",
-};
 
 const effortHeights: Record<EffortLevel, string> = {
   low: "min-h-36",
@@ -34,7 +11,30 @@ const effortHeights: Record<EffortLevel, string> = {
 };
 
 export default function TaskDetailCards({ tasks }: { tasks: OpportunityTask[] }) {
+  const t = useTranslations("opportunities.taskCards");
   const [openTaskId, setOpenTaskId] = useState(tasks[0]?.id ?? "");
+  const colorStyles = {
+    green: {
+      rail: "border-l-green-600",
+      tint: "bg-green-50",
+      label: t("type.green"),
+    },
+    blue: {
+      rail: "border-l-sky-600",
+      tint: "bg-sky-50",
+      label: t("type.blue"),
+    },
+    orange: {
+      rail: "border-l-orange-500",
+      tint: "bg-orange-50",
+      label: t("type.orange"),
+    },
+  } as const;
+  const effortLabels: Record<EffortLevel, string> = {
+    low: t("effort.low"),
+    medium: t("effort.medium"),
+    high: t("effort.high"),
+  };
 
   return (
     <div className="space-y-4">
@@ -71,12 +71,12 @@ export default function TaskDetailCards({ tasks }: { tasks: OpportunityTask[] })
                       {task.name}
                     </h3>
                     <p className="mt-1 text-xs font-medium text-stone-600">
-                      {task.startTime} · {task.durationMinutes} min ·{" "}
-                      {task.peopleNeeded} people
+                      {task.startTime} · {t("minutes", { count: task.durationMinutes })} ·{" "}
+                      {t("people", { count: task.peopleNeeded })}
                     </p>
                   </div>
                   <span className="shrink-0 rounded-sm bg-white/80 px-2 py-1 text-xs font-semibold text-stone-700">
-                    {task.spotsRemaining} left
+                    {t("spotsLeft", { count: task.spotsRemaining })}
                   </span>
                 </div>
                 <p className="mt-3 text-sm leading-6 text-stone-700">
@@ -84,13 +84,15 @@ export default function TaskDetailCards({ tasks }: { tasks: OpportunityTask[] })
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs text-stone-700">
                   <span className="rounded-sm bg-white/80 px-2 py-1">
-                    Physical: {effortLabels[task.physicalEffort]}
+                    {t("physical")}: {effortLabels[task.physicalEffort]}
                   </span>
                   <span className="rounded-sm bg-white/80 px-2 py-1">
-                    Mental: {effortLabels[task.mentalEffort]}
+                    {t("mental")}: {effortLabels[task.mentalEffort]}
                   </span>
                   <span className="rounded-sm bg-white/80 px-2 py-1">
-                    {task.environmentShape === "relaxed" ? "Relaxed" : "Structured"}
+                    {task.environmentShape === "relaxed"
+                      ? t("environment.relaxed")
+                      : t("environment.structured")}
                   </span>
                 </div>
               </button>
@@ -102,11 +104,13 @@ export default function TaskDetailCards({ tasks }: { tasks: OpportunityTask[] })
                   </p>
 
                   <div className="mt-4 grid gap-4 text-sm md:grid-cols-2">
-                    <DetailList title="Steps" items={task.steps} />
-                    <DetailList title="Tools provided" items={task.toolsProvided} />
-                    <DetailList title="Bring" items={task.thingsToBring} />
+                    <DetailList title={t("steps")} items={task.steps} />
+                    <DetailList title={t("toolsProvided")} items={task.toolsProvided} />
+                    <DetailList title={t("bring")} items={task.thingsToBring} />
                     <div>
-                      <h4 className="font-semibold text-stone-900">Extra details</h4>
+                      <h4 className="font-semibold text-stone-900">
+                        {t("extraDetails")}
+                      </h4>
                       <dl className="mt-2 space-y-2">
                         {task.customFields.map((field) => (
                           <div key={field.label}>
@@ -131,7 +135,7 @@ export default function TaskDetailCards({ tasks }: { tasks: OpportunityTask[] })
                     }
                     className="mt-5 rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600"
                   >
-                    Sign up for this task
+                    {t("signUp")}
                   </button>
                 </div>
               )}

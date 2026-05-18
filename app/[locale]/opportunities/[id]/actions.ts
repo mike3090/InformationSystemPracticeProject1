@@ -26,15 +26,18 @@ export async function submitEventApplication(
   formData: FormData,
 ): Promise<ApplicationFormState> {
   const session = await auth();
+  const locale = String(formData.get("locale") ?? "ja");
 
   if (!session?.user?.id) {
     return {
       status: "error",
-      message: "Please sign in before applying.",
+      message:
+        locale === "en"
+          ? "Please sign in before applying."
+          : "応募するにはログインしてください。",
     };
   }
 
-  const locale = String(formData.get("locale") ?? "ja");
   const opportunityId = String(formData.get("opportunityId") ?? "");
   const selectedTaskIds = formData
     .getAll("selectedTaskIds")
