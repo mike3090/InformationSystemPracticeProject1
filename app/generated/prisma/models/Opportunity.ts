@@ -27,31 +27,68 @@ export type AggregateOpportunity = {
 }
 
 export type OpportunityAvgAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  durationMinutes: number | null
   volunteersNeeded: number | null
+  maxApplicants: number | null
+  withdrawalCutoffHours: number | null
 }
 
 export type OpportunitySumAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  durationMinutes: number | null
   volunteersNeeded: number | null
+  maxApplicants: number | null
+  withdrawalCutoffHours: number | null
 }
 
 export type OpportunityMinAggregateOutputType = {
   id: string | null
   title: string | null
   titleJa: string | null
+  shortDescription: string | null
   description: string | null
   descriptionJa: string | null
   type: $Enums.OpportunityType | null
   status: $Enums.OpportunityStatus | null
+  category: string | null
+  taskTypeColor: string | null
+  environmentShape: string | null
+  physicalEffort: string | null
+  mentalEffort: string | null
   prefecture: string | null
   city: string | null
   address: string | null
+  googleMapsUrl: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
   startAt: Date | null
   endAt: Date | null
+  arrivalTime: Date | null
+  durationMinutes: number | null
   recurrenceRule: string | null
   volunteersNeeded: number | null
+  maxApplicants: number | null
+  allowWaitlist: boolean | null
+  allowMultipleTaskSelection: boolean | null
+  instructions: string | null
+  arrivalGuidance: string | null
+  firstLandmarkDescription: string | null
+  firstLandmarkImageUrl: string | null
+  firstContactName: string | null
+  firstContactRole: string | null
+  firstContactImageUrl: string | null
+  coverImageUrl: string | null
+  workspace3dEmbedUrl: string | null
+  withdrawalCutoffHours: number | null
+  aiTemplateUsed: string | null
   requesterId: string | null
   organizationId: string | null
   aiDrafted: boolean | null
+  publishedAt: Date | null
+  completedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,20 +97,47 @@ export type OpportunityMaxAggregateOutputType = {
   id: string | null
   title: string | null
   titleJa: string | null
+  shortDescription: string | null
   description: string | null
   descriptionJa: string | null
   type: $Enums.OpportunityType | null
   status: $Enums.OpportunityStatus | null
+  category: string | null
+  taskTypeColor: string | null
+  environmentShape: string | null
+  physicalEffort: string | null
+  mentalEffort: string | null
   prefecture: string | null
   city: string | null
   address: string | null
+  googleMapsUrl: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
   startAt: Date | null
   endAt: Date | null
+  arrivalTime: Date | null
+  durationMinutes: number | null
   recurrenceRule: string | null
   volunteersNeeded: number | null
+  maxApplicants: number | null
+  allowWaitlist: boolean | null
+  allowMultipleTaskSelection: boolean | null
+  instructions: string | null
+  arrivalGuidance: string | null
+  firstLandmarkDescription: string | null
+  firstLandmarkImageUrl: string | null
+  firstContactName: string | null
+  firstContactRole: string | null
+  firstContactImageUrl: string | null
+  coverImageUrl: string | null
+  workspace3dEmbedUrl: string | null
+  withdrawalCutoffHours: number | null
+  aiTemplateUsed: string | null
   requesterId: string | null
   organizationId: string | null
   aiDrafted: boolean | null
+  publishedAt: Date | null
+  completedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -82,21 +146,55 @@ export type OpportunityCountAggregateOutputType = {
   id: number
   title: number
   titleJa: number
+  shortDescription: number
   description: number
   descriptionJa: number
   type: number
   status: number
+  category: number
+  tags: number
+  taskTypeColor: number
+  environmentShape: number
+  physicalEffort: number
+  mentalEffort: number
   skills: number
   prefecture: number
   city: number
   address: number
+  googleMapsUrl: number
+  latitude: number
+  longitude: number
   startAt: number
   endAt: number
+  arrivalTime: number
+  durationMinutes: number
   recurrenceRule: number
   volunteersNeeded: number
+  maxApplicants: number
+  allowWaitlist: number
+  allowMultipleTaskSelection: number
+  taskFlow: number
+  customFields: number
+  instructions: number
+  toolsProvided: number
+  thingsToBring: number
+  arrivalGuidance: number
+  firstLandmarkDescription: number
+  firstLandmarkImageUrl: number
+  firstContactName: number
+  firstContactRole: number
+  firstContactImageUrl: number
+  coverImageUrl: number
+  workspaceImageUrls: number
+  workspace3dEmbedUrl: number
+  preApplicationQuestions: number
+  withdrawalCutoffHours: number
+  aiTemplateUsed: number
   requesterId: number
   organizationId: number
   aiDrafted: number
+  publishedAt: number
+  completedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -104,31 +202,68 @@ export type OpportunityCountAggregateOutputType = {
 
 
 export type OpportunityAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  durationMinutes?: true
   volunteersNeeded?: true
+  maxApplicants?: true
+  withdrawalCutoffHours?: true
 }
 
 export type OpportunitySumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  durationMinutes?: true
   volunteersNeeded?: true
+  maxApplicants?: true
+  withdrawalCutoffHours?: true
 }
 
 export type OpportunityMinAggregateInputType = {
   id?: true
   title?: true
   titleJa?: true
+  shortDescription?: true
   description?: true
   descriptionJa?: true
   type?: true
   status?: true
+  category?: true
+  taskTypeColor?: true
+  environmentShape?: true
+  physicalEffort?: true
+  mentalEffort?: true
   prefecture?: true
   city?: true
   address?: true
+  googleMapsUrl?: true
+  latitude?: true
+  longitude?: true
   startAt?: true
   endAt?: true
+  arrivalTime?: true
+  durationMinutes?: true
   recurrenceRule?: true
   volunteersNeeded?: true
+  maxApplicants?: true
+  allowWaitlist?: true
+  allowMultipleTaskSelection?: true
+  instructions?: true
+  arrivalGuidance?: true
+  firstLandmarkDescription?: true
+  firstLandmarkImageUrl?: true
+  firstContactName?: true
+  firstContactRole?: true
+  firstContactImageUrl?: true
+  coverImageUrl?: true
+  workspace3dEmbedUrl?: true
+  withdrawalCutoffHours?: true
+  aiTemplateUsed?: true
   requesterId?: true
   organizationId?: true
   aiDrafted?: true
+  publishedAt?: true
+  completedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -137,20 +272,47 @@ export type OpportunityMaxAggregateInputType = {
   id?: true
   title?: true
   titleJa?: true
+  shortDescription?: true
   description?: true
   descriptionJa?: true
   type?: true
   status?: true
+  category?: true
+  taskTypeColor?: true
+  environmentShape?: true
+  physicalEffort?: true
+  mentalEffort?: true
   prefecture?: true
   city?: true
   address?: true
+  googleMapsUrl?: true
+  latitude?: true
+  longitude?: true
   startAt?: true
   endAt?: true
+  arrivalTime?: true
+  durationMinutes?: true
   recurrenceRule?: true
   volunteersNeeded?: true
+  maxApplicants?: true
+  allowWaitlist?: true
+  allowMultipleTaskSelection?: true
+  instructions?: true
+  arrivalGuidance?: true
+  firstLandmarkDescription?: true
+  firstLandmarkImageUrl?: true
+  firstContactName?: true
+  firstContactRole?: true
+  firstContactImageUrl?: true
+  coverImageUrl?: true
+  workspace3dEmbedUrl?: true
+  withdrawalCutoffHours?: true
+  aiTemplateUsed?: true
   requesterId?: true
   organizationId?: true
   aiDrafted?: true
+  publishedAt?: true
+  completedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -159,21 +321,55 @@ export type OpportunityCountAggregateInputType = {
   id?: true
   title?: true
   titleJa?: true
+  shortDescription?: true
   description?: true
   descriptionJa?: true
   type?: true
   status?: true
+  category?: true
+  tags?: true
+  taskTypeColor?: true
+  environmentShape?: true
+  physicalEffort?: true
+  mentalEffort?: true
   skills?: true
   prefecture?: true
   city?: true
   address?: true
+  googleMapsUrl?: true
+  latitude?: true
+  longitude?: true
   startAt?: true
   endAt?: true
+  arrivalTime?: true
+  durationMinutes?: true
   recurrenceRule?: true
   volunteersNeeded?: true
+  maxApplicants?: true
+  allowWaitlist?: true
+  allowMultipleTaskSelection?: true
+  taskFlow?: true
+  customFields?: true
+  instructions?: true
+  toolsProvided?: true
+  thingsToBring?: true
+  arrivalGuidance?: true
+  firstLandmarkDescription?: true
+  firstLandmarkImageUrl?: true
+  firstContactName?: true
+  firstContactRole?: true
+  firstContactImageUrl?: true
+  coverImageUrl?: true
+  workspaceImageUrls?: true
+  workspace3dEmbedUrl?: true
+  preApplicationQuestions?: true
+  withdrawalCutoffHours?: true
+  aiTemplateUsed?: true
   requesterId?: true
   organizationId?: true
   aiDrafted?: true
+  publishedAt?: true
+  completedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -269,21 +465,55 @@ export type OpportunityGroupByOutputType = {
   id: string
   title: string
   titleJa: string | null
+  shortDescription: string | null
   description: string
   descriptionJa: string | null
   type: $Enums.OpportunityType
   status: $Enums.OpportunityStatus
+  category: string | null
+  tags: string[]
+  taskTypeColor: string | null
+  environmentShape: string | null
+  physicalEffort: string
+  mentalEffort: string
   skills: string[]
   prefecture: string | null
   city: string | null
   address: string | null
+  googleMapsUrl: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
   startAt: Date | null
   endAt: Date | null
+  arrivalTime: Date | null
+  durationMinutes: number | null
   recurrenceRule: string | null
   volunteersNeeded: number
+  maxApplicants: number | null
+  allowWaitlist: boolean
+  allowMultipleTaskSelection: boolean
+  taskFlow: runtime.JsonValue
+  customFields: runtime.JsonValue
+  instructions: string | null
+  toolsProvided: string[]
+  thingsToBring: string[]
+  arrivalGuidance: string | null
+  firstLandmarkDescription: string | null
+  firstLandmarkImageUrl: string | null
+  firstContactName: string | null
+  firstContactRole: string | null
+  firstContactImageUrl: string | null
+  coverImageUrl: string | null
+  workspaceImageUrls: string[]
+  workspace3dEmbedUrl: string | null
+  preApplicationQuestions: runtime.JsonValue
+  withdrawalCutoffHours: number
+  aiTemplateUsed: string | null
   requesterId: string
   organizationId: string | null
   aiDrafted: boolean
+  publishedAt: Date | null
+  completedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: OpportunityCountAggregateOutputType | null
@@ -315,52 +545,126 @@ export type OpportunityWhereInput = {
   id?: Prisma.StringFilter<"Opportunity"> | string
   title?: Prisma.StringFilter<"Opportunity"> | string
   titleJa?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  shortDescription?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   description?: Prisma.StringFilter<"Opportunity"> | string
   descriptionJa?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   type?: Prisma.EnumOpportunityTypeFilter<"Opportunity"> | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFilter<"Opportunity"> | $Enums.OpportunityStatus
+  category?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Opportunity">
+  taskTypeColor?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  environmentShape?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  physicalEffort?: Prisma.StringFilter<"Opportunity"> | string
+  mentalEffort?: Prisma.StringFilter<"Opportunity"> | string
   skills?: Prisma.StringNullableListFilter<"Opportunity">
   prefecture?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   city?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   address?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   endAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  arrivalTime?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  durationMinutes?: Prisma.IntNullableFilter<"Opportunity"> | number | null
   recurrenceRule?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   volunteersNeeded?: Prisma.IntFilter<"Opportunity"> | number
+  maxApplicants?: Prisma.IntNullableFilter<"Opportunity"> | number | null
+  allowWaitlist?: Prisma.BoolFilter<"Opportunity"> | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFilter<"Opportunity"> | boolean
+  taskFlow?: Prisma.JsonFilter<"Opportunity">
+  customFields?: Prisma.JsonFilter<"Opportunity">
+  instructions?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  toolsProvided?: Prisma.StringNullableListFilter<"Opportunity">
+  thingsToBring?: Prisma.StringNullableListFilter<"Opportunity">
+  arrivalGuidance?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstLandmarkDescription?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstLandmarkImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactName?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactRole?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Opportunity">
+  workspace3dEmbedUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  preApplicationQuestions?: Prisma.JsonFilter<"Opportunity">
+  withdrawalCutoffHours?: Prisma.IntFilter<"Opportunity"> | number
+  aiTemplateUsed?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   requesterId?: Prisma.StringFilter<"Opportunity"> | string
   organizationId?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   aiDrafted?: Prisma.BoolFilter<"Opportunity"> | boolean
+  publishedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   applications?: Prisma.ApplicationListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  eventUpdates?: Prisma.EventUpdateListRelationFilter
+  eventMessages?: Prisma.EventMessageListRelationFilter
 }
 
 export type OpportunityOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   titleJa?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   descriptionJa?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  taskTypeColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  environmentShape?: Prisma.SortOrderInput | Prisma.SortOrder
+  physicalEffort?: Prisma.SortOrder
+  mentalEffort?: Prisma.SortOrder
   skills?: Prisma.SortOrder
   prefecture?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   startAt?: Prisma.SortOrderInput | Prisma.SortOrder
   endAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  arrivalTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   recurrenceRule?: Prisma.SortOrderInput | Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrderInput | Prisma.SortOrder
+  allowWaitlist?: Prisma.SortOrder
+  allowMultipleTaskSelection?: Prisma.SortOrder
+  taskFlow?: Prisma.SortOrder
+  customFields?: Prisma.SortOrder
+  instructions?: Prisma.SortOrderInput | Prisma.SortOrder
+  toolsProvided?: Prisma.SortOrder
+  thingsToBring?: Prisma.SortOrder
+  arrivalGuidance?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstLandmarkDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstLandmarkImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstContactName?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstContactRole?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstContactImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  workspaceImageUrls?: Prisma.SortOrder
+  workspace3dEmbedUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  preApplicationQuestions?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
+  aiTemplateUsed?: Prisma.SortOrderInput | Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   aiDrafted?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   requester?: Prisma.UserOrderByWithRelationInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
   applications?: Prisma.ApplicationOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  eventUpdates?: Prisma.EventUpdateOrderByRelationAggregateInput
+  eventMessages?: Prisma.EventMessageOrderByRelationAggregateInput
 }
 
 export type OpportunityWhereUniqueInput = Prisma.AtLeast<{
@@ -370,47 +674,118 @@ export type OpportunityWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OpportunityWhereInput | Prisma.OpportunityWhereInput[]
   title?: Prisma.StringFilter<"Opportunity"> | string
   titleJa?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  shortDescription?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   description?: Prisma.StringFilter<"Opportunity"> | string
   descriptionJa?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   type?: Prisma.EnumOpportunityTypeFilter<"Opportunity"> | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFilter<"Opportunity"> | $Enums.OpportunityStatus
+  category?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Opportunity">
+  taskTypeColor?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  environmentShape?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  physicalEffort?: Prisma.StringFilter<"Opportunity"> | string
+  mentalEffort?: Prisma.StringFilter<"Opportunity"> | string
   skills?: Prisma.StringNullableListFilter<"Opportunity">
   prefecture?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   city?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   address?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   endAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  arrivalTime?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  durationMinutes?: Prisma.IntNullableFilter<"Opportunity"> | number | null
   recurrenceRule?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   volunteersNeeded?: Prisma.IntFilter<"Opportunity"> | number
+  maxApplicants?: Prisma.IntNullableFilter<"Opportunity"> | number | null
+  allowWaitlist?: Prisma.BoolFilter<"Opportunity"> | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFilter<"Opportunity"> | boolean
+  taskFlow?: Prisma.JsonFilter<"Opportunity">
+  customFields?: Prisma.JsonFilter<"Opportunity">
+  instructions?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  toolsProvided?: Prisma.StringNullableListFilter<"Opportunity">
+  thingsToBring?: Prisma.StringNullableListFilter<"Opportunity">
+  arrivalGuidance?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstLandmarkDescription?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstLandmarkImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactName?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactRole?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Opportunity">
+  workspace3dEmbedUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  preApplicationQuestions?: Prisma.JsonFilter<"Opportunity">
+  withdrawalCutoffHours?: Prisma.IntFilter<"Opportunity"> | number
+  aiTemplateUsed?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   requesterId?: Prisma.StringFilter<"Opportunity"> | string
   organizationId?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   aiDrafted?: Prisma.BoolFilter<"Opportunity"> | boolean
+  publishedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   applications?: Prisma.ApplicationListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  eventUpdates?: Prisma.EventUpdateListRelationFilter
+  eventMessages?: Prisma.EventMessageListRelationFilter
 }, "id">
 
 export type OpportunityOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   titleJa?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   descriptionJa?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  taskTypeColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  environmentShape?: Prisma.SortOrderInput | Prisma.SortOrder
+  physicalEffort?: Prisma.SortOrder
+  mentalEffort?: Prisma.SortOrder
   skills?: Prisma.SortOrder
   prefecture?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   startAt?: Prisma.SortOrderInput | Prisma.SortOrder
   endAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  arrivalTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   recurrenceRule?: Prisma.SortOrderInput | Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrderInput | Prisma.SortOrder
+  allowWaitlist?: Prisma.SortOrder
+  allowMultipleTaskSelection?: Prisma.SortOrder
+  taskFlow?: Prisma.SortOrder
+  customFields?: Prisma.SortOrder
+  instructions?: Prisma.SortOrderInput | Prisma.SortOrder
+  toolsProvided?: Prisma.SortOrder
+  thingsToBring?: Prisma.SortOrder
+  arrivalGuidance?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstLandmarkDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstLandmarkImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstContactName?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstContactRole?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstContactImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  workspaceImageUrls?: Prisma.SortOrder
+  workspace3dEmbedUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  preApplicationQuestions?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
+  aiTemplateUsed?: Prisma.SortOrderInput | Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   aiDrafted?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OpportunityCountOrderByAggregateInput
@@ -427,21 +802,55 @@ export type OpportunityScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
   title?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
   titleJa?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  shortDescription?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   description?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
   descriptionJa?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   type?: Prisma.EnumOpportunityTypeWithAggregatesFilter<"Opportunity"> | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusWithAggregatesFilter<"Opportunity"> | $Enums.OpportunityStatus
+  category?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Opportunity">
+  taskTypeColor?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  environmentShape?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  physicalEffort?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
+  mentalEffort?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
   skills?: Prisma.StringNullableListFilter<"Opportunity">
   prefecture?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  googleMapsUrl?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  latitude?: Prisma.DecimalNullableWithAggregatesFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableWithAggregatesFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
   endAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
+  arrivalTime?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
+  durationMinutes?: Prisma.IntNullableWithAggregatesFilter<"Opportunity"> | number | null
   recurrenceRule?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   volunteersNeeded?: Prisma.IntWithAggregatesFilter<"Opportunity"> | number
+  maxApplicants?: Prisma.IntNullableWithAggregatesFilter<"Opportunity"> | number | null
+  allowWaitlist?: Prisma.BoolWithAggregatesFilter<"Opportunity"> | boolean
+  allowMultipleTaskSelection?: Prisma.BoolWithAggregatesFilter<"Opportunity"> | boolean
+  taskFlow?: Prisma.JsonWithAggregatesFilter<"Opportunity">
+  customFields?: Prisma.JsonWithAggregatesFilter<"Opportunity">
+  instructions?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  toolsProvided?: Prisma.StringNullableListFilter<"Opportunity">
+  thingsToBring?: Prisma.StringNullableListFilter<"Opportunity">
+  arrivalGuidance?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  firstLandmarkDescription?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  firstLandmarkImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  firstContactName?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  firstContactRole?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  firstContactImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  coverImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Opportunity">
+  workspace3dEmbedUrl?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  preApplicationQuestions?: Prisma.JsonWithAggregatesFilter<"Opportunity">
+  withdrawalCutoffHours?: Prisma.IntWithAggregatesFilter<"Opportunity"> | number
+  aiTemplateUsed?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   requesterId?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
   organizationId?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   aiDrafted?: Prisma.BoolWithAggregatesFilter<"Opportunity"> | boolean
+  publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
 }
@@ -450,117 +859,299 @@ export type OpportunityCreateInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutOpportunitiesInput
   applications?: Prisma.ApplicationCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityUncheckedCreateInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   requesterId: string
   organizationId?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateUncheckedCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutOpportunitiesNestedInput
   applications?: Prisma.ApplicationUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityCreateManyInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   requesterId: string
   organizationId?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -569,19 +1160,53 @@ export type OpportunityUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -590,21 +1215,55 @@ export type OpportunityUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -623,47 +1282,113 @@ export type OpportunityCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   titleJa?: Prisma.SortOrder
+  shortDescription?: Prisma.SortOrder
   description?: Prisma.SortOrder
   descriptionJa?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  taskTypeColor?: Prisma.SortOrder
+  environmentShape?: Prisma.SortOrder
+  physicalEffort?: Prisma.SortOrder
+  mentalEffort?: Prisma.SortOrder
   skills?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrder
+  arrivalTime?: Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrder
   recurrenceRule?: Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrder
+  allowWaitlist?: Prisma.SortOrder
+  allowMultipleTaskSelection?: Prisma.SortOrder
+  taskFlow?: Prisma.SortOrder
+  customFields?: Prisma.SortOrder
+  instructions?: Prisma.SortOrder
+  toolsProvided?: Prisma.SortOrder
+  thingsToBring?: Prisma.SortOrder
+  arrivalGuidance?: Prisma.SortOrder
+  firstLandmarkDescription?: Prisma.SortOrder
+  firstLandmarkImageUrl?: Prisma.SortOrder
+  firstContactName?: Prisma.SortOrder
+  firstContactRole?: Prisma.SortOrder
+  firstContactImageUrl?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  workspaceImageUrls?: Prisma.SortOrder
+  workspace3dEmbedUrl?: Prisma.SortOrder
+  preApplicationQuestions?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
+  aiTemplateUsed?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   aiDrafted?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OpportunityAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
 }
 
 export type OpportunityMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   titleJa?: Prisma.SortOrder
+  shortDescription?: Prisma.SortOrder
   description?: Prisma.SortOrder
   descriptionJa?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  taskTypeColor?: Prisma.SortOrder
+  environmentShape?: Prisma.SortOrder
+  physicalEffort?: Prisma.SortOrder
+  mentalEffort?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrder
+  arrivalTime?: Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrder
   recurrenceRule?: Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrder
+  allowWaitlist?: Prisma.SortOrder
+  allowMultipleTaskSelection?: Prisma.SortOrder
+  instructions?: Prisma.SortOrder
+  arrivalGuidance?: Prisma.SortOrder
+  firstLandmarkDescription?: Prisma.SortOrder
+  firstLandmarkImageUrl?: Prisma.SortOrder
+  firstContactName?: Prisma.SortOrder
+  firstContactRole?: Prisma.SortOrder
+  firstContactImageUrl?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  workspace3dEmbedUrl?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
+  aiTemplateUsed?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   aiDrafted?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -672,31 +1397,68 @@ export type OpportunityMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   titleJa?: Prisma.SortOrder
+  shortDescription?: Prisma.SortOrder
   description?: Prisma.SortOrder
   descriptionJa?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  taskTypeColor?: Prisma.SortOrder
+  environmentShape?: Prisma.SortOrder
+  physicalEffort?: Prisma.SortOrder
+  mentalEffort?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   startAt?: Prisma.SortOrder
   endAt?: Prisma.SortOrder
+  arrivalTime?: Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrder
   recurrenceRule?: Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrder
+  allowWaitlist?: Prisma.SortOrder
+  allowMultipleTaskSelection?: Prisma.SortOrder
+  instructions?: Prisma.SortOrder
+  arrivalGuidance?: Prisma.SortOrder
+  firstLandmarkDescription?: Prisma.SortOrder
+  firstLandmarkImageUrl?: Prisma.SortOrder
+  firstContactName?: Prisma.SortOrder
+  firstContactRole?: Prisma.SortOrder
+  firstContactImageUrl?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  workspace3dEmbedUrl?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
+  aiTemplateUsed?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   aiDrafted?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OpportunitySumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  durationMinutes?: Prisma.SortOrder
   volunteersNeeded?: Prisma.SortOrder
+  maxApplicants?: Prisma.SortOrder
+  withdrawalCutoffHours?: Prisma.SortOrder
 }
 
 export type OpportunityScalarRelationFilter = {
   is?: Prisma.OpportunityWhereInput
   isNot?: Prisma.OpportunityWhereInput
+}
+
+export type OpportunityNullableScalarRelationFilter = {
+  is?: Prisma.OpportunityWhereInput | null
+  isNot?: Prisma.OpportunityWhereInput | null
 }
 
 export type OpportunityCreateNestedManyWithoutRequesterInput = {
@@ -783,7 +1545,23 @@ export type OpportunityUncheckedUpdateManyWithoutOrganizationNestedInput = {
   deleteMany?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
 }
 
+export type OpportunityCreatetagsInput = {
+  set: string[]
+}
+
 export type OpportunityCreateskillsInput = {
+  set: string[]
+}
+
+export type OpportunityCreatetoolsProvidedInput = {
+  set: string[]
+}
+
+export type OpportunityCreatethingsToBringInput = {
+  set: string[]
+}
+
+export type OpportunityCreateworkspaceImageUrlsInput = {
   set: string[]
 }
 
@@ -795,9 +1573,22 @@ export type EnumOpportunityStatusFieldUpdateOperationsInput = {
   set?: $Enums.OpportunityStatus
 }
 
+export type OpportunityUpdatetagsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type OpportunityUpdateskillsInput = {
   set?: string[]
   push?: string | string[]
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -806,6 +1597,21 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type OpportunityUpdatetoolsProvidedInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type OpportunityUpdatethingsToBringInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type OpportunityUpdateworkspaceImageUrlsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type OpportunityCreateNestedOneWithoutApplicationsInput = {
@@ -822,50 +1628,168 @@ export type OpportunityUpdateOneRequiredWithoutApplicationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpportunityUpdateToOneWithWhereWithoutApplicationsInput, Prisma.OpportunityUpdateWithoutApplicationsInput>, Prisma.OpportunityUncheckedUpdateWithoutApplicationsInput>
 }
 
+export type OpportunityCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutNotificationsInput, Prisma.OpportunityUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.OpportunityWhereUniqueInput
+}
+
+export type OpportunityUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutNotificationsInput, Prisma.OpportunityUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.OpportunityUpsertWithoutNotificationsInput
+  disconnect?: Prisma.OpportunityWhereInput | boolean
+  delete?: Prisma.OpportunityWhereInput | boolean
+  connect?: Prisma.OpportunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OpportunityUpdateToOneWithWhereWithoutNotificationsInput, Prisma.OpportunityUpdateWithoutNotificationsInput>, Prisma.OpportunityUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type OpportunityCreateNestedOneWithoutEventUpdatesInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutEventUpdatesInput, Prisma.OpportunityUncheckedCreateWithoutEventUpdatesInput>
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutEventUpdatesInput
+  connect?: Prisma.OpportunityWhereUniqueInput
+}
+
+export type OpportunityUpdateOneRequiredWithoutEventUpdatesNestedInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutEventUpdatesInput, Prisma.OpportunityUncheckedCreateWithoutEventUpdatesInput>
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutEventUpdatesInput
+  upsert?: Prisma.OpportunityUpsertWithoutEventUpdatesInput
+  connect?: Prisma.OpportunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OpportunityUpdateToOneWithWhereWithoutEventUpdatesInput, Prisma.OpportunityUpdateWithoutEventUpdatesInput>, Prisma.OpportunityUncheckedUpdateWithoutEventUpdatesInput>
+}
+
+export type OpportunityCreateNestedOneWithoutEventMessagesInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutEventMessagesInput, Prisma.OpportunityUncheckedCreateWithoutEventMessagesInput>
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutEventMessagesInput
+  connect?: Prisma.OpportunityWhereUniqueInput
+}
+
+export type OpportunityUpdateOneRequiredWithoutEventMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutEventMessagesInput, Prisma.OpportunityUncheckedCreateWithoutEventMessagesInput>
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutEventMessagesInput
+  upsert?: Prisma.OpportunityUpsertWithoutEventMessagesInput
+  connect?: Prisma.OpportunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OpportunityUpdateToOneWithWhereWithoutEventMessagesInput, Prisma.OpportunityUpdateWithoutEventMessagesInput>, Prisma.OpportunityUncheckedUpdateWithoutEventMessagesInput>
+}
+
 export type OpportunityCreateWithoutRequesterInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutOpportunitiesInput
   applications?: Prisma.ApplicationCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityUncheckedCreateWithoutRequesterInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   organizationId?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateUncheckedCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityCreateOrConnectWithoutRequesterInput = {
@@ -901,21 +1825,55 @@ export type OpportunityScalarWhereInput = {
   id?: Prisma.StringFilter<"Opportunity"> | string
   title?: Prisma.StringFilter<"Opportunity"> | string
   titleJa?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  shortDescription?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   description?: Prisma.StringFilter<"Opportunity"> | string
   descriptionJa?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   type?: Prisma.EnumOpportunityTypeFilter<"Opportunity"> | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFilter<"Opportunity"> | $Enums.OpportunityStatus
+  category?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Opportunity">
+  taskTypeColor?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  environmentShape?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  physicalEffort?: Prisma.StringFilter<"Opportunity"> | string
+  mentalEffort?: Prisma.StringFilter<"Opportunity"> | string
   skills?: Prisma.StringNullableListFilter<"Opportunity">
   prefecture?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   city?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   address?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"Opportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   endAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  arrivalTime?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  durationMinutes?: Prisma.IntNullableFilter<"Opportunity"> | number | null
   recurrenceRule?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   volunteersNeeded?: Prisma.IntFilter<"Opportunity"> | number
+  maxApplicants?: Prisma.IntNullableFilter<"Opportunity"> | number | null
+  allowWaitlist?: Prisma.BoolFilter<"Opportunity"> | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFilter<"Opportunity"> | boolean
+  taskFlow?: Prisma.JsonFilter<"Opportunity">
+  customFields?: Prisma.JsonFilter<"Opportunity">
+  instructions?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  toolsProvided?: Prisma.StringNullableListFilter<"Opportunity">
+  thingsToBring?: Prisma.StringNullableListFilter<"Opportunity">
+  arrivalGuidance?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstLandmarkDescription?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstLandmarkImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactName?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactRole?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  firstContactImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Opportunity">
+  workspace3dEmbedUrl?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  preApplicationQuestions?: Prisma.JsonFilter<"Opportunity">
+  withdrawalCutoffHours?: Prisma.IntFilter<"Opportunity"> | number
+  aiTemplateUsed?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   requesterId?: Prisma.StringFilter<"Opportunity"> | string
   organizationId?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   aiDrafted?: Prisma.BoolFilter<"Opportunity"> | boolean
+  publishedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
 }
@@ -924,46 +1882,120 @@ export type OpportunityCreateWithoutOrganizationInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   applications?: Prisma.ApplicationCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityUncheckedCreateWithoutOrganizationInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   requesterId: string
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateUncheckedCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityCreateOrConnectWithoutOrganizationInput = {
@@ -996,46 +2028,120 @@ export type OpportunityCreateWithoutApplicationsInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutOpportunitiesInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityUncheckedCreateWithoutApplicationsInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   requesterId: string
   organizationId?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateUncheckedCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityCreateOrConnectWithoutApplicationsInput = {
@@ -1058,66 +2164,942 @@ export type OpportunityUpdateWithoutApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutOpportunitiesNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityUncheckedUpdateWithoutApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityCreateWithoutNotificationsInput = {
+  id?: string
+  title: string
+  titleJa?: string | null
+  shortDescription?: string | null
+  description: string
+  descriptionJa?: string | null
+  type?: $Enums.OpportunityType
+  status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
+  skills?: Prisma.OpportunityCreateskillsInput | string[]
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Date | string | null
+  endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
+  recurrenceRule?: string | null
+  volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
+  aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutOpportunitiesInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  title: string
+  titleJa?: string | null
+  shortDescription?: string | null
+  description: string
+  descriptionJa?: string | null
+  type?: $Enums.OpportunityType
+  status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
+  skills?: Prisma.OpportunityCreateskillsInput | string[]
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Date | string | null
+  endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
+  recurrenceRule?: string | null
+  volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
+  requesterId: string
+  organizationId?: string | null
+  aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateUncheckedCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.OpportunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutNotificationsInput, Prisma.OpportunityUncheckedCreateWithoutNotificationsInput>
+}
+
+export type OpportunityUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.OpportunityUpdateWithoutNotificationsInput, Prisma.OpportunityUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutNotificationsInput, Prisma.OpportunityUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.OpportunityWhereInput
+}
+
+export type OpportunityUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.OpportunityWhereInput
+  data: Prisma.XOR<Prisma.OpportunityUpdateWithoutNotificationsInput, Prisma.OpportunityUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type OpportunityUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
+  status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  skills?: Prisma.OpportunityUpdateskillsInput | string[]
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutOpportunitiesNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
+  status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  skills?: Prisma.OpportunityUpdateskillsInput | string[]
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityCreateWithoutEventUpdatesInput = {
+  id?: string
+  title: string
+  titleJa?: string | null
+  shortDescription?: string | null
+  description: string
+  descriptionJa?: string | null
+  type?: $Enums.OpportunityType
+  status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
+  skills?: Prisma.OpportunityCreateskillsInput | string[]
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Date | string | null
+  endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
+  recurrenceRule?: string | null
+  volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
+  aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutOpportunitiesInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityUncheckedCreateWithoutEventUpdatesInput = {
+  id?: string
+  title: string
+  titleJa?: string | null
+  shortDescription?: string | null
+  description: string
+  descriptionJa?: string | null
+  type?: $Enums.OpportunityType
+  status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
+  skills?: Prisma.OpportunityCreateskillsInput | string[]
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Date | string | null
+  endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
+  recurrenceRule?: string | null
+  volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
+  requesterId: string
+  organizationId?: string | null
+  aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityCreateOrConnectWithoutEventUpdatesInput = {
+  where: Prisma.OpportunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutEventUpdatesInput, Prisma.OpportunityUncheckedCreateWithoutEventUpdatesInput>
+}
+
+export type OpportunityUpsertWithoutEventUpdatesInput = {
+  update: Prisma.XOR<Prisma.OpportunityUpdateWithoutEventUpdatesInput, Prisma.OpportunityUncheckedUpdateWithoutEventUpdatesInput>
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutEventUpdatesInput, Prisma.OpportunityUncheckedCreateWithoutEventUpdatesInput>
+  where?: Prisma.OpportunityWhereInput
+}
+
+export type OpportunityUpdateToOneWithWhereWithoutEventUpdatesInput = {
+  where?: Prisma.OpportunityWhereInput
+  data: Prisma.XOR<Prisma.OpportunityUpdateWithoutEventUpdatesInput, Prisma.OpportunityUncheckedUpdateWithoutEventUpdatesInput>
+}
+
+export type OpportunityUpdateWithoutEventUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
+  status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  skills?: Prisma.OpportunityUpdateskillsInput | string[]
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutOpportunitiesNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityUncheckedUpdateWithoutEventUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
+  status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  skills?: Prisma.OpportunityUpdateskillsInput | string[]
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityCreateWithoutEventMessagesInput = {
+  id?: string
+  title: string
+  titleJa?: string | null
+  shortDescription?: string | null
+  description: string
+  descriptionJa?: string | null
+  type?: $Enums.OpportunityType
+  status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
+  skills?: Prisma.OpportunityCreateskillsInput | string[]
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Date | string | null
+  endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
+  recurrenceRule?: string | null
+  volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
+  aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutOpportunitiesInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityUncheckedCreateWithoutEventMessagesInput = {
+  id?: string
+  title: string
+  titleJa?: string | null
+  shortDescription?: string | null
+  description: string
+  descriptionJa?: string | null
+  type?: $Enums.OpportunityType
+  status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
+  skills?: Prisma.OpportunityCreateskillsInput | string[]
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Date | string | null
+  endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
+  recurrenceRule?: string | null
+  volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
+  requesterId: string
+  organizationId?: string | null
+  aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutOpportunityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOpportunityInput
+  eventUpdates?: Prisma.EventUpdateUncheckedCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityCreateOrConnectWithoutEventMessagesInput = {
+  where: Prisma.OpportunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutEventMessagesInput, Prisma.OpportunityUncheckedCreateWithoutEventMessagesInput>
+}
+
+export type OpportunityUpsertWithoutEventMessagesInput = {
+  update: Prisma.XOR<Prisma.OpportunityUpdateWithoutEventMessagesInput, Prisma.OpportunityUncheckedUpdateWithoutEventMessagesInput>
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutEventMessagesInput, Prisma.OpportunityUncheckedCreateWithoutEventMessagesInput>
+  where?: Prisma.OpportunityWhereInput
+}
+
+export type OpportunityUpdateToOneWithWhereWithoutEventMessagesInput = {
+  where?: Prisma.OpportunityWhereInput
+  data: Prisma.XOR<Prisma.OpportunityUpdateWithoutEventMessagesInput, Prisma.OpportunityUncheckedUpdateWithoutEventMessagesInput>
+}
+
+export type OpportunityUpdateWithoutEventMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
+  status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  skills?: Prisma.OpportunityUpdateskillsInput | string[]
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutOpportunitiesNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityUncheckedUpdateWithoutEventMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
+  status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  skills?: Prisma.OpportunityUpdateskillsInput | string[]
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityCreateManyRequesterInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   organizationId?: string | null
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1126,66 +3108,174 @@ export type OpportunityUpdateWithoutRequesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutOpportunitiesNestedInput
   applications?: Prisma.ApplicationUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityUncheckedUpdateWithoutRequesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityUncheckedUpdateManyWithoutRequesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1194,20 +3284,54 @@ export type OpportunityCreateManyOrganizationInput = {
   id?: string
   title: string
   titleJa?: string | null
+  shortDescription?: string | null
   description: string
   descriptionJa?: string | null
   type?: $Enums.OpportunityType
   status?: $Enums.OpportunityStatus
+  category?: string | null
+  tags?: Prisma.OpportunityCreatetagsInput | string[]
+  taskTypeColor?: string | null
+  environmentShape?: string | null
+  physicalEffort?: string
+  mentalEffort?: string
   skills?: Prisma.OpportunityCreateskillsInput | string[]
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Date | string | null
   endAt?: Date | string | null
+  arrivalTime?: Date | string | null
+  durationMinutes?: number | null
   recurrenceRule?: string | null
   volunteersNeeded?: number
+  maxApplicants?: number | null
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: string | null
+  toolsProvided?: Prisma.OpportunityCreatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityCreatethingsToBringInput | string[]
+  arrivalGuidance?: string | null
+  firstLandmarkDescription?: string | null
+  firstLandmarkImageUrl?: string | null
+  firstContactName?: string | null
+  firstContactRole?: string | null
+  firstContactImageUrl?: string | null
+  coverImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OpportunityCreateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: number
+  aiTemplateUsed?: string | null
   requesterId: string
   aiDrafted?: boolean
+  publishedAt?: Date | string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1216,66 +3340,174 @@ export type OpportunityUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   applications?: Prisma.ApplicationUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityUncheckedUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventUpdates?: Prisma.EventUpdateUncheckedUpdateManyWithoutOpportunityNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
 export type OpportunityUncheckedUpdateManyWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   descriptionJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOpportunityTypeFieldUpdateOperationsInput | $Enums.OpportunityType
   status?: Prisma.EnumOpportunityStatusFieldUpdateOperationsInput | $Enums.OpportunityStatus
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.OpportunityUpdatetagsInput | string[]
+  taskTypeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  environmentShape?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  physicalEffort?: Prisma.StringFieldUpdateOperationsInput | string
+  mentalEffort?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OpportunityUpdateskillsInput | string[]
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   startAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  arrivalTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   recurrenceRule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   volunteersNeeded?: Prisma.IntFieldUpdateOperationsInput | number
+  maxApplicants?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allowWaitlist?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowMultipleTaskSelection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taskFlow?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customFields?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toolsProvided?: Prisma.OpportunityUpdatetoolsProvidedInput | string[]
+  thingsToBring?: Prisma.OpportunityUpdatethingsToBringInput | string[]
+  arrivalGuidance?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstLandmarkImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstContactImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OpportunityUpdateworkspaceImageUrlsInput | string[]
+  workspace3dEmbedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preApplicationQuestions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  withdrawalCutoffHours?: Prisma.IntFieldUpdateOperationsInput | number
+  aiTemplateUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   aiDrafted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1287,10 +3519,16 @@ export type OpportunityUncheckedUpdateManyWithoutOrganizationInput = {
 
 export type OpportunityCountOutputType = {
   applications: number
+  notifications: number
+  eventUpdates: number
+  eventMessages: number
 }
 
 export type OpportunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   applications?: boolean | OpportunityCountOutputTypeCountApplicationsArgs
+  notifications?: boolean | OpportunityCountOutputTypeCountNotificationsArgs
+  eventUpdates?: boolean | OpportunityCountOutputTypeCountEventUpdatesArgs
+  eventMessages?: boolean | OpportunityCountOutputTypeCountEventMessagesArgs
 }
 
 /**
@@ -1310,31 +3548,89 @@ export type OpportunityCountOutputTypeCountApplicationsArgs<ExtArgs extends runt
   where?: Prisma.ApplicationWhereInput
 }
 
+/**
+ * OpportunityCountOutputType without action
+ */
+export type OpportunityCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * OpportunityCountOutputType without action
+ */
+export type OpportunityCountOutputTypeCountEventUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventUpdateWhereInput
+}
+
+/**
+ * OpportunityCountOutputType without action
+ */
+export type OpportunityCountOutputTypeCountEventMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventMessageWhereInput
+}
+
 
 export type OpportunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   titleJa?: boolean
+  shortDescription?: boolean
   description?: boolean
   descriptionJa?: boolean
   type?: boolean
   status?: boolean
+  category?: boolean
+  tags?: boolean
+  taskTypeColor?: boolean
+  environmentShape?: boolean
+  physicalEffort?: boolean
+  mentalEffort?: boolean
   skills?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
   startAt?: boolean
   endAt?: boolean
+  arrivalTime?: boolean
+  durationMinutes?: boolean
   recurrenceRule?: boolean
   volunteersNeeded?: boolean
+  maxApplicants?: boolean
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: boolean
+  customFields?: boolean
+  instructions?: boolean
+  toolsProvided?: boolean
+  thingsToBring?: boolean
+  arrivalGuidance?: boolean
+  firstLandmarkDescription?: boolean
+  firstLandmarkImageUrl?: boolean
+  firstContactName?: boolean
+  firstContactRole?: boolean
+  firstContactImageUrl?: boolean
+  coverImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  workspace3dEmbedUrl?: boolean
+  preApplicationQuestions?: boolean
+  withdrawalCutoffHours?: boolean
+  aiTemplateUsed?: boolean
   requesterId?: boolean
   organizationId?: boolean
   aiDrafted?: boolean
+  publishedAt?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.Opportunity$organizationArgs<ExtArgs>
   applications?: boolean | Prisma.Opportunity$applicationsArgs<ExtArgs>
+  notifications?: boolean | Prisma.Opportunity$notificationsArgs<ExtArgs>
+  eventUpdates?: boolean | Prisma.Opportunity$eventUpdatesArgs<ExtArgs>
+  eventMessages?: boolean | Prisma.Opportunity$eventMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.OpportunityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opportunity"]>
 
@@ -1342,21 +3638,55 @@ export type OpportunitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   title?: boolean
   titleJa?: boolean
+  shortDescription?: boolean
   description?: boolean
   descriptionJa?: boolean
   type?: boolean
   status?: boolean
+  category?: boolean
+  tags?: boolean
+  taskTypeColor?: boolean
+  environmentShape?: boolean
+  physicalEffort?: boolean
+  mentalEffort?: boolean
   skills?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
   startAt?: boolean
   endAt?: boolean
+  arrivalTime?: boolean
+  durationMinutes?: boolean
   recurrenceRule?: boolean
   volunteersNeeded?: boolean
+  maxApplicants?: boolean
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: boolean
+  customFields?: boolean
+  instructions?: boolean
+  toolsProvided?: boolean
+  thingsToBring?: boolean
+  arrivalGuidance?: boolean
+  firstLandmarkDescription?: boolean
+  firstLandmarkImageUrl?: boolean
+  firstContactName?: boolean
+  firstContactRole?: boolean
+  firstContactImageUrl?: boolean
+  coverImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  workspace3dEmbedUrl?: boolean
+  preApplicationQuestions?: boolean
+  withdrawalCutoffHours?: boolean
+  aiTemplateUsed?: boolean
   requesterId?: boolean
   organizationId?: boolean
   aiDrafted?: boolean
+  publishedAt?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1367,21 +3697,55 @@ export type OpportunitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   title?: boolean
   titleJa?: boolean
+  shortDescription?: boolean
   description?: boolean
   descriptionJa?: boolean
   type?: boolean
   status?: boolean
+  category?: boolean
+  tags?: boolean
+  taskTypeColor?: boolean
+  environmentShape?: boolean
+  physicalEffort?: boolean
+  mentalEffort?: boolean
   skills?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
   startAt?: boolean
   endAt?: boolean
+  arrivalTime?: boolean
+  durationMinutes?: boolean
   recurrenceRule?: boolean
   volunteersNeeded?: boolean
+  maxApplicants?: boolean
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: boolean
+  customFields?: boolean
+  instructions?: boolean
+  toolsProvided?: boolean
+  thingsToBring?: boolean
+  arrivalGuidance?: boolean
+  firstLandmarkDescription?: boolean
+  firstLandmarkImageUrl?: boolean
+  firstContactName?: boolean
+  firstContactRole?: boolean
+  firstContactImageUrl?: boolean
+  coverImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  workspace3dEmbedUrl?: boolean
+  preApplicationQuestions?: boolean
+  withdrawalCutoffHours?: boolean
+  aiTemplateUsed?: boolean
   requesterId?: boolean
   organizationId?: boolean
   aiDrafted?: boolean
+  publishedAt?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1392,30 +3756,67 @@ export type OpportunitySelectScalar = {
   id?: boolean
   title?: boolean
   titleJa?: boolean
+  shortDescription?: boolean
   description?: boolean
   descriptionJa?: boolean
   type?: boolean
   status?: boolean
+  category?: boolean
+  tags?: boolean
+  taskTypeColor?: boolean
+  environmentShape?: boolean
+  physicalEffort?: boolean
+  mentalEffort?: boolean
   skills?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
   startAt?: boolean
   endAt?: boolean
+  arrivalTime?: boolean
+  durationMinutes?: boolean
   recurrenceRule?: boolean
   volunteersNeeded?: boolean
+  maxApplicants?: boolean
+  allowWaitlist?: boolean
+  allowMultipleTaskSelection?: boolean
+  taskFlow?: boolean
+  customFields?: boolean
+  instructions?: boolean
+  toolsProvided?: boolean
+  thingsToBring?: boolean
+  arrivalGuidance?: boolean
+  firstLandmarkDescription?: boolean
+  firstLandmarkImageUrl?: boolean
+  firstContactName?: boolean
+  firstContactRole?: boolean
+  firstContactImageUrl?: boolean
+  coverImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  workspace3dEmbedUrl?: boolean
+  preApplicationQuestions?: boolean
+  withdrawalCutoffHours?: boolean
+  aiTemplateUsed?: boolean
   requesterId?: boolean
   organizationId?: boolean
   aiDrafted?: boolean
+  publishedAt?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "titleJa" | "description" | "descriptionJa" | "type" | "status" | "skills" | "prefecture" | "city" | "address" | "startAt" | "endAt" | "recurrenceRule" | "volunteersNeeded" | "requesterId" | "organizationId" | "aiDrafted" | "createdAt" | "updatedAt", ExtArgs["result"]["opportunity"]>
+export type OpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "titleJa" | "shortDescription" | "description" | "descriptionJa" | "type" | "status" | "category" | "tags" | "taskTypeColor" | "environmentShape" | "physicalEffort" | "mentalEffort" | "skills" | "prefecture" | "city" | "address" | "googleMapsUrl" | "latitude" | "longitude" | "startAt" | "endAt" | "arrivalTime" | "durationMinutes" | "recurrenceRule" | "volunteersNeeded" | "maxApplicants" | "allowWaitlist" | "allowMultipleTaskSelection" | "taskFlow" | "customFields" | "instructions" | "toolsProvided" | "thingsToBring" | "arrivalGuidance" | "firstLandmarkDescription" | "firstLandmarkImageUrl" | "firstContactName" | "firstContactRole" | "firstContactImageUrl" | "coverImageUrl" | "workspaceImageUrls" | "workspace3dEmbedUrl" | "preApplicationQuestions" | "withdrawalCutoffHours" | "aiTemplateUsed" | "requesterId" | "organizationId" | "aiDrafted" | "publishedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["opportunity"]>
 export type OpportunityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.Opportunity$organizationArgs<ExtArgs>
   applications?: boolean | Prisma.Opportunity$applicationsArgs<ExtArgs>
+  notifications?: boolean | Prisma.Opportunity$notificationsArgs<ExtArgs>
+  eventUpdates?: boolean | Prisma.Opportunity$eventUpdatesArgs<ExtArgs>
+  eventMessages?: boolean | Prisma.Opportunity$eventMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.OpportunityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OpportunityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1433,26 +3834,63 @@ export type $OpportunityPayload<ExtArgs extends runtime.Types.Extensions.Interna
     requester: Prisma.$UserPayload<ExtArgs>
     organization: Prisma.$OrganizationPayload<ExtArgs> | null
     applications: Prisma.$ApplicationPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    eventUpdates: Prisma.$EventUpdatePayload<ExtArgs>[]
+    eventMessages: Prisma.$EventMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
     titleJa: string | null
+    shortDescription: string | null
     description: string
     descriptionJa: string | null
     type: $Enums.OpportunityType
     status: $Enums.OpportunityStatus
+    category: string | null
+    tags: string[]
+    taskTypeColor: string | null
+    environmentShape: string | null
+    physicalEffort: string
+    mentalEffort: string
     skills: string[]
     prefecture: string | null
     city: string | null
     address: string | null
+    googleMapsUrl: string | null
+    latitude: runtime.Decimal | null
+    longitude: runtime.Decimal | null
     startAt: Date | null
     endAt: Date | null
+    arrivalTime: Date | null
+    durationMinutes: number | null
     recurrenceRule: string | null
     volunteersNeeded: number
+    maxApplicants: number | null
+    allowWaitlist: boolean
+    allowMultipleTaskSelection: boolean
+    taskFlow: runtime.JsonValue
+    customFields: runtime.JsonValue
+    instructions: string | null
+    toolsProvided: string[]
+    thingsToBring: string[]
+    arrivalGuidance: string | null
+    firstLandmarkDescription: string | null
+    firstLandmarkImageUrl: string | null
+    firstContactName: string | null
+    firstContactRole: string | null
+    firstContactImageUrl: string | null
+    coverImageUrl: string | null
+    workspaceImageUrls: string[]
+    workspace3dEmbedUrl: string | null
+    preApplicationQuestions: runtime.JsonValue
+    withdrawalCutoffHours: number
+    aiTemplateUsed: string | null
     requesterId: string
     organizationId: string | null
     aiDrafted: boolean
+    publishedAt: Date | null
+    completedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["opportunity"]>
@@ -1852,6 +4290,9 @@ export interface Prisma__OpportunityClient<T, Null = never, ExtArgs extends runt
   requester<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   organization<T extends Prisma.Opportunity$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Opportunity$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   applications<T extends Prisma.Opportunity$applicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Opportunity$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Opportunity$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Opportunity$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventUpdates<T extends Prisma.Opportunity$eventUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Opportunity$eventUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventMessages<T extends Prisma.Opportunity$eventMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Opportunity$eventMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1884,21 +4325,55 @@ export interface OpportunityFieldRefs {
   readonly id: Prisma.FieldRef<"Opportunity", 'String'>
   readonly title: Prisma.FieldRef<"Opportunity", 'String'>
   readonly titleJa: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly shortDescription: Prisma.FieldRef<"Opportunity", 'String'>
   readonly description: Prisma.FieldRef<"Opportunity", 'String'>
   readonly descriptionJa: Prisma.FieldRef<"Opportunity", 'String'>
   readonly type: Prisma.FieldRef<"Opportunity", 'OpportunityType'>
   readonly status: Prisma.FieldRef<"Opportunity", 'OpportunityStatus'>
+  readonly category: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly tags: Prisma.FieldRef<"Opportunity", 'String[]'>
+  readonly taskTypeColor: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly environmentShape: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly physicalEffort: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly mentalEffort: Prisma.FieldRef<"Opportunity", 'String'>
   readonly skills: Prisma.FieldRef<"Opportunity", 'String[]'>
   readonly prefecture: Prisma.FieldRef<"Opportunity", 'String'>
   readonly city: Prisma.FieldRef<"Opportunity", 'String'>
   readonly address: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly googleMapsUrl: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly latitude: Prisma.FieldRef<"Opportunity", 'Decimal'>
+  readonly longitude: Prisma.FieldRef<"Opportunity", 'Decimal'>
   readonly startAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly endAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
+  readonly arrivalTime: Prisma.FieldRef<"Opportunity", 'DateTime'>
+  readonly durationMinutes: Prisma.FieldRef<"Opportunity", 'Int'>
   readonly recurrenceRule: Prisma.FieldRef<"Opportunity", 'String'>
   readonly volunteersNeeded: Prisma.FieldRef<"Opportunity", 'Int'>
+  readonly maxApplicants: Prisma.FieldRef<"Opportunity", 'Int'>
+  readonly allowWaitlist: Prisma.FieldRef<"Opportunity", 'Boolean'>
+  readonly allowMultipleTaskSelection: Prisma.FieldRef<"Opportunity", 'Boolean'>
+  readonly taskFlow: Prisma.FieldRef<"Opportunity", 'Json'>
+  readonly customFields: Prisma.FieldRef<"Opportunity", 'Json'>
+  readonly instructions: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly toolsProvided: Prisma.FieldRef<"Opportunity", 'String[]'>
+  readonly thingsToBring: Prisma.FieldRef<"Opportunity", 'String[]'>
+  readonly arrivalGuidance: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly firstLandmarkDescription: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly firstLandmarkImageUrl: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly firstContactName: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly firstContactRole: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly firstContactImageUrl: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly coverImageUrl: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly workspaceImageUrls: Prisma.FieldRef<"Opportunity", 'String[]'>
+  readonly workspace3dEmbedUrl: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly preApplicationQuestions: Prisma.FieldRef<"Opportunity", 'Json'>
+  readonly withdrawalCutoffHours: Prisma.FieldRef<"Opportunity", 'Int'>
+  readonly aiTemplateUsed: Prisma.FieldRef<"Opportunity", 'String'>
   readonly requesterId: Prisma.FieldRef<"Opportunity", 'String'>
   readonly organizationId: Prisma.FieldRef<"Opportunity", 'String'>
   readonly aiDrafted: Prisma.FieldRef<"Opportunity", 'Boolean'>
+  readonly publishedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
+  readonly completedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
 }
@@ -2342,6 +4817,78 @@ export type Opportunity$applicationsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.ApplicationScalarFieldEnum | Prisma.ApplicationScalarFieldEnum[]
+}
+
+/**
+ * Opportunity.notifications
+ */
+export type Opportunity$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * Opportunity.eventUpdates
+ */
+export type Opportunity$eventUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventUpdate
+   */
+  select?: Prisma.EventUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventUpdate
+   */
+  omit?: Prisma.EventUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventUpdateInclude<ExtArgs> | null
+  where?: Prisma.EventUpdateWhereInput
+  orderBy?: Prisma.EventUpdateOrderByWithRelationInput | Prisma.EventUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.EventUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventUpdateScalarFieldEnum | Prisma.EventUpdateScalarFieldEnum[]
+}
+
+/**
+ * Opportunity.eventMessages
+ */
+export type Opportunity$eventMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventMessage
+   */
+  select?: Prisma.EventMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventMessage
+   */
+  omit?: Prisma.EventMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventMessageInclude<ExtArgs> | null
+  where?: Prisma.EventMessageWhereInput
+  orderBy?: Prisma.EventMessageOrderByWithRelationInput | Prisma.EventMessageOrderByWithRelationInput[]
+  cursor?: Prisma.EventMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventMessageScalarFieldEnum | Prisma.EventMessageScalarFieldEnum[]
 }
 
 /**

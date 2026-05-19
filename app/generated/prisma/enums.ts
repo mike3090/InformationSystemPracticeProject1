@@ -31,7 +31,9 @@ export type OpportunityType = (typeof OpportunityType)[keyof typeof OpportunityT
 export const OpportunityStatus = {
   DRAFT: 'DRAFT',
   OPEN: 'OPEN',
+  PAUSED: 'PAUSED',
   FILLED: 'FILLED',
+  PROCESSING: 'PROCESSING',
   CANCELLED: 'CANCELLED',
   COMPLETED: 'COMPLETED'
 } as const
@@ -42,6 +44,7 @@ export type OpportunityStatus = (typeof OpportunityStatus)[keyof typeof Opportun
 export const ApplicationStatus = {
   PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',
+  WAITLISTED: 'WAITLISTED',
   REJECTED: 'REJECTED',
   WITHDRAWN: 'WITHDRAWN'
 } as const
@@ -51,8 +54,12 @@ export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof Applicat
 
 export const OrganizationType = {
   INDIVIDUAL: 'INDIVIDUAL',
+  VOLUNTARY_GROUP: 'VOLUNTARY_GROUP',
   SMALL_BUSINESS: 'SMALL_BUSINESS',
   NPO: 'NPO',
+  GENERAL_ASSOCIATION: 'GENERAL_ASSOCIATION',
+  CORPORATION: 'CORPORATION',
+  SCHOOL: 'SCHOOL',
   COMMUNITY_GROUP: 'COMMUNITY_GROUP',
   MUNICIPAL: 'MUNICIPAL'
 } as const

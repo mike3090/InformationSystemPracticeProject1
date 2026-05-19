@@ -28,15 +28,56 @@ export type OrganizationMinAggregateOutputType = {
   id: string | null
   userId: string | null
   name: string | null
+  displayName: string | null
   nameJa: string | null
+  nameKana: string | null
+  nameEn: string | null
+  email: string | null
+  phone: string | null
   contactName: string | null
   type: $Enums.OrganizationType | null
+  representativeName: string | null
+  purpose: string | null
   description: string | null
   environmentStyle: string | null
   prefecture: string | null
   city: string | null
   address: string | null
+  googleMapsUrl: string | null
+  publicEmail: string | null
+  publicPhone: string | null
+  contactFormUrl: string | null
   website: string | null
+  founded: string | null
+  recruitmentStatus: string | null
+  hasWaterDispenser: boolean | null
+  hasRestRoom: boolean | null
+  hasAirConditioning: boolean | null
+  activitySpaceSize: string | null
+  profileImageUrl: string | null
+  certificationStatus: string | null
+  certificationSource: string | null
+  certifiedAt: Date | null
+  certificationSubmittedAt: Date | null
+  certificationReviewedAt: Date | null
+  certificationReviewNote: string | null
+  managerPhone: string | null
+  managerLegalName: string | null
+  identityDocumentNote: string | null
+  managerAddress: string | null
+  isLocationPublic: boolean | null
+  contactPersonName: string | null
+  contactPersonRole: string | null
+  contactPersonPhone: string | null
+  contactPersonEmail: string | null
+  antiSocialForcesConfirmed: boolean | null
+  termsAccepted: boolean | null
+  legalEntityType: string | null
+  corporateNumber: string | null
+  legalName: string | null
+  legalAddress: string | null
+  registrationDocumentUrl: string | null
+  bylawsUrl: string | null
   profileCompleted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -46,15 +87,56 @@ export type OrganizationMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   name: string | null
+  displayName: string | null
   nameJa: string | null
+  nameKana: string | null
+  nameEn: string | null
+  email: string | null
+  phone: string | null
   contactName: string | null
   type: $Enums.OrganizationType | null
+  representativeName: string | null
+  purpose: string | null
   description: string | null
   environmentStyle: string | null
   prefecture: string | null
   city: string | null
   address: string | null
+  googleMapsUrl: string | null
+  publicEmail: string | null
+  publicPhone: string | null
+  contactFormUrl: string | null
   website: string | null
+  founded: string | null
+  recruitmentStatus: string | null
+  hasWaterDispenser: boolean | null
+  hasRestRoom: boolean | null
+  hasAirConditioning: boolean | null
+  activitySpaceSize: string | null
+  profileImageUrl: string | null
+  certificationStatus: string | null
+  certificationSource: string | null
+  certifiedAt: Date | null
+  certificationSubmittedAt: Date | null
+  certificationReviewedAt: Date | null
+  certificationReviewNote: string | null
+  managerPhone: string | null
+  managerLegalName: string | null
+  identityDocumentNote: string | null
+  managerAddress: string | null
+  isLocationPublic: boolean | null
+  contactPersonName: string | null
+  contactPersonRole: string | null
+  contactPersonPhone: string | null
+  contactPersonEmail: string | null
+  antiSocialForcesConfirmed: boolean | null
+  termsAccepted: boolean | null
+  legalEntityType: string | null
+  corporateNumber: string | null
+  legalName: string | null
+  legalAddress: string | null
+  registrationDocumentUrl: string | null
+  bylawsUrl: string | null
   profileCompleted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -64,15 +146,60 @@ export type OrganizationCountAggregateOutputType = {
   id: number
   userId: number
   name: number
+  displayName: number
   nameJa: number
+  nameKana: number
+  nameEn: number
+  email: number
+  phone: number
   contactName: number
   type: number
+  representativeName: number
+  purpose: number
   description: number
+  activityAreas: number
+  activityRegions: number
   environmentStyle: number
   prefecture: number
   city: number
   address: number
+  googleMapsUrl: number
+  publicEmail: number
+  publicPhone: number
+  contactFormUrl: number
   website: number
+  snsLinks: number
+  founded: number
+  recruitmentStatus: number
+  hasWaterDispenser: number
+  hasRestRoom: number
+  hasAirConditioning: number
+  activitySpaceSize: number
+  profileImageUrl: number
+  workspaceImageUrls: number
+  certificationStatus: number
+  certificationSource: number
+  certifiedAt: number
+  certificationSubmittedAt: number
+  certificationReviewedAt: number
+  certificationReviewNote: number
+  managerPhone: number
+  managerLegalName: number
+  identityDocumentNote: number
+  managerAddress: number
+  isLocationPublic: number
+  contactPersonName: number
+  contactPersonRole: number
+  contactPersonPhone: number
+  contactPersonEmail: number
+  antiSocialForcesConfirmed: number
+  termsAccepted: number
+  legalEntityType: number
+  corporateNumber: number
+  legalName: number
+  legalAddress: number
+  registrationDocumentUrl: number
+  bylawsUrl: number
   profileCompleted: number
   createdAt: number
   updatedAt: number
@@ -84,15 +211,56 @@ export type OrganizationMinAggregateInputType = {
   id?: true
   userId?: true
   name?: true
+  displayName?: true
   nameJa?: true
+  nameKana?: true
+  nameEn?: true
+  email?: true
+  phone?: true
   contactName?: true
   type?: true
+  representativeName?: true
+  purpose?: true
   description?: true
   environmentStyle?: true
   prefecture?: true
   city?: true
   address?: true
+  googleMapsUrl?: true
+  publicEmail?: true
+  publicPhone?: true
+  contactFormUrl?: true
   website?: true
+  founded?: true
+  recruitmentStatus?: true
+  hasWaterDispenser?: true
+  hasRestRoom?: true
+  hasAirConditioning?: true
+  activitySpaceSize?: true
+  profileImageUrl?: true
+  certificationStatus?: true
+  certificationSource?: true
+  certifiedAt?: true
+  certificationSubmittedAt?: true
+  certificationReviewedAt?: true
+  certificationReviewNote?: true
+  managerPhone?: true
+  managerLegalName?: true
+  identityDocumentNote?: true
+  managerAddress?: true
+  isLocationPublic?: true
+  contactPersonName?: true
+  contactPersonRole?: true
+  contactPersonPhone?: true
+  contactPersonEmail?: true
+  antiSocialForcesConfirmed?: true
+  termsAccepted?: true
+  legalEntityType?: true
+  corporateNumber?: true
+  legalName?: true
+  legalAddress?: true
+  registrationDocumentUrl?: true
+  bylawsUrl?: true
   profileCompleted?: true
   createdAt?: true
   updatedAt?: true
@@ -102,15 +270,56 @@ export type OrganizationMaxAggregateInputType = {
   id?: true
   userId?: true
   name?: true
+  displayName?: true
   nameJa?: true
+  nameKana?: true
+  nameEn?: true
+  email?: true
+  phone?: true
   contactName?: true
   type?: true
+  representativeName?: true
+  purpose?: true
   description?: true
   environmentStyle?: true
   prefecture?: true
   city?: true
   address?: true
+  googleMapsUrl?: true
+  publicEmail?: true
+  publicPhone?: true
+  contactFormUrl?: true
   website?: true
+  founded?: true
+  recruitmentStatus?: true
+  hasWaterDispenser?: true
+  hasRestRoom?: true
+  hasAirConditioning?: true
+  activitySpaceSize?: true
+  profileImageUrl?: true
+  certificationStatus?: true
+  certificationSource?: true
+  certifiedAt?: true
+  certificationSubmittedAt?: true
+  certificationReviewedAt?: true
+  certificationReviewNote?: true
+  managerPhone?: true
+  managerLegalName?: true
+  identityDocumentNote?: true
+  managerAddress?: true
+  isLocationPublic?: true
+  contactPersonName?: true
+  contactPersonRole?: true
+  contactPersonPhone?: true
+  contactPersonEmail?: true
+  antiSocialForcesConfirmed?: true
+  termsAccepted?: true
+  legalEntityType?: true
+  corporateNumber?: true
+  legalName?: true
+  legalAddress?: true
+  registrationDocumentUrl?: true
+  bylawsUrl?: true
   profileCompleted?: true
   createdAt?: true
   updatedAt?: true
@@ -120,15 +329,60 @@ export type OrganizationCountAggregateInputType = {
   id?: true
   userId?: true
   name?: true
+  displayName?: true
   nameJa?: true
+  nameKana?: true
+  nameEn?: true
+  email?: true
+  phone?: true
   contactName?: true
   type?: true
+  representativeName?: true
+  purpose?: true
   description?: true
+  activityAreas?: true
+  activityRegions?: true
   environmentStyle?: true
   prefecture?: true
   city?: true
   address?: true
+  googleMapsUrl?: true
+  publicEmail?: true
+  publicPhone?: true
+  contactFormUrl?: true
   website?: true
+  snsLinks?: true
+  founded?: true
+  recruitmentStatus?: true
+  hasWaterDispenser?: true
+  hasRestRoom?: true
+  hasAirConditioning?: true
+  activitySpaceSize?: true
+  profileImageUrl?: true
+  workspaceImageUrls?: true
+  certificationStatus?: true
+  certificationSource?: true
+  certifiedAt?: true
+  certificationSubmittedAt?: true
+  certificationReviewedAt?: true
+  certificationReviewNote?: true
+  managerPhone?: true
+  managerLegalName?: true
+  identityDocumentNote?: true
+  managerAddress?: true
+  isLocationPublic?: true
+  contactPersonName?: true
+  contactPersonRole?: true
+  contactPersonPhone?: true
+  contactPersonEmail?: true
+  antiSocialForcesConfirmed?: true
+  termsAccepted?: true
+  legalEntityType?: true
+  corporateNumber?: true
+  legalName?: true
+  legalAddress?: true
+  registrationDocumentUrl?: true
+  bylawsUrl?: true
   profileCompleted?: true
   createdAt?: true
   updatedAt?: true
@@ -211,15 +465,60 @@ export type OrganizationGroupByOutputType = {
   id: string
   userId: string
   name: string
+  displayName: string | null
   nameJa: string | null
+  nameKana: string | null
+  nameEn: string | null
+  email: string | null
+  phone: string | null
   contactName: string | null
   type: $Enums.OrganizationType
+  representativeName: string | null
+  purpose: string | null
   description: string | null
+  activityAreas: string[]
+  activityRegions: string[]
   environmentStyle: string
   prefecture: string | null
   city: string | null
   address: string | null
+  googleMapsUrl: string | null
+  publicEmail: string | null
+  publicPhone: string | null
+  contactFormUrl: string | null
   website: string | null
+  snsLinks: string[]
+  founded: string | null
+  recruitmentStatus: string
+  hasWaterDispenser: boolean
+  hasRestRoom: boolean
+  hasAirConditioning: boolean
+  activitySpaceSize: string | null
+  profileImageUrl: string | null
+  workspaceImageUrls: string[]
+  certificationStatus: string
+  certificationSource: string | null
+  certifiedAt: Date | null
+  certificationSubmittedAt: Date | null
+  certificationReviewedAt: Date | null
+  certificationReviewNote: string | null
+  managerPhone: string | null
+  managerLegalName: string | null
+  identityDocumentNote: string | null
+  managerAddress: string | null
+  isLocationPublic: boolean
+  contactPersonName: string | null
+  contactPersonRole: string | null
+  contactPersonPhone: string | null
+  contactPersonEmail: string | null
+  antiSocialForcesConfirmed: boolean
+  termsAccepted: boolean
+  legalEntityType: string | null
+  corporateNumber: string | null
+  legalName: string | null
+  legalAddress: string | null
+  registrationDocumentUrl: string | null
+  bylawsUrl: string | null
   profileCompleted: boolean
   createdAt: Date
   updatedAt: Date
@@ -250,40 +549,132 @@ export type OrganizationWhereInput = {
   id?: Prisma.StringFilter<"Organization"> | string
   userId?: Prisma.StringFilter<"Organization"> | string
   name?: Prisma.StringFilter<"Organization"> | string
+  displayName?: Prisma.StringNullableFilter<"Organization"> | string | null
   nameJa?: Prisma.StringNullableFilter<"Organization"> | string | null
+  nameKana?: Prisma.StringNullableFilter<"Organization"> | string | null
+  nameEn?: Prisma.StringNullableFilter<"Organization"> | string | null
+  email?: Prisma.StringNullableFilter<"Organization"> | string | null
+  phone?: Prisma.StringNullableFilter<"Organization"> | string | null
   contactName?: Prisma.StringNullableFilter<"Organization"> | string | null
   type?: Prisma.EnumOrganizationTypeFilter<"Organization"> | $Enums.OrganizationType
+  representativeName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  purpose?: Prisma.StringNullableFilter<"Organization"> | string | null
   description?: Prisma.StringNullableFilter<"Organization"> | string | null
+  activityAreas?: Prisma.StringNullableListFilter<"Organization">
+  activityRegions?: Prisma.StringNullableListFilter<"Organization">
   environmentStyle?: Prisma.StringFilter<"Organization"> | string
   prefecture?: Prisma.StringNullableFilter<"Organization"> | string | null
   city?: Prisma.StringNullableFilter<"Organization"> | string | null
   address?: Prisma.StringNullableFilter<"Organization"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  publicEmail?: Prisma.StringNullableFilter<"Organization"> | string | null
+  publicPhone?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactFormUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   website?: Prisma.StringNullableFilter<"Organization"> | string | null
+  snsLinks?: Prisma.StringNullableListFilter<"Organization">
+  founded?: Prisma.StringNullableFilter<"Organization"> | string | null
+  recruitmentStatus?: Prisma.StringFilter<"Organization"> | string
+  hasWaterDispenser?: Prisma.BoolFilter<"Organization"> | boolean
+  hasRestRoom?: Prisma.BoolFilter<"Organization"> | boolean
+  hasAirConditioning?: Prisma.BoolFilter<"Organization"> | boolean
+  activitySpaceSize?: Prisma.StringNullableFilter<"Organization"> | string | null
+  profileImageUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Organization">
+  certificationStatus?: Prisma.StringFilter<"Organization"> | string
+  certificationSource?: Prisma.StringNullableFilter<"Organization"> | string | null
+  certifiedAt?: Prisma.DateTimeNullableFilter<"Organization"> | Date | string | null
+  certificationSubmittedAt?: Prisma.DateTimeNullableFilter<"Organization"> | Date | string | null
+  certificationReviewedAt?: Prisma.DateTimeNullableFilter<"Organization"> | Date | string | null
+  certificationReviewNote?: Prisma.StringNullableFilter<"Organization"> | string | null
+  managerPhone?: Prisma.StringNullableFilter<"Organization"> | string | null
+  managerLegalName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  identityDocumentNote?: Prisma.StringNullableFilter<"Organization"> | string | null
+  managerAddress?: Prisma.StringNullableFilter<"Organization"> | string | null
+  isLocationPublic?: Prisma.BoolFilter<"Organization"> | boolean
+  contactPersonName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactPersonRole?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactPersonPhone?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactPersonEmail?: Prisma.StringNullableFilter<"Organization"> | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFilter<"Organization"> | boolean
+  termsAccepted?: Prisma.BoolFilter<"Organization"> | boolean
+  legalEntityType?: Prisma.StringNullableFilter<"Organization"> | string | null
+  corporateNumber?: Prisma.StringNullableFilter<"Organization"> | string | null
+  legalName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  legalAddress?: Prisma.StringNullableFilter<"Organization"> | string | null
+  registrationDocumentUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  bylawsUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   profileCompleted?: Prisma.BoolFilter<"Organization"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   opportunities?: Prisma.OpportunityListRelationFilter
+  reviewedApplications?: Prisma.ApplicationListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   nameJa?: Prisma.SortOrderInput | Prisma.SortOrder
+  nameKana?: Prisma.SortOrderInput | Prisma.SortOrder
+  nameEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   contactName?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
+  representativeName?: Prisma.SortOrderInput | Prisma.SortOrder
+  purpose?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityAreas?: Prisma.SortOrder
+  activityRegions?: Prisma.SortOrder
   environmentStyle?: Prisma.SortOrder
   prefecture?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactFormUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
+  snsLinks?: Prisma.SortOrder
+  founded?: Prisma.SortOrderInput | Prisma.SortOrder
+  recruitmentStatus?: Prisma.SortOrder
+  hasWaterDispenser?: Prisma.SortOrder
+  hasRestRoom?: Prisma.SortOrder
+  hasAirConditioning?: Prisma.SortOrder
+  activitySpaceSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  workspaceImageUrls?: Prisma.SortOrder
+  certificationStatus?: Prisma.SortOrder
+  certificationSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  certifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  certificationSubmittedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  certificationReviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  certificationReviewNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  managerPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  managerLegalName?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityDocumentNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  managerAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  isLocationPublic?: Prisma.SortOrder
+  contactPersonName?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPersonRole?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPersonPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPersonEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  antiSocialForcesConfirmed?: Prisma.SortOrder
+  termsAccepted?: Prisma.SortOrder
+  legalEntityType?: Prisma.SortOrderInput | Prisma.SortOrder
+  corporateNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  legalName?: Prisma.SortOrderInput | Prisma.SortOrder
+  legalAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationDocumentUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  bylawsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   opportunities?: Prisma.OpportunityOrderByRelationAggregateInput
+  reviewedApplications?: Prisma.ApplicationOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -293,35 +684,126 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OrganizationWhereInput[]
   NOT?: Prisma.OrganizationWhereInput | Prisma.OrganizationWhereInput[]
   name?: Prisma.StringFilter<"Organization"> | string
+  displayName?: Prisma.StringNullableFilter<"Organization"> | string | null
   nameJa?: Prisma.StringNullableFilter<"Organization"> | string | null
+  nameKana?: Prisma.StringNullableFilter<"Organization"> | string | null
+  nameEn?: Prisma.StringNullableFilter<"Organization"> | string | null
+  email?: Prisma.StringNullableFilter<"Organization"> | string | null
+  phone?: Prisma.StringNullableFilter<"Organization"> | string | null
   contactName?: Prisma.StringNullableFilter<"Organization"> | string | null
   type?: Prisma.EnumOrganizationTypeFilter<"Organization"> | $Enums.OrganizationType
+  representativeName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  purpose?: Prisma.StringNullableFilter<"Organization"> | string | null
   description?: Prisma.StringNullableFilter<"Organization"> | string | null
+  activityAreas?: Prisma.StringNullableListFilter<"Organization">
+  activityRegions?: Prisma.StringNullableListFilter<"Organization">
   environmentStyle?: Prisma.StringFilter<"Organization"> | string
   prefecture?: Prisma.StringNullableFilter<"Organization"> | string | null
   city?: Prisma.StringNullableFilter<"Organization"> | string | null
   address?: Prisma.StringNullableFilter<"Organization"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  publicEmail?: Prisma.StringNullableFilter<"Organization"> | string | null
+  publicPhone?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactFormUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   website?: Prisma.StringNullableFilter<"Organization"> | string | null
+  snsLinks?: Prisma.StringNullableListFilter<"Organization">
+  founded?: Prisma.StringNullableFilter<"Organization"> | string | null
+  recruitmentStatus?: Prisma.StringFilter<"Organization"> | string
+  hasWaterDispenser?: Prisma.BoolFilter<"Organization"> | boolean
+  hasRestRoom?: Prisma.BoolFilter<"Organization"> | boolean
+  hasAirConditioning?: Prisma.BoolFilter<"Organization"> | boolean
+  activitySpaceSize?: Prisma.StringNullableFilter<"Organization"> | string | null
+  profileImageUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Organization">
+  certificationStatus?: Prisma.StringFilter<"Organization"> | string
+  certificationSource?: Prisma.StringNullableFilter<"Organization"> | string | null
+  certifiedAt?: Prisma.DateTimeNullableFilter<"Organization"> | Date | string | null
+  certificationSubmittedAt?: Prisma.DateTimeNullableFilter<"Organization"> | Date | string | null
+  certificationReviewedAt?: Prisma.DateTimeNullableFilter<"Organization"> | Date | string | null
+  certificationReviewNote?: Prisma.StringNullableFilter<"Organization"> | string | null
+  managerPhone?: Prisma.StringNullableFilter<"Organization"> | string | null
+  managerLegalName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  identityDocumentNote?: Prisma.StringNullableFilter<"Organization"> | string | null
+  managerAddress?: Prisma.StringNullableFilter<"Organization"> | string | null
+  isLocationPublic?: Prisma.BoolFilter<"Organization"> | boolean
+  contactPersonName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactPersonRole?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactPersonPhone?: Prisma.StringNullableFilter<"Organization"> | string | null
+  contactPersonEmail?: Prisma.StringNullableFilter<"Organization"> | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFilter<"Organization"> | boolean
+  termsAccepted?: Prisma.BoolFilter<"Organization"> | boolean
+  legalEntityType?: Prisma.StringNullableFilter<"Organization"> | string | null
+  corporateNumber?: Prisma.StringNullableFilter<"Organization"> | string | null
+  legalName?: Prisma.StringNullableFilter<"Organization"> | string | null
+  legalAddress?: Prisma.StringNullableFilter<"Organization"> | string | null
+  registrationDocumentUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  bylawsUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   profileCompleted?: Prisma.BoolFilter<"Organization"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   opportunities?: Prisma.OpportunityListRelationFilter
+  reviewedApplications?: Prisma.ApplicationListRelationFilter
 }, "id" | "userId">
 
 export type OrganizationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   nameJa?: Prisma.SortOrderInput | Prisma.SortOrder
+  nameKana?: Prisma.SortOrderInput | Prisma.SortOrder
+  nameEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   contactName?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
+  representativeName?: Prisma.SortOrderInput | Prisma.SortOrder
+  purpose?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityAreas?: Prisma.SortOrder
+  activityRegions?: Prisma.SortOrder
   environmentStyle?: Prisma.SortOrder
   prefecture?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactFormUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
+  snsLinks?: Prisma.SortOrder
+  founded?: Prisma.SortOrderInput | Prisma.SortOrder
+  recruitmentStatus?: Prisma.SortOrder
+  hasWaterDispenser?: Prisma.SortOrder
+  hasRestRoom?: Prisma.SortOrder
+  hasAirConditioning?: Prisma.SortOrder
+  activitySpaceSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  profileImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  workspaceImageUrls?: Prisma.SortOrder
+  certificationStatus?: Prisma.SortOrder
+  certificationSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  certifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  certificationSubmittedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  certificationReviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  certificationReviewNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  managerPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  managerLegalName?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityDocumentNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  managerAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  isLocationPublic?: Prisma.SortOrder
+  contactPersonName?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPersonRole?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPersonPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPersonEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  antiSocialForcesConfirmed?: Prisma.SortOrder
+  termsAccepted?: Prisma.SortOrder
+  legalEntityType?: Prisma.SortOrderInput | Prisma.SortOrder
+  corporateNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  legalName?: Prisma.SortOrderInput | Prisma.SortOrder
+  legalAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationDocumentUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  bylawsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -337,15 +819,60 @@ export type OrganizationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   name?: Prisma.StringWithAggregatesFilter<"Organization"> | string
+  displayName?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   nameJa?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  nameKana?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  nameEn?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  email?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   contactName?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   type?: Prisma.EnumOrganizationTypeWithAggregatesFilter<"Organization"> | $Enums.OrganizationType
+  representativeName?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  purpose?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  activityAreas?: Prisma.StringNullableListFilter<"Organization">
+  activityRegions?: Prisma.StringNullableListFilter<"Organization">
   environmentStyle?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   prefecture?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  googleMapsUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  publicEmail?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  publicPhone?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  contactFormUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   website?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  snsLinks?: Prisma.StringNullableListFilter<"Organization">
+  founded?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  recruitmentStatus?: Prisma.StringWithAggregatesFilter<"Organization"> | string
+  hasWaterDispenser?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
+  hasRestRoom?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
+  hasAirConditioning?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
+  activitySpaceSize?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  profileImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  workspaceImageUrls?: Prisma.StringNullableListFilter<"Organization">
+  certificationStatus?: Prisma.StringWithAggregatesFilter<"Organization"> | string
+  certificationSource?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  certifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Organization"> | Date | string | null
+  certificationSubmittedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Organization"> | Date | string | null
+  certificationReviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Organization"> | Date | string | null
+  certificationReviewNote?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  managerPhone?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  managerLegalName?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  identityDocumentNote?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  managerAddress?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  isLocationPublic?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
+  contactPersonName?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  contactPersonRole?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  contactPersonPhone?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  contactPersonEmail?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
+  termsAccepted?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
+  legalEntityType?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  corporateNumber?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  legalName?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  legalAddress?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  registrationDocumentUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  bylawsUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   profileCompleted?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Organization"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Organization"> | Date | string
@@ -354,92 +881,321 @@ export type OrganizationScalarWhereWithAggregatesInput = {
 export type OrganizationCreateInput = {
   id?: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutOrganizationInput
   opportunities?: Prisma.OpportunityCreateNestedManyWithoutOrganizationInput
+  reviewedApplications?: Prisma.ApplicationCreateNestedManyWithoutReviewedByEmployerInput
 }
 
 export type OrganizationUncheckedCreateInput = {
   id?: string
   userId: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutOrganizationInput
+  reviewedApplications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewedByEmployerInput
 }
 
 export type OrganizationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutOrganizationNestedInput
   opportunities?: Prisma.OpportunityUpdateManyWithoutOrganizationNestedInput
+  reviewedApplications?: Prisma.ApplicationUpdateManyWithoutReviewedByEmployerNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutOrganizationNestedInput
+  reviewedApplications?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewedByEmployerNestedInput
 }
 
 export type OrganizationCreateManyInput = {
   id?: string
   userId: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -448,15 +1204,60 @@ export type OrganizationCreateManyInput = {
 export type OrganizationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -466,15 +1267,60 @@ export type OrganizationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -489,15 +1335,60 @@ export type OrganizationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   nameJa?: Prisma.SortOrder
+  nameKana?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   contactName?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  representativeName?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  activityAreas?: Prisma.SortOrder
+  activityRegions?: Prisma.SortOrder
   environmentStyle?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  publicEmail?: Prisma.SortOrder
+  publicPhone?: Prisma.SortOrder
+  contactFormUrl?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  snsLinks?: Prisma.SortOrder
+  founded?: Prisma.SortOrder
+  recruitmentStatus?: Prisma.SortOrder
+  hasWaterDispenser?: Prisma.SortOrder
+  hasRestRoom?: Prisma.SortOrder
+  hasAirConditioning?: Prisma.SortOrder
+  activitySpaceSize?: Prisma.SortOrder
+  profileImageUrl?: Prisma.SortOrder
+  workspaceImageUrls?: Prisma.SortOrder
+  certificationStatus?: Prisma.SortOrder
+  certificationSource?: Prisma.SortOrder
+  certifiedAt?: Prisma.SortOrder
+  certificationSubmittedAt?: Prisma.SortOrder
+  certificationReviewedAt?: Prisma.SortOrder
+  certificationReviewNote?: Prisma.SortOrder
+  managerPhone?: Prisma.SortOrder
+  managerLegalName?: Prisma.SortOrder
+  identityDocumentNote?: Prisma.SortOrder
+  managerAddress?: Prisma.SortOrder
+  isLocationPublic?: Prisma.SortOrder
+  contactPersonName?: Prisma.SortOrder
+  contactPersonRole?: Prisma.SortOrder
+  contactPersonPhone?: Prisma.SortOrder
+  contactPersonEmail?: Prisma.SortOrder
+  antiSocialForcesConfirmed?: Prisma.SortOrder
+  termsAccepted?: Prisma.SortOrder
+  legalEntityType?: Prisma.SortOrder
+  corporateNumber?: Prisma.SortOrder
+  legalName?: Prisma.SortOrder
+  legalAddress?: Prisma.SortOrder
+  registrationDocumentUrl?: Prisma.SortOrder
+  bylawsUrl?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -507,15 +1398,56 @@ export type OrganizationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   nameJa?: Prisma.SortOrder
+  nameKana?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   contactName?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  representativeName?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   description?: Prisma.SortOrder
   environmentStyle?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  publicEmail?: Prisma.SortOrder
+  publicPhone?: Prisma.SortOrder
+  contactFormUrl?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  founded?: Prisma.SortOrder
+  recruitmentStatus?: Prisma.SortOrder
+  hasWaterDispenser?: Prisma.SortOrder
+  hasRestRoom?: Prisma.SortOrder
+  hasAirConditioning?: Prisma.SortOrder
+  activitySpaceSize?: Prisma.SortOrder
+  profileImageUrl?: Prisma.SortOrder
+  certificationStatus?: Prisma.SortOrder
+  certificationSource?: Prisma.SortOrder
+  certifiedAt?: Prisma.SortOrder
+  certificationSubmittedAt?: Prisma.SortOrder
+  certificationReviewedAt?: Prisma.SortOrder
+  certificationReviewNote?: Prisma.SortOrder
+  managerPhone?: Prisma.SortOrder
+  managerLegalName?: Prisma.SortOrder
+  identityDocumentNote?: Prisma.SortOrder
+  managerAddress?: Prisma.SortOrder
+  isLocationPublic?: Prisma.SortOrder
+  contactPersonName?: Prisma.SortOrder
+  contactPersonRole?: Prisma.SortOrder
+  contactPersonPhone?: Prisma.SortOrder
+  contactPersonEmail?: Prisma.SortOrder
+  antiSocialForcesConfirmed?: Prisma.SortOrder
+  termsAccepted?: Prisma.SortOrder
+  legalEntityType?: Prisma.SortOrder
+  corporateNumber?: Prisma.SortOrder
+  legalName?: Prisma.SortOrder
+  legalAddress?: Prisma.SortOrder
+  registrationDocumentUrl?: Prisma.SortOrder
+  bylawsUrl?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -525,15 +1457,56 @@ export type OrganizationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   nameJa?: Prisma.SortOrder
+  nameKana?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   contactName?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  representativeName?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   description?: Prisma.SortOrder
   environmentStyle?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  publicEmail?: Prisma.SortOrder
+  publicPhone?: Prisma.SortOrder
+  contactFormUrl?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  founded?: Prisma.SortOrder
+  recruitmentStatus?: Prisma.SortOrder
+  hasWaterDispenser?: Prisma.SortOrder
+  hasRestRoom?: Prisma.SortOrder
+  hasAirConditioning?: Prisma.SortOrder
+  activitySpaceSize?: Prisma.SortOrder
+  profileImageUrl?: Prisma.SortOrder
+  certificationStatus?: Prisma.SortOrder
+  certificationSource?: Prisma.SortOrder
+  certifiedAt?: Prisma.SortOrder
+  certificationSubmittedAt?: Prisma.SortOrder
+  certificationReviewedAt?: Prisma.SortOrder
+  certificationReviewNote?: Prisma.SortOrder
+  managerPhone?: Prisma.SortOrder
+  managerLegalName?: Prisma.SortOrder
+  identityDocumentNote?: Prisma.SortOrder
+  managerAddress?: Prisma.SortOrder
+  isLocationPublic?: Prisma.SortOrder
+  contactPersonName?: Prisma.SortOrder
+  contactPersonRole?: Prisma.SortOrder
+  contactPersonPhone?: Prisma.SortOrder
+  contactPersonEmail?: Prisma.SortOrder
+  antiSocialForcesConfirmed?: Prisma.SortOrder
+  termsAccepted?: Prisma.SortOrder
+  legalEntityType?: Prisma.SortOrder
+  corporateNumber?: Prisma.SortOrder
+  legalName?: Prisma.SortOrder
+  legalAddress?: Prisma.SortOrder
+  registrationDocumentUrl?: Prisma.SortOrder
+  bylawsUrl?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -571,8 +1544,44 @@ export type OrganizationUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutUserInput, Prisma.OrganizationUpdateWithoutUserInput>, Prisma.OrganizationUncheckedUpdateWithoutUserInput>
 }
 
+export type OrganizationCreateactivityAreasInput = {
+  set: string[]
+}
+
+export type OrganizationCreateactivityRegionsInput = {
+  set: string[]
+}
+
+export type OrganizationCreatesnsLinksInput = {
+  set: string[]
+}
+
+export type OrganizationCreateworkspaceImageUrlsInput = {
+  set: string[]
+}
+
 export type EnumOrganizationTypeFieldUpdateOperationsInput = {
   set?: $Enums.OrganizationType
+}
+
+export type OrganizationUpdateactivityAreasInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type OrganizationUpdateactivityRegionsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type OrganizationUpdatesnsLinksInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type OrganizationUpdateworkspaceImageUrlsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type OrganizationCreateNestedOneWithoutOpportunitiesInput = {
@@ -591,40 +1600,148 @@ export type OrganizationUpdateOneWithoutOpportunitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutOpportunitiesInput, Prisma.OrganizationUpdateWithoutOpportunitiesInput>, Prisma.OrganizationUncheckedUpdateWithoutOpportunitiesInput>
 }
 
+export type OrganizationCreateNestedOneWithoutReviewedApplicationsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutReviewedApplicationsInput, Prisma.OrganizationUncheckedCreateWithoutReviewedApplicationsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutReviewedApplicationsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneWithoutReviewedApplicationsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutReviewedApplicationsInput, Prisma.OrganizationUncheckedCreateWithoutReviewedApplicationsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutReviewedApplicationsInput
+  upsert?: Prisma.OrganizationUpsertWithoutReviewedApplicationsInput
+  disconnect?: Prisma.OrganizationWhereInput | boolean
+  delete?: Prisma.OrganizationWhereInput | boolean
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutReviewedApplicationsInput, Prisma.OrganizationUpdateWithoutReviewedApplicationsInput>, Prisma.OrganizationUncheckedUpdateWithoutReviewedApplicationsInput>
+}
+
 export type OrganizationCreateWithoutUserInput = {
   id?: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   opportunities?: Prisma.OpportunityCreateNestedManyWithoutOrganizationInput
+  reviewedApplications?: Prisma.ApplicationCreateNestedManyWithoutReviewedByEmployerInput
 }
 
 export type OrganizationUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutOrganizationInput
+  reviewedApplications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewedByEmployerInput
 }
 
 export type OrganizationCreateOrConnectWithoutUserInput = {
@@ -646,73 +1763,257 @@ export type OrganizationUpdateToOneWithWhereWithoutUserInput = {
 export type OrganizationUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   opportunities?: Prisma.OpportunityUpdateManyWithoutOrganizationNestedInput
+  reviewedApplications?: Prisma.ApplicationUpdateManyWithoutReviewedByEmployerNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutOrganizationNestedInput
+  reviewedApplications?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewedByEmployerNestedInput
 }
 
 export type OrganizationCreateWithoutOpportunitiesInput = {
   id?: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutOrganizationInput
+  reviewedApplications?: Prisma.ApplicationCreateNestedManyWithoutReviewedByEmployerInput
 }
 
 export type OrganizationUncheckedCreateWithoutOpportunitiesInput = {
   id?: string
   userId: string
   name: string
+  displayName?: string | null
   nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
   contactName?: string | null
   type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
   description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
   environmentStyle?: string
   prefecture?: string | null
   city?: string | null
   address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
   website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
   profileCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  reviewedApplications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewedByEmployerInput
 }
 
 export type OrganizationCreateOrConnectWithoutOpportunitiesInput = {
@@ -734,37 +2035,401 @@ export type OrganizationUpdateToOneWithWhereWithoutOpportunitiesInput = {
 export type OrganizationUpdateWithoutOpportunitiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutOrganizationNestedInput
+  reviewedApplications?: Prisma.ApplicationUpdateManyWithoutReviewedByEmployerNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutOpportunitiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
   environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedApplications?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewedByEmployerNestedInput
+}
+
+export type OrganizationCreateWithoutReviewedApplicationsInput = {
+  id?: string
+  name: string
+  displayName?: string | null
+  nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
+  contactName?: string | null
+  type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
+  description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
+  environmentStyle?: string
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
+  website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutOrganizationInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutReviewedApplicationsInput = {
+  id?: string
+  userId: string
+  name: string
+  displayName?: string | null
+  nameJa?: string | null
+  nameKana?: string | null
+  nameEn?: string | null
+  email?: string | null
+  phone?: string | null
+  contactName?: string | null
+  type?: $Enums.OrganizationType
+  representativeName?: string | null
+  purpose?: string | null
+  description?: string | null
+  activityAreas?: Prisma.OrganizationCreateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationCreateactivityRegionsInput | string[]
+  environmentStyle?: string
+  prefecture?: string | null
+  city?: string | null
+  address?: string | null
+  googleMapsUrl?: string | null
+  publicEmail?: string | null
+  publicPhone?: string | null
+  contactFormUrl?: string | null
+  website?: string | null
+  snsLinks?: Prisma.OrganizationCreatesnsLinksInput | string[]
+  founded?: string | null
+  recruitmentStatus?: string
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: string | null
+  profileImageUrl?: string | null
+  workspaceImageUrls?: Prisma.OrganizationCreateworkspaceImageUrlsInput | string[]
+  certificationStatus?: string
+  certificationSource?: string | null
+  certifiedAt?: Date | string | null
+  certificationSubmittedAt?: Date | string | null
+  certificationReviewedAt?: Date | string | null
+  certificationReviewNote?: string | null
+  managerPhone?: string | null
+  managerLegalName?: string | null
+  identityDocumentNote?: string | null
+  managerAddress?: string | null
+  isLocationPublic?: boolean
+  contactPersonName?: string | null
+  contactPersonRole?: string | null
+  contactPersonPhone?: string | null
+  contactPersonEmail?: string | null
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: string | null
+  corporateNumber?: string | null
+  legalName?: string | null
+  legalAddress?: string | null
+  registrationDocumentUrl?: string | null
+  bylawsUrl?: string | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutReviewedApplicationsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutReviewedApplicationsInput, Prisma.OrganizationUncheckedCreateWithoutReviewedApplicationsInput>
+}
+
+export type OrganizationUpsertWithoutReviewedApplicationsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutReviewedApplicationsInput, Prisma.OrganizationUncheckedUpdateWithoutReviewedApplicationsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutReviewedApplicationsInput, Prisma.OrganizationUncheckedCreateWithoutReviewedApplicationsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutReviewedApplicationsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutReviewedApplicationsInput, Prisma.OrganizationUncheckedUpdateWithoutReviewedApplicationsInput>
+}
+
+export type OrganizationUpdateWithoutReviewedApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
+  environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutOrganizationNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutReviewedApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameKana?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+  representativeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityAreas?: Prisma.OrganizationUpdateactivityAreasInput | string[]
+  activityRegions?: Prisma.OrganizationUpdateactivityRegionsInput | string[]
+  environmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactFormUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  snsLinks?: Prisma.OrganizationUpdatesnsLinksInput | string[]
+  founded?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recruitmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  hasWaterDispenser?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRestRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activitySpaceSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaceImageUrls?: Prisma.OrganizationUpdateworkspaceImageUrlsInput | string[]
+  certificationStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  certificationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  certifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  certificationReviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerLegalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityDocumentNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLocationPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactPersonName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPersonEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  antiSocialForcesConfirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalEntityType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  corporateNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationDocumentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bylawsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -774,10 +2439,12 @@ export type OrganizationUncheckedUpdateWithoutOpportunitiesInput = {
 
 export type OrganizationCountOutputType = {
   opportunities: number
+  reviewedApplications: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   opportunities?: boolean | OrganizationCountOutputTypeCountOpportunitiesArgs
+  reviewedApplications?: boolean | OrganizationCountOutputTypeCountReviewedApplicationsArgs
 }
 
 /**
@@ -797,25 +2464,78 @@ export type OrganizationCountOutputTypeCountOpportunitiesArgs<ExtArgs extends ru
   where?: Prisma.OpportunityWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountReviewedApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApplicationWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   name?: boolean
+  displayName?: boolean
   nameJa?: boolean
+  nameKana?: boolean
+  nameEn?: boolean
+  email?: boolean
+  phone?: boolean
   contactName?: boolean
   type?: boolean
+  representativeName?: boolean
+  purpose?: boolean
   description?: boolean
+  activityAreas?: boolean
+  activityRegions?: boolean
   environmentStyle?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  publicEmail?: boolean
+  publicPhone?: boolean
+  contactFormUrl?: boolean
   website?: boolean
+  snsLinks?: boolean
+  founded?: boolean
+  recruitmentStatus?: boolean
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: boolean
+  profileImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  certificationStatus?: boolean
+  certificationSource?: boolean
+  certifiedAt?: boolean
+  certificationSubmittedAt?: boolean
+  certificationReviewedAt?: boolean
+  certificationReviewNote?: boolean
+  managerPhone?: boolean
+  managerLegalName?: boolean
+  identityDocumentNote?: boolean
+  managerAddress?: boolean
+  isLocationPublic?: boolean
+  contactPersonName?: boolean
+  contactPersonRole?: boolean
+  contactPersonPhone?: boolean
+  contactPersonEmail?: boolean
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: boolean
+  corporateNumber?: boolean
+  legalName?: boolean
+  legalAddress?: boolean
+  registrationDocumentUrl?: boolean
+  bylawsUrl?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   opportunities?: boolean | Prisma.Organization$opportunitiesArgs<ExtArgs>
+  reviewedApplications?: boolean | Prisma.Organization$reviewedApplicationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -823,15 +2543,60 @@ export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   userId?: boolean
   name?: boolean
+  displayName?: boolean
   nameJa?: boolean
+  nameKana?: boolean
+  nameEn?: boolean
+  email?: boolean
+  phone?: boolean
   contactName?: boolean
   type?: boolean
+  representativeName?: boolean
+  purpose?: boolean
   description?: boolean
+  activityAreas?: boolean
+  activityRegions?: boolean
   environmentStyle?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  publicEmail?: boolean
+  publicPhone?: boolean
+  contactFormUrl?: boolean
   website?: boolean
+  snsLinks?: boolean
+  founded?: boolean
+  recruitmentStatus?: boolean
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: boolean
+  profileImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  certificationStatus?: boolean
+  certificationSource?: boolean
+  certifiedAt?: boolean
+  certificationSubmittedAt?: boolean
+  certificationReviewedAt?: boolean
+  certificationReviewNote?: boolean
+  managerPhone?: boolean
+  managerLegalName?: boolean
+  identityDocumentNote?: boolean
+  managerAddress?: boolean
+  isLocationPublic?: boolean
+  contactPersonName?: boolean
+  contactPersonRole?: boolean
+  contactPersonPhone?: boolean
+  contactPersonEmail?: boolean
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: boolean
+  corporateNumber?: boolean
+  legalName?: boolean
+  legalAddress?: boolean
+  registrationDocumentUrl?: boolean
+  bylawsUrl?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -842,15 +2607,60 @@ export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   userId?: boolean
   name?: boolean
+  displayName?: boolean
   nameJa?: boolean
+  nameKana?: boolean
+  nameEn?: boolean
+  email?: boolean
+  phone?: boolean
   contactName?: boolean
   type?: boolean
+  representativeName?: boolean
+  purpose?: boolean
   description?: boolean
+  activityAreas?: boolean
+  activityRegions?: boolean
   environmentStyle?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  publicEmail?: boolean
+  publicPhone?: boolean
+  contactFormUrl?: boolean
   website?: boolean
+  snsLinks?: boolean
+  founded?: boolean
+  recruitmentStatus?: boolean
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: boolean
+  profileImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  certificationStatus?: boolean
+  certificationSource?: boolean
+  certifiedAt?: boolean
+  certificationSubmittedAt?: boolean
+  certificationReviewedAt?: boolean
+  certificationReviewNote?: boolean
+  managerPhone?: boolean
+  managerLegalName?: boolean
+  identityDocumentNote?: boolean
+  managerAddress?: boolean
+  isLocationPublic?: boolean
+  contactPersonName?: boolean
+  contactPersonRole?: boolean
+  contactPersonPhone?: boolean
+  contactPersonEmail?: boolean
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: boolean
+  corporateNumber?: boolean
+  legalName?: boolean
+  legalAddress?: boolean
+  registrationDocumentUrl?: boolean
+  bylawsUrl?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -861,24 +2671,70 @@ export type OrganizationSelectScalar = {
   id?: boolean
   userId?: boolean
   name?: boolean
+  displayName?: boolean
   nameJa?: boolean
+  nameKana?: boolean
+  nameEn?: boolean
+  email?: boolean
+  phone?: boolean
   contactName?: boolean
   type?: boolean
+  representativeName?: boolean
+  purpose?: boolean
   description?: boolean
+  activityAreas?: boolean
+  activityRegions?: boolean
   environmentStyle?: boolean
   prefecture?: boolean
   city?: boolean
   address?: boolean
+  googleMapsUrl?: boolean
+  publicEmail?: boolean
+  publicPhone?: boolean
+  contactFormUrl?: boolean
   website?: boolean
+  snsLinks?: boolean
+  founded?: boolean
+  recruitmentStatus?: boolean
+  hasWaterDispenser?: boolean
+  hasRestRoom?: boolean
+  hasAirConditioning?: boolean
+  activitySpaceSize?: boolean
+  profileImageUrl?: boolean
+  workspaceImageUrls?: boolean
+  certificationStatus?: boolean
+  certificationSource?: boolean
+  certifiedAt?: boolean
+  certificationSubmittedAt?: boolean
+  certificationReviewedAt?: boolean
+  certificationReviewNote?: boolean
+  managerPhone?: boolean
+  managerLegalName?: boolean
+  identityDocumentNote?: boolean
+  managerAddress?: boolean
+  isLocationPublic?: boolean
+  contactPersonName?: boolean
+  contactPersonRole?: boolean
+  contactPersonPhone?: boolean
+  contactPersonEmail?: boolean
+  antiSocialForcesConfirmed?: boolean
+  termsAccepted?: boolean
+  legalEntityType?: boolean
+  corporateNumber?: boolean
+  legalName?: boolean
+  legalAddress?: boolean
+  registrationDocumentUrl?: boolean
+  bylawsUrl?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "nameJa" | "contactName" | "type" | "description" | "environmentStyle" | "prefecture" | "city" | "address" | "website" | "profileCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
+export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "displayName" | "nameJa" | "nameKana" | "nameEn" | "email" | "phone" | "contactName" | "type" | "representativeName" | "purpose" | "description" | "activityAreas" | "activityRegions" | "environmentStyle" | "prefecture" | "city" | "address" | "googleMapsUrl" | "publicEmail" | "publicPhone" | "contactFormUrl" | "website" | "snsLinks" | "founded" | "recruitmentStatus" | "hasWaterDispenser" | "hasRestRoom" | "hasAirConditioning" | "activitySpaceSize" | "profileImageUrl" | "workspaceImageUrls" | "certificationStatus" | "certificationSource" | "certifiedAt" | "certificationSubmittedAt" | "certificationReviewedAt" | "certificationReviewNote" | "managerPhone" | "managerLegalName" | "identityDocumentNote" | "managerAddress" | "isLocationPublic" | "contactPersonName" | "contactPersonRole" | "contactPersonPhone" | "contactPersonEmail" | "antiSocialForcesConfirmed" | "termsAccepted" | "legalEntityType" | "corporateNumber" | "legalName" | "legalAddress" | "registrationDocumentUrl" | "bylawsUrl" | "profileCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
 export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   opportunities?: boolean | Prisma.Organization$opportunitiesArgs<ExtArgs>
+  reviewedApplications?: boolean | Prisma.Organization$reviewedApplicationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -893,20 +2749,66 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     opportunities: Prisma.$OpportunityPayload<ExtArgs>[]
+    reviewedApplications: Prisma.$ApplicationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
     name: string
+    displayName: string | null
     nameJa: string | null
+    nameKana: string | null
+    nameEn: string | null
+    email: string | null
+    phone: string | null
     contactName: string | null
     type: $Enums.OrganizationType
+    representativeName: string | null
+    purpose: string | null
     description: string | null
+    activityAreas: string[]
+    activityRegions: string[]
     environmentStyle: string
     prefecture: string | null
     city: string | null
     address: string | null
+    googleMapsUrl: string | null
+    publicEmail: string | null
+    publicPhone: string | null
+    contactFormUrl: string | null
     website: string | null
+    snsLinks: string[]
+    founded: string | null
+    recruitmentStatus: string
+    hasWaterDispenser: boolean
+    hasRestRoom: boolean
+    hasAirConditioning: boolean
+    activitySpaceSize: string | null
+    profileImageUrl: string | null
+    workspaceImageUrls: string[]
+    certificationStatus: string
+    certificationSource: string | null
+    certifiedAt: Date | null
+    certificationSubmittedAt: Date | null
+    certificationReviewedAt: Date | null
+    certificationReviewNote: string | null
+    managerPhone: string | null
+    managerLegalName: string | null
+    identityDocumentNote: string | null
+    managerAddress: string | null
+    isLocationPublic: boolean
+    contactPersonName: string | null
+    contactPersonRole: string | null
+    contactPersonPhone: string | null
+    contactPersonEmail: string | null
+    antiSocialForcesConfirmed: boolean
+    termsAccepted: boolean
+    legalEntityType: string | null
+    corporateNumber: string | null
+    legalName: string | null
+    legalAddress: string | null
+    registrationDocumentUrl: string | null
+    bylawsUrl: string | null
     profileCompleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -1306,6 +3208,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   opportunities<T extends Prisma.Organization$opportunitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$opportunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedApplications<T extends Prisma.Organization$reviewedApplicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$reviewedApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1338,15 +3241,60 @@ export interface OrganizationFieldRefs {
   readonly id: Prisma.FieldRef<"Organization", 'String'>
   readonly userId: Prisma.FieldRef<"Organization", 'String'>
   readonly name: Prisma.FieldRef<"Organization", 'String'>
+  readonly displayName: Prisma.FieldRef<"Organization", 'String'>
   readonly nameJa: Prisma.FieldRef<"Organization", 'String'>
+  readonly nameKana: Prisma.FieldRef<"Organization", 'String'>
+  readonly nameEn: Prisma.FieldRef<"Organization", 'String'>
+  readonly email: Prisma.FieldRef<"Organization", 'String'>
+  readonly phone: Prisma.FieldRef<"Organization", 'String'>
   readonly contactName: Prisma.FieldRef<"Organization", 'String'>
   readonly type: Prisma.FieldRef<"Organization", 'OrganizationType'>
+  readonly representativeName: Prisma.FieldRef<"Organization", 'String'>
+  readonly purpose: Prisma.FieldRef<"Organization", 'String'>
   readonly description: Prisma.FieldRef<"Organization", 'String'>
+  readonly activityAreas: Prisma.FieldRef<"Organization", 'String[]'>
+  readonly activityRegions: Prisma.FieldRef<"Organization", 'String[]'>
   readonly environmentStyle: Prisma.FieldRef<"Organization", 'String'>
   readonly prefecture: Prisma.FieldRef<"Organization", 'String'>
   readonly city: Prisma.FieldRef<"Organization", 'String'>
   readonly address: Prisma.FieldRef<"Organization", 'String'>
+  readonly googleMapsUrl: Prisma.FieldRef<"Organization", 'String'>
+  readonly publicEmail: Prisma.FieldRef<"Organization", 'String'>
+  readonly publicPhone: Prisma.FieldRef<"Organization", 'String'>
+  readonly contactFormUrl: Prisma.FieldRef<"Organization", 'String'>
   readonly website: Prisma.FieldRef<"Organization", 'String'>
+  readonly snsLinks: Prisma.FieldRef<"Organization", 'String[]'>
+  readonly founded: Prisma.FieldRef<"Organization", 'String'>
+  readonly recruitmentStatus: Prisma.FieldRef<"Organization", 'String'>
+  readonly hasWaterDispenser: Prisma.FieldRef<"Organization", 'Boolean'>
+  readonly hasRestRoom: Prisma.FieldRef<"Organization", 'Boolean'>
+  readonly hasAirConditioning: Prisma.FieldRef<"Organization", 'Boolean'>
+  readonly activitySpaceSize: Prisma.FieldRef<"Organization", 'String'>
+  readonly profileImageUrl: Prisma.FieldRef<"Organization", 'String'>
+  readonly workspaceImageUrls: Prisma.FieldRef<"Organization", 'String[]'>
+  readonly certificationStatus: Prisma.FieldRef<"Organization", 'String'>
+  readonly certificationSource: Prisma.FieldRef<"Organization", 'String'>
+  readonly certifiedAt: Prisma.FieldRef<"Organization", 'DateTime'>
+  readonly certificationSubmittedAt: Prisma.FieldRef<"Organization", 'DateTime'>
+  readonly certificationReviewedAt: Prisma.FieldRef<"Organization", 'DateTime'>
+  readonly certificationReviewNote: Prisma.FieldRef<"Organization", 'String'>
+  readonly managerPhone: Prisma.FieldRef<"Organization", 'String'>
+  readonly managerLegalName: Prisma.FieldRef<"Organization", 'String'>
+  readonly identityDocumentNote: Prisma.FieldRef<"Organization", 'String'>
+  readonly managerAddress: Prisma.FieldRef<"Organization", 'String'>
+  readonly isLocationPublic: Prisma.FieldRef<"Organization", 'Boolean'>
+  readonly contactPersonName: Prisma.FieldRef<"Organization", 'String'>
+  readonly contactPersonRole: Prisma.FieldRef<"Organization", 'String'>
+  readonly contactPersonPhone: Prisma.FieldRef<"Organization", 'String'>
+  readonly contactPersonEmail: Prisma.FieldRef<"Organization", 'String'>
+  readonly antiSocialForcesConfirmed: Prisma.FieldRef<"Organization", 'Boolean'>
+  readonly termsAccepted: Prisma.FieldRef<"Organization", 'Boolean'>
+  readonly legalEntityType: Prisma.FieldRef<"Organization", 'String'>
+  readonly corporateNumber: Prisma.FieldRef<"Organization", 'String'>
+  readonly legalName: Prisma.FieldRef<"Organization", 'String'>
+  readonly legalAddress: Prisma.FieldRef<"Organization", 'String'>
+  readonly registrationDocumentUrl: Prisma.FieldRef<"Organization", 'String'>
+  readonly bylawsUrl: Prisma.FieldRef<"Organization", 'String'>
   readonly profileCompleted: Prisma.FieldRef<"Organization", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Organization", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Organization", 'DateTime'>
@@ -1772,6 +3720,30 @@ export type Organization$opportunitiesArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.OpportunityScalarFieldEnum | Prisma.OpportunityScalarFieldEnum[]
+}
+
+/**
+ * Organization.reviewedApplications
+ */
+export type Organization$reviewedApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Application
+   */
+  select?: Prisma.ApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Application
+   */
+  omit?: Prisma.ApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ApplicationInclude<ExtArgs> | null
+  where?: Prisma.ApplicationWhereInput
+  orderBy?: Prisma.ApplicationOrderByWithRelationInput | Prisma.ApplicationOrderByWithRelationInput[]
+  cursor?: Prisma.ApplicationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ApplicationScalarFieldEnum | Prisma.ApplicationScalarFieldEnum[]
 }
 
 /**

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import EventApplicationPanel from "./EventApplicationPanel";
 import TaskDetailCards from "./TaskDetailCards";
@@ -8,6 +9,7 @@ import {
   getMockOpportunity,
   getOpportunityCoverImage,
 } from "@/lib/mockOpportunities";
+import { localizeMockOpportunity } from "@/lib/mockOpportunityI18n";
 import {
   hasArrivalGuidance,
   type ArrivalGuidance,
@@ -29,11 +31,13 @@ export default async function OpportunityDetailPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
-  const opportunity = getMockOpportunity(id);
+  const t = await getTranslations("opportunities.detail");
+  const rawOpportunity = getMockOpportunity(id);
 
-  if (!opportunity) {
+  if (!rawOpportunity) {
     notFound();
   }
+  const opportunity = localizeMockOpportunity(rawOpportunity, locale);
 
   const session = await auth();
   const userId = session?.user?.id;
@@ -84,7 +88,7 @@ export default async function OpportunityDetailPage({
           href={`/${locale}/opportunities`}
           className="text-sm font-semibold text-green-700 hover:text-green-600"
         >
-          Back to opportunities
+          {t("back")}
         </Link>
 
         <article className="mt-6 space-y-6">
@@ -100,8 +104,13 @@ export default async function OpportunityDetailPage({
                   <span className="rounded-sm bg-white/20 px-2.5 py-1">
                     {opportunity.category}
                   </span>
+                  {opportunity.trustedOrganizer && (
+                    <span className="rounded-sm bg-green-600 px-2.5 py-1 text-white">
+                      {locale === "en" ? "Trusted" : "信頼済み"}
+                    </span>
+                  )}
                   <span className="rounded-sm bg-white/20 px-2.5 py-1">
-                    {opportunity.spotsRemaining} spots left
+                    {t("spotsLeft", { count: opportunity.spotsRemaining })}
                   </span>
                 </div>
                 <h1 className="mt-3 max-w-3xl text-3xl font-bold md:text-5xl">
@@ -115,23 +124,37 @@ export default async function OpportunityDetailPage({
 
             <div className="grid gap-6 border-b border-stone-200 p-6 md:grid-cols-[1.4fr_1fr]">
               <div>
-                <SectionLabel number="1" title="Basic information" />
+                <SectionLabel number="1" title={t("basic.title")} />
                 <p className="text-sm font-semibold text-stone-500">
-                  Organized by {opportunity.organizerName}
+                  {t("basic.organizedBy", { name: opportunity.organizerName })}
+                  {opportunity.trustedOrganizer && (
+                    <span className="ml-2 rounded-full bg-green-50 px-2 py-0.5 text-xs font-bold text-green-700">
+                      {locale === "en" ? "Trusted" : "信頼済み"}
+                    </span>
+                  )}
                 </p>
                 <p className="mt-4 text-base leading-7 text-stone-700">
                   {opportunity.description}
                 </p>
               </div>
               <dl className="grid gap-3 text-sm sm:grid-cols-2 md:grid-cols-1">
-                <InfoItem label="Date & time" value={opportunity.scheduleLabel} />
-                <InfoItem label="Duration" value={opportunity.durationLabel} />
                 <InfoItem
-                  label="Capacity"
-                  value={`${opportunity.spotsRemaining} of ${opportunity.volunteersNeeded} spots remaining`}
+                  label={t("facts.dateTime")}
+                  value={formatDateRange(opportunity.startsAt, opportunity.endsAt, locale)}
                 />
                 <InfoItem
-                  label="Location"
+                  label={t("facts.duration")}
+                  value={formatDuration(opportunity.startsAt, opportunity.endsAt, locale)}
+                />
+                <InfoItem
+                  label={t("facts.capacity")}
+                  value={t("capacityValue", {
+                    remaining: opportunity.spotsRemaining,
+                    total: opportunity.volunteersNeeded,
+                  })}
+                />
+                <InfoItem
+                  label={t("facts.location")}
                   value={`${opportunity.city}, ${opportunity.prefecture}`}
                 />
               </dl>
@@ -140,9 +163,9 @@ export default async function OpportunityDetailPage({
 
           <section className="grid gap-6 rounded-lg border border-stone-200 bg-white p-6 shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <SectionLabel number="2" title="Location" />
+              <SectionLabel number="2" title={t("location.title")} />
               <h2 className="mt-2 text-2xl font-bold text-stone-950">
-                Plan the trip before applying
+                {t("location.heading")}
               </h2>
               <a
                 href={opportunity.mapsUrl}
@@ -153,13 +176,12 @@ export default async function OpportunityDetailPage({
                 {opportunity.address}
               </a>
               <p className="mt-3 text-sm leading-6 text-stone-600">
-                The map opens with this destination pre-filled. If details change,
-                the organizer will update the address before confirmation.
+                {t("location.body")}
               </p>
             </div>
             <div className="overflow-hidden rounded-lg border border-stone-200 bg-stone-100">
               <iframe
-                title={`Map preview for ${opportunity.title}`}
+                title={t("location.mapTitle", { title: opportunity.title })}
                 src={mapEmbedUrl}
                 className="h-72 w-full"
                 loading="lazy"
@@ -169,13 +191,13 @@ export default async function OpportunityDetailPage({
           </section>
 
           <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
-            <SectionLabel number="3" title="Workspace photos" />
+            <SectionLabel number="3" title={t("photos.title")} />
             <div className="mt-4 grid gap-4 md:grid-cols-3">
               {opportunity.workspaceImageUrls.map((imageUrl, index) => (
                 <img
                   key={imageUrl}
                   src={imageUrl}
-                  alt={`Workspace view ${index + 1}`}
+                  alt={t("photos.alt", { number: index + 1 })}
                   loading="lazy"
                   className="h-56 w-full rounded-lg object-cover"
                 />
@@ -193,14 +215,14 @@ export default async function OpportunityDetailPage({
           <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
-                <SectionLabel number="4" title="Task flow" />
+                <SectionLabel number="4" title={t("flow.title")} />
                 <h2 className="mt-2 text-2xl font-bold text-stone-950">
-                  How the day is structured
+                  {t("flow.heading")}
                 </h2>
               </div>
               {opportunity.aiGenerated && (
                 <p className="text-xs font-medium text-stone-500">
-                  Plan suggested by Restarter AI
+                  {t("flow.aiSuggested")}
                 </p>
               )}
             </div>
@@ -215,8 +237,8 @@ export default async function OpportunityDetailPage({
                   </div>
                   <h3 className="mt-4 font-semibold text-stone-950">{task.name}</h3>
                   <p className="mt-1 text-sm text-stone-600">
-                    {task.startTime} · {task.durationMinutes} min ·{" "}
-                    {task.peopleNeeded} people
+                    {task.startTime} · {formatMinutes(task.durationMinutes, locale)} ·{" "}
+                    {t("people", { count: task.peopleNeeded })}
                   </p>
                   <p className="mt-3 text-sm leading-6 text-stone-700">
                     {task.shortDescription}
@@ -227,14 +249,13 @@ export default async function OpportunityDetailPage({
           </section>
 
           <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
-            <SectionLabel number="6" title="Task cards" />
+            <SectionLabel number="6" title={t("cards.title")} />
             <div className="mt-2 max-w-3xl">
               <h2 className="text-2xl font-bold text-stone-950">
-                Choose the part that fits your energy
+                {t("cards.heading")}
               </h2>
               <p className="mt-3 text-sm leading-6 text-stone-600">
-                Each task includes its effort level, working style, remaining
-                places, and the practical details needed before applying.
+                {t("cards.body")}
               </p>
             </div>
             <div className="mt-6">
@@ -418,4 +439,44 @@ function SectionLabel({ number, title }: { number: string; title: string }) {
       {number}. {title}
     </p>
   );
+}
+
+function formatDateRange(startValue: string, endValue: string, locale: string) {
+  const start = new Date(startValue);
+  const end = new Date(endValue);
+  const startLabel = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(start);
+  const endLabel = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(end);
+
+  return `${startLabel} - ${endLabel}`;
+}
+
+function formatDuration(startValue: string, endValue: string, locale: string) {
+  const minutes = Math.round(
+    (new Date(endValue).getTime() - new Date(startValue).getTime()) / 60000,
+  );
+  return formatMinutes(minutes, locale);
+}
+
+function formatMinutes(minutes: number, locale: string) {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (locale === "en") {
+    if (hours === 0) return `${remainingMinutes} min`;
+    if (remainingMinutes === 0) return `${hours} hr`;
+    return `${hours} hr ${remainingMinutes} min`;
+  }
+
+  if (hours === 0) return `${remainingMinutes}分`;
+  if (remainingMinutes === 0) return `${hours}時間`;
+  return `${hours}時間${remainingMinutes}分`;
 }

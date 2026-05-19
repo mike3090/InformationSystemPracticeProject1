@@ -82,6 +82,21 @@ export type Opportunity = Prisma.OpportunityModel
  */
 export type Application = Prisma.ApplicationModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model EventUpdate
+ * 
+ */
+export type EventUpdate = Prisma.EventUpdateModel
+/**
+ * Model EventMessage
+ * 
+ */
+export type EventMessage = Prisma.EventMessageModel
+/**
  * Model Booking
  * 
  */

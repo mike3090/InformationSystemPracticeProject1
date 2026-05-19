@@ -25,7 +25,9 @@ enum OpportunityType {
 enum OpportunityStatus {
   DRAFT
   OPEN
+  PAUSED
   FILLED
+  PROCESSING
   CANCELLED
   COMPLETED
 }
@@ -40,8 +42,12 @@ enum ApplicationStatus {
 
 enum OrganizationType {
   INDIVIDUAL
+  VOLUNTARY_GROUP
   SMALL_BUSINESS
   NPO
+  GENERAL_ASSOCIATION
+  CORPORATION
+  SCHOOL
   COMMUNITY_GROUP
   MUNICIPAL
 }
@@ -97,28 +103,32 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  accounts       Account[]
-  sessions       Session[]
-  profile        VolunteerProfile?
-  organization   Organization?
-  opportunities  Opportunity[]
-  applications   Application[]
-  aiInteractions AiInteraction[]
-  notifications  Notification[]
-  eventUpdates   EventUpdate[]
-  sentEventMessages EventMessage[] @relation("SentEventMessages")
-  receivedEventMessages EventMessage[] @relation("ReceivedEventMessages")
-  experienceShares ExperienceShare[]
+  accounts              Account[]
+  sessions              Session[]
+  profile               VolunteerProfile?
+  organization          Organization?
+  opportunities         Opportunity[]
+  applications          Application[]
+  aiInteractions        AiInteraction[]
+  notifications         Notification[]
+  eventUpdates          EventUpdate[]
+  sentEventMessages     EventMessage[]    @relation("SentEventMessages")
+  receivedEventMessages EventMessage[]    @relation("ReceivedEventMessages")
+  experienceShares     ExperienceShare[]
 }
 
 model VolunteerProfile {
   id                        String   @id @default(cuid())
   userId                    String   @unique
+  displayName               String?
+  email                     String?
+  phone                     String?
   bio                       String?  @db.Text
   skills                    String[] @default([])
   interests                 String[] @default([])
   languages                 String[] @default([])
   availability              String?
+  availabilitySlots         String[] @default([])
   preferredTaskTypes        String[] @default([])
   preferredEnvironmentStyle String   @default("either")
   emailNotificationsEnabled Boolean  @default(true)
@@ -136,59 +146,131 @@ model VolunteerProfile {
 }
 
 model Organization {
-  id               String           @id @default(cuid())
-  userId           String           @unique
-  name             String
-  nameJa           String?
-  contactName      String?
-  type             OrganizationType @default(INDIVIDUAL)
-  description      String?          @db.Text
-  environmentStyle String           @default("mixed")
-  prefecture       String?
-  city             String?
-  address          String?
-  website          String?
-  profileCompleted Boolean          @default(false)
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  id                        String           @id @default(cuid())
+  userId                    String           @unique
+  name                      String
+  displayName               String?
+  nameJa                    String?
+  nameKana                  String?
+  nameEn                    String?
+  email                     String?
+  phone                     String?
+  contactName               String?
+  type                      OrganizationType @default(INDIVIDUAL)
+  representativeName        String?
+  purpose                   String?          @db.Text
+  description               String?          @db.Text
+  activityAreas             String[]         @default([])
+  activityRegions           String[]         @default([])
+  environmentStyle          String           @default("mixed")
+  prefecture                String?
+  city                      String?
+  address                   String?
+  googleMapsUrl             String?
+  publicEmail               String?
+  publicPhone               String?
+  contactFormUrl            String?
+  website                   String?
+  snsLinks                  String[]         @default([])
+  founded                   String?
+  recruitmentStatus         String           @default("recruiting")
+  hasWaterDispenser         Boolean          @default(false)
+  hasRestRoom               Boolean          @default(false)
+  hasAirConditioning        Boolean          @default(false)
+  activitySpaceSize         String?
+  profileImageUrl           String?
+  workspaceImageUrls        String[]         @default([])
+  certificationStatus       String           @default("uncertified")
+  certificationSource       String?
+  certifiedAt               DateTime?
+  certificationSubmittedAt  DateTime?
+  certificationReviewedAt   DateTime?
+  certificationReviewNote   String?          @db.Text
+  managerPhone              String?
+  managerLegalName          String?
+  identityDocumentNote      String?          @db.Text
+  managerAddress            String?
+  isLocationPublic          Boolean          @default(false)
+  contactPersonName         String?
+  contactPersonRole         String?
+  contactPersonPhone        String?
+  contactPersonEmail        String?
+  antiSocialForcesConfirmed Boolean          @default(false)
+  termsAccepted             Boolean          @default(false)
+  legalEntityType           String?
+  corporateNumber           String?
+  legalName                 String?
+  legalAddress              String?
+  registrationDocumentUrl   String?
+  bylawsUrl                 String?
+  profileCompleted          Boolean          @default(false)
+  createdAt                 DateTime         @default(now())
+  updatedAt                 DateTime         @updatedAt
 
-  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  opportunities Opportunity[]
+  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunities        Opportunity[]
+  reviewedApplications Application[] @relation("ReviewedApplications")
 }
 
 model Opportunity {
-  id               String            @id @default(cuid())
-  title            String
-  titleJa          String?
-  description      String            @db.Text
-  descriptionJa    String?           @db.Text
-  type             OpportunityType   @default(ONE_TIME)
-  status           OpportunityStatus @default(DRAFT)
-  skills           String[]
-  prefecture       String?
-  city             String?
-  address          String?
-  startAt          DateTime?
-  endAt            DateTime?
-  recurrenceRule   String?
-  volunteersNeeded Int               @default(1)
-  allowMultipleTaskSelection Boolean  @default(false)
-  thingsToBring    String[]          @default([])
-  arrivalGuidance  String?           @db.Text
-  firstLandmarkDescription String?   @db.Text
-  firstLandmarkImageUrl String?
-  firstContactName String?
-  firstContactRole String?
-  firstContactImageUrl String?
-  requesterId      String
-  organizationId   String?
-  aiDrafted        Boolean           @default(false)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  id                         String            @id @default(cuid())
+  title                      String
+  titleJa                    String?
+  shortDescription           String?
+  description                String            @db.Text
+  descriptionJa              String?           @db.Text
+  type                       OpportunityType   @default(ONE_TIME)
+  status                     OpportunityStatus @default(DRAFT)
+  category                   String?
+  tags                       String[]          @default([])
+  taskTypeColor              String?
+  environmentShape           String?
+  physicalEffort             String            @default("medium")
+  mentalEffort               String            @default("medium")
+  skills                     String[]
+  prefecture                 String?
+  city                       String?
+  address                    String?
+  googleMapsUrl              String?
+  latitude                   Decimal?          @db.Decimal(10, 7)
+  longitude                  Decimal?          @db.Decimal(10, 7)
+  startAt                    DateTime?
+  endAt                      DateTime?
+  arrivalTime                DateTime?
+  durationMinutes            Int?
+  recurrenceRule             String?
+  volunteersNeeded           Int               @default(1)
+  maxApplicants              Int?
+  allowWaitlist              Boolean           @default(true)
+  allowMultipleTaskSelection Boolean           @default(false)
+  taskFlow                   Json              @default("[]")
+  customFields               Json              @default("{}")
+  instructions               String?           @db.Text
+  toolsProvided              String[]          @default([])
+  thingsToBring              String[]          @default([])
+  arrivalGuidance            String?           @db.Text
+  firstLandmarkDescription   String?           @db.Text
+  firstLandmarkImageUrl      String?
+  firstContactName           String?
+  firstContactRole           String?
+  firstContactImageUrl       String?
+  coverImageUrl              String?
+  workspaceImageUrls         String[]          @default([])
+  workspace3dEmbedUrl        String?
+  preApplicationQuestions    Json              @default("[]")
+  withdrawalCutoffHours      Int               @default(24)
+  aiTemplateUsed             String?
+  requesterId                String
+  organizationId             String?
+  aiDrafted                  Boolean           @default(false)
+  publishedAt                DateTime?
+  completedAt                DateTime?
+  createdAt                  DateTime          @default(now())
+  updatedAt                  DateTime          @updatedAt
 
-  requester    User          @relation(fields: [requesterId], references: [id])
-  organization Organization? @relation(fields: [organizationId], references: [id])
-  applications Application[]
+  requester     User           @relation(fields: [requesterId], references: [id])
+  organization  Organization?  @relation(fields: [organizationId], references: [id])
+  applications  Application[]
   notifications Notification[]
   eventUpdates  EventUpdate[]
   eventMessages EventMessage[]
@@ -196,29 +278,42 @@ model Opportunity {
 }
 
 model Application {
-  id            String            @id @default(cuid())
-  opportunityId String
-  volunteerId   String
-  status        ApplicationStatus @default(PENDING)
-  selectedTaskItems Json          @default("[]")
-  confirmedTimeCommitment Boolean @default(false)
-  skillTags     String[]          @default([])
-  experienceNote String?          @db.Text
-  message       String?           @db.Text
-  waitlistPosition Int?
-  matchScore    Float?
-  aiRecommended Boolean           @default(false)
-  reviewedAt    DateTime?
-  withdrawnAt   DateTime?
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
+  id                      String            @id @default(cuid())
+  opportunityId           String
+  volunteerId             String
+  status                  ApplicationStatus @default(PENDING)
+  selectedTaskItems       Json              @default("[]")
+  confirmedTimeCommitment Boolean           @default(false)
+  skillTags               String[]          @default([])
+  experienceNote          String?           @db.Text
+  message                 String?           @db.Text
+  questionAnswers         Json              @default("{}")
+  waitlistPosition        Int?
+  reviewedByEmployerId    String?
+  participantGroup        String?
+  participantRole         String            @default("MEMBER")
+  accessLevel             String            @default("STANDARD")
+  organizerNote           String?           @db.Text
+  rejectionReason         String?           @db.Text
+  attendanceStatus        String            @default("UNKNOWN")
+  checkedInAt             DateTime?
+  checkinMethod           String?
+  matchScore              Float?
+  aiRecommended           Boolean           @default(false)
+  reviewedAt              DateTime?
+  withdrawnAt             DateTime?
+  withdrawalReason        String?           @db.Text
+  completedAt             DateTime?
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
 
-  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
-  volunteer   User        @relation(fields: [volunteerId], references: [id])
-  booking     Booking?
-  notifications Notification[]
-  eventMessages EventMessage[]
-  experienceShare ExperienceShare?
+  opportunity        Opportunity    @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  volunteer          User           @relation(fields: [volunteerId], references: [id])
+  reviewedByEmployer Organization?  @relation("ReviewedApplications", fields: [reviewedByEmployerId], references: [id], onDelete: SetNull)
+  booking            Booking?
+  notifications      Notification[]
+  eventMessages      EventMessage[]
+  experienceShare    ExperienceShare?
 
   @@unique([opportunityId, volunteerId])
 }
@@ -265,13 +360,13 @@ model Notification {
 }
 
 model EventUpdate {
-  id            String   @id @default(cuid())
-  opportunityId String
-  organizerId   String
-  type          String   @default("GENERAL")
-  message       String   @db.Text
-  highlightedDetail String? @db.Text
-  createdAt     DateTime @default(now())
+  id                String   @id @default(cuid())
+  opportunityId     String
+  organizerId       String
+  type              String   @default("GENERAL")
+  message           String   @db.Text
+  highlightedDetail String?  @db.Text
+  createdAt         DateTime @default(now())
 
   opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
   organizer   User        @relation(fields: [organizerId], references: [id], onDelete: Cascade)

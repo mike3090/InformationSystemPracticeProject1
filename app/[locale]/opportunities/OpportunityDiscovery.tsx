@@ -2,6 +2,7 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   getOpportunityCoverImage,
   type EffortLevel,
@@ -12,24 +13,6 @@ type DateFilter = "this-week" | "this-weekend" | "next-week";
 type DurationFilter = "under-2" | "half-day" | "full-day";
 type EffortFilter = EffortLevel;
 
-const dateFilterLabels: Record<DateFilter, string> = {
-  "this-week": "This week",
-  "this-weekend": "This weekend",
-  "next-week": "Next week",
-};
-
-const durationFilterLabels: Record<DurationFilter, string> = {
-  "under-2": "Under 2 hours",
-  "half-day": "2-4 hours",
-  "full-day": "4+ hours",
-};
-
-const effortFilterLabels: Record<EffortFilter, string> = {
-  low: "Low effort",
-  medium: "Moderate effort",
-  high: "High effort",
-};
-
 export default function OpportunityDiscovery({
   locale,
   opportunities,
@@ -37,6 +20,7 @@ export default function OpportunityDiscovery({
   locale: string;
   opportunities: MockOpportunity[];
 }) {
+  const t = useTranslations("opportunities.discovery");
   const [query, setQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
@@ -47,6 +31,21 @@ export default function OpportunityDiscovery({
   const [selectedEfforts, setSelectedEfforts] = useState<EffortFilter[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [currentTime] = useState(() => Date.now());
+  const dateFilterLabels: Record<DateFilter, string> = {
+    "this-week": t("date.thisWeek"),
+    "this-weekend": t("date.thisWeekend"),
+    "next-week": t("date.nextWeek"),
+  };
+  const durationFilterLabels: Record<DurationFilter, string> = {
+    "under-2": t("duration.under2"),
+    "half-day": t("duration.halfDay"),
+    "full-day": t("duration.fullDay"),
+  };
+  const effortFilterLabels: Record<EffortFilter, string> = {
+    low: t("effort.low"),
+    medium: t("effort.medium"),
+    high: t("effort.high"),
+  };
 
   const categories = useMemo(
     () => unique(opportunities.map((opportunity) => opportunity.category)),
@@ -174,12 +173,14 @@ export default function OpportunityDiscovery({
       <section className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <label className="block flex-1">
-            <span className="text-xs font-semibold uppercase text-stone-500">Search</span>
+            <span className="text-xs font-semibold uppercase text-stone-500">
+              {t("searchLabel")}
+            </span>
             <input
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search by title, category, task, or location"
+              placeholder={t("searchPlaceholder")}
               className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </label>
@@ -190,14 +191,14 @@ export default function OpportunityDiscovery({
             className="rounded-lg border border-green-700 px-4 py-3 text-sm font-semibold text-green-700 hover:bg-green-50"
             aria-expanded={filtersOpen}
           >
-            {filtersOpen ? "Hide filters" : "Show filters"}
+            {filtersOpen ? t("hideFilters") : t("showFilters")}
           </button>
         </div>
 
         {filtersOpen && (
           <div className="mt-5 grid gap-4 border-t border-stone-200 pt-5 lg:grid-cols-[1fr_18rem]">
             <div className="space-y-4">
-              <FilterGroup title="Category">
+              <FilterGroup title={t("category")}>
                 {categories.map((category) => (
                   <FilterChip
                     key={category}
@@ -208,7 +209,7 @@ export default function OpportunityDiscovery({
                 ))}
               </FilterGroup>
 
-              <FilterGroup title="Date">
+              <FilterGroup title={t("date.label")}>
                 {(Object.keys(dateFilterLabels) as DateFilter[]).map((dateFilter) => (
                   <FilterChip
                     key={dateFilter}
@@ -223,14 +224,14 @@ export default function OpportunityDiscovery({
                     value={dateRangeStart}
                     onChange={(event) => setDateRangeStart(event.target.value)}
                     className="rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    aria-label="Start date"
+                    aria-label={t("startDate")}
                   />
                   <input
                     type="date"
                     value={dateRangeEnd}
                     onChange={(event) => setDateRangeEnd(event.target.value)}
                     className="rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    aria-label="End date"
+                    aria-label={t("endDate")}
                   />
                   {(dateRangeStart || dateRangeEnd) && (
                     <button
@@ -241,13 +242,13 @@ export default function OpportunityDiscovery({
                       }}
                       className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 hover:border-green-600 hover:text-green-700"
                     >
-                      Clear dates
+                      {t("clearDates")}
                     </button>
                   )}
                 </div>
               </FilterGroup>
 
-              <FilterGroup title="Duration">
+              <FilterGroup title={t("duration.label")}>
                 {(Object.keys(durationFilterLabels) as DurationFilter[]).map((durationFilter) => (
                   <FilterChip
                     key={durationFilter}
@@ -260,7 +261,7 @@ export default function OpportunityDiscovery({
                 ))}
               </FilterGroup>
 
-              <FilterGroup title="Location">
+              <FilterGroup title={t("location")}>
                 {locations.map((location) => (
                   <FilterChip
                     key={location}
@@ -271,7 +272,7 @@ export default function OpportunityDiscovery({
                 ))}
               </FilterGroup>
 
-              <FilterGroup title="Effort">
+              <FilterGroup title={t("effort.label")}>
                 {(Object.keys(effortFilterLabels) as EffortFilter[]).map((effortFilter) => (
                   <FilterChip
                     key={effortFilter}
@@ -288,7 +289,7 @@ export default function OpportunityDiscovery({
                   onClick={resetAllFilters}
                   className="text-sm font-semibold text-green-700 hover:text-green-600"
                 >
-                  Reset all filters
+                  {t("resetAll")}
                 </button>
               )}
             </div>
@@ -297,14 +298,13 @@ export default function OpportunityDiscovery({
               <div className="flex h-full flex-col justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase text-stone-500">
-                    Map view
+                    {t("mapView")}
                   </p>
                   <h2 className="mt-2 text-lg font-semibold text-stone-950">
-                    Map placeholder
+                    {t("mapPlaceholderTitle")}
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-stone-600">
-                    Pins will appear here after the project connects event latitude
-                    and longitude from the database.
+                    {t("mapPlaceholderBody")}
                   </p>
                 </div>
                 <div className="mt-6 grid grid-cols-3 gap-2">
@@ -329,8 +329,7 @@ export default function OpportunityDiscovery({
 
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm font-medium text-stone-600">
-          Showing {filteredOpportunities.length} upcoming event
-          {filteredOpportunities.length === 1 ? "" : "s"}
+          {t("showing", { count: filteredOpportunities.length })}
         </p>
       </div>
 
@@ -341,17 +340,26 @@ export default function OpportunityDiscovery({
               key={opportunity.id}
               locale={locale}
               opportunity={opportunity}
+              labels={{
+                location: t("card.location"),
+                when: t("card.when"),
+                duration: t("card.duration"),
+                full: t("card.full"),
+                spotsLeft: t("card.spotsLeft", {
+                  count: opportunity.spotsRemaining,
+                }),
+                viewDetails: t("card.viewDetails"),
+              }}
             />
           ))}
         </div>
       ) : (
         <div className="rounded-lg border border-stone-200 bg-white p-8 text-center shadow-sm">
           <h2 className="text-xl font-semibold text-stone-950">
-            No matching events
+            {t("noMatchingTitle")}
           </h2>
           <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-stone-600">
-            Try broadening the search, clearing a filter, or checking another
-            date window.
+            {t("noMatchingBody")}
           </p>
           {hasActiveFilters && (
             <button
@@ -359,7 +367,7 @@ export default function OpportunityDiscovery({
               onClick={resetAllFilters}
               className="mt-5 rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600"
             >
-              Clear filters
+              {t("clearFilters")}
             </button>
           )}
         </div>
@@ -371,9 +379,18 @@ export default function OpportunityDiscovery({
 function OpportunityCard({
   locale,
   opportunity,
+  labels,
 }: {
   locale: string;
   opportunity: MockOpportunity;
+  labels: {
+    location: string;
+    when: string;
+    duration: string;
+    full: string;
+    spotsLeft: string;
+    viewDetails: string;
+  };
 }) {
   const isFull = opportunity.spotsRemaining <= 0;
 
@@ -402,9 +419,9 @@ function OpportunityCard({
           {opportunity.title}
         </h2>
         <dl className="mt-3 grid gap-2 text-sm text-stone-600">
-          <CardFact label="Location" value={`${opportunity.city}, ${opportunity.prefecture}`} />
-          <CardFact label="When" value={opportunity.scheduleLabel} />
-          <CardFact label="Duration" value={opportunity.durationLabel} />
+          <CardFact label={labels.location} value={`${opportunity.city}, ${opportunity.prefecture}`} />
+          <CardFact label={labels.when} value={formatDateRange(opportunity.startsAt, opportunity.endsAt, locale)} />
+          <CardFact label={labels.duration} value={formatDuration(opportunity.startsAt, opportunity.endsAt, locale)} />
         </dl>
         <p className="mt-3 text-sm leading-6 text-stone-700">
           {opportunity.shortDescription}
@@ -417,13 +434,13 @@ function OpportunityCard({
                 : "bg-green-700 text-white"
             }`}
           >
-            {isFull ? "Full" : `${opportunity.spotsRemaining} spots left`}
+            {isFull ? labels.full : labels.spotsLeft}
           </span>
           <Link
             href={`/${locale}/opportunities/${opportunity.id}`}
             className="text-sm font-semibold text-green-700 hover:text-green-600"
           >
-            View details
+            {labels.viewDetails}
           </Link>
         </div>
       </div>
@@ -557,4 +574,40 @@ function addDays(date: Date, days: number) {
 function nextDayOfWeek(date: Date, targetDay: number) {
   const distance = (targetDay - date.getDay() + 7) % 7;
   return addDays(date, distance);
+}
+
+function formatDateRange(startValue: string, endValue: string, locale: string) {
+  const start = new Date(startValue);
+  const end = new Date(endValue);
+  const startLabel = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(start);
+  const endLabel = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "ja-JP", {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(end);
+
+  return `${startLabel} - ${endLabel}`;
+}
+
+function formatDuration(startValue: string, endValue: string, locale: string) {
+  const minutes = Math.round(
+    (new Date(endValue).getTime() - new Date(startValue).getTime()) / 60000,
+  );
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (locale === "en") {
+    if (hours === 0) return `${remainingMinutes} min`;
+    if (remainingMinutes === 0) return `${hours} hr`;
+    return `${hours} hr ${remainingMinutes} min`;
+  }
+
+  if (hours === 0) return `${remainingMinutes}分`;
+  if (remainingMinutes === 0) return `${hours}時間`;
+  return `${hours}時間${remainingMinutes}分`;
 }
