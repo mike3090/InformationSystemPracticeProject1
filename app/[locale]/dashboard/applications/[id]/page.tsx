@@ -19,6 +19,7 @@ import {
 } from "../../applicationStatus";
 import ApplicationCommunicationPanel from "./ApplicationCommunicationPanel";
 import DevApplicationTools from "./DevApplicationTools";
+import EventCheckInPanel from "./EventCheckInPanel";
 
 type ApplicationDetail = {
   id: string;
@@ -31,6 +32,9 @@ type ApplicationDetail = {
   waitlistPosition: number | null;
   reviewedAt: Date | null;
   createdAt: Date;
+  attendanceStatus: string;
+  checkedInAt: Date | null;
+  checkinMethod: string | null;
   opportunity: {
     id: string;
     title: string;
@@ -42,6 +46,9 @@ type ApplicationDetail = {
     endAt: Date | null;
     status: OpportunityStatus;
     skills: string[];
+    instructions: string | null;
+    toolsProvided: string[];
+    thingsToBring: string[];
   };
 };
 
@@ -56,6 +63,9 @@ type RawApplicationDetail = {
   waitlistPosition: number | null;
   reviewedAt: Date | null;
   createdAt: Date;
+  attendanceStatus: string;
+  checkedInAt: Date | null;
+  checkinMethod: string | null;
   opportunityId: string;
   opportunityTitle: string;
   opportunityDescription: string;
@@ -66,6 +76,9 @@ type RawApplicationDetail = {
   opportunityEndAt: Date | null;
   opportunityStatus: OpportunityStatus;
   opportunitySkills: string[];
+  opportunityInstructions: string | null;
+  opportunityToolsProvided: string[];
+  opportunityThingsToBring: string[];
 };
 
 export default async function ApplicationDetailPage({
@@ -122,6 +135,9 @@ async function getApplicationDetail(
       a."waitlistPosition" AS "waitlistPosition",
       a."reviewedAt" AS "reviewedAt",
       a."createdAt" AS "createdAt",
+      a."attendanceStatus" AS "attendanceStatus",
+      a."checkedInAt" AS "checkedInAt",
+      a."checkinMethod" AS "checkinMethod",
       o."id" AS "opportunityId",
       o."title" AS "opportunityTitle",
       o."description" AS "opportunityDescription",
@@ -131,7 +147,10 @@ async function getApplicationDetail(
       o."startAt" AS "opportunityStartAt",
       o."endAt" AS "opportunityEndAt",
       o."status" AS "opportunityStatus",
-      o."skills" AS "opportunitySkills"
+      o."skills" AS "opportunitySkills",
+      o."instructions" AS "opportunityInstructions",
+      o."toolsProvided" AS "opportunityToolsProvided",
+      o."thingsToBring" AS "opportunityThingsToBring"
     FROM "Application" a
     INNER JOIN "Opportunity" o ON o."id" = a."opportunityId"
     WHERE a."id" = ${id}
@@ -153,6 +172,9 @@ async function getApplicationDetail(
     waitlistPosition: row.waitlistPosition,
     reviewedAt: row.reviewedAt,
     createdAt: row.createdAt,
+    attendanceStatus: row.attendanceStatus,
+    checkedInAt: row.checkedInAt,
+    checkinMethod: row.checkinMethod,
     opportunity: {
       id: row.opportunityId,
       title: row.opportunityTitle,
@@ -164,6 +186,9 @@ async function getApplicationDetail(
       endAt: row.opportunityEndAt,
       status: row.opportunityStatus,
       skills: row.opportunitySkills,
+      instructions: row.opportunityInstructions,
+      toolsProvided: row.opportunityToolsProvided,
+      thingsToBring: row.opportunityThingsToBring,
     },
   };
 }
@@ -355,6 +380,22 @@ function ApplicationDetailView({
             </section>
           </aside>
         </div>
+
+        {isConfirmed && (
+          <EventCheckInPanel
+            applicationId={application.id}
+            locale={locale}
+            attendanceStatus={application.attendanceStatus}
+            checkedInAt={application.checkedInAt?.toISOString() ?? null}
+            checkinMethod={application.checkinMethod}
+            startAt={application.opportunity.startAt?.toISOString() ?? null}
+            endAt={application.opportunity.endAt?.toISOString() ?? null}
+            selectedTasks={selectedTasks}
+            instructions={application.opportunity.instructions}
+            toolsProvided={application.opportunity.toolsProvided}
+            thingsToBring={application.opportunity.thingsToBring}
+          />
+        )}
 
         {isConfirmed && (
           <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
