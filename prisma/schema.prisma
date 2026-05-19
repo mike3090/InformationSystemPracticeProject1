@@ -114,6 +114,7 @@ model User {
   eventUpdates          EventUpdate[]
   sentEventMessages     EventMessage[]    @relation("SentEventMessages")
   receivedEventMessages EventMessage[]    @relation("ReceivedEventMessages")
+  experienceShares     ExperienceShare[]
 }
 
 model VolunteerProfile {
@@ -273,6 +274,7 @@ model Opportunity {
   notifications Notification[]
   eventUpdates  EventUpdate[]
   eventMessages EventMessage[]
+  experienceShares ExperienceShare[]
 }
 
 model Application {
@@ -311,8 +313,32 @@ model Application {
   booking            Booking?
   notifications      Notification[]
   eventMessages      EventMessage[]
+  experienceShare    ExperienceShare?
 
   @@unique([opportunityId, volunteerId])
+}
+
+model ExperienceShare {
+  id            String   @id @default(cuid())
+  authorId      String
+  opportunityId String
+  applicationId String?  @unique
+  title         String
+  body          String   @db.Text
+  imageUrl      String?
+  tags          String[] @default([])
+  rating        Int?
+  isPublished   Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+
+  @@index([opportunityId])
+  @@index([authorId])
+  @@index([createdAt])
 }
 
 model Notification {
