@@ -25,6 +25,13 @@ type VolunteerProfileSummary = {
   skills: string[];
 } | null;
 
+type FeedbackSummary = {
+  count: bigint;
+  taskClarity: number | null;
+  preparation: number | null;
+  timeWellSpent: number | null;
+};
+
 export default async function OpportunityDetailPage({
   params,
 }: {
@@ -77,6 +84,7 @@ export default async function OpportunityDetailPage({
     opportunity.address,
   )}&output=embed`;
   const arrivalGuidance = getMockArrivalGuidance(opportunity);
+  const feedbackSummary = await getFeedbackSummary(opportunity.id);
   const showArrivalGuidance =
     existingApplication?.status === "ACCEPTED" &&
     hasArrivalGuidance(arrivalGuidance);
@@ -262,6 +270,13 @@ export default async function OpportunityDetailPage({
               <TaskDetailCards tasks={opportunity.taskFlow} />
             </div>
           </section>
+
+          {feedbackSummary && Number(feedbackSummary.count) > 0 && (
+            <FeedbackSummarySection
+              summary={feedbackSummary}
+              locale={locale}
+            />
+          )}
         </article>
       </div>
       <EventApplicationPanel
@@ -275,6 +290,88 @@ export default async function OpportunityDetailPage({
       />
     </div>
   );
+}
+
+async function getFeedbackSummary(opportunityId: string) {
+  try {
+    const rows = await prisma.$queryRaw<FeedbackSummary[]>`
+      SELECT
+        COUNT(*)::bigint AS "count",
+        AVG("taskClarityRating") AS "taskClarity",
+        AVG("preparationRating") AS "preparation",
+        AVG("timeWellSpentRating") AS "timeWellSpent"
+      FROM "PostEventReflection"
+      WHERE "opportunityId" = ${opportunityId}
+        AND (
+          "taskClarityRating" IS NOT NULL
+          OR "preparationRating" IS NOT NULL
+          OR "timeWellSpentRating" IS NOT NULL
+        )
+    `;
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function FeedbackSummarySection({
+  summary,
+  locale,
+}: {
+  summary: FeedbackSummary;
+  locale: string;
+}) {
+  const items = [
+    {
+      label: locale === "en" ? "Task clarity" : "タスクの明確さ",
+      value: summary.taskClarity,
+    },
+    {
+      label: locale === "en" ? "Preparation" : "準備",
+      value: summary.preparation,
+    },
+    {
+      label: locale === "en" ? "Time well spent" : "充実した時間",
+      value: summary.timeWellSpent,
+    },
+  ];
+
+  return (
+    <section className="rounded-lg border border-emerald-200 bg-white p-6 shadow-sm">
+      <SectionLabel
+        number="7"
+        title={locale === "en" ? "Volunteer feedback" : "参加者フィードバック"}
+      />
+      <h2 className="mt-2 text-2xl font-bold text-stone-950">
+        {locale === "en"
+          ? "What past volunteers reported"
+          : "過去の参加者による評価"}
+      </h2>
+      <p className="mt-2 text-sm text-stone-600">
+        {locale === "en"
+          ? `${Number(summary.count)} anonymous reflection(s)`
+          : `${Number(summary.count)}件の匿名フィードバック`}
+      </p>
+      <div className="mt-5 grid gap-3 md:grid-cols-3">
+        {items.map((item) => (
+          <div key={item.label} className="rounded-lg bg-emerald-50 p-4">
+            <p className="text-sm font-semibold text-stone-950">{item.label}</p>
+            <p className="mt-2 text-2xl font-bold text-emerald-800">
+              {formatRating(item.value)}
+            </p>
+            <p className="mt-1 text-xs text-emerald-800">
+              {locale === "en" ? "3-point quick rating" : "3段階の簡単評価"}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function formatRating(value: number | null) {
+  if (value === null) return "-";
+  return `${Number(value).toFixed(1)} / 3`;
 }
 
 function getMockArrivalGuidance(

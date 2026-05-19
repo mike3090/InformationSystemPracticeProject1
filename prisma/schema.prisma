@@ -115,6 +115,8 @@ model User {
   sentEventMessages     EventMessage[]    @relation("SentEventMessages")
   receivedEventMessages EventMessage[]    @relation("ReceivedEventMessages")
   experienceShares     ExperienceShare[]
+  postEventReflections PostEventReflection[]
+  skillBadges          VolunteerSkillBadge[]
 }
 
 model VolunteerProfile {
@@ -275,6 +277,7 @@ model Opportunity {
   eventUpdates  EventUpdate[]
   eventMessages EventMessage[]
   experienceShares ExperienceShare[]
+  postEventReflections PostEventReflection[]
 }
 
 model Application {
@@ -314,8 +317,50 @@ model Application {
   notifications      Notification[]
   eventMessages      EventMessage[]
   experienceShare    ExperienceShare?
+  postEventReflection PostEventReflection?
 
   @@unique([opportunityId, volunteerId])
+}
+
+model PostEventReflection {
+  id                    String   @id @default(cuid())
+  applicationId         String   @unique
+  userId                String
+  opportunityId         String
+  durationMinutes       Int
+  accomplishmentSummary String   @db.Text
+  shareCardText         String   @db.Text
+  badges                Json     @default("[]")
+  taskClarityRating     Int?
+  preparationRating     Int?
+  timeWellSpentRating   Int?
+  feedbackComment       String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([opportunityId])
+}
+
+model VolunteerSkillBadge {
+  id           String   @id @default(cuid())
+  userId       String
+  badgeKey     String
+  name         String
+  icon         String
+  description  String   @db.Text
+  earnedCount  Int      @default(1)
+  firstEarnedAt DateTime @default(now())
+  lastEarnedAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeKey])
+  @@index([badgeKey])
 }
 
 model ExperienceShare {

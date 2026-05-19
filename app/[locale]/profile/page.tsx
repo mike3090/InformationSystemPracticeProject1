@@ -4,6 +4,15 @@ import { prisma } from "@/lib/db";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 
+type SkillBadgeRow = {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  earnedCount: number;
+  lastEarnedAt: Date;
+};
+
 export default async function ProfilePage({
   params,
   searchParams,
@@ -29,6 +38,7 @@ export default async function ProfilePage({
   }
 
   const t = await getTranslations("profile");
+  const skillBadges = await getSkillBadges(session.user.id);
   const profileType =
     user.role === "REQUESTER" || user.role === "BOTH" || user.role === "ADMIN"
       ? "requester"
@@ -45,6 +55,33 @@ export default async function ProfilePage({
           {t("savedMessage")}
         </div>
       )}
+      {skillBadges.length > 0 && (
+        <section className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 p-6">
+          <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">
+            {locale === "en" ? "Skill badges" : "スキルバッジ"}
+          </p>
+          <h2 className="mt-2 text-xl font-bold text-stone-950">
+            {locale === "en" ? "Visible volunteer experience" : "見える参加経験"}
+          </h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {skillBadges.map((badge) => (
+              <article key={badge.id} className="rounded-lg bg-white p-4">
+                <p className="text-sm font-bold text-stone-950">
+                  {badge.icon} {badge.name}
+                </p>
+                <p className="mt-1 text-sm leading-6 text-stone-600">
+                  {badge.description}
+                </p>
+                <p className="mt-2 text-xs font-semibold text-emerald-700">
+                  {locale === "en"
+                    ? `${badge.earnedCount} time(s) earned`
+                    : `${badge.earnedCount}回獲得`}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
       <ProfileForm
         user={user}
         locale={locale}
@@ -55,6 +92,26 @@ export default async function ProfilePage({
       />
     </div>
   );
+}
+
+async function getSkillBadges(userId: string) {
+  try {
+    return await prisma.$queryRaw<SkillBadgeRow[]>`
+      SELECT
+        "id",
+        "name",
+        "icon",
+        "description",
+        "earnedCount",
+        "lastEarnedAt"
+      FROM "VolunteerSkillBadge"
+      WHERE "userId" = ${userId}
+      ORDER BY "lastEarnedAt" DESC
+      LIMIT 6
+    `;
+  } catch {
+    return [];
+  }
 }
 
 function profileLabels(t: Awaited<ReturnType<typeof getTranslations>>) {

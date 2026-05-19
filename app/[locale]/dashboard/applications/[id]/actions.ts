@@ -2,6 +2,7 @@
 
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { createNotification } from "@/lib/preEventCommunication";
@@ -84,11 +85,7 @@ export async function sendOrganizerMessage(
   });
 
   revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
-
-  return {
-    status: "success",
-    message: locale === "en" ? "Message sent." : "メッセージを送信しました。",
-  };
+  redirect(`/${locale}/dashboard/applications/${applicationId}?message=sent`);
 }
 
 export async function withdrawConfirmedApplication(
@@ -167,6 +164,110 @@ export async function withdrawConfirmedApplication(
     status: "success",
     message: locale === "en" ? "You withdrew from this event." : "このイベントを辞退しました。",
   };
+}
+
+export async function checkInToEvent(
+  _prevState: ApplicationActionState,
+  formData: FormData,
+): Promise<ApplicationActionState> {
+  const session = await auth();
+  const locale = String(formData.get("locale") ?? "ja");
+  const applicationId = String(formData.get("applicationId") ?? "");
+  const method = String(formData.get("method") ?? "MANUAL");
+  const qrCode = String(formData.get("qrCode") ?? "").trim();
+
+  if (!session?.user?.id) {
+    return error(locale, "Please sign in before checking in.", "チェックインにはログインしてください。");
+  }
+
+  const rows = await prisma.$queryRaw<
+    {
+      opportunityId: string;
+      requesterId: string;
+      opportunityTitle: string;
+      status: string;
+      startAt: Date | null;
+      endAt: Date | null;
+      attendanceStatus: string;
+    }[]
+  >`
+    SELECT
+      a."opportunityId" AS "opportunityId",
+      a."status"::text AS "status",
+      a."attendanceStatus" AS "attendanceStatus",
+      o."requesterId" AS "requesterId",
+      o."title" AS "opportunityTitle",
+      o."startAt" AS "startAt",
+      o."endAt" AS "endAt"
+    FROM "Application" a
+    INNER JOIN "Opportunity" o ON o."id" = a."opportunityId"
+    WHERE a."id" = ${applicationId}
+      AND a."volunteerId" = ${session.user.id}
+    LIMIT 1
+  `;
+  const application = rows[0];
+
+  if (!application || application.status !== "ACCEPTED") {
+    return error(locale, "Check-in is available only after confirmation.", "チェックインは参加確定後に利用できます。");
+  }
+
+  const isLocalDemoQr =
+    process.env.NODE_ENV !== "production" &&
+    method === "QR" &&
+    qrCode === "DEMO-CHECKIN";
+
+  if (method === "QR") {
+    const acceptedCodes = new Set([
+      applicationId,
+      application.opportunityId,
+      `GTT-${application.opportunityId}`,
+      "DEMO-CHECKIN",
+    ]);
+    if (!acceptedCodes.has(qrCode)) {
+      return error(locale, "The QR code is not valid for this event.", "このイベントのQRコードではありません。");
+    }
+  }
+
+  if (!isLocalDemoQr && !isWithinCheckInWindow(application.startAt, application.endAt)) {
+    return error(
+      locale,
+      "Check-in opens 30 minutes before the event and closes when the event ends.",
+      "チェックインは開始30分前からイベント終了まで利用できます。",
+    );
+  }
+
+  await prisma.$executeRaw`
+    UPDATE "Application"
+    SET "attendanceStatus" = 'ATTENDED',
+        "checkedInAt" = NOW(),
+        "checkinMethod" = ${method === "QR" ? "QR" : "MANUAL"},
+        "updatedAt" = NOW()
+    WHERE "id" = ${applicationId}
+      AND "volunteerId" = ${session.user.id}
+  `;
+
+  await createNotification({
+    userId: application.requesterId,
+    opportunityId: application.opportunityId,
+    applicationId,
+    type: "VOLUNTEER_CHECKED_IN",
+    title: `Volunteer checked in: ${application.opportunityTitle}`,
+    body: method === "QR" ? "Checked in with QR code." : "Checked in manually.",
+  });
+
+  revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
+  revalidatePath(`/${locale}/dashboard/opportunities/${application.opportunityId}`);
+  redirect(`/${locale}/dashboard/applications/${applicationId}?checkin=success`);
+}
+
+function isWithinCheckInWindow(startAt: Date | null, endAt: Date | null) {
+  if (!startAt) return false;
+
+  const now = Date.now();
+  const opensAt = startAt.getTime() - 30 * 60 * 1000;
+  const closesAt = endAt?.getTime() ?? startAt.getTime() + 8 * 60 * 60 * 1000;
+
+  return now >= opensAt && now <= closesAt;
 }
 
 export async function devConfirmOwnApplication(

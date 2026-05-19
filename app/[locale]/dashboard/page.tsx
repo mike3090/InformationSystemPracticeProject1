@@ -293,6 +293,30 @@ export default async function DashboardPage({
                 </div>
               </section>
             )}
+
+            {showVolunteerDashboard && (
+              <section className="rounded-lg border border-green-200 bg-white p-6 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wide text-green-700">
+                  {locale === "en"
+                    ? "Pre-event communication"
+                    : "活動前コミュニケーション"}
+                </p>
+                <h2 className="mt-2 text-lg font-bold text-stone-950">
+                  {locale === "en" ? "Prepare before you arrive" : "参加前の準備"}
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-stone-600">
+                  {locale === "en"
+                    ? "Confirmed events include arrival guidance, organizer updates, messages, reminders, and withdrawal controls."
+                    : "確認済み活動では、到着指引、主催者からの更新、メッセージ、提醒、辞退操作をまとめて確認できます。"}
+                </p>
+                <Link
+                  href={`/${locale}/my-events`}
+                  className="mt-4 inline-flex rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600"
+                >
+                  {locale === "en" ? "Open My Events" : "My Events を開く"}
+                </Link>
+              </section>
+            )}
           </aside>
         </div>
       </div>
