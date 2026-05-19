@@ -392,6 +392,9 @@ export const ModelName = {
   Organization: 'Organization',
   Opportunity: 'Opportunity',
   Application: 'Application',
+  Notification: 'Notification',
+  EventUpdate: 'EventUpdate',
+  EventMessage: 'EventMessage',
   Booking: 'Booking',
   AiInteraction: 'AiInteraction'
 } as const
@@ -409,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "user" | "volunteerProfile" | "organization" | "opportunity" | "application" | "booking" | "aiInteraction"
+    modelProps: "account" | "session" | "verificationToken" | "user" | "volunteerProfile" | "organization" | "opportunity" | "application" | "notification" | "eventUpdate" | "eventMessage" | "booking" | "aiInteraction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1005,6 +1008,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Notification: {
+      payload: Prisma.$NotificationPayload<ExtArgs>
+      fields: Prisma.NotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        update: {
+          args: Prisma.NotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
+        }
+        groupBy: {
+          args: Prisma.NotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    EventUpdate: {
+      payload: Prisma.$EventUpdatePayload<ExtArgs>
+      fields: Prisma.EventUpdateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventUpdateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventUpdateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>
+        }
+        findFirst: {
+          args: Prisma.EventUpdateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventUpdateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>
+        }
+        findMany: {
+          args: Prisma.EventUpdateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>[]
+        }
+        create: {
+          args: Prisma.EventUpdateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>
+        }
+        createMany: {
+          args: Prisma.EventUpdateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventUpdateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>[]
+        }
+        delete: {
+          args: Prisma.EventUpdateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>
+        }
+        update: {
+          args: Prisma.EventUpdateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>
+        }
+        deleteMany: {
+          args: Prisma.EventUpdateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventUpdateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventUpdateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>[]
+        }
+        upsert: {
+          args: Prisma.EventUpdateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventUpdatePayload>
+        }
+        aggregate: {
+          args: Prisma.EventUpdateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventUpdate>
+        }
+        groupBy: {
+          args: Prisma.EventUpdateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventUpdateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventUpdateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventUpdateCountAggregateOutputType> | number
+        }
+      }
+    }
+    EventMessage: {
+      payload: Prisma.$EventMessagePayload<ExtArgs>
+      fields: Prisma.EventMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.EventMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>
+        }
+        findMany: {
+          args: Prisma.EventMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>[]
+        }
+        create: {
+          args: Prisma.EventMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>
+        }
+        createMany: {
+          args: Prisma.EventMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.EventMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>
+        }
+        update: {
+          args: Prisma.EventMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.EventMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.EventMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.EventMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventMessage>
+        }
+        groupBy: {
+          args: Prisma.EventMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventMessageCountAggregateOutputType> | number
+        }
+      }
+    }
     Booking: {
       payload: Prisma.$BookingPayload<ExtArgs>
       fields: Prisma.BookingFieldRefs
@@ -1248,13 +1473,22 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const VolunteerProfileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  displayName: 'displayName',
+  email: 'email',
+  phone: 'phone',
   bio: 'bio',
   skills: 'skills',
   interests: 'interests',
   languages: 'languages',
   availability: 'availability',
+  availabilitySlots: 'availabilitySlots',
   preferredTaskTypes: 'preferredTaskTypes',
   preferredEnvironmentStyle: 'preferredEnvironmentStyle',
+  emailNotificationsEnabled: 'emailNotificationsEnabled',
+  inAppNotificationsEnabled: 'inAppNotificationsEnabled',
+  reminder3DaysEnabled: 'reminder3DaysEnabled',
+  reminder1DayEnabled: 'reminder1DayEnabled',
+  reminderSameDayEnabled: 'reminderSameDayEnabled',
   profileCompleted: 'profileCompleted',
   prefecture: 'prefecture',
   city: 'city',
@@ -1269,15 +1503,60 @@ export const OrganizationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   name: 'name',
+  displayName: 'displayName',
   nameJa: 'nameJa',
+  nameKana: 'nameKana',
+  nameEn: 'nameEn',
+  email: 'email',
+  phone: 'phone',
   contactName: 'contactName',
   type: 'type',
+  representativeName: 'representativeName',
+  purpose: 'purpose',
   description: 'description',
+  activityAreas: 'activityAreas',
+  activityRegions: 'activityRegions',
   environmentStyle: 'environmentStyle',
   prefecture: 'prefecture',
   city: 'city',
   address: 'address',
+  googleMapsUrl: 'googleMapsUrl',
+  publicEmail: 'publicEmail',
+  publicPhone: 'publicPhone',
+  contactFormUrl: 'contactFormUrl',
   website: 'website',
+  snsLinks: 'snsLinks',
+  founded: 'founded',
+  recruitmentStatus: 'recruitmentStatus',
+  hasWaterDispenser: 'hasWaterDispenser',
+  hasRestRoom: 'hasRestRoom',
+  hasAirConditioning: 'hasAirConditioning',
+  activitySpaceSize: 'activitySpaceSize',
+  profileImageUrl: 'profileImageUrl',
+  workspaceImageUrls: 'workspaceImageUrls',
+  certificationStatus: 'certificationStatus',
+  certificationSource: 'certificationSource',
+  certifiedAt: 'certifiedAt',
+  certificationSubmittedAt: 'certificationSubmittedAt',
+  certificationReviewedAt: 'certificationReviewedAt',
+  certificationReviewNote: 'certificationReviewNote',
+  managerPhone: 'managerPhone',
+  managerLegalName: 'managerLegalName',
+  identityDocumentNote: 'identityDocumentNote',
+  managerAddress: 'managerAddress',
+  isLocationPublic: 'isLocationPublic',
+  contactPersonName: 'contactPersonName',
+  contactPersonRole: 'contactPersonRole',
+  contactPersonPhone: 'contactPersonPhone',
+  contactPersonEmail: 'contactPersonEmail',
+  antiSocialForcesConfirmed: 'antiSocialForcesConfirmed',
+  termsAccepted: 'termsAccepted',
+  legalEntityType: 'legalEntityType',
+  corporateNumber: 'corporateNumber',
+  legalName: 'legalName',
+  legalAddress: 'legalAddress',
+  registrationDocumentUrl: 'registrationDocumentUrl',
+  bylawsUrl: 'bylawsUrl',
   profileCompleted: 'profileCompleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1290,21 +1569,55 @@ export const OpportunityScalarFieldEnum = {
   id: 'id',
   title: 'title',
   titleJa: 'titleJa',
+  shortDescription: 'shortDescription',
   description: 'description',
   descriptionJa: 'descriptionJa',
   type: 'type',
   status: 'status',
+  category: 'category',
+  tags: 'tags',
+  taskTypeColor: 'taskTypeColor',
+  environmentShape: 'environmentShape',
+  physicalEffort: 'physicalEffort',
+  mentalEffort: 'mentalEffort',
   skills: 'skills',
   prefecture: 'prefecture',
   city: 'city',
   address: 'address',
+  googleMapsUrl: 'googleMapsUrl',
+  latitude: 'latitude',
+  longitude: 'longitude',
   startAt: 'startAt',
   endAt: 'endAt',
+  arrivalTime: 'arrivalTime',
+  durationMinutes: 'durationMinutes',
   recurrenceRule: 'recurrenceRule',
   volunteersNeeded: 'volunteersNeeded',
+  maxApplicants: 'maxApplicants',
+  allowWaitlist: 'allowWaitlist',
+  allowMultipleTaskSelection: 'allowMultipleTaskSelection',
+  taskFlow: 'taskFlow',
+  customFields: 'customFields',
+  instructions: 'instructions',
+  toolsProvided: 'toolsProvided',
+  thingsToBring: 'thingsToBring',
+  arrivalGuidance: 'arrivalGuidance',
+  firstLandmarkDescription: 'firstLandmarkDescription',
+  firstLandmarkImageUrl: 'firstLandmarkImageUrl',
+  firstContactName: 'firstContactName',
+  firstContactRole: 'firstContactRole',
+  firstContactImageUrl: 'firstContactImageUrl',
+  coverImageUrl: 'coverImageUrl',
+  workspaceImageUrls: 'workspaceImageUrls',
+  workspace3dEmbedUrl: 'workspace3dEmbedUrl',
+  preApplicationQuestions: 'preApplicationQuestions',
+  withdrawalCutoffHours: 'withdrawalCutoffHours',
+  aiTemplateUsed: 'aiTemplateUsed',
   requesterId: 'requesterId',
   organizationId: 'organizationId',
   aiDrafted: 'aiDrafted',
+  publishedAt: 'publishedAt',
+  completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1317,15 +1630,77 @@ export const ApplicationScalarFieldEnum = {
   opportunityId: 'opportunityId',
   volunteerId: 'volunteerId',
   status: 'status',
+  selectedTaskItems: 'selectedTaskItems',
+  confirmedTimeCommitment: 'confirmedTimeCommitment',
+  skillTags: 'skillTags',
+  experienceNote: 'experienceNote',
   message: 'message',
+  questionAnswers: 'questionAnswers',
+  waitlistPosition: 'waitlistPosition',
+  reviewedByEmployerId: 'reviewedByEmployerId',
+  participantGroup: 'participantGroup',
+  participantRole: 'participantRole',
+  accessLevel: 'accessLevel',
+  organizerNote: 'organizerNote',
+  rejectionReason: 'rejectionReason',
+  attendanceStatus: 'attendanceStatus',
+  checkedInAt: 'checkedInAt',
+  checkinMethod: 'checkinMethod',
   matchScore: 'matchScore',
   aiRecommended: 'aiRecommended',
   reviewedAt: 'reviewedAt',
+  withdrawnAt: 'withdrawnAt',
+  withdrawalReason: 'withdrawalReason',
+  completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  opportunityId: 'opportunityId',
+  applicationId: 'applicationId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  channel: 'channel',
+  metadata: 'metadata',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const EventUpdateScalarFieldEnum = {
+  id: 'id',
+  opportunityId: 'opportunityId',
+  organizerId: 'organizerId',
+  type: 'type',
+  message: 'message',
+  highlightedDetail: 'highlightedDetail',
+  createdAt: 'createdAt'
+} as const
+
+export type EventUpdateScalarFieldEnum = (typeof EventUpdateScalarFieldEnum)[keyof typeof EventUpdateScalarFieldEnum]
+
+
+export const EventMessageScalarFieldEnum = {
+  id: 'id',
+  opportunityId: 'opportunityId',
+  applicationId: 'applicationId',
+  senderId: 'senderId',
+  recipientId: 'recipientId',
+  body: 'body',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type EventMessageScalarFieldEnum = (typeof EventMessageScalarFieldEnum)[keyof typeof EventMessageScalarFieldEnum]
 
 
 export const BookingScalarFieldEnum = {
@@ -1361,6 +1736,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -1375,6 +1757,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1485,6 +1876,34 @@ export type EnumOpportunityStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'OpportunityStatus[]'
  */
 export type ListEnumOpportunityStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpportunityStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1633,6 +2052,9 @@ export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
   opportunity?: Prisma.OpportunityOmit
   application?: Prisma.ApplicationOmit
+  notification?: Prisma.NotificationOmit
+  eventUpdate?: Prisma.EventUpdateOmit
+  eventMessage?: Prisma.EventMessageOmit
   booking?: Prisma.BookingOmit
   aiInteraction?: Prisma.AiInteractionOmit
 }

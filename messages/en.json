@@ -125,6 +125,11 @@
     "requesterSignInIntro": "Use this entrance to post needs and manage volunteer opportunities.",
     "loginTab": "Sign in",
     "registerTab": "Register",
+    "accountTypeLabel": "What kind of account do you want to create?",
+    "volunteerAccountType": "Volunteer",
+    "volunteerAccountTypeDescription": "Find activities and apply to join.",
+    "requesterAccountType": "Employer",
+    "requesterAccountTypeDescription": "Post needs and manage applicants.",
     "nameLabel": "Name",
     "namePlaceholder": "Your name",
     "emailLabel": "Email address",
@@ -146,7 +151,7 @@
     "setupTitle": "Set up your profile",
     "editTitle": "Edit profile",
     "volunteerSetupIntro": "Tell the platform what you are interested in, where you are, and when you can usually help.",
-    "requesterSetupIntro": "Tell volunteers who is posting the opportunity and what kind of environment they can expect.",
+    "requesterSetupIntro": "Set up your organizer profile so volunteers can understand who is hosting the opportunity and what kind of environment they can expect.",
     "volunteerEditIntro": "Update your volunteer details so future recommendations and applications fit you better.",
     "requesterEditIntro": "Update your organizer profile so volunteers understand your group and location.",
     "savedMessage": "Profile saved.",
@@ -178,8 +183,46 @@
       "reminderSameDay": "Morning-of reminder",
       "organizationName": "Organization name",
       "organizationType": "Organization type",
+      "nameKana": "Name kana / furigana",
+      "nameEn": "English name",
+      "representativeName": "Representative name",
+      "purpose": "Activity purpose",
+      "activityAreas": "Main activity fields",
+      "activityRegions": "Main activity areas",
+      "publicEmail": "Public email",
+      "publicPhone": "Public phone",
+      "contactFormUrl": "Contact form URL",
       "description": "Description",
       "website": "Website",
+      "snsLinks": "Official website / SNS links",
+      "founded": "Founded month",
+      "recruitmentStatus": "Current recruitment status",
+      "activitySpaceSize": "Activity space size",
+      "profileImageUrl": "Profile image URL",
+      "workspaceImageUrls": "Workspace image URLs",
+      "hasWaterDispenser": "Free water dispenser available",
+      "hasRestRoom": "Quiet rest room available",
+      "hasAirConditioning": "Air conditioning available",
+      "certificationStatus": "Certification status",
+      "certificationStatusPrivate": "This status is controlled by platform review and is not publicly shown until approved.",
+      "certificationSource": "Certification source",
+      "managerPhone": "Responsible person's mobile number",
+      "managerLegalName": "Responsible person's legal name",
+      "identityDocumentNote": "Identity document note",
+      "managerAddress": "Responsible person's address",
+      "isLocationPublic": "Allow organization location to be shown publicly",
+      "contactPersonName": "Contact person name",
+      "contactPersonRole": "Contact person role",
+      "contactPersonPhone": "Contact person phone",
+      "contactPersonEmail": "Contact person email",
+      "antiSocialForcesConfirmed": "I confirm this organizer is not associated with anti-social forces.",
+      "termsAccepted": "I agree to the platform terms, privacy handling, and activity responsibility policy.",
+      "legalEntityType": "Legal entity type",
+      "corporateNumber": "Corporate number",
+      "legalName": "Legal registered name",
+      "legalAddress": "Legal registered address",
+      "registrationDocumentUrl": "Registration / proof document URL",
+      "bylawsUrl": "Articles or bylaws URL",
       "address": "Address"
     },
     "placeholders": {
@@ -187,7 +230,13 @@
       "interests": "gardening, cooking, crafts",
       "skills": "teaching, translation, repair",
       "languages": "Japanese, English",
-      "preferredTaskTypes": "outdoor, event support"
+      "preferredTaskTypes": "outdoor, event support",
+      "activityAreas": "environment, education, welfare, children",
+      "activityRegions": "Kyoto citywide, Sakyo ward, online",
+      "snsLinks": "https://example.org, Instagram, X",
+      "founded": "YYYY-MM",
+      "activitySpaceSize": "e.g. small room for 8 people, outdoor garden, gymnasium",
+      "workspaceImageUrls": "Separate image URLs with commas"
     },
     "environment": {
       "either": "Either",
@@ -197,10 +246,47 @@
     },
     "organizationTypes": {
       "individual": "Individual",
+      "voluntaryGroup": "Voluntary group",
       "company": "Company / small business",
       "npo": "NPO",
+      "generalAssociation": "General incorporated association",
+      "corporation": "Corporation",
+      "school": "School",
       "community": "Community group",
       "municipal": "Municipality"
+    },
+    "requesterSections": {
+      "public": {
+        "eyebrow": "Volunteer-visible",
+        "title": "Public organizer profile",
+        "description": "This information helps volunteers understand who is hosting the activity and whether the environment feels trustworthy."
+      },
+      "review": {
+        "eyebrow": "Private",
+        "title": "Responsible person information",
+        "description": "This section is private. It is used only for platform review, emergency contact, and safety checks, and is not shown to volunteers by default."
+      },
+      "certification": {
+        "eyebrow": "Certification",
+        "title": "Legal or group certification",
+        "description": "This section appears only when the organizer type is a group or legal entity. Add details that can later be checked against official records or reviewed manually."
+      }
+    },
+    "recruitmentStatus": {
+      "recruiting": "Recruiting",
+      "paused": "Paused",
+      "internalOnly": "Internal only"
+    },
+    "legalEntityTypes": {
+      "notApplicable": "Not applicable",
+      "other": "Other legal entity"
+    },
+    "certificationStatus": {
+      "uncertified": "Uncertified",
+      "underReview": "Under review",
+      "certified": "Certified",
+      "rejected": "Rejected",
+      "changesRequested": "Changes requested"
     }
   },
   "common": {

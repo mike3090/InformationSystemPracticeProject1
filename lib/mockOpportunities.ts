@@ -25,6 +25,7 @@ export type MockOpportunity = {
   id: string;
   title: string;
   organizerName: string;
+  trustedOrganizer?: boolean;
   category: string;
   city: string;
   prefecture: string;
@@ -58,6 +59,7 @@ export const mockOpportunities: MockOpportunity[] = [
     id: "garden-cleanup",
     title: "Community garden cleanup",
     organizerName: "Kamogawa Neighborhood Association",
+    trustedOrganizer: true,
     category: "Outdoor care",
     city: "Kyoto",
     prefecture: "Kyoto",
