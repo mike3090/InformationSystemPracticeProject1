@@ -189,6 +189,36 @@ export default async function DashboardPage({
                 {t("volunteer.findMore")}
               </Link>
             </section>
+
+            {showVolunteerDashboard && (
+              <section className="rounded-lg border border-rose-200 bg-white p-6 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wide text-rose-600">
+                  {locale === "en" ? "Experience notes" : "体験ノート"}
+                </p>
+                <h2 className="mt-2 text-lg font-bold text-stone-950">
+                  {locale === "en" ? "Share after joining" : "参加後の経験を共有"}
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-stone-600">
+                  {locale === "en"
+                    ? "Turn a finished activity into a public post so other volunteers can understand the opportunity."
+                    : "参加した活動の感想を投稿し、他のユーザーが活動を知るきっかけにできます。"}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href={`/${locale}/experiences/new`}
+                    className="inline-flex rounded-lg bg-rose-600 px-4 py-2 text-sm font-semibold text-white hover:bg-rose-500"
+                  >
+                    {locale === "en" ? "Write a post" : "投稿する"}
+                  </Link>
+                  <Link
+                    href={`/${locale}/experiences`}
+                    className="inline-flex rounded-lg border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 hover:border-rose-300 hover:text-rose-700"
+                  >
+                    {locale === "en" ? "Browse posts" : "投稿を見る"}
+                  </Link>
+                </div>
+              </section>
+            )}
           </aside>
         </div>
       </div>
