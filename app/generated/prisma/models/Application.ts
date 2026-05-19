@@ -27,10 +27,12 @@ export type AggregateApplication = {
 }
 
 export type ApplicationAvgAggregateOutputType = {
+  waitlistPosition: number | null
   matchScore: number | null
 }
 
 export type ApplicationSumAggregateOutputType = {
+  waitlistPosition: number | null
   matchScore: number | null
 }
 
@@ -39,10 +41,25 @@ export type ApplicationMinAggregateOutputType = {
   opportunityId: string | null
   volunteerId: string | null
   status: $Enums.ApplicationStatus | null
+  confirmedTimeCommitment: boolean | null
+  experienceNote: string | null
   message: string | null
+  waitlistPosition: number | null
+  reviewedByEmployerId: string | null
+  participantGroup: string | null
+  participantRole: string | null
+  accessLevel: string | null
+  organizerNote: string | null
+  rejectionReason: string | null
+  attendanceStatus: string | null
+  checkedInAt: Date | null
+  checkinMethod: string | null
   matchScore: number | null
   aiRecommended: boolean | null
   reviewedAt: Date | null
+  withdrawnAt: Date | null
+  withdrawalReason: string | null
+  completedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,10 +69,25 @@ export type ApplicationMaxAggregateOutputType = {
   opportunityId: string | null
   volunteerId: string | null
   status: $Enums.ApplicationStatus | null
+  confirmedTimeCommitment: boolean | null
+  experienceNote: string | null
   message: string | null
+  waitlistPosition: number | null
+  reviewedByEmployerId: string | null
+  participantGroup: string | null
+  participantRole: string | null
+  accessLevel: string | null
+  organizerNote: string | null
+  rejectionReason: string | null
+  attendanceStatus: string | null
+  checkedInAt: Date | null
+  checkinMethod: string | null
   matchScore: number | null
   aiRecommended: boolean | null
   reviewedAt: Date | null
+  withdrawnAt: Date | null
+  withdrawalReason: string | null
+  completedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -65,10 +97,28 @@ export type ApplicationCountAggregateOutputType = {
   opportunityId: number
   volunteerId: number
   status: number
+  selectedTaskItems: number
+  confirmedTimeCommitment: number
+  skillTags: number
+  experienceNote: number
   message: number
+  questionAnswers: number
+  waitlistPosition: number
+  reviewedByEmployerId: number
+  participantGroup: number
+  participantRole: number
+  accessLevel: number
+  organizerNote: number
+  rejectionReason: number
+  attendanceStatus: number
+  checkedInAt: number
+  checkinMethod: number
   matchScore: number
   aiRecommended: number
   reviewedAt: number
+  withdrawnAt: number
+  withdrawalReason: number
+  completedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -76,10 +126,12 @@ export type ApplicationCountAggregateOutputType = {
 
 
 export type ApplicationAvgAggregateInputType = {
+  waitlistPosition?: true
   matchScore?: true
 }
 
 export type ApplicationSumAggregateInputType = {
+  waitlistPosition?: true
   matchScore?: true
 }
 
@@ -88,10 +140,25 @@ export type ApplicationMinAggregateInputType = {
   opportunityId?: true
   volunteerId?: true
   status?: true
+  confirmedTimeCommitment?: true
+  experienceNote?: true
   message?: true
+  waitlistPosition?: true
+  reviewedByEmployerId?: true
+  participantGroup?: true
+  participantRole?: true
+  accessLevel?: true
+  organizerNote?: true
+  rejectionReason?: true
+  attendanceStatus?: true
+  checkedInAt?: true
+  checkinMethod?: true
   matchScore?: true
   aiRecommended?: true
   reviewedAt?: true
+  withdrawnAt?: true
+  withdrawalReason?: true
+  completedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -101,10 +168,25 @@ export type ApplicationMaxAggregateInputType = {
   opportunityId?: true
   volunteerId?: true
   status?: true
+  confirmedTimeCommitment?: true
+  experienceNote?: true
   message?: true
+  waitlistPosition?: true
+  reviewedByEmployerId?: true
+  participantGroup?: true
+  participantRole?: true
+  accessLevel?: true
+  organizerNote?: true
+  rejectionReason?: true
+  attendanceStatus?: true
+  checkedInAt?: true
+  checkinMethod?: true
   matchScore?: true
   aiRecommended?: true
   reviewedAt?: true
+  withdrawnAt?: true
+  withdrawalReason?: true
+  completedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -114,10 +196,28 @@ export type ApplicationCountAggregateInputType = {
   opportunityId?: true
   volunteerId?: true
   status?: true
+  selectedTaskItems?: true
+  confirmedTimeCommitment?: true
+  skillTags?: true
+  experienceNote?: true
   message?: true
+  questionAnswers?: true
+  waitlistPosition?: true
+  reviewedByEmployerId?: true
+  participantGroup?: true
+  participantRole?: true
+  accessLevel?: true
+  organizerNote?: true
+  rejectionReason?: true
+  attendanceStatus?: true
+  checkedInAt?: true
+  checkinMethod?: true
   matchScore?: true
   aiRecommended?: true
   reviewedAt?: true
+  withdrawnAt?: true
+  withdrawalReason?: true
+  completedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -214,10 +314,28 @@ export type ApplicationGroupByOutputType = {
   opportunityId: string
   volunteerId: string
   status: $Enums.ApplicationStatus
+  selectedTaskItems: runtime.JsonValue
+  confirmedTimeCommitment: boolean
+  skillTags: string[]
+  experienceNote: string | null
   message: string | null
+  questionAnswers: runtime.JsonValue
+  waitlistPosition: number | null
+  reviewedByEmployerId: string | null
+  participantGroup: string | null
+  participantRole: string
+  accessLevel: string
+  organizerNote: string | null
+  rejectionReason: string | null
+  attendanceStatus: string
+  checkedInAt: Date | null
+  checkinMethod: string | null
   matchScore: number | null
   aiRecommended: boolean
   reviewedAt: Date | null
+  withdrawnAt: Date | null
+  withdrawalReason: string | null
+  completedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: ApplicationCountAggregateOutputType | null
@@ -250,15 +368,36 @@ export type ApplicationWhereInput = {
   opportunityId?: Prisma.StringFilter<"Application"> | string
   volunteerId?: Prisma.StringFilter<"Application"> | string
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonFilter<"Application">
+  confirmedTimeCommitment?: Prisma.BoolFilter<"Application"> | boolean
+  skillTags?: Prisma.StringNullableListFilter<"Application">
+  experienceNote?: Prisma.StringNullableFilter<"Application"> | string | null
   message?: Prisma.StringNullableFilter<"Application"> | string | null
+  questionAnswers?: Prisma.JsonFilter<"Application">
+  waitlistPosition?: Prisma.IntNullableFilter<"Application"> | number | null
+  reviewedByEmployerId?: Prisma.StringNullableFilter<"Application"> | string | null
+  participantGroup?: Prisma.StringNullableFilter<"Application"> | string | null
+  participantRole?: Prisma.StringFilter<"Application"> | string
+  accessLevel?: Prisma.StringFilter<"Application"> | string
+  organizerNote?: Prisma.StringNullableFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  attendanceStatus?: Prisma.StringFilter<"Application"> | string
+  checkedInAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  checkinMethod?: Prisma.StringNullableFilter<"Application"> | string | null
   matchScore?: Prisma.FloatNullableFilter<"Application"> | number | null
   aiRecommended?: Prisma.BoolFilter<"Application"> | boolean
   reviewedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  withdrawnAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  withdrawalReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Application"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Application"> | Date | string
   opportunity?: Prisma.XOR<Prisma.OpportunityScalarRelationFilter, Prisma.OpportunityWhereInput>
   volunteer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  reviewedByEmployer?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   booking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+  notifications?: Prisma.NotificationListRelationFilter
+  eventMessages?: Prisma.EventMessageListRelationFilter
 }
 
 export type ApplicationOrderByWithRelationInput = {
@@ -266,15 +405,36 @@ export type ApplicationOrderByWithRelationInput = {
   opportunityId?: Prisma.SortOrder
   volunteerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  selectedTaskItems?: Prisma.SortOrder
+  confirmedTimeCommitment?: Prisma.SortOrder
+  skillTags?: Prisma.SortOrder
+  experienceNote?: Prisma.SortOrderInput | Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
+  questionAnswers?: Prisma.SortOrder
+  waitlistPosition?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedByEmployerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  participantGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  participantRole?: Prisma.SortOrder
+  accessLevel?: Prisma.SortOrder
+  organizerNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  attendanceStatus?: Prisma.SortOrder
+  checkedInAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkinMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   matchScore?: Prisma.SortOrderInput | Prisma.SortOrder
   aiRecommended?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  withdrawnAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  withdrawalReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   opportunity?: Prisma.OpportunityOrderByWithRelationInput
   volunteer?: Prisma.UserOrderByWithRelationInput
+  reviewedByEmployer?: Prisma.OrganizationOrderByWithRelationInput
   booking?: Prisma.BookingOrderByWithRelationInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  eventMessages?: Prisma.EventMessageOrderByRelationAggregateInput
 }
 
 export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
@@ -286,15 +446,36 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   opportunityId?: Prisma.StringFilter<"Application"> | string
   volunteerId?: Prisma.StringFilter<"Application"> | string
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonFilter<"Application">
+  confirmedTimeCommitment?: Prisma.BoolFilter<"Application"> | boolean
+  skillTags?: Prisma.StringNullableListFilter<"Application">
+  experienceNote?: Prisma.StringNullableFilter<"Application"> | string | null
   message?: Prisma.StringNullableFilter<"Application"> | string | null
+  questionAnswers?: Prisma.JsonFilter<"Application">
+  waitlistPosition?: Prisma.IntNullableFilter<"Application"> | number | null
+  reviewedByEmployerId?: Prisma.StringNullableFilter<"Application"> | string | null
+  participantGroup?: Prisma.StringNullableFilter<"Application"> | string | null
+  participantRole?: Prisma.StringFilter<"Application"> | string
+  accessLevel?: Prisma.StringFilter<"Application"> | string
+  organizerNote?: Prisma.StringNullableFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  attendanceStatus?: Prisma.StringFilter<"Application"> | string
+  checkedInAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  checkinMethod?: Prisma.StringNullableFilter<"Application"> | string | null
   matchScore?: Prisma.FloatNullableFilter<"Application"> | number | null
   aiRecommended?: Prisma.BoolFilter<"Application"> | boolean
   reviewedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  withdrawnAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  withdrawalReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Application"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Application"> | Date | string
   opportunity?: Prisma.XOR<Prisma.OpportunityScalarRelationFilter, Prisma.OpportunityWhereInput>
   volunteer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  reviewedByEmployer?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   booking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+  notifications?: Prisma.NotificationListRelationFilter
+  eventMessages?: Prisma.EventMessageListRelationFilter
 }, "id" | "opportunityId_volunteerId">
 
 export type ApplicationOrderByWithAggregationInput = {
@@ -302,10 +483,28 @@ export type ApplicationOrderByWithAggregationInput = {
   opportunityId?: Prisma.SortOrder
   volunteerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  selectedTaskItems?: Prisma.SortOrder
+  confirmedTimeCommitment?: Prisma.SortOrder
+  skillTags?: Prisma.SortOrder
+  experienceNote?: Prisma.SortOrderInput | Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
+  questionAnswers?: Prisma.SortOrder
+  waitlistPosition?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedByEmployerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  participantGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  participantRole?: Prisma.SortOrder
+  accessLevel?: Prisma.SortOrder
+  organizerNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  attendanceStatus?: Prisma.SortOrder
+  checkedInAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkinMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   matchScore?: Prisma.SortOrderInput | Prisma.SortOrder
   aiRecommended?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  withdrawnAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  withdrawalReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ApplicationCountOrderByAggregateInput
@@ -323,10 +522,28 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   opportunityId?: Prisma.StringWithAggregatesFilter<"Application"> | string
   volunteerId?: Prisma.StringWithAggregatesFilter<"Application"> | string
   status?: Prisma.EnumApplicationStatusWithAggregatesFilter<"Application"> | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonWithAggregatesFilter<"Application">
+  confirmedTimeCommitment?: Prisma.BoolWithAggregatesFilter<"Application"> | boolean
+  skillTags?: Prisma.StringNullableListFilter<"Application">
+  experienceNote?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
   message?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  questionAnswers?: Prisma.JsonWithAggregatesFilter<"Application">
+  waitlistPosition?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
+  reviewedByEmployerId?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  participantGroup?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  participantRole?: Prisma.StringWithAggregatesFilter<"Application"> | string
+  accessLevel?: Prisma.StringWithAggregatesFilter<"Application"> | string
+  organizerNote?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  attendanceStatus?: Prisma.StringWithAggregatesFilter<"Application"> | string
+  checkedInAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Application"> | Date | string | null
+  checkinMethod?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
   matchScore?: Prisma.FloatNullableWithAggregatesFilter<"Application"> | number | null
   aiRecommended?: Prisma.BoolWithAggregatesFilter<"Application"> | boolean
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Application"> | Date | string | null
+  withdrawnAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Application"> | Date | string | null
+  withdrawalReason?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Application"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Application"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Application"> | Date | string
 }
@@ -334,15 +551,35 @@ export type ApplicationScalarWhereWithAggregatesInput = {
 export type ApplicationCreateInput = {
   id?: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   opportunity: Prisma.OpportunityCreateNestedOneWithoutApplicationsInput
   volunteer: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  reviewedByEmployer?: Prisma.OrganizationCreateNestedOneWithoutReviewedApplicationsInput
   booking?: Prisma.BookingCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateInput = {
@@ -350,27 +587,67 @@ export type ApplicationUncheckedCreateInput = {
   opportunityId: string
   volunteerId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   booking?: Prisma.BookingUncheckedCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   opportunity?: Prisma.OpportunityUpdateOneRequiredWithoutApplicationsNestedInput
   volunteer?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  reviewedByEmployer?: Prisma.OrganizationUpdateOneWithoutReviewedApplicationsNestedInput
   booking?: Prisma.BookingUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateInput = {
@@ -378,13 +655,33 @@ export type ApplicationUncheckedUpdateInput = {
   opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
   volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking?: Prisma.BookingUncheckedUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateManyInput = {
@@ -392,10 +689,28 @@ export type ApplicationCreateManyInput = {
   opportunityId: string
   volunteerId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -403,10 +718,27 @@ export type ApplicationCreateManyInput = {
 export type ApplicationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -416,10 +748,28 @@ export type ApplicationUncheckedUpdateManyInput = {
   opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
   volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,15 +794,34 @@ export type ApplicationCountOrderByAggregateInput = {
   opportunityId?: Prisma.SortOrder
   volunteerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  selectedTaskItems?: Prisma.SortOrder
+  confirmedTimeCommitment?: Prisma.SortOrder
+  skillTags?: Prisma.SortOrder
+  experienceNote?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  questionAnswers?: Prisma.SortOrder
+  waitlistPosition?: Prisma.SortOrder
+  reviewedByEmployerId?: Prisma.SortOrder
+  participantGroup?: Prisma.SortOrder
+  participantRole?: Prisma.SortOrder
+  accessLevel?: Prisma.SortOrder
+  organizerNote?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  attendanceStatus?: Prisma.SortOrder
+  checkedInAt?: Prisma.SortOrder
+  checkinMethod?: Prisma.SortOrder
   matchScore?: Prisma.SortOrder
   aiRecommended?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
+  withdrawnAt?: Prisma.SortOrder
+  withdrawalReason?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ApplicationAvgOrderByAggregateInput = {
+  waitlistPosition?: Prisma.SortOrder
   matchScore?: Prisma.SortOrder
 }
 
@@ -461,10 +830,25 @@ export type ApplicationMaxOrderByAggregateInput = {
   opportunityId?: Prisma.SortOrder
   volunteerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  confirmedTimeCommitment?: Prisma.SortOrder
+  experienceNote?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  waitlistPosition?: Prisma.SortOrder
+  reviewedByEmployerId?: Prisma.SortOrder
+  participantGroup?: Prisma.SortOrder
+  participantRole?: Prisma.SortOrder
+  accessLevel?: Prisma.SortOrder
+  organizerNote?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  attendanceStatus?: Prisma.SortOrder
+  checkedInAt?: Prisma.SortOrder
+  checkinMethod?: Prisma.SortOrder
   matchScore?: Prisma.SortOrder
   aiRecommended?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
+  withdrawnAt?: Prisma.SortOrder
+  withdrawalReason?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -474,16 +858,37 @@ export type ApplicationMinOrderByAggregateInput = {
   opportunityId?: Prisma.SortOrder
   volunteerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  confirmedTimeCommitment?: Prisma.SortOrder
+  experienceNote?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  waitlistPosition?: Prisma.SortOrder
+  reviewedByEmployerId?: Prisma.SortOrder
+  participantGroup?: Prisma.SortOrder
+  participantRole?: Prisma.SortOrder
+  accessLevel?: Prisma.SortOrder
+  organizerNote?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  attendanceStatus?: Prisma.SortOrder
+  checkedInAt?: Prisma.SortOrder
+  checkinMethod?: Prisma.SortOrder
   matchScore?: Prisma.SortOrder
   aiRecommended?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
+  withdrawnAt?: Prisma.SortOrder
+  withdrawalReason?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ApplicationSumOrderByAggregateInput = {
+  waitlistPosition?: Prisma.SortOrder
   matchScore?: Prisma.SortOrder
+}
+
+export type ApplicationNullableScalarRelationFilter = {
+  is?: Prisma.ApplicationWhereInput | null
+  isNot?: Prisma.ApplicationWhereInput | null
 }
 
 export type ApplicationScalarRelationFilter = {
@@ -533,6 +938,48 @@ export type ApplicationUncheckedUpdateManyWithoutVolunteerNestedInput = {
   deleteMany?: Prisma.ApplicationScalarWhereInput | Prisma.ApplicationScalarWhereInput[]
 }
 
+export type ApplicationCreateNestedManyWithoutReviewedByEmployerInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput> | Prisma.ApplicationCreateWithoutReviewedByEmployerInput[] | Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput[]
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput | Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput[]
+  createMany?: Prisma.ApplicationCreateManyReviewedByEmployerInputEnvelope
+  connect?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+}
+
+export type ApplicationUncheckedCreateNestedManyWithoutReviewedByEmployerInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput> | Prisma.ApplicationCreateWithoutReviewedByEmployerInput[] | Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput[]
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput | Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput[]
+  createMany?: Prisma.ApplicationCreateManyReviewedByEmployerInputEnvelope
+  connect?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+}
+
+export type ApplicationUpdateManyWithoutReviewedByEmployerNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput> | Prisma.ApplicationCreateWithoutReviewedByEmployerInput[] | Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput[]
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput | Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput[]
+  upsert?: Prisma.ApplicationUpsertWithWhereUniqueWithoutReviewedByEmployerInput | Prisma.ApplicationUpsertWithWhereUniqueWithoutReviewedByEmployerInput[]
+  createMany?: Prisma.ApplicationCreateManyReviewedByEmployerInputEnvelope
+  set?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  disconnect?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  delete?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  connect?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  update?: Prisma.ApplicationUpdateWithWhereUniqueWithoutReviewedByEmployerInput | Prisma.ApplicationUpdateWithWhereUniqueWithoutReviewedByEmployerInput[]
+  updateMany?: Prisma.ApplicationUpdateManyWithWhereWithoutReviewedByEmployerInput | Prisma.ApplicationUpdateManyWithWhereWithoutReviewedByEmployerInput[]
+  deleteMany?: Prisma.ApplicationScalarWhereInput | Prisma.ApplicationScalarWhereInput[]
+}
+
+export type ApplicationUncheckedUpdateManyWithoutReviewedByEmployerNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput> | Prisma.ApplicationCreateWithoutReviewedByEmployerInput[] | Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput[]
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput | Prisma.ApplicationCreateOrConnectWithoutReviewedByEmployerInput[]
+  upsert?: Prisma.ApplicationUpsertWithWhereUniqueWithoutReviewedByEmployerInput | Prisma.ApplicationUpsertWithWhereUniqueWithoutReviewedByEmployerInput[]
+  createMany?: Prisma.ApplicationCreateManyReviewedByEmployerInputEnvelope
+  set?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  disconnect?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  delete?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  connect?: Prisma.ApplicationWhereUniqueInput | Prisma.ApplicationWhereUniqueInput[]
+  update?: Prisma.ApplicationUpdateWithWhereUniqueWithoutReviewedByEmployerInput | Prisma.ApplicationUpdateWithWhereUniqueWithoutReviewedByEmployerInput[]
+  updateMany?: Prisma.ApplicationUpdateManyWithWhereWithoutReviewedByEmployerInput | Prisma.ApplicationUpdateManyWithWhereWithoutReviewedByEmployerInput[]
+  deleteMany?: Prisma.ApplicationScalarWhereInput | Prisma.ApplicationScalarWhereInput[]
+}
+
 export type ApplicationCreateNestedManyWithoutOpportunityInput = {
   create?: Prisma.XOR<Prisma.ApplicationCreateWithoutOpportunityInput, Prisma.ApplicationUncheckedCreateWithoutOpportunityInput> | Prisma.ApplicationCreateWithoutOpportunityInput[] | Prisma.ApplicationUncheckedCreateWithoutOpportunityInput[]
   connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutOpportunityInput | Prisma.ApplicationCreateOrConnectWithoutOpportunityInput[]
@@ -575,8 +1022,17 @@ export type ApplicationUncheckedUpdateManyWithoutOpportunityNestedInput = {
   deleteMany?: Prisma.ApplicationScalarWhereInput | Prisma.ApplicationScalarWhereInput[]
 }
 
+export type ApplicationCreateskillTagsInput = {
+  set: string[]
+}
+
 export type EnumApplicationStatusFieldUpdateOperationsInput = {
   set?: $Enums.ApplicationStatus
+}
+
+export type ApplicationUpdateskillTagsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type NullableFloatFieldUpdateOperationsInput = {
@@ -585,6 +1041,36 @@ export type NullableFloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type ApplicationCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutNotificationsInput, Prisma.ApplicationUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutNotificationsInput, Prisma.ApplicationUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.ApplicationUpsertWithoutNotificationsInput
+  disconnect?: Prisma.ApplicationWhereInput | boolean
+  delete?: Prisma.ApplicationWhereInput | boolean
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutNotificationsInput, Prisma.ApplicationUpdateWithoutNotificationsInput>, Prisma.ApplicationUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type ApplicationCreateNestedOneWithoutEventMessagesInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutEventMessagesInput, Prisma.ApplicationUncheckedCreateWithoutEventMessagesInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutEventMessagesInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneRequiredWithoutEventMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutEventMessagesInput, Prisma.ApplicationUncheckedCreateWithoutEventMessagesInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutEventMessagesInput
+  upsert?: Prisma.ApplicationUpsertWithoutEventMessagesInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutEventMessagesInput, Prisma.ApplicationUpdateWithoutEventMessagesInput>, Prisma.ApplicationUncheckedUpdateWithoutEventMessagesInput>
 }
 
 export type ApplicationCreateNestedOneWithoutBookingInput = {
@@ -604,27 +1090,67 @@ export type ApplicationUpdateOneRequiredWithoutBookingNestedInput = {
 export type ApplicationCreateWithoutVolunteerInput = {
   id?: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   opportunity: Prisma.OpportunityCreateNestedOneWithoutApplicationsInput
+  reviewedByEmployer?: Prisma.OrganizationCreateNestedOneWithoutReviewedApplicationsInput
   booking?: Prisma.BookingCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutVolunteerInput = {
   id?: string
   opportunityId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   booking?: Prisma.BookingUncheckedCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutVolunteerInput = {
@@ -661,38 +1187,188 @@ export type ApplicationScalarWhereInput = {
   opportunityId?: Prisma.StringFilter<"Application"> | string
   volunteerId?: Prisma.StringFilter<"Application"> | string
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonFilter<"Application">
+  confirmedTimeCommitment?: Prisma.BoolFilter<"Application"> | boolean
+  skillTags?: Prisma.StringNullableListFilter<"Application">
+  experienceNote?: Prisma.StringNullableFilter<"Application"> | string | null
   message?: Prisma.StringNullableFilter<"Application"> | string | null
+  questionAnswers?: Prisma.JsonFilter<"Application">
+  waitlistPosition?: Prisma.IntNullableFilter<"Application"> | number | null
+  reviewedByEmployerId?: Prisma.StringNullableFilter<"Application"> | string | null
+  participantGroup?: Prisma.StringNullableFilter<"Application"> | string | null
+  participantRole?: Prisma.StringFilter<"Application"> | string
+  accessLevel?: Prisma.StringFilter<"Application"> | string
+  organizerNote?: Prisma.StringNullableFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  attendanceStatus?: Prisma.StringFilter<"Application"> | string
+  checkedInAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  checkinMethod?: Prisma.StringNullableFilter<"Application"> | string | null
   matchScore?: Prisma.FloatNullableFilter<"Application"> | number | null
   aiRecommended?: Prisma.BoolFilter<"Application"> | boolean
   reviewedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  withdrawnAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  withdrawalReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Application"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Application"> | Date | string
+}
+
+export type ApplicationCreateWithoutReviewedByEmployerInput = {
+  id?: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  opportunity: Prisma.OpportunityCreateNestedOneWithoutApplicationsInput
+  volunteer: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  booking?: Prisma.BookingCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutReviewedByEmployerInput = {
+  id?: string
+  opportunityId: string
+  volunteerId: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  booking?: Prisma.BookingUncheckedCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutReviewedByEmployerInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput>
+}
+
+export type ApplicationCreateManyReviewedByEmployerInputEnvelope = {
+  data: Prisma.ApplicationCreateManyReviewedByEmployerInput | Prisma.ApplicationCreateManyReviewedByEmployerInput[]
+  skipDuplicates?: boolean
+}
+
+export type ApplicationUpsertWithWhereUniqueWithoutReviewedByEmployerInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedUpdateWithoutReviewedByEmployerInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedCreateWithoutReviewedByEmployerInput>
+}
+
+export type ApplicationUpdateWithWhereUniqueWithoutReviewedByEmployerInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutReviewedByEmployerInput, Prisma.ApplicationUncheckedUpdateWithoutReviewedByEmployerInput>
+}
+
+export type ApplicationUpdateManyWithWhereWithoutReviewedByEmployerInput = {
+  where: Prisma.ApplicationScalarWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateManyMutationInput, Prisma.ApplicationUncheckedUpdateManyWithoutReviewedByEmployerInput>
 }
 
 export type ApplicationCreateWithoutOpportunityInput = {
   id?: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   volunteer: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  reviewedByEmployer?: Prisma.OrganizationCreateNestedOneWithoutReviewedApplicationsInput
   booking?: Prisma.BookingCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutOpportunityInput = {
   id?: string
   volunteerId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   booking?: Prisma.BookingUncheckedCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutOpportunityInput = {
@@ -721,17 +1397,333 @@ export type ApplicationUpdateManyWithWhereWithoutOpportunityInput = {
   data: Prisma.XOR<Prisma.ApplicationUpdateManyMutationInput, Prisma.ApplicationUncheckedUpdateManyWithoutOpportunityInput>
 }
 
-export type ApplicationCreateWithoutBookingInput = {
+export type ApplicationCreateWithoutNotificationsInput = {
   id?: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   opportunity: Prisma.OpportunityCreateNestedOneWithoutApplicationsInput
   volunteer: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  reviewedByEmployer?: Prisma.OrganizationCreateNestedOneWithoutReviewedApplicationsInput
+  booking?: Prisma.BookingCreateNestedOneWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  opportunityId: string
+  volunteerId: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  booking?: Prisma.BookingUncheckedCreateNestedOneWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutNotificationsInput, Prisma.ApplicationUncheckedCreateWithoutNotificationsInput>
+}
+
+export type ApplicationUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutNotificationsInput, Prisma.ApplicationUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutNotificationsInput, Prisma.ApplicationUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutNotificationsInput, Prisma.ApplicationUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type ApplicationUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  opportunity?: Prisma.OpportunityUpdateOneRequiredWithoutApplicationsNestedInput
+  volunteer?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  reviewedByEmployer?: Prisma.OrganizationUpdateOneWithoutReviewedApplicationsNestedInput
+  booking?: Prisma.BookingUpdateOneWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
+  volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking?: Prisma.BookingUncheckedUpdateOneWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutEventMessagesInput = {
+  id?: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  opportunity: Prisma.OpportunityCreateNestedOneWithoutApplicationsInput
+  volunteer: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  reviewedByEmployer?: Prisma.OrganizationCreateNestedOneWithoutReviewedApplicationsInput
+  booking?: Prisma.BookingCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutEventMessagesInput = {
+  id?: string
+  opportunityId: string
+  volunteerId: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  booking?: Prisma.BookingUncheckedCreateNestedOneWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutEventMessagesInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutEventMessagesInput, Prisma.ApplicationUncheckedCreateWithoutEventMessagesInput>
+}
+
+export type ApplicationUpsertWithoutEventMessagesInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutEventMessagesInput, Prisma.ApplicationUncheckedUpdateWithoutEventMessagesInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutEventMessagesInput, Prisma.ApplicationUncheckedCreateWithoutEventMessagesInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutEventMessagesInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutEventMessagesInput, Prisma.ApplicationUncheckedUpdateWithoutEventMessagesInput>
+}
+
+export type ApplicationUpdateWithoutEventMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  opportunity?: Prisma.OpportunityUpdateOneRequiredWithoutApplicationsNestedInput
+  volunteer?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  reviewedByEmployer?: Prisma.OrganizationUpdateOneWithoutReviewedApplicationsNestedInput
+  booking?: Prisma.BookingUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutEventMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
+  volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking?: Prisma.BookingUncheckedUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutBookingInput = {
+  id?: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  opportunity: Prisma.OpportunityCreateNestedOneWithoutApplicationsInput
+  volunteer: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  reviewedByEmployer?: Prisma.OrganizationCreateNestedOneWithoutReviewedApplicationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutBookingInput = {
@@ -739,12 +1731,32 @@ export type ApplicationUncheckedCreateWithoutBookingInput = {
   opportunityId: string
   volunteerId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  eventMessages?: Prisma.EventMessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutBookingInput = {
@@ -766,14 +1778,34 @@ export type ApplicationUpdateToOneWithWhereWithoutBookingInput = {
 export type ApplicationUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   opportunity?: Prisma.OpportunityUpdateOneRequiredWithoutApplicationsNestedInput
   volunteer?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  reviewedByEmployer?: Prisma.OrganizationUpdateOneWithoutReviewedApplicationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutBookingInput = {
@@ -781,22 +1813,60 @@ export type ApplicationUncheckedUpdateWithoutBookingInput = {
   opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
   volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateManyVolunteerInput = {
   id?: string
   opportunityId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -804,37 +1874,221 @@ export type ApplicationCreateManyVolunteerInput = {
 export type ApplicationUpdateWithoutVolunteerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   opportunity?: Prisma.OpportunityUpdateOneRequiredWithoutApplicationsNestedInput
+  reviewedByEmployer?: Prisma.OrganizationUpdateOneWithoutReviewedApplicationsNestedInput
   booking?: Prisma.BookingUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutVolunteerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking?: Prisma.BookingUncheckedUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateManyWithoutVolunteerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ApplicationCreateManyReviewedByEmployerInput = {
+  id?: string
+  opportunityId: string
+  volunteerId: string
+  status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
+  message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
+  matchScore?: number | null
+  aiRecommended?: boolean
+  reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ApplicationUpdateWithoutReviewedByEmployerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  opportunity?: Prisma.OpportunityUpdateOneRequiredWithoutApplicationsNestedInput
+  volunteer?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  booking?: Prisma.BookingUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutReviewedByEmployerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
+  volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking?: Prisma.BookingUncheckedUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateManyWithoutReviewedByEmployerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  opportunityId?: Prisma.StringFieldUpdateOperationsInput | string
+  volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -843,10 +2097,28 @@ export type ApplicationCreateManyOpportunityInput = {
   id?: string
   volunteerId: string
   status?: $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: boolean
+  skillTags?: Prisma.ApplicationCreateskillTagsInput | string[]
+  experienceNote?: string | null
   message?: string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: number | null
+  reviewedByEmployerId?: string | null
+  participantGroup?: string | null
+  participantRole?: string
+  accessLevel?: string
+  organizerNote?: string | null
+  rejectionReason?: string | null
+  attendanceStatus?: string
+  checkedInAt?: Date | string | null
+  checkinMethod?: string | null
   matchScore?: number | null
   aiRecommended?: boolean
   reviewedAt?: Date | string | null
+  withdrawnAt?: Date | string | null
+  withdrawalReason?: string | null
+  completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -854,41 +2126,137 @@ export type ApplicationCreateManyOpportunityInput = {
 export type ApplicationUpdateWithoutOpportunityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   volunteer?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  reviewedByEmployer?: Prisma.OrganizationUpdateOneWithoutReviewedApplicationsNestedInput
   booking?: Prisma.BookingUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutOpportunityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking?: Prisma.BookingUncheckedUpdateOneWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  eventMessages?: Prisma.EventMessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateManyWithoutOpportunityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   volunteerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  selectedTaskItems?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confirmedTimeCommitment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  skillTags?: Prisma.ApplicationUpdateskillTagsInput | string[]
+  experienceNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  questionAnswers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  waitlistPosition?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedByEmployerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantRole?: Prisma.StringFieldUpdateOperationsInput | string
+  accessLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  organizerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendanceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  checkedInAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  checkinMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiRecommended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawnAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  withdrawalReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type ApplicationCountOutputType
+ */
+
+export type ApplicationCountOutputType = {
+  notifications: number
+  eventMessages: number
+}
+
+export type ApplicationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  notifications?: boolean | ApplicationCountOutputTypeCountNotificationsArgs
+  eventMessages?: boolean | ApplicationCountOutputTypeCountEventMessagesArgs
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ApplicationCountOutputType
+   */
+  select?: Prisma.ApplicationCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountEventMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventMessageWhereInput
+}
 
 
 export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -896,15 +2264,37 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   opportunityId?: boolean
   volunteerId?: boolean
   status?: boolean
+  selectedTaskItems?: boolean
+  confirmedTimeCommitment?: boolean
+  skillTags?: boolean
+  experienceNote?: boolean
   message?: boolean
+  questionAnswers?: boolean
+  waitlistPosition?: boolean
+  reviewedByEmployerId?: boolean
+  participantGroup?: boolean
+  participantRole?: boolean
+  accessLevel?: boolean
+  organizerNote?: boolean
+  rejectionReason?: boolean
+  attendanceStatus?: boolean
+  checkedInAt?: boolean
+  checkinMethod?: boolean
   matchScore?: boolean
   aiRecommended?: boolean
   reviewedAt?: boolean
+  withdrawnAt?: boolean
+  withdrawalReason?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   opportunity?: boolean | Prisma.OpportunityDefaultArgs<ExtArgs>
   volunteer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewedByEmployer?: boolean | Prisma.Application$reviewedByEmployerArgs<ExtArgs>
   booking?: boolean | Prisma.Application$bookingArgs<ExtArgs>
+  notifications?: boolean | Prisma.Application$notificationsArgs<ExtArgs>
+  eventMessages?: boolean | Prisma.Application$eventMessagesArgs<ExtArgs>
+  _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
 export type ApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -912,14 +2302,33 @@ export type ApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   opportunityId?: boolean
   volunteerId?: boolean
   status?: boolean
+  selectedTaskItems?: boolean
+  confirmedTimeCommitment?: boolean
+  skillTags?: boolean
+  experienceNote?: boolean
   message?: boolean
+  questionAnswers?: boolean
+  waitlistPosition?: boolean
+  reviewedByEmployerId?: boolean
+  participantGroup?: boolean
+  participantRole?: boolean
+  accessLevel?: boolean
+  organizerNote?: boolean
+  rejectionReason?: boolean
+  attendanceStatus?: boolean
+  checkedInAt?: boolean
+  checkinMethod?: boolean
   matchScore?: boolean
   aiRecommended?: boolean
   reviewedAt?: boolean
+  withdrawnAt?: boolean
+  withdrawalReason?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   opportunity?: boolean | Prisma.OpportunityDefaultArgs<ExtArgs>
   volunteer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewedByEmployer?: boolean | Prisma.Application$reviewedByEmployerArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
 export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -927,14 +2336,33 @@ export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   opportunityId?: boolean
   volunteerId?: boolean
   status?: boolean
+  selectedTaskItems?: boolean
+  confirmedTimeCommitment?: boolean
+  skillTags?: boolean
+  experienceNote?: boolean
   message?: boolean
+  questionAnswers?: boolean
+  waitlistPosition?: boolean
+  reviewedByEmployerId?: boolean
+  participantGroup?: boolean
+  participantRole?: boolean
+  accessLevel?: boolean
+  organizerNote?: boolean
+  rejectionReason?: boolean
+  attendanceStatus?: boolean
+  checkedInAt?: boolean
+  checkinMethod?: boolean
   matchScore?: boolean
   aiRecommended?: boolean
   reviewedAt?: boolean
+  withdrawnAt?: boolean
+  withdrawalReason?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   opportunity?: boolean | Prisma.OpportunityDefaultArgs<ExtArgs>
   volunteer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewedByEmployer?: boolean | Prisma.Application$reviewedByEmployerArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
 export type ApplicationSelectScalar = {
@@ -942,27 +2370,51 @@ export type ApplicationSelectScalar = {
   opportunityId?: boolean
   volunteerId?: boolean
   status?: boolean
+  selectedTaskItems?: boolean
+  confirmedTimeCommitment?: boolean
+  skillTags?: boolean
+  experienceNote?: boolean
   message?: boolean
+  questionAnswers?: boolean
+  waitlistPosition?: boolean
+  reviewedByEmployerId?: boolean
+  participantGroup?: boolean
+  participantRole?: boolean
+  accessLevel?: boolean
+  organizerNote?: boolean
+  rejectionReason?: boolean
+  attendanceStatus?: boolean
+  checkedInAt?: boolean
+  checkinMethod?: boolean
   matchScore?: boolean
   aiRecommended?: boolean
   reviewedAt?: boolean
+  withdrawnAt?: boolean
+  withdrawalReason?: boolean
+  completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "opportunityId" | "volunteerId" | "status" | "message" | "matchScore" | "aiRecommended" | "reviewedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["application"]>
+export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "opportunityId" | "volunteerId" | "status" | "selectedTaskItems" | "confirmedTimeCommitment" | "skillTags" | "experienceNote" | "message" | "questionAnswers" | "waitlistPosition" | "reviewedByEmployerId" | "participantGroup" | "participantRole" | "accessLevel" | "organizerNote" | "rejectionReason" | "attendanceStatus" | "checkedInAt" | "checkinMethod" | "matchScore" | "aiRecommended" | "reviewedAt" | "withdrawnAt" | "withdrawalReason" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["application"]>
 export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   opportunity?: boolean | Prisma.OpportunityDefaultArgs<ExtArgs>
   volunteer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewedByEmployer?: boolean | Prisma.Application$reviewedByEmployerArgs<ExtArgs>
   booking?: boolean | Prisma.Application$bookingArgs<ExtArgs>
+  notifications?: boolean | Prisma.Application$notificationsArgs<ExtArgs>
+  eventMessages?: boolean | Prisma.Application$eventMessagesArgs<ExtArgs>
+  _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ApplicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   opportunity?: boolean | Prisma.OpportunityDefaultArgs<ExtArgs>
   volunteer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewedByEmployer?: boolean | Prisma.Application$reviewedByEmployerArgs<ExtArgs>
 }
 export type ApplicationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   opportunity?: boolean | Prisma.OpportunityDefaultArgs<ExtArgs>
   volunteer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewedByEmployer?: boolean | Prisma.Application$reviewedByEmployerArgs<ExtArgs>
 }
 
 export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -970,17 +2422,38 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     opportunity: Prisma.$OpportunityPayload<ExtArgs>
     volunteer: Prisma.$UserPayload<ExtArgs>
+    reviewedByEmployer: Prisma.$OrganizationPayload<ExtArgs> | null
     booking: Prisma.$BookingPayload<ExtArgs> | null
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    eventMessages: Prisma.$EventMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     opportunityId: string
     volunteerId: string
     status: $Enums.ApplicationStatus
+    selectedTaskItems: runtime.JsonValue
+    confirmedTimeCommitment: boolean
+    skillTags: string[]
+    experienceNote: string | null
     message: string | null
+    questionAnswers: runtime.JsonValue
+    waitlistPosition: number | null
+    reviewedByEmployerId: string | null
+    participantGroup: string | null
+    participantRole: string
+    accessLevel: string
+    organizerNote: string | null
+    rejectionReason: string | null
+    attendanceStatus: string
+    checkedInAt: Date | null
+    checkinMethod: string | null
     matchScore: number | null
     aiRecommended: boolean
     reviewedAt: Date | null
+    withdrawnAt: Date | null
+    withdrawalReason: string | null
+    completedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["application"]>
@@ -1379,7 +2852,10 @@ export interface Prisma__ApplicationClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   opportunity<T extends Prisma.OpportunityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpportunityDefaultArgs<ExtArgs>>): Prisma.Prisma__OpportunityClient<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   volunteer<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reviewedByEmployer<T extends Prisma.Application$reviewedByEmployerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$reviewedByEmployerArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   booking<T extends Prisma.Application$bookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$bookingArgs<ExtArgs>>): Prisma.Prisma__BookingClient<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  notifications<T extends Prisma.Application$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventMessages<T extends Prisma.Application$eventMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$eventMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1413,10 +2889,28 @@ export interface ApplicationFieldRefs {
   readonly opportunityId: Prisma.FieldRef<"Application", 'String'>
   readonly volunteerId: Prisma.FieldRef<"Application", 'String'>
   readonly status: Prisma.FieldRef<"Application", 'ApplicationStatus'>
+  readonly selectedTaskItems: Prisma.FieldRef<"Application", 'Json'>
+  readonly confirmedTimeCommitment: Prisma.FieldRef<"Application", 'Boolean'>
+  readonly skillTags: Prisma.FieldRef<"Application", 'String[]'>
+  readonly experienceNote: Prisma.FieldRef<"Application", 'String'>
   readonly message: Prisma.FieldRef<"Application", 'String'>
+  readonly questionAnswers: Prisma.FieldRef<"Application", 'Json'>
+  readonly waitlistPosition: Prisma.FieldRef<"Application", 'Int'>
+  readonly reviewedByEmployerId: Prisma.FieldRef<"Application", 'String'>
+  readonly participantGroup: Prisma.FieldRef<"Application", 'String'>
+  readonly participantRole: Prisma.FieldRef<"Application", 'String'>
+  readonly accessLevel: Prisma.FieldRef<"Application", 'String'>
+  readonly organizerNote: Prisma.FieldRef<"Application", 'String'>
+  readonly rejectionReason: Prisma.FieldRef<"Application", 'String'>
+  readonly attendanceStatus: Prisma.FieldRef<"Application", 'String'>
+  readonly checkedInAt: Prisma.FieldRef<"Application", 'DateTime'>
+  readonly checkinMethod: Prisma.FieldRef<"Application", 'String'>
   readonly matchScore: Prisma.FieldRef<"Application", 'Float'>
   readonly aiRecommended: Prisma.FieldRef<"Application", 'Boolean'>
   readonly reviewedAt: Prisma.FieldRef<"Application", 'DateTime'>
+  readonly withdrawnAt: Prisma.FieldRef<"Application", 'DateTime'>
+  readonly withdrawalReason: Prisma.FieldRef<"Application", 'String'>
+  readonly completedAt: Prisma.FieldRef<"Application", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Application", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Application", 'DateTime'>
 }
@@ -1820,6 +3314,25 @@ export type ApplicationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Application.reviewedByEmployer
+ */
+export type Application$reviewedByEmployerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Organization
+   */
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Organization
+   */
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
+}
+
+/**
  * Application.booking
  */
 export type Application$bookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1836,6 +3349,54 @@ export type Application$bookingArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.BookingInclude<ExtArgs> | null
   where?: Prisma.BookingWhereInput
+}
+
+/**
+ * Application.notifications
+ */
+export type Application$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * Application.eventMessages
+ */
+export type Application$eventMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventMessage
+   */
+  select?: Prisma.EventMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventMessage
+   */
+  omit?: Prisma.EventMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventMessageInclude<ExtArgs> | null
+  where?: Prisma.EventMessageWhereInput
+  orderBy?: Prisma.EventMessageOrderByWithRelationInput | Prisma.EventMessageOrderByWithRelationInput[]
+  cursor?: Prisma.EventMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventMessageScalarFieldEnum | Prisma.EventMessageScalarFieldEnum[]
 }
 
 /**

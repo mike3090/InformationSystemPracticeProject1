@@ -314,6 +314,11 @@
     "requesterSignInIntro": "ボランティア募集を投稿・管理するための入口です。",
     "loginTab": "ログイン",
     "registerTab": "登録",
+    "accountTypeLabel": "作成するアカウントの種類",
+    "volunteerAccountType": "ボランティア",
+    "volunteerAccountTypeDescription": "募集を探して応募します。",
+    "requesterAccountType": "依頼者",
+    "requesterAccountTypeDescription": "募集を投稿し、応募者を管理します。",
     "nameLabel": "名前",
     "namePlaceholder": "あなたの名前",
     "emailLabel": "メールアドレス",
@@ -335,7 +340,7 @@
     "setupTitle": "プロフィール設定",
     "editTitle": "プロフィール編集",
     "volunteerSetupIntro": "興味のある活動、地域、参加しやすい時間帯を設定します。",
-    "requesterSetupIntro": "ボランティアに表示される依頼者・団体情報を設定します。",
+    "requesterSetupIntro": "ボランティアに表示される主催者プロフィールを設定します。誰が募集しているか、どのような環境かを伝えます。",
     "volunteerEditIntro": "おすすめや応募に使うボランティア情報を更新できます。",
     "requesterEditIntro": "ボランティアが安心して応募できるよう、団体情報や場所を更新できます。",
     "savedMessage": "プロフィールを保存しました。",
@@ -367,8 +372,46 @@
       "reminderSameDay": "当日朝のリマインダー",
       "organizationName": "団体名",
       "organizationType": "団体タイプ",
+      "nameKana": "名称ふりがな",
+      "nameEn": "英語名",
+      "representativeName": "代表者名",
+      "purpose": "活動目的",
+      "activityAreas": "主な活動分野",
+      "activityRegions": "主な活動地域",
+      "publicEmail": "公開メールアドレス",
+      "publicPhone": "公開電話番号",
+      "contactFormUrl": "問い合わせフォームURL",
       "description": "説明",
       "website": "Webサイト",
+      "snsLinks": "公式サイト・SNSリンク",
+      "founded": "設立年月",
+      "recruitmentStatus": "現在の募集状態",
+      "activitySpaceSize": "活動スペースの規模",
+      "profileImageUrl": "プロフィール画像URL",
+      "workspaceImageUrls": "活動場所画像URL",
+      "hasWaterDispenser": "無料給水設備あり",
+      "hasRestRoom": "静かな休憩室あり",
+      "hasAirConditioning": "空調あり",
+      "certificationStatus": "認証ステータス",
+      "certificationStatusPrivate": "このステータスはプラットフォーム審査で管理され、承認まで公開されません。",
+      "certificationSource": "認証元",
+      "managerPhone": "責任者携帯番号",
+      "managerLegalName": "責任者の実名",
+      "identityDocumentNote": "本人確認書類メモ",
+      "managerAddress": "責任者住所",
+      "isLocationPublic": "団体所在地を公開する",
+      "contactPersonName": "連絡担当者名",
+      "contactPersonRole": "連絡担当者の役割",
+      "contactPersonPhone": "連絡担当者電話番号",
+      "contactPersonEmail": "連絡担当者メール",
+      "antiSocialForcesConfirmed": "反社会的勢力と関係がないことを確認します。",
+      "termsAccepted": "利用規約、個人情報の取扱い、活動責任ポリシーに同意します。",
+      "legalEntityType": "法人格タイプ",
+      "corporateNumber": "法人番号",
+      "legalName": "法人正式名称",
+      "legalAddress": "法人所在地",
+      "registrationDocumentUrl": "登記証明・法人証明URL",
+      "bylawsUrl": "定款・規約URL",
       "address": "住所"
     },
     "placeholders": {
@@ -376,7 +419,13 @@
       "interests": "園芸, 料理, クラフト",
       "skills": "教育, 翻訳, 修理",
       "languages": "日本語, 英語",
-      "preferredTaskTypes": "屋外作業, イベント補助"
+      "preferredTaskTypes": "屋外作業, イベント補助",
+      "activityAreas": "環境, 教育, 福祉, 子ども支援",
+      "activityRegions": "京都市全域, 左京区, オンライン",
+      "snsLinks": "https://example.org, Instagram, X",
+      "founded": "YYYY-MM",
+      "activitySpaceSize": "例: 8人程度の小部屋, 屋外庭園, 体育館",
+      "workspaceImageUrls": "画像URLをカンマ区切りで入力"
     },
     "environment": {
       "either": "どちらでもよい",
@@ -386,10 +435,47 @@
     },
     "organizationTypes": {
       "individual": "個人",
+      "voluntaryGroup": "任意団体",
       "company": "会社・小規模事業者",
       "npo": "NPO",
+      "generalAssociation": "一般社団法人",
+      "corporation": "株式会社",
+      "school": "学校",
       "community": "地域団体",
       "municipal": "自治体"
+    },
+    "requesterSections": {
+      "public": {
+        "eyebrow": "公開情報",
+        "title": "ボランティア向け公開プロフィール",
+        "description": "活動の主催者、目的、連絡方法が分かるようにし、応募前の安心感につなげます。"
+      },
+      "review": {
+        "eyebrow": "非公開",
+        "title": "責任者情報",
+        "description": "このセクションは非公開です。審査、緊急連絡、安全確認のために使用し、初期状態ではボランティアには公開しません。"
+      },
+      "certification": {
+        "eyebrow": "認証",
+        "title": "法人・団体認証情報",
+        "description": "組織タイプが団体・法人の場合のみ表示されます。公式情報や提出資料と照合できる情報を登録します。"
+      }
+    },
+    "recruitmentStatus": {
+      "recruiting": "募集中",
+      "paused": "募集停止中",
+      "internalOnly": "内部募集のみ"
+    },
+    "legalEntityTypes": {
+      "notApplicable": "該当なし",
+      "other": "その他の法人"
+    },
+    "certificationStatus": {
+      "uncertified": "未認証",
+      "underReview": "審査中",
+      "certified": "認証済み",
+      "rejected": "却下",
+      "changesRequested": "修正依頼"
     }
   },
   "common": {

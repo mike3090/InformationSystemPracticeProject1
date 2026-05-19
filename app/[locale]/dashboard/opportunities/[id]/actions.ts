@@ -128,6 +128,88 @@ export async function updateApplicationReview(
   };
 }
 
+export async function bulkUpdateApplicationReview(formData: FormData) {
+  const session = await auth();
+  const locale = String(formData.get("locale") ?? "ja");
+  const opportunityId = String(formData.get("opportunityId") ?? "");
+  const nextStatus = String(formData.get("nextStatus") ?? "") as ReviewStatus;
+  const applicationIds = formData
+    .getAll("applicationIds")
+    .map((value) => String(value))
+    .filter(Boolean);
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  if (!opportunityId || !reviewStatuses.has(nextStatus) || applicationIds.length === 0) {
+    revalidatePath(`/${locale}/dashboard/opportunities/${opportunityId}`);
+    return;
+  }
+
+  const ownedOpportunity = await prisma.opportunity.findFirst({
+    where: {
+      id: opportunityId,
+      requesterId: session.user.id,
+    },
+    select: { id: true },
+  });
+
+  if (!ownedOpportunity) {
+    throw new Error("You can only review applications for your own opportunities.");
+  }
+
+  for (const applicationId of applicationIds) {
+    await prisma.$executeRaw`
+      UPDATE "Application"
+      SET "status" = ${nextStatus}::"ApplicationStatus",
+          "reviewedAt" = NOW(),
+          "updatedAt" = NOW(),
+          "waitlistPosition" = CASE
+            WHEN ${nextStatus} = 'WAITLISTED' THEN COALESCE(
+              "waitlistPosition",
+              (
+                SELECT COUNT(*)::int + 1
+                FROM "Application"
+                WHERE "opportunityId" = ${opportunityId}
+                  AND "status" = 'WAITLISTED'::"ApplicationStatus"
+                  AND "id" <> ${applicationId}
+              )
+            )
+            ELSE NULL
+          END
+      WHERE "id" = ${applicationId}
+        AND "opportunityId" = ${opportunityId}
+    `;
+
+    if (nextStatus === "ACCEPTED") {
+      await prisma.$executeRaw`
+        INSERT INTO "Booking" (
+          "id",
+          "applicationId",
+          "confirmedAt"
+        )
+        VALUES (
+          ${randomUUID()},
+          ${applicationId},
+          NOW()
+        )
+        ON CONFLICT ("applicationId") DO UPDATE
+        SET "confirmedAt" = EXCLUDED."confirmedAt"
+      `;
+      await sendConfirmationNotification(applicationId, locale);
+    } else {
+      await prisma.$executeRaw`
+        DELETE FROM "Booking"
+        WHERE "applicationId" = ${applicationId}
+      `;
+    }
+  }
+
+  revalidatePath(`/${locale}/dashboard`);
+  revalidatePath(`/${locale}/dashboard/opportunities/${opportunityId}`);
+}
+
 export async function createOrganizerUpdate(
   _prevState: ReviewActionState,
   formData: FormData,
@@ -286,6 +368,75 @@ export async function replyToVolunteerMessage(
   };
 }
 
+export async function updateParticipantManagement(
+  _prevState: ReviewActionState,
+  formData: FormData,
+): Promise<ReviewActionState> {
+  const session = await auth();
+  const locale = String(formData.get("locale") ?? "ja");
+  const opportunityId = String(formData.get("opportunityId") ?? "");
+  const applicationId = String(formData.get("applicationId") ?? "");
+  const participantGroup = String(formData.get("participantGroup") ?? "").trim();
+  const participantRole = normalizeChoice(
+    formData.get("participantRole"),
+    ["MEMBER", "LEADER", "SUPPORT", "OBSERVER"],
+    "MEMBER",
+  );
+  const accessLevel = normalizeChoice(
+    formData.get("accessLevel"),
+    ["STANDARD", "SENSITIVE", "ONSITE_ONLY"],
+    "STANDARD",
+  );
+  const attendanceStatus = normalizeChoice(
+    formData.get("attendanceStatus"),
+    ["UNKNOWN", "ATTENDED", "NO_SHOW", "EXCUSED"],
+    "UNKNOWN",
+  );
+  const organizerNote = String(formData.get("organizerNote") ?? "").trim();
+
+  if (!session?.user?.id) {
+    return reviewError(locale, "Please sign in before managing participants.", "参加者管理にはログインしてください。");
+  }
+
+  if (!opportunityId || !applicationId || organizerNote.length > 1000) {
+    return reviewError(locale, "Participant management details were incomplete.", "参加者管理の内容が不完全です。");
+  }
+
+  const rows = await prisma.$queryRaw<{ id: string }[]>`
+    SELECT a."id"
+    FROM "Application" a
+    INNER JOIN "Opportunity" o ON o."id" = a."opportunityId"
+    WHERE a."id" = ${applicationId}
+      AND a."opportunityId" = ${opportunityId}
+      AND o."requesterId" = ${session.user.id}
+    LIMIT 1
+  `;
+
+  if (!rows[0]) {
+    return reviewError(locale, "You can only manage participants for your own opportunity.", "自分が投稿した募集の参加者のみ管理できます。");
+  }
+
+  await prisma.$executeRaw`
+    UPDATE "Application"
+    SET "participantGroup" = ${participantGroup || null},
+        "participantRole" = ${participantRole},
+        "accessLevel" = ${accessLevel},
+        "attendanceStatus" = ${attendanceStatus},
+        "organizerNote" = ${organizerNote || null},
+        "updatedAt" = NOW()
+    WHERE "id" = ${applicationId}
+      AND "opportunityId" = ${opportunityId}
+  `;
+
+  revalidatePath(`/${locale}/dashboard/opportunities/${opportunityId}`);
+  revalidatePath(`/${locale}/dashboard`);
+
+  return {
+    status: "success",
+    message: locale === "en" ? "Participant details saved." : "参加者管理情報を保存しました。",
+  };
+}
+
 async function sendConfirmationNotification(applicationId: string, locale: string) {
   const rows = await prisma.$queryRaw<
     {
@@ -355,6 +506,11 @@ function reviewError(locale: string, en: string, ja: string): ReviewActionState 
     status: "error",
     message: locale === "en" ? en : ja,
   };
+}
+
+function normalizeChoice(value: FormDataEntryValue | null, allowed: string[], fallback: string) {
+  const raw = String(value ?? "");
+  return allowed.includes(raw) ? raw : fallback;
 }
 
 function selectedTaskLabel(value: unknown) {

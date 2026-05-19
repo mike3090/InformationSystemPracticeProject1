@@ -27,9 +27,17 @@ export type AggregateVolunteerProfile = {
 export type VolunteerProfileMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  displayName: string | null
+  email: string | null
+  phone: string | null
   bio: string | null
   availability: string | null
   preferredEnvironmentStyle: string | null
+  emailNotificationsEnabled: boolean | null
+  inAppNotificationsEnabled: boolean | null
+  reminder3DaysEnabled: boolean | null
+  reminder1DayEnabled: boolean | null
+  reminderSameDayEnabled: boolean | null
   profileCompleted: boolean | null
   prefecture: string | null
   city: string | null
@@ -40,9 +48,17 @@ export type VolunteerProfileMinAggregateOutputType = {
 export type VolunteerProfileMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  displayName: string | null
+  email: string | null
+  phone: string | null
   bio: string | null
   availability: string | null
   preferredEnvironmentStyle: string | null
+  emailNotificationsEnabled: boolean | null
+  inAppNotificationsEnabled: boolean | null
+  reminder3DaysEnabled: boolean | null
+  reminder1DayEnabled: boolean | null
+  reminderSameDayEnabled: boolean | null
   profileCompleted: boolean | null
   prefecture: string | null
   city: string | null
@@ -53,13 +69,22 @@ export type VolunteerProfileMaxAggregateOutputType = {
 export type VolunteerProfileCountAggregateOutputType = {
   id: number
   userId: number
+  displayName: number
+  email: number
+  phone: number
   bio: number
   skills: number
   interests: number
   languages: number
   availability: number
+  availabilitySlots: number
   preferredTaskTypes: number
   preferredEnvironmentStyle: number
+  emailNotificationsEnabled: number
+  inAppNotificationsEnabled: number
+  reminder3DaysEnabled: number
+  reminder1DayEnabled: number
+  reminderSameDayEnabled: number
   profileCompleted: number
   prefecture: number
   city: number
@@ -72,9 +97,17 @@ export type VolunteerProfileCountAggregateOutputType = {
 export type VolunteerProfileMinAggregateInputType = {
   id?: true
   userId?: true
+  displayName?: true
+  email?: true
+  phone?: true
   bio?: true
   availability?: true
   preferredEnvironmentStyle?: true
+  emailNotificationsEnabled?: true
+  inAppNotificationsEnabled?: true
+  reminder3DaysEnabled?: true
+  reminder1DayEnabled?: true
+  reminderSameDayEnabled?: true
   profileCompleted?: true
   prefecture?: true
   city?: true
@@ -85,9 +118,17 @@ export type VolunteerProfileMinAggregateInputType = {
 export type VolunteerProfileMaxAggregateInputType = {
   id?: true
   userId?: true
+  displayName?: true
+  email?: true
+  phone?: true
   bio?: true
   availability?: true
   preferredEnvironmentStyle?: true
+  emailNotificationsEnabled?: true
+  inAppNotificationsEnabled?: true
+  reminder3DaysEnabled?: true
+  reminder1DayEnabled?: true
+  reminderSameDayEnabled?: true
   profileCompleted?: true
   prefecture?: true
   city?: true
@@ -98,13 +139,22 @@ export type VolunteerProfileMaxAggregateInputType = {
 export type VolunteerProfileCountAggregateInputType = {
   id?: true
   userId?: true
+  displayName?: true
+  email?: true
+  phone?: true
   bio?: true
   skills?: true
   interests?: true
   languages?: true
   availability?: true
+  availabilitySlots?: true
   preferredTaskTypes?: true
   preferredEnvironmentStyle?: true
+  emailNotificationsEnabled?: true
+  inAppNotificationsEnabled?: true
+  reminder3DaysEnabled?: true
+  reminder1DayEnabled?: true
+  reminderSameDayEnabled?: true
   profileCompleted?: true
   prefecture?: true
   city?: true
@@ -188,13 +238,22 @@ export type VolunteerProfileGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type VolunteerProfileGroupByOutputType = {
   id: string
   userId: string
+  displayName: string | null
+  email: string | null
+  phone: string | null
   bio: string | null
   skills: string[]
   interests: string[]
   languages: string[]
   availability: string | null
+  availabilitySlots: string[]
   preferredTaskTypes: string[]
   preferredEnvironmentStyle: string
+  emailNotificationsEnabled: boolean
+  inAppNotificationsEnabled: boolean
+  reminder3DaysEnabled: boolean
+  reminder1DayEnabled: boolean
+  reminderSameDayEnabled: boolean
   profileCompleted: boolean
   prefecture: string | null
   city: string | null
@@ -226,13 +285,22 @@ export type VolunteerProfileWhereInput = {
   NOT?: Prisma.VolunteerProfileWhereInput | Prisma.VolunteerProfileWhereInput[]
   id?: Prisma.StringFilter<"VolunteerProfile"> | string
   userId?: Prisma.StringFilter<"VolunteerProfile"> | string
+  displayName?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
+  email?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
+  phone?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
   bio?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
   skills?: Prisma.StringNullableListFilter<"VolunteerProfile">
   interests?: Prisma.StringNullableListFilter<"VolunteerProfile">
   languages?: Prisma.StringNullableListFilter<"VolunteerProfile">
   availability?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
+  availabilitySlots?: Prisma.StringNullableListFilter<"VolunteerProfile">
   preferredTaskTypes?: Prisma.StringNullableListFilter<"VolunteerProfile">
   preferredEnvironmentStyle?: Prisma.StringFilter<"VolunteerProfile"> | string
+  emailNotificationsEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  reminder3DaysEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  reminder1DayEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  reminderSameDayEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
   profileCompleted?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
   prefecture?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
   city?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
@@ -244,13 +312,22 @@ export type VolunteerProfileWhereInput = {
 export type VolunteerProfileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   skills?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   languages?: Prisma.SortOrder
   availability?: Prisma.SortOrderInput | Prisma.SortOrder
+  availabilitySlots?: Prisma.SortOrder
   preferredTaskTypes?: Prisma.SortOrder
   preferredEnvironmentStyle?: Prisma.SortOrder
+  emailNotificationsEnabled?: Prisma.SortOrder
+  inAppNotificationsEnabled?: Prisma.SortOrder
+  reminder3DaysEnabled?: Prisma.SortOrder
+  reminder1DayEnabled?: Prisma.SortOrder
+  reminderSameDayEnabled?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   prefecture?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -265,13 +342,22 @@ export type VolunteerProfileWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VolunteerProfileWhereInput | Prisma.VolunteerProfileWhereInput[]
   OR?: Prisma.VolunteerProfileWhereInput[]
   NOT?: Prisma.VolunteerProfileWhereInput | Prisma.VolunteerProfileWhereInput[]
+  displayName?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
+  email?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
+  phone?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
   bio?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
   skills?: Prisma.StringNullableListFilter<"VolunteerProfile">
   interests?: Prisma.StringNullableListFilter<"VolunteerProfile">
   languages?: Prisma.StringNullableListFilter<"VolunteerProfile">
   availability?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
+  availabilitySlots?: Prisma.StringNullableListFilter<"VolunteerProfile">
   preferredTaskTypes?: Prisma.StringNullableListFilter<"VolunteerProfile">
   preferredEnvironmentStyle?: Prisma.StringFilter<"VolunteerProfile"> | string
+  emailNotificationsEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  reminder3DaysEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  reminder1DayEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
+  reminderSameDayEnabled?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
   profileCompleted?: Prisma.BoolFilter<"VolunteerProfile"> | boolean
   prefecture?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
   city?: Prisma.StringNullableFilter<"VolunteerProfile"> | string | null
@@ -283,13 +369,22 @@ export type VolunteerProfileWhereUniqueInput = Prisma.AtLeast<{
 export type VolunteerProfileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   skills?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   languages?: Prisma.SortOrder
   availability?: Prisma.SortOrderInput | Prisma.SortOrder
+  availabilitySlots?: Prisma.SortOrder
   preferredTaskTypes?: Prisma.SortOrder
   preferredEnvironmentStyle?: Prisma.SortOrder
+  emailNotificationsEnabled?: Prisma.SortOrder
+  inAppNotificationsEnabled?: Prisma.SortOrder
+  reminder3DaysEnabled?: Prisma.SortOrder
+  reminder1DayEnabled?: Prisma.SortOrder
+  reminderSameDayEnabled?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   prefecture?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -306,13 +401,22 @@ export type VolunteerProfileScalarWhereWithAggregatesInput = {
   NOT?: Prisma.VolunteerProfileScalarWhereWithAggregatesInput | Prisma.VolunteerProfileScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"VolunteerProfile"> | string
   userId?: Prisma.StringWithAggregatesFilter<"VolunteerProfile"> | string
+  displayName?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
+  email?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
   skills?: Prisma.StringNullableListFilter<"VolunteerProfile">
   interests?: Prisma.StringNullableListFilter<"VolunteerProfile">
   languages?: Prisma.StringNullableListFilter<"VolunteerProfile">
   availability?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
+  availabilitySlots?: Prisma.StringNullableListFilter<"VolunteerProfile">
   preferredTaskTypes?: Prisma.StringNullableListFilter<"VolunteerProfile">
   preferredEnvironmentStyle?: Prisma.StringWithAggregatesFilter<"VolunteerProfile"> | string
+  emailNotificationsEnabled?: Prisma.BoolWithAggregatesFilter<"VolunteerProfile"> | boolean
+  inAppNotificationsEnabled?: Prisma.BoolWithAggregatesFilter<"VolunteerProfile"> | boolean
+  reminder3DaysEnabled?: Prisma.BoolWithAggregatesFilter<"VolunteerProfile"> | boolean
+  reminder1DayEnabled?: Prisma.BoolWithAggregatesFilter<"VolunteerProfile"> | boolean
+  reminderSameDayEnabled?: Prisma.BoolWithAggregatesFilter<"VolunteerProfile"> | boolean
   profileCompleted?: Prisma.BoolWithAggregatesFilter<"VolunteerProfile"> | boolean
   prefecture?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"VolunteerProfile"> | string | null
@@ -322,13 +426,22 @@ export type VolunteerProfileScalarWhereWithAggregatesInput = {
 
 export type VolunteerProfileCreateInput = {
   id?: string
+  displayName?: string | null
+  email?: string | null
+  phone?: string | null
   bio?: string | null
   skills?: Prisma.VolunteerProfileCreateskillsInput | string[]
   interests?: Prisma.VolunteerProfileCreateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileCreatelanguagesInput | string[]
   availability?: string | null
+  availabilitySlots?: Prisma.VolunteerProfileCreateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileCreatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: string
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: string | null
   city?: string | null
@@ -340,13 +453,22 @@ export type VolunteerProfileCreateInput = {
 export type VolunteerProfileUncheckedCreateInput = {
   id?: string
   userId: string
+  displayName?: string | null
+  email?: string | null
+  phone?: string | null
   bio?: string | null
   skills?: Prisma.VolunteerProfileCreateskillsInput | string[]
   interests?: Prisma.VolunteerProfileCreateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileCreatelanguagesInput | string[]
   availability?: string | null
+  availabilitySlots?: Prisma.VolunteerProfileCreateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileCreatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: string
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: string | null
   city?: string | null
@@ -356,13 +478,22 @@ export type VolunteerProfileUncheckedCreateInput = {
 
 export type VolunteerProfileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   skills?: Prisma.VolunteerProfileUpdateskillsInput | string[]
   interests?: Prisma.VolunteerProfileUpdateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileUpdatelanguagesInput | string[]
   availability?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availabilitySlots?: Prisma.VolunteerProfileUpdateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileUpdatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder3DaysEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder1DayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminderSameDayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -374,13 +505,22 @@ export type VolunteerProfileUpdateInput = {
 export type VolunteerProfileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   skills?: Prisma.VolunteerProfileUpdateskillsInput | string[]
   interests?: Prisma.VolunteerProfileUpdateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileUpdatelanguagesInput | string[]
   availability?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availabilitySlots?: Prisma.VolunteerProfileUpdateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileUpdatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder3DaysEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder1DayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminderSameDayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -391,13 +531,22 @@ export type VolunteerProfileUncheckedUpdateInput = {
 export type VolunteerProfileCreateManyInput = {
   id?: string
   userId: string
+  displayName?: string | null
+  email?: string | null
+  phone?: string | null
   bio?: string | null
   skills?: Prisma.VolunteerProfileCreateskillsInput | string[]
   interests?: Prisma.VolunteerProfileCreateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileCreatelanguagesInput | string[]
   availability?: string | null
+  availabilitySlots?: Prisma.VolunteerProfileCreateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileCreatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: string
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: string | null
   city?: string | null
@@ -407,13 +556,22 @@ export type VolunteerProfileCreateManyInput = {
 
 export type VolunteerProfileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   skills?: Prisma.VolunteerProfileUpdateskillsInput | string[]
   interests?: Prisma.VolunteerProfileUpdateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileUpdatelanguagesInput | string[]
   availability?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availabilitySlots?: Prisma.VolunteerProfileUpdateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileUpdatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder3DaysEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder1DayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminderSameDayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -424,13 +582,22 @@ export type VolunteerProfileUpdateManyMutationInput = {
 export type VolunteerProfileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   skills?: Prisma.VolunteerProfileUpdateskillsInput | string[]
   interests?: Prisma.VolunteerProfileUpdateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileUpdatelanguagesInput | string[]
   availability?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availabilitySlots?: Prisma.VolunteerProfileUpdateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileUpdatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder3DaysEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder1DayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminderSameDayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -454,13 +621,22 @@ export type StringNullableListFilter<$PrismaModel = never> = {
 export type VolunteerProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   skills?: Prisma.SortOrder
   interests?: Prisma.SortOrder
   languages?: Prisma.SortOrder
   availability?: Prisma.SortOrder
+  availabilitySlots?: Prisma.SortOrder
   preferredTaskTypes?: Prisma.SortOrder
   preferredEnvironmentStyle?: Prisma.SortOrder
+  emailNotificationsEnabled?: Prisma.SortOrder
+  inAppNotificationsEnabled?: Prisma.SortOrder
+  reminder3DaysEnabled?: Prisma.SortOrder
+  reminder1DayEnabled?: Prisma.SortOrder
+  reminderSameDayEnabled?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
@@ -471,9 +647,17 @@ export type VolunteerProfileCountOrderByAggregateInput = {
 export type VolunteerProfileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   availability?: Prisma.SortOrder
   preferredEnvironmentStyle?: Prisma.SortOrder
+  emailNotificationsEnabled?: Prisma.SortOrder
+  inAppNotificationsEnabled?: Prisma.SortOrder
+  reminder3DaysEnabled?: Prisma.SortOrder
+  reminder1DayEnabled?: Prisma.SortOrder
+  reminderSameDayEnabled?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
@@ -484,9 +668,17 @@ export type VolunteerProfileMaxOrderByAggregateInput = {
 export type VolunteerProfileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   availability?: Prisma.SortOrder
   preferredEnvironmentStyle?: Prisma.SortOrder
+  emailNotificationsEnabled?: Prisma.SortOrder
+  inAppNotificationsEnabled?: Prisma.SortOrder
+  reminder3DaysEnabled?: Prisma.SortOrder
+  reminder1DayEnabled?: Prisma.SortOrder
+  reminderSameDayEnabled?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   prefecture?: Prisma.SortOrder
   city?: Prisma.SortOrder
@@ -538,6 +730,10 @@ export type VolunteerProfileCreatelanguagesInput = {
   set: string[]
 }
 
+export type VolunteerProfileCreateavailabilitySlotsInput = {
+  set: string[]
+}
+
 export type VolunteerProfileCreatepreferredTaskTypesInput = {
   set: string[]
 }
@@ -557,6 +753,11 @@ export type VolunteerProfileUpdatelanguagesInput = {
   push?: string | string[]
 }
 
+export type VolunteerProfileUpdateavailabilitySlotsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type VolunteerProfileUpdatepreferredTaskTypesInput = {
   set?: string[]
   push?: string | string[]
@@ -568,13 +769,22 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type VolunteerProfileCreateWithoutUserInput = {
   id?: string
+  displayName?: string | null
+  email?: string | null
+  phone?: string | null
   bio?: string | null
   skills?: Prisma.VolunteerProfileCreateskillsInput | string[]
   interests?: Prisma.VolunteerProfileCreateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileCreatelanguagesInput | string[]
   availability?: string | null
+  availabilitySlots?: Prisma.VolunteerProfileCreateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileCreatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: string
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: string | null
   city?: string | null
@@ -584,13 +794,22 @@ export type VolunteerProfileCreateWithoutUserInput = {
 
 export type VolunteerProfileUncheckedCreateWithoutUserInput = {
   id?: string
+  displayName?: string | null
+  email?: string | null
+  phone?: string | null
   bio?: string | null
   skills?: Prisma.VolunteerProfileCreateskillsInput | string[]
   interests?: Prisma.VolunteerProfileCreateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileCreatelanguagesInput | string[]
   availability?: string | null
+  availabilitySlots?: Prisma.VolunteerProfileCreateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileCreatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: string
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: string | null
   city?: string | null
@@ -616,13 +835,22 @@ export type VolunteerProfileUpdateToOneWithWhereWithoutUserInput = {
 
 export type VolunteerProfileUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   skills?: Prisma.VolunteerProfileUpdateskillsInput | string[]
   interests?: Prisma.VolunteerProfileUpdateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileUpdatelanguagesInput | string[]
   availability?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availabilitySlots?: Prisma.VolunteerProfileUpdateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileUpdatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder3DaysEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder1DayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminderSameDayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -632,13 +860,22 @@ export type VolunteerProfileUpdateWithoutUserInput = {
 
 export type VolunteerProfileUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   skills?: Prisma.VolunteerProfileUpdateskillsInput | string[]
   interests?: Prisma.VolunteerProfileUpdateinterestsInput | string[]
   languages?: Prisma.VolunteerProfileUpdatelanguagesInput | string[]
   availability?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  availabilitySlots?: Prisma.VolunteerProfileUpdateavailabilitySlotsInput | string[]
   preferredTaskTypes?: Prisma.VolunteerProfileUpdatepreferredTaskTypesInput | string[]
   preferredEnvironmentStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder3DaysEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminder1DayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reminderSameDayEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   prefecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -651,13 +888,22 @@ export type VolunteerProfileUncheckedUpdateWithoutUserInput = {
 export type VolunteerProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  displayName?: boolean
+  email?: boolean
+  phone?: boolean
   bio?: boolean
   skills?: boolean
   interests?: boolean
   languages?: boolean
   availability?: boolean
+  availabilitySlots?: boolean
   preferredTaskTypes?: boolean
   preferredEnvironmentStyle?: boolean
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: boolean
   city?: boolean
@@ -669,13 +915,22 @@ export type VolunteerProfileSelect<ExtArgs extends runtime.Types.Extensions.Inte
 export type VolunteerProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  displayName?: boolean
+  email?: boolean
+  phone?: boolean
   bio?: boolean
   skills?: boolean
   interests?: boolean
   languages?: boolean
   availability?: boolean
+  availabilitySlots?: boolean
   preferredTaskTypes?: boolean
   preferredEnvironmentStyle?: boolean
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: boolean
   city?: boolean
@@ -687,13 +942,22 @@ export type VolunteerProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
 export type VolunteerProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  displayName?: boolean
+  email?: boolean
+  phone?: boolean
   bio?: boolean
   skills?: boolean
   interests?: boolean
   languages?: boolean
   availability?: boolean
+  availabilitySlots?: boolean
   preferredTaskTypes?: boolean
   preferredEnvironmentStyle?: boolean
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: boolean
   city?: boolean
@@ -705,13 +969,22 @@ export type VolunteerProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type VolunteerProfileSelectScalar = {
   id?: boolean
   userId?: boolean
+  displayName?: boolean
+  email?: boolean
+  phone?: boolean
   bio?: boolean
   skills?: boolean
   interests?: boolean
   languages?: boolean
   availability?: boolean
+  availabilitySlots?: boolean
   preferredTaskTypes?: boolean
   preferredEnvironmentStyle?: boolean
+  emailNotificationsEnabled?: boolean
+  inAppNotificationsEnabled?: boolean
+  reminder3DaysEnabled?: boolean
+  reminder1DayEnabled?: boolean
+  reminderSameDayEnabled?: boolean
   profileCompleted?: boolean
   prefecture?: boolean
   city?: boolean
@@ -719,7 +992,7 @@ export type VolunteerProfileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type VolunteerProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "bio" | "skills" | "interests" | "languages" | "availability" | "preferredTaskTypes" | "preferredEnvironmentStyle" | "profileCompleted" | "prefecture" | "city" | "createdAt" | "updatedAt", ExtArgs["result"]["volunteerProfile"]>
+export type VolunteerProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "displayName" | "email" | "phone" | "bio" | "skills" | "interests" | "languages" | "availability" | "availabilitySlots" | "preferredTaskTypes" | "preferredEnvironmentStyle" | "emailNotificationsEnabled" | "inAppNotificationsEnabled" | "reminder3DaysEnabled" | "reminder1DayEnabled" | "reminderSameDayEnabled" | "profileCompleted" | "prefecture" | "city" | "createdAt" | "updatedAt", ExtArgs["result"]["volunteerProfile"]>
 export type VolunteerProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -738,13 +1011,22 @@ export type $VolunteerProfilePayload<ExtArgs extends runtime.Types.Extensions.In
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    displayName: string | null
+    email: string | null
+    phone: string | null
     bio: string | null
     skills: string[]
     interests: string[]
     languages: string[]
     availability: string | null
+    availabilitySlots: string[]
     preferredTaskTypes: string[]
     preferredEnvironmentStyle: string
+    emailNotificationsEnabled: boolean
+    inAppNotificationsEnabled: boolean
+    reminder3DaysEnabled: boolean
+    reminder1DayEnabled: boolean
+    reminderSameDayEnabled: boolean
     profileCompleted: boolean
     prefecture: string | null
     city: string | null
@@ -1176,13 +1458,22 @@ export interface Prisma__VolunteerProfileClient<T, Null = never, ExtArgs extends
 export interface VolunteerProfileFieldRefs {
   readonly id: Prisma.FieldRef<"VolunteerProfile", 'String'>
   readonly userId: Prisma.FieldRef<"VolunteerProfile", 'String'>
+  readonly displayName: Prisma.FieldRef<"VolunteerProfile", 'String'>
+  readonly email: Prisma.FieldRef<"VolunteerProfile", 'String'>
+  readonly phone: Prisma.FieldRef<"VolunteerProfile", 'String'>
   readonly bio: Prisma.FieldRef<"VolunteerProfile", 'String'>
   readonly skills: Prisma.FieldRef<"VolunteerProfile", 'String[]'>
   readonly interests: Prisma.FieldRef<"VolunteerProfile", 'String[]'>
   readonly languages: Prisma.FieldRef<"VolunteerProfile", 'String[]'>
   readonly availability: Prisma.FieldRef<"VolunteerProfile", 'String'>
+  readonly availabilitySlots: Prisma.FieldRef<"VolunteerProfile", 'String[]'>
   readonly preferredTaskTypes: Prisma.FieldRef<"VolunteerProfile", 'String[]'>
   readonly preferredEnvironmentStyle: Prisma.FieldRef<"VolunteerProfile", 'String'>
+  readonly emailNotificationsEnabled: Prisma.FieldRef<"VolunteerProfile", 'Boolean'>
+  readonly inAppNotificationsEnabled: Prisma.FieldRef<"VolunteerProfile", 'Boolean'>
+  readonly reminder3DaysEnabled: Prisma.FieldRef<"VolunteerProfile", 'Boolean'>
+  readonly reminder1DayEnabled: Prisma.FieldRef<"VolunteerProfile", 'Boolean'>
+  readonly reminderSameDayEnabled: Prisma.FieldRef<"VolunteerProfile", 'Boolean'>
   readonly profileCompleted: Prisma.FieldRef<"VolunteerProfile", 'Boolean'>
   readonly prefecture: Prisma.FieldRef<"VolunteerProfile", 'String'>
   readonly city: Prisma.FieldRef<"VolunteerProfile", 'String'>

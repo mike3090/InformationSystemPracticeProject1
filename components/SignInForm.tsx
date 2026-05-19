@@ -20,6 +20,8 @@ export default function SignInForm({
 }) {
   const t = useTranslations("auth");
   const [mode, setMode] = useState<"login" | "register">("login");
+  const [registerAccountType, setRegisterAccountType] =
+    useState<"volunteer" | "requester">(accountIntent);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -113,9 +115,30 @@ export default function SignInForm({
       ) : (
         <form action={registerAction} className="space-y-3">
           <input type="hidden" name="locale" value={locale} />
-          <input type="hidden" name="accountType" value={accountIntent} />
+          <input type="hidden" name="accountType" value={registerAccountType} />
+          <fieldset>
+            <legend className="mb-2 block text-sm font-medium text-stone-700">
+              {t("accountTypeLabel")}
+            </legend>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <AccountTypeOption
+                value="volunteer"
+                title={t("volunteerAccountType")}
+                description={t("volunteerAccountTypeDescription")}
+                selected={registerAccountType === "volunteer"}
+                onSelect={() => setRegisterAccountType("volunteer")}
+              />
+              <AccountTypeOption
+                value="requester"
+                title={t("requesterAccountType")}
+                description={t("requesterAccountTypeDescription")}
+                selected={registerAccountType === "requester"}
+                onSelect={() => setRegisterAccountType("requester")}
+              />
+            </div>
+          </fieldset>
           <p className="rounded-lg border border-green-100 bg-green-50 px-3 py-2 text-sm text-green-800">
-            {accountIntent === "requester"
+            {registerAccountType === "requester"
               ? t("requesterRegisterNote")
               : t("volunteerRegisterNote")}
           </p>
@@ -166,7 +189,7 @@ export default function SignInForm({
           >
             {isRegisterPending
               ? t("creatingAccount")
-              : accountIntent === "requester"
+              : registerAccountType === "requester"
                 ? t("createRequesterAccount")
                 : t("createVolunteerAccount")}
           </button>
@@ -176,7 +199,9 @@ export default function SignInForm({
       <button
         onClick={() =>
           signIn("google", {
-            callbackUrl: `/${locale}/profile/setup?intent=${accountIntent}&next=${encodeURIComponent(callbackUrl)}`,
+            callbackUrl: `/${locale}/profile/setup?intent=${
+              mode === "register" ? registerAccountType : accountIntent
+            }&next=${encodeURIComponent(callbackUrl)}`,
           })
         }
         className="w-full flex items-center justify-center gap-3 border border-stone-300 rounded-lg px-4 py-3 text-sm font-medium hover:bg-stone-50 transition"
@@ -185,6 +210,43 @@ export default function SignInForm({
         {t("continueWithGoogle")}
       </button>
     </div>
+  );
+}
+
+function AccountTypeOption({
+  value,
+  title,
+  description,
+  selected,
+  onSelect,
+}: {
+  value: "volunteer" | "requester";
+  title: string;
+  description: string;
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  return (
+    <label
+      className={`cursor-pointer rounded-lg border p-3 text-sm transition ${
+        selected
+          ? "border-green-700 bg-green-50 text-green-950"
+          : "border-stone-200 bg-white text-stone-700 hover:border-green-300"
+      }`}
+    >
+      <input
+        type="radio"
+        name="accountTypeChoice"
+        value={value}
+        checked={selected}
+        onChange={onSelect}
+        className="sr-only"
+      />
+      <span className="font-semibold">{title}</span>
+      <span className="mt-1 block text-xs leading-5 text-stone-600">
+        {description}
+      </span>
+    </label>
   );
 }
 
