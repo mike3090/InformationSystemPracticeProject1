@@ -6,10 +6,12 @@
 // Called by the "Draft with AI" button on the new opportunity form.
 //
 // Request body (JSON):
-//   { roughDescription: string, organizerContext?: string }
+//   { roughDescription: string, organizerContext?: string, locale?: "ja" | "en" }
 //
 // Response (JSON):
 //   AgentResult<DraftOpportunityOutput>
+//   Includes extracted fields, missingDetails, visual photo prompts, and
+//   display signals for the opportunity creation form.
 //   — check result.ok before reading result.data
 //
 // ─────────────────────────────────────────────────────────────────────────────

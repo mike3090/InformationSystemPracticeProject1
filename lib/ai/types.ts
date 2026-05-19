@@ -96,20 +96,84 @@ export type DraftOpportunityInput = {
 export type DraftOpportunityOutput = {
   title: string;
   titleJa: string;
+  shortDescription: string;
   description: string;        // English prose, 80–150 words
   descriptionJa: string;
+  category: string;
+  tags: string[];
   skills: string[];           // e.g. ["gardening", "outdoor", "beginner friendly"]
+  schedule: DraftSchedule;
+  location: DraftLocation;
+  capacity: DraftCapacity;
   thingsToBring: string[];    // e.g. ["Comfortable shoes", "Water bottle"]
+  toolsProvided: string[];
+  preApplicationQuestions: string[];
+  arrivalGuidance: string;
+  firstLandmarkDescription: string;
+  firstContactName: string;
+  firstContactRole: string;
+  visuals: DraftVisualPrompts;
+  display: DraftDisplaySignals;
+  missingDetails: DraftMissingDetail[];
+  confidence: DraftConfidence;
   taskFlow: DraftedTask[];
 };
 
 export type DraftedTask = {
   name: string;
   nameJa: string;
-  startTime: string;          // "HH:MM" — approximate, requester can adjust
-  durationMinutes: number;
+  startTime: string;          // "HH:MM" or "" when unknown
+  durationMinutes: number | null;
+  peopleNeeded: number | null;
   shortDescription: string;   // One sentence
   shortDescriptionJa: string;
+  steps: string[];
+};
+
+export type DraftSchedule = {
+  startAt: string;
+  endAt: string;
+  arrivalTime: string;
+  scheduleNote: string;
+};
+
+export type DraftLocation = {
+  prefecture: string;
+  city: string;
+  address: string;
+  googleMapsUrl: string;
+  locationNote: string;
+};
+
+export type DraftCapacity = {
+  volunteersNeeded: number | null;
+  maxApplicants: number | null;
+  allowWaitlist: boolean;
+};
+
+export type DraftVisualPrompts = {
+  coverPhotoPrompt: string;
+  workspacePhotoPrompts: string[];
+  landmarkPhotoPrompt: string;
+  contactPhotoPrompt: string;
+};
+
+export type DraftDisplaySignals = {
+  taskTypeColor: "green" | "blue" | "orange";
+  environmentShape: "relaxed" | "structured";
+  physicalEffort: "low" | "medium" | "high";
+  mentalEffort: "low" | "medium" | "high";
+};
+
+export type DraftMissingDetail = {
+  field: string;
+  severity: "required" | "recommended";
+  message: string;
+};
+
+export type DraftConfidence = {
+  overall: "low" | "medium" | "high";
+  notes: string[];
 };
 
 // ── Agent: scoreApplicants ────────────────────────────────────────────────────

@@ -19,8 +19,22 @@ function requiredText(formData: FormData, key: string) {
 }
 
 function listValue(formData: FormData, key: string) {
-  return String(formData.get(key) ?? "")
-    .split(",")
+  const values = formData
+    .getAll(key)
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+
+  if (values.length > 1) {
+    return values;
+  }
+
+  const value = values[0] ?? "";
+  if (value.startsWith("data:image/")) {
+    return [value];
+  }
+
+  return value
+    .split(/[,\n]/)
     .map((item) => item.trim())
     .filter(Boolean);
 }
@@ -158,7 +172,7 @@ export async function createOpportunity(formData: FormData) {
       preApplicationQuestions: listValue(formData, "preApplicationQuestions").map(
         (question) => ({ question }),
       ),
-      aiDrafted: false,
+      aiDrafted: String(formData.get("aiDrafted") ?? "") === "true",
       publishedAt: status === "OPEN" ? new Date() : null,
       requesterId: session.user.id,
       organizationId: user.organization.id,
