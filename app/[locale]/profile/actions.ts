@@ -17,6 +17,33 @@ function textValue(formData: FormData, key: string) {
   return value || null;
 }
 
+function checkboxValue(formData: FormData, key: string) {
+  return String(formData.get(key) ?? "") === "on";
+}
+
+function certificationStatusValue(formData: FormData, currentStatus?: string | null) {
+  if (currentStatus) return currentStatus;
+  const value = String(formData.get("certificationStatus") ?? "uncertified");
+  return value === "under_review" ? "under_review" : "uncertified";
+}
+
+function organizationTypeValue(formData: FormData) {
+  const value = String(formData.get("organizationType") ?? "INDIVIDUAL");
+  const allowed = new Set([
+    "INDIVIDUAL",
+    "VOLUNTARY_GROUP",
+    "NPO",
+    "GENERAL_ASSOCIATION",
+    "CORPORATION",
+    "SCHOOL",
+    "MUNICIPAL",
+    "SMALL_BUSINESS",
+    "COMMUNITY_GROUP",
+  ]);
+
+  return allowed.has(value) ? value : "INDIVIDUAL";
+}
+
 function savedRedirectPath(next: string) {
   const target = next && next.startsWith("/") ? next : "/";
   const separator = target.includes("?") ? "&" : "?";
@@ -45,7 +72,12 @@ export async function saveProfile(formData: FormData) {
 
   const currentUser = await prisma.user.findUnique({
     where: { id: userId },
-    select: { role: true },
+    select: {
+      role: true,
+      organization: {
+        select: { certificationStatus: true },
+      },
+    },
   });
 
   if (!currentUser) {
@@ -69,26 +101,106 @@ export async function saveProfile(formData: FormData) {
       create: {
         userId,
         name: String(formData.get("organizationName") ?? name).trim() || name,
+        nameKana: textValue(formData, "nameKana"),
+        nameEn: textValue(formData, "nameEn"),
         contactName: name || null,
-        type: String(formData.get("organizationType") ?? "INDIVIDUAL") as never,
+        type: organizationTypeValue(formData) as never,
+        representativeName: textValue(formData, "representativeName"),
+        purpose: textValue(formData, "purpose"),
         description: textValue(formData, "description"),
+        activityAreas: listValue(formData, "activityAreas"),
+        activityRegions: listValue(formData, "activityRegions"),
         environmentStyle: String(formData.get("environmentStyle") ?? "mixed"),
         prefecture: textValue(formData, "prefecture"),
         city: textValue(formData, "city"),
         address: textValue(formData, "address"),
+        publicEmail: textValue(formData, "publicEmail"),
+        publicPhone: textValue(formData, "publicPhone"),
+        contactFormUrl: textValue(formData, "contactFormUrl"),
         website: textValue(formData, "website"),
+        snsLinks: listValue(formData, "snsLinks"),
+        founded: textValue(formData, "founded"),
+        recruitmentStatus: String(formData.get("recruitmentStatus") ?? "recruiting"),
+        hasWaterDispenser: checkboxValue(formData, "hasWaterDispenser"),
+        hasRestRoom: checkboxValue(formData, "hasRestRoom"),
+        hasAirConditioning: checkboxValue(formData, "hasAirConditioning"),
+        activitySpaceSize: textValue(formData, "activitySpaceSize"),
+        profileImageUrl: textValue(formData, "profileImageUrl"),
+        workspaceImageUrls: listValue(formData, "workspaceImageUrls"),
+        certificationStatus: certificationStatusValue(
+          formData,
+          currentUser.organization?.certificationStatus,
+        ),
+        certificationSource: textValue(formData, "certificationSource"),
+        managerPhone: textValue(formData, "managerPhone"),
+        managerLegalName: textValue(formData, "managerLegalName"),
+        identityDocumentNote: textValue(formData, "identityDocumentNote"),
+        managerAddress: textValue(formData, "managerAddress"),
+        isLocationPublic: checkboxValue(formData, "isLocationPublic"),
+        contactPersonName: textValue(formData, "contactPersonName"),
+        contactPersonRole: textValue(formData, "contactPersonRole"),
+        contactPersonPhone: textValue(formData, "contactPersonPhone"),
+        contactPersonEmail: textValue(formData, "contactPersonEmail"),
+        antiSocialForcesConfirmed: checkboxValue(formData, "antiSocialForcesConfirmed"),
+        termsAccepted: checkboxValue(formData, "termsAccepted"),
+        legalEntityType: textValue(formData, "legalEntityType"),
+        corporateNumber: textValue(formData, "corporateNumber"),
+        legalName: textValue(formData, "legalName"),
+        legalAddress: textValue(formData, "legalAddress"),
+        registrationDocumentUrl: textValue(formData, "registrationDocumentUrl"),
+        bylawsUrl: textValue(formData, "bylawsUrl"),
         profileCompleted: true,
       },
       update: {
         name: String(formData.get("organizationName") ?? name).trim() || name,
+        nameKana: textValue(formData, "nameKana"),
+        nameEn: textValue(formData, "nameEn"),
         contactName: name || null,
-        type: String(formData.get("organizationType") ?? "INDIVIDUAL") as never,
+        type: organizationTypeValue(formData) as never,
+        representativeName: textValue(formData, "representativeName"),
+        purpose: textValue(formData, "purpose"),
         description: textValue(formData, "description"),
+        activityAreas: listValue(formData, "activityAreas"),
+        activityRegions: listValue(formData, "activityRegions"),
         environmentStyle: String(formData.get("environmentStyle") ?? "mixed"),
         prefecture: textValue(formData, "prefecture"),
         city: textValue(formData, "city"),
         address: textValue(formData, "address"),
+        publicEmail: textValue(formData, "publicEmail"),
+        publicPhone: textValue(formData, "publicPhone"),
+        contactFormUrl: textValue(formData, "contactFormUrl"),
         website: textValue(formData, "website"),
+        snsLinks: listValue(formData, "snsLinks"),
+        founded: textValue(formData, "founded"),
+        recruitmentStatus: String(formData.get("recruitmentStatus") ?? "recruiting"),
+        hasWaterDispenser: checkboxValue(formData, "hasWaterDispenser"),
+        hasRestRoom: checkboxValue(formData, "hasRestRoom"),
+        hasAirConditioning: checkboxValue(formData, "hasAirConditioning"),
+        activitySpaceSize: textValue(formData, "activitySpaceSize"),
+        profileImageUrl: textValue(formData, "profileImageUrl"),
+        workspaceImageUrls: listValue(formData, "workspaceImageUrls"),
+        certificationStatus: certificationStatusValue(
+          formData,
+          currentUser.organization?.certificationStatus,
+        ),
+        certificationSource: textValue(formData, "certificationSource"),
+        managerPhone: textValue(formData, "managerPhone"),
+        managerLegalName: textValue(formData, "managerLegalName"),
+        identityDocumentNote: textValue(formData, "identityDocumentNote"),
+        managerAddress: textValue(formData, "managerAddress"),
+        isLocationPublic: checkboxValue(formData, "isLocationPublic"),
+        contactPersonName: textValue(formData, "contactPersonName"),
+        contactPersonRole: textValue(formData, "contactPersonRole"),
+        contactPersonPhone: textValue(formData, "contactPersonPhone"),
+        contactPersonEmail: textValue(formData, "contactPersonEmail"),
+        antiSocialForcesConfirmed: checkboxValue(formData, "antiSocialForcesConfirmed"),
+        termsAccepted: checkboxValue(formData, "termsAccepted"),
+        legalEntityType: textValue(formData, "legalEntityType"),
+        corporateNumber: textValue(formData, "corporateNumber"),
+        legalName: textValue(formData, "legalName"),
+        legalAddress: textValue(formData, "legalAddress"),
+        registrationDocumentUrl: textValue(formData, "registrationDocumentUrl"),
+        bylawsUrl: textValue(formData, "bylawsUrl"),
         profileCompleted: true,
       },
     });
@@ -146,10 +258,6 @@ export async function saveProfile(formData: FormData) {
   }
 
   redirect(savedRedirectPath(next));
-}
-
-function checkboxValue(formData: FormData, key: string) {
-  return String(formData.get(key) ?? "") === "on";
 }
 
 export async function addRequesterRole(formData: FormData) {

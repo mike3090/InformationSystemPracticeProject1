@@ -31,20 +31,26 @@ export default async function ProfileSetupPage({
 
   const t = await getTranslations("profile");
   const safeNext = next?.startsWith(`/${locale}/`) ? next : `/${locale}/opportunities`;
-  const profileType =
+  const requestedProfileType =
     intent === "requester" || safeNext.includes("/opportunities/new")
       ? "requester"
       : "volunteer";
+  const canUseRequesterProfile =
+    user.role === "REQUESTER" || user.role === "BOTH" || user.role === "ADMIN";
+  const canUseVolunteerProfile =
+    user.role === "VOLUNTEER" || user.role === "BOTH" || user.role === "ADMIN";
+  const profileType =
+    requestedProfileType === "volunteer" &&
+    !canUseVolunteerProfile &&
+    canUseRequesterProfile
+      ? "requester"
+      : requestedProfileType;
   const needsRequesterRole =
     profileType === "requester" &&
-    user.role !== "REQUESTER" &&
-    user.role !== "BOTH" &&
-    user.role !== "ADMIN";
+    !canUseRequesterProfile;
   const needsVolunteerRole =
     profileType === "volunteer" &&
-    user.role !== "VOLUNTEER" &&
-    user.role !== "BOTH" &&
-    user.role !== "ADMIN";
+    !canUseVolunteerProfile;
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-10">
@@ -145,6 +151,12 @@ function profileLabels(t: Awaited<ReturnType<typeof getTranslations>>) {
     languagesPlaceholder: t("placeholders.languages"),
     preferredTaskTypes: t("fields.preferredTaskTypes"),
     preferredTaskTypesPlaceholder: t("placeholders.preferredTaskTypes"),
+    activityAreasPlaceholder: t("placeholders.activityAreas"),
+    activityRegionsPlaceholder: t("placeholders.activityRegions"),
+    snsLinksPlaceholder: t("placeholders.snsLinks"),
+    foundedPlaceholder: t("placeholders.founded"),
+    activitySpaceSizePlaceholder: t("placeholders.activitySpaceSize"),
+    workspaceImageUrlsPlaceholder: t("placeholders.workspaceImageUrls"),
     notificationSettings: t("fields.notificationSettings"),
     emailNotifications: t("fields.emailNotifications"),
     inAppNotifications: t("fields.inAppNotifications"),
@@ -153,14 +165,75 @@ function profileLabels(t: Awaited<ReturnType<typeof getTranslations>>) {
     reminderSameDay: t("fields.reminderSameDay"),
     organizationName: t("fields.organizationName"),
     organizationType: t("fields.organizationType"),
+    nameKana: t("fields.nameKana"),
+    nameEn: t("fields.nameEn"),
+    representativeName: t("fields.representativeName"),
+    purpose: t("fields.purpose"),
+    activityAreas: t("fields.activityAreas"),
+    activityRegions: t("fields.activityRegions"),
+    publicEmail: t("fields.publicEmail"),
+    publicPhone: t("fields.publicPhone"),
+    contactFormUrl: t("fields.contactFormUrl"),
     description: t("fields.description"),
     website: t("fields.website"),
+    snsLinks: t("fields.snsLinks"),
+    founded: t("fields.founded"),
+    recruitmentStatus: t("fields.recruitmentStatus"),
+    activitySpaceSize: t("fields.activitySpaceSize"),
+    profileImageUrl: t("fields.profileImageUrl"),
+    workspaceImageUrls: t("fields.workspaceImageUrls"),
+    hasWaterDispenser: t("fields.hasWaterDispenser"),
+    hasRestRoom: t("fields.hasRestRoom"),
+    hasAirConditioning: t("fields.hasAirConditioning"),
+    certificationStatus: t("fields.certificationStatus"),
+    certificationStatusPrivate: t("fields.certificationStatusPrivate"),
+    certificationSource: t("fields.certificationSource"),
+    managerPhone: t("fields.managerPhone"),
+    managerLegalName: t("fields.managerLegalName"),
+    identityDocumentNote: t("fields.identityDocumentNote"),
+    managerAddress: t("fields.managerAddress"),
+    isLocationPublic: t("fields.isLocationPublic"),
+    contactPersonName: t("fields.contactPersonName"),
+    contactPersonRole: t("fields.contactPersonRole"),
+    contactPersonPhone: t("fields.contactPersonPhone"),
+    contactPersonEmail: t("fields.contactPersonEmail"),
+    antiSocialForcesConfirmed: t("fields.antiSocialForcesConfirmed"),
+    termsAccepted: t("fields.termsAccepted"),
+    legalEntityType: t("fields.legalEntityType"),
+    corporateNumber: t("fields.corporateNumber"),
+    legalName: t("fields.legalName"),
+    legalAddress: t("fields.legalAddress"),
+    registrationDocumentUrl: t("fields.registrationDocumentUrl"),
+    bylawsUrl: t("fields.bylawsUrl"),
     address: t("fields.address"),
     typeIndividual: t("organizationTypes.individual"),
+    typeVoluntaryGroup: t("organizationTypes.voluntaryGroup"),
     typeCompany: t("organizationTypes.company"),
     typeNpo: t("organizationTypes.npo"),
+    typeGeneralAssociation: t("organizationTypes.generalAssociation"),
+    typeCorporation: t("organizationTypes.corporation"),
+    typeSchool: t("organizationTypes.school"),
     typeCommunity: t("organizationTypes.community"),
     typeMunicipal: t("organizationTypes.municipal"),
+    publicProfileEyebrow: t("requesterSections.public.eyebrow"),
+    publicProfileTitle: t("requesterSections.public.title"),
+    publicProfileDescription: t("requesterSections.public.description"),
+    reviewProfileEyebrow: t("requesterSections.review.eyebrow"),
+    reviewProfileTitle: t("requesterSections.review.title"),
+    reviewProfileDescription: t("requesterSections.review.description"),
+    certificationEyebrow: t("requesterSections.certification.eyebrow"),
+    certificationTitle: t("requesterSections.certification.title"),
+    certificationDescription: t("requesterSections.certification.description"),
+    recruiting: t("recruitmentStatus.recruiting"),
+    recruitmentPaused: t("recruitmentStatus.paused"),
+    internalOnly: t("recruitmentStatus.internalOnly"),
+    notApplicable: t("legalEntityTypes.notApplicable"),
+    otherLegalEntity: t("legalEntityTypes.other"),
+    certificationUncertified: t("certificationStatus.uncertified"),
+    certificationUnderReview: t("certificationStatus.underReview"),
+    certificationCertified: t("certificationStatus.certified"),
+    certificationRejected: t("certificationStatus.rejected"),
+    certificationChangesRequested: t("certificationStatus.changesRequested"),
     finishSetup: t("finishSetup"),
     saveChanges: t("saveChanges"),
     becomeRequesterTitle: t("becomeRequesterTitle"),

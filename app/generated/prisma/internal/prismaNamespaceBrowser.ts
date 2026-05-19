@@ -59,6 +59,9 @@ export const ModelName = {
   Organization: 'Organization',
   Opportunity: 'Opportunity',
   Application: 'Application',
+  Notification: 'Notification',
+  EventUpdate: 'EventUpdate',
+  EventMessage: 'EventMessage',
   Booking: 'Booking',
   AiInteraction: 'AiInteraction'
 } as const
@@ -135,13 +138,22 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const VolunteerProfileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  displayName: 'displayName',
+  email: 'email',
+  phone: 'phone',
   bio: 'bio',
   skills: 'skills',
   interests: 'interests',
   languages: 'languages',
   availability: 'availability',
+  availabilitySlots: 'availabilitySlots',
   preferredTaskTypes: 'preferredTaskTypes',
   preferredEnvironmentStyle: 'preferredEnvironmentStyle',
+  emailNotificationsEnabled: 'emailNotificationsEnabled',
+  inAppNotificationsEnabled: 'inAppNotificationsEnabled',
+  reminder3DaysEnabled: 'reminder3DaysEnabled',
+  reminder1DayEnabled: 'reminder1DayEnabled',
+  reminderSameDayEnabled: 'reminderSameDayEnabled',
   profileCompleted: 'profileCompleted',
   prefecture: 'prefecture',
   city: 'city',
@@ -156,15 +168,60 @@ export const OrganizationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   name: 'name',
+  displayName: 'displayName',
   nameJa: 'nameJa',
+  nameKana: 'nameKana',
+  nameEn: 'nameEn',
+  email: 'email',
+  phone: 'phone',
   contactName: 'contactName',
   type: 'type',
+  representativeName: 'representativeName',
+  purpose: 'purpose',
   description: 'description',
+  activityAreas: 'activityAreas',
+  activityRegions: 'activityRegions',
   environmentStyle: 'environmentStyle',
   prefecture: 'prefecture',
   city: 'city',
   address: 'address',
+  googleMapsUrl: 'googleMapsUrl',
+  publicEmail: 'publicEmail',
+  publicPhone: 'publicPhone',
+  contactFormUrl: 'contactFormUrl',
   website: 'website',
+  snsLinks: 'snsLinks',
+  founded: 'founded',
+  recruitmentStatus: 'recruitmentStatus',
+  hasWaterDispenser: 'hasWaterDispenser',
+  hasRestRoom: 'hasRestRoom',
+  hasAirConditioning: 'hasAirConditioning',
+  activitySpaceSize: 'activitySpaceSize',
+  profileImageUrl: 'profileImageUrl',
+  workspaceImageUrls: 'workspaceImageUrls',
+  certificationStatus: 'certificationStatus',
+  certificationSource: 'certificationSource',
+  certifiedAt: 'certifiedAt',
+  certificationSubmittedAt: 'certificationSubmittedAt',
+  certificationReviewedAt: 'certificationReviewedAt',
+  certificationReviewNote: 'certificationReviewNote',
+  managerPhone: 'managerPhone',
+  managerLegalName: 'managerLegalName',
+  identityDocumentNote: 'identityDocumentNote',
+  managerAddress: 'managerAddress',
+  isLocationPublic: 'isLocationPublic',
+  contactPersonName: 'contactPersonName',
+  contactPersonRole: 'contactPersonRole',
+  contactPersonPhone: 'contactPersonPhone',
+  contactPersonEmail: 'contactPersonEmail',
+  antiSocialForcesConfirmed: 'antiSocialForcesConfirmed',
+  termsAccepted: 'termsAccepted',
+  legalEntityType: 'legalEntityType',
+  corporateNumber: 'corporateNumber',
+  legalName: 'legalName',
+  legalAddress: 'legalAddress',
+  registrationDocumentUrl: 'registrationDocumentUrl',
+  bylawsUrl: 'bylawsUrl',
   profileCompleted: 'profileCompleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -177,21 +234,55 @@ export const OpportunityScalarFieldEnum = {
   id: 'id',
   title: 'title',
   titleJa: 'titleJa',
+  shortDescription: 'shortDescription',
   description: 'description',
   descriptionJa: 'descriptionJa',
   type: 'type',
   status: 'status',
+  category: 'category',
+  tags: 'tags',
+  taskTypeColor: 'taskTypeColor',
+  environmentShape: 'environmentShape',
+  physicalEffort: 'physicalEffort',
+  mentalEffort: 'mentalEffort',
   skills: 'skills',
   prefecture: 'prefecture',
   city: 'city',
   address: 'address',
+  googleMapsUrl: 'googleMapsUrl',
+  latitude: 'latitude',
+  longitude: 'longitude',
   startAt: 'startAt',
   endAt: 'endAt',
+  arrivalTime: 'arrivalTime',
+  durationMinutes: 'durationMinutes',
   recurrenceRule: 'recurrenceRule',
   volunteersNeeded: 'volunteersNeeded',
+  maxApplicants: 'maxApplicants',
+  allowWaitlist: 'allowWaitlist',
+  allowMultipleTaskSelection: 'allowMultipleTaskSelection',
+  taskFlow: 'taskFlow',
+  customFields: 'customFields',
+  instructions: 'instructions',
+  toolsProvided: 'toolsProvided',
+  thingsToBring: 'thingsToBring',
+  arrivalGuidance: 'arrivalGuidance',
+  firstLandmarkDescription: 'firstLandmarkDescription',
+  firstLandmarkImageUrl: 'firstLandmarkImageUrl',
+  firstContactName: 'firstContactName',
+  firstContactRole: 'firstContactRole',
+  firstContactImageUrl: 'firstContactImageUrl',
+  coverImageUrl: 'coverImageUrl',
+  workspaceImageUrls: 'workspaceImageUrls',
+  workspace3dEmbedUrl: 'workspace3dEmbedUrl',
+  preApplicationQuestions: 'preApplicationQuestions',
+  withdrawalCutoffHours: 'withdrawalCutoffHours',
+  aiTemplateUsed: 'aiTemplateUsed',
   requesterId: 'requesterId',
   organizationId: 'organizationId',
   aiDrafted: 'aiDrafted',
+  publishedAt: 'publishedAt',
+  completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -204,15 +295,77 @@ export const ApplicationScalarFieldEnum = {
   opportunityId: 'opportunityId',
   volunteerId: 'volunteerId',
   status: 'status',
+  selectedTaskItems: 'selectedTaskItems',
+  confirmedTimeCommitment: 'confirmedTimeCommitment',
+  skillTags: 'skillTags',
+  experienceNote: 'experienceNote',
   message: 'message',
+  questionAnswers: 'questionAnswers',
+  waitlistPosition: 'waitlistPosition',
+  reviewedByEmployerId: 'reviewedByEmployerId',
+  participantGroup: 'participantGroup',
+  participantRole: 'participantRole',
+  accessLevel: 'accessLevel',
+  organizerNote: 'organizerNote',
+  rejectionReason: 'rejectionReason',
+  attendanceStatus: 'attendanceStatus',
+  checkedInAt: 'checkedInAt',
+  checkinMethod: 'checkinMethod',
   matchScore: 'matchScore',
   aiRecommended: 'aiRecommended',
   reviewedAt: 'reviewedAt',
+  withdrawnAt: 'withdrawnAt',
+  withdrawalReason: 'withdrawalReason',
+  completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  opportunityId: 'opportunityId',
+  applicationId: 'applicationId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  channel: 'channel',
+  metadata: 'metadata',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const EventUpdateScalarFieldEnum = {
+  id: 'id',
+  opportunityId: 'opportunityId',
+  organizerId: 'organizerId',
+  type: 'type',
+  message: 'message',
+  highlightedDetail: 'highlightedDetail',
+  createdAt: 'createdAt'
+} as const
+
+export type EventUpdateScalarFieldEnum = (typeof EventUpdateScalarFieldEnum)[keyof typeof EventUpdateScalarFieldEnum]
+
+
+export const EventMessageScalarFieldEnum = {
+  id: 'id',
+  opportunityId: 'opportunityId',
+  applicationId: 'applicationId',
+  senderId: 'senderId',
+  recipientId: 'recipientId',
+  body: 'body',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type EventMessageScalarFieldEnum = (typeof EventMessageScalarFieldEnum)[keyof typeof EventMessageScalarFieldEnum]
 
 
 export const BookingScalarFieldEnum = {
@@ -248,6 +401,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -262,4 +422,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

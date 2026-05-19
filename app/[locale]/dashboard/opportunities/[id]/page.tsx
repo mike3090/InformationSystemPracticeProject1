@@ -8,10 +8,12 @@ import {
   type ApplicationStatusView,
 } from "../../applicationStatus";
 import ApplicationReviewForm from "./ApplicationReviewForm";
+import { bulkUpdateApplicationReview } from "./actions";
 import {
   OrganizerReplyForm,
   OrganizerUpdateForm,
 } from "./OrganizerCommunicationForms";
+import ParticipantManagementForm from "./ParticipantManagementForm";
 import {
   getEventMessages,
   type EventMessageView,
@@ -39,6 +41,11 @@ type ApplicantReview = {
   experienceNote: string | null;
   message: string | null;
   waitlistPosition: number | null;
+  participantGroup: string | null;
+  participantRole: string;
+  accessLevel: string;
+  attendanceStatus: string;
+  organizerNote: string | null;
   reviewedAt: Date | null;
   createdAt: Date;
   volunteerId: string;
@@ -54,10 +61,14 @@ type RawApplicantReview = Omit<ApplicantReview, "messages">;
 
 export default async function RequesterOpportunityReviewPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; id: string }>;
+  searchParams?: Promise<{ status?: string }>;
 }) {
   const { locale, id } = await params;
+  const { status: rawStatusFilter } = (await searchParams) ?? {};
+  const statusFilter = normalizeStatusFilter(rawStatusFilter);
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -92,6 +103,9 @@ export default async function RequesterOpportunityReviewPage({
   const applicants = await getApplicants(id);
   const pendingCount = applicants.filter((applicant) => applicant.status === "PENDING").length;
   const acceptedCount = applicants.filter((applicant) => applicant.status === "ACCEPTED").length;
+  const waitlistedCount = applicants.filter((applicant) => applicant.status === "WAITLISTED").length;
+  const displayApplicants = filterApplicants(applicants, statusFilter);
+  const participantGroups = summarizeParticipantGroups(applicants);
 
   return (
     <div className="bg-stone-50">
@@ -130,6 +144,15 @@ export default async function RequesterOpportunityReviewPage({
                 value={`${acceptedCount}/${opportunity.volunteersNeeded}`}
               />
             </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Link
+              href={`/${locale}/dashboard/opportunities/${opportunity.id}/edit`}
+              className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 hover:border-green-700 hover:text-green-700"
+            >
+              {locale === "en" ? "Edit opportunity" : "募集を編集"}
+            </Link>
           </div>
 
           <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-3">
@@ -177,23 +200,95 @@ export default async function RequesterOpportunityReviewPage({
             </div>
           </div>
 
-          {applicants.length === 0 ? (
+          <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_18rem]">
+            <nav className="flex flex-wrap gap-2" aria-label="Application status filters">
+              <StatusFilterLink
+                href={`/${locale}/dashboard/opportunities/${opportunity.id}`}
+                active={statusFilter === "all"}
+                label={locale === "en" ? "All" : "すべて"}
+                count={applicants.length}
+              />
+              <StatusFilterLink
+                href={`/${locale}/dashboard/opportunities/${opportunity.id}?status=pending`}
+                active={statusFilter === "pending"}
+                label={locale === "en" ? "Pending" : "審査中"}
+                count={pendingCount}
+              />
+              <StatusFilterLink
+                href={`/${locale}/dashboard/opportunities/${opportunity.id}?status=accepted`}
+                active={statusFilter === "accepted"}
+                label={locale === "en" ? "Accepted" : "承認済み"}
+                count={acceptedCount}
+              />
+              <StatusFilterLink
+                href={`/${locale}/dashboard/opportunities/${opportunity.id}?status=waitlisted`}
+                active={statusFilter === "waitlisted"}
+                label={locale === "en" ? "Waitlisted" : "待機"}
+                count={waitlistedCount}
+              />
+              <StatusFilterLink
+                href={`/${locale}/dashboard/opportunities/${opportunity.id}?status=closed`}
+                active={statusFilter === "closed"}
+                label={locale === "en" ? "Closed" : "終了"}
+                count={
+                  applicants.filter((applicant) =>
+                    ["REJECTED", "WITHDRAWN"].includes(applicant.status),
+                  ).length
+                }
+              />
+            </nav>
+
+            <aside className="rounded-lg border border-stone-200 bg-stone-50 p-4">
+              <h3 className="text-sm font-bold text-stone-950">
+                {locale === "en" ? "Participant groups" : "参加者グループ"}
+              </h3>
+              {participantGroups.length === 0 ? (
+                <p className="mt-2 text-sm text-stone-600">
+                  {locale === "en"
+                    ? "No groups assigned yet."
+                    : "まだグループ設定はありません。"}
+                </p>
+              ) : (
+                <div className="mt-3 space-y-2">
+                  {participantGroups.map((group) => (
+                    <div key={group.name} className="flex justify-between text-sm">
+                      <span className="font-medium text-stone-700">{group.name}</span>
+                      <span className="text-stone-500">{group.count}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </aside>
+          </div>
+
+          {displayApplicants.length === 0 ? (
             <p className="mt-6 rounded-lg border border-dashed border-stone-300 bg-stone-50 p-6 text-sm text-stone-600">
-              {locale === "en"
-                ? "No one has applied yet."
-                : "まだ応募者はいません。"}
+              {applicants.length === 0
+                ? locale === "en"
+                  ? "No one has applied yet."
+                  : "まだ応募者はいません。"
+                : locale === "en"
+                  ? "No applicants match this filter."
+                  : "この条件に一致する応募者はいません。"}
             </p>
           ) : (
-            <div className="mt-6 grid gap-4">
-              {applicants.map((applicant) => (
-                <ApplicantCard
-                  key={applicant.id}
-                  applicant={applicant}
-                  opportunity={opportunity}
-                  locale={locale}
-                />
-              ))}
-            </div>
+            <>
+              <BulkReviewForm
+                applicants={displayApplicants}
+                locale={locale}
+                opportunityId={opportunity.id}
+              />
+              <div className="mt-6 grid gap-4">
+                {displayApplicants.map((applicant) => (
+                  <ApplicantCard
+                    key={applicant.id}
+                    applicant={applicant}
+                    opportunity={opportunity}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </section>
       </div>
@@ -212,6 +307,11 @@ async function getApplicants(opportunityId: string): Promise<ApplicantReview[]> 
       a."experienceNote" AS "experienceNote",
       a."message",
       a."waitlistPosition" AS "waitlistPosition",
+      a."participantGroup" AS "participantGroup",
+      a."participantRole" AS "participantRole",
+      a."accessLevel" AS "accessLevel",
+      a."attendanceStatus" AS "attendanceStatus",
+      a."organizerNote" AS "organizerNote",
       a."reviewedAt" AS "reviewedAt",
       a."createdAt" AS "createdAt",
       u."id" AS "volunteerId",
@@ -369,6 +469,17 @@ function ApplicantCard({
             : ""}
         </p>
 
+        <ParticipantManagementForm
+          locale={locale}
+          opportunityId={opportunity.id}
+          applicationId={applicant.id}
+          participantGroup={applicant.participantGroup}
+          participantRole={applicant.participantRole}
+          accessLevel={applicant.accessLevel}
+          attendanceStatus={applicant.attendanceStatus}
+          organizerNote={applicant.organizerNote}
+        />
+
         {applicant.status === "ACCEPTED" && (
           <div className="mt-4 rounded-lg border border-stone-200 bg-stone-50 p-4">
             <h4 className="font-semibold text-stone-950">
@@ -422,11 +533,173 @@ function ApplicantCard({
   );
 }
 
+function BulkReviewForm({
+  applicants,
+  locale,
+  opportunityId,
+}: {
+  applicants: ApplicantReview[];
+  locale: string;
+  opportunityId: string;
+}) {
+  return (
+    <form
+      action={bulkUpdateApplicationReview}
+      className="mt-6 rounded-lg border border-stone-200 bg-stone-50 p-4"
+    >
+      <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="opportunityId" value={opportunityId} />
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h3 className="text-sm font-bold text-stone-950">
+            {locale === "en" ? "Bulk review" : "一括審査"}
+          </h3>
+          <p className="mt-1 text-sm leading-6 text-stone-600">
+            {locale === "en"
+              ? "Select applicants from the current filter and apply one review decision."
+              : "現在の絞り込み対象から応募者を選び、同じ審査結果を一括適用します。"}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            name="nextStatus"
+            value="ACCEPTED"
+            className="rounded-lg bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600"
+          >
+            {locale === "en" ? "Accept selected" : "選択を承認"}
+          </button>
+          <button
+            name="nextStatus"
+            value="WAITLISTED"
+            className="rounded-lg bg-sky-700 px-3 py-2 text-sm font-semibold text-white hover:bg-sky-600"
+          >
+            {locale === "en" ? "Waitlist selected" : "選択を待機"}
+          </button>
+          <button
+            name="nextStatus"
+            value="REJECTED"
+            className="rounded-lg bg-stone-900 px-3 py-2 text-sm font-semibold text-white hover:bg-stone-700"
+          >
+            {locale === "en" ? "Reject selected" : "選択を不採用"}
+          </button>
+        </div>
+      </div>
+      <div className="mt-4 grid gap-2 md:grid-cols-2">
+        {applicants.map((applicant) => {
+          const volunteerName =
+            applicant.volunteerName || applicant.volunteerEmail || applicant.volunteerId;
+          return (
+            <label
+              key={applicant.id}
+              className="flex items-center gap-3 rounded-lg border border-stone-200 bg-white p-3 text-sm"
+            >
+              <input
+                name="applicationIds"
+                value={applicant.id}
+                type="checkbox"
+                className="h-4 w-4"
+              />
+              <span className="min-w-0">
+                <span className="block truncate font-semibold text-stone-900">
+                  {volunteerName}
+                </span>
+                <span className="block text-xs text-stone-500">
+                  {applicant.status}
+                  {applicant.participantGroup ? ` · ${applicant.participantGroup}` : ""}
+                </span>
+              </span>
+            </label>
+          );
+        })}
+      </div>
+    </form>
+  );
+}
+
 function getApplicantReviewStatusView(status: string): ApplicationStatusView {
   if (status === "ACCEPTED") return "confirmed";
   if (status === "WAITLISTED") return "waitlisted";
   if (status === "REJECTED" || status === "WITHDRAWN") return "cancelled";
   return "pending";
+}
+
+function StatusFilterLink({
+  href,
+  active,
+  label,
+  count,
+}: {
+  href: string;
+  active: boolean;
+  label: string;
+  count: number;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+        active
+          ? "border-green-700 bg-green-700 text-white"
+          : "border-stone-300 text-stone-700 hover:border-green-700 hover:text-green-700"
+      }`}
+    >
+      <span>{label}</span>
+      <span
+        className={`rounded-full px-2 py-0.5 text-xs ${
+          active ? "bg-white/20 text-white" : "bg-stone-100 text-stone-600"
+        }`}
+      >
+        {count}
+      </span>
+    </Link>
+  );
+}
+
+function normalizeStatusFilter(value: string | undefined) {
+  if (
+    value === "pending" ||
+    value === "accepted" ||
+    value === "waitlisted" ||
+    value === "closed"
+  ) {
+    return value;
+  }
+  return "all";
+}
+
+function filterApplicants(
+  applicants: ApplicantReview[],
+  statusFilter: ReturnType<typeof normalizeStatusFilter>,
+) {
+  if (statusFilter === "pending") {
+    return applicants.filter((applicant) => applicant.status === "PENDING");
+  }
+  if (statusFilter === "accepted") {
+    return applicants.filter((applicant) => applicant.status === "ACCEPTED");
+  }
+  if (statusFilter === "waitlisted") {
+    return applicants.filter((applicant) => applicant.status === "WAITLISTED");
+  }
+  if (statusFilter === "closed") {
+    return applicants.filter((applicant) =>
+      ["REJECTED", "WITHDRAWN"].includes(applicant.status),
+    );
+  }
+  return applicants;
+}
+
+function summarizeParticipantGroups(applicants: ApplicantReview[]) {
+  const groups = new Map<string, number>();
+  applicants.forEach((applicant) => {
+    if (!applicant.participantGroup) return;
+    groups.set(
+      applicant.participantGroup,
+      (groups.get(applicant.participantGroup) ?? 0) + 1,
+    );
+  });
+  return Array.from(groups, ([name, count]) => ({ name, count })).sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
 }
 
 function Metric({ label, value }: { label: string; value: string }) {

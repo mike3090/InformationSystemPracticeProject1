@@ -104,6 +104,11 @@ export default async function OpportunityDetailPage({
                   <span className="rounded-sm bg-white/20 px-2.5 py-1">
                     {opportunity.category}
                   </span>
+                  {opportunity.trustedOrganizer && (
+                    <span className="rounded-sm bg-green-600 px-2.5 py-1 text-white">
+                      {locale === "en" ? "Trusted" : "信頼済み"}
+                    </span>
+                  )}
                   <span className="rounded-sm bg-white/20 px-2.5 py-1">
                     {t("spotsLeft", { count: opportunity.spotsRemaining })}
                   </span>
@@ -122,6 +127,11 @@ export default async function OpportunityDetailPage({
                 <SectionLabel number="1" title={t("basic.title")} />
                 <p className="text-sm font-semibold text-stone-500">
                   {t("basic.organizedBy", { name: opportunity.organizerName })}
+                  {opportunity.trustedOrganizer && (
+                    <span className="ml-2 rounded-full bg-green-50 px-2 py-0.5 text-xs font-bold text-green-700">
+                      {locale === "en" ? "Trusted" : "信頼済み"}
+                    </span>
+                  )}
                 </p>
                 <p className="mt-4 text-base leading-7 text-stone-700">
                   {opportunity.description}

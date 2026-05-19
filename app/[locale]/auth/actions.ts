@@ -17,7 +17,8 @@ export async function registerAccount(
   formData: FormData
 ): Promise<RegisterState> {
   const locale = String(formData.get("locale") ?? "ja");
-  const accountType = String(formData.get("accountType") ?? "volunteer");
+  const rawAccountType = String(formData.get("accountType") ?? "volunteer");
+  const accountType = rawAccountType === "requester" ? "requester" : "volunteer";
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
