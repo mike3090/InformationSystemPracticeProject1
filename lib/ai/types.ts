@@ -384,7 +384,8 @@ export type RankOpportunitiesOutput = {
 
 export type TranslateTextInput = {
   text: string;
-  targetLocale: "ja" | "en";
+  /** BCP-47-style code: "ja", "en", "zh", "ko", "es", "fr", … */
+  targetLocale: string;
   context?: string; // Optional hint: e.g. "volunteer opportunity title", "chat message"
 };
 

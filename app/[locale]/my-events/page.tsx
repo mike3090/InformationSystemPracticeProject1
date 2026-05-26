@@ -355,12 +355,12 @@ const englishCopy = {
 
 const japaneseCopy = {
   eyebrow: "活動前コミュニケーション",
-  title: "My Events",
+  title: "マイイベント",
   intro:
     "確認済みの参加予定を一か所で確認できます。日時、場所、担当タスク、連絡情報をまとめて表示します。",
   opportunities: "募集を探す",
-  upcoming: "Upcoming Events",
-  past: "Past Events",
+  upcoming: "今後のイベント",
+  past: "過去のイベント",
   cancelled: "Cancelled",
   noUpcoming: "確認済みの今後の活動がここに表示されます。",
   noPast: "終了した確認済み活動がここに表示されます。",

@@ -1,11 +1,12 @@
 // POST /api/ai/translate
-// Called by both volunteers (reading Japanese opportunity descriptions) and
-// organisers (reading volunteer messages in Japanese or English).
 // Body: { text, targetLocale, context?, locale? }
+// targetLocale accepts any supported language code: "ja", "en", "zh", "ko", "es", "fr"
 
 import { auth } from "@/lib/auth";
 import { translateText } from "@/lib/ai";
-import type { AgentContext, TranslateTextInput } from "@/lib/ai";
+import type { AgentContext } from "@/lib/ai";
+
+const SUPPORTED_LOCALES = new Set(["ja", "en", "zh", "ko", "es", "fr"]);
 
 export async function POST(request: Request) {
   const session = await auth();
@@ -13,12 +14,15 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: "You must be signed in.", code: "UNAUTHORIZED" }, { status: 401 });
   }
 
-  let body: TranslateTextInput & { locale?: unknown };
+  let body: { text?: unknown; targetLocale?: unknown; context?: unknown; locale?: unknown };
   try {
     body = await request.json();
   } catch {
     return Response.json({ ok: false, error: "Invalid request body.", code: "INVALID_INPUT" }, { status: 400 });
   }
+
+  const rawTarget = typeof body.targetLocale === "string" ? body.targetLocale : "";
+  const targetLocale = SUPPORTED_LOCALES.has(rawTarget) ? rawTarget : "ja";
 
   const ctx: AgentContext = {
     userId: session.user.id,
@@ -29,7 +33,7 @@ export async function POST(request: Request) {
   const result = await translateText(
     {
       text: String(body.text ?? ""),
-      targetLocale: body.targetLocale === "en" ? "en" : "ja",
+      targetLocale,
       context: typeof body.context === "string" ? body.context : undefined,
     },
     ctx,

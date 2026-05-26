@@ -6,6 +6,7 @@ import {
   type ExperienceView,
 } from "@/lib/experienceDemo";
 import { ExperienceLikeButton } from "../ExperienceLikeButton";
+import InlineTranslate from "@/components/InlineTranslate";
 
 export default async function ExperienceDetailPage({
   params,
@@ -84,9 +85,13 @@ export default async function ExperienceDetailPage({
               ))}
             </div>
 
-            <p className="mt-6 whitespace-pre-line text-base leading-8 text-stone-700">
-              {experience.body}
-            </p>
+            <InlineTranslate
+              text={experience.body}
+              targetLocale={locale as "ja" | "en"}
+              locale={locale}
+              context="Personal reflection written by a volunteer after attending a community event in Japan"
+              textClassName="mt-6 whitespace-pre-line text-base leading-8 text-stone-700"
+            />
           </div>
         </article>
 

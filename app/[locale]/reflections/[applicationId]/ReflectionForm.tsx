@@ -208,7 +208,7 @@ export default function ReflectionForm({
         <p className="text-xs text-stone-500">
           {locale === "en"
             ? "You can come back from My Events -> Past Events."
-            : "My Events の Past Events からいつでも戻れます。"}
+            : "マイイベントの過去のイベントからいつでも戻れます。"}
         </p>
       </div>
     </form>

@@ -41,7 +41,7 @@ export default function Navbar({ locale }: { locale: string }) {
               )}
               {canUseVolunteerTools && (
                 <Link href={`/${locale}/my-events`} className="hover:text-green-700 transition">
-                  {locale === "en" ? "My Events" : "My Events"}
+                  {locale === "en" ? "My Events" : "マイエベンと"}
                 </Link>
               )}
               <Link href={`/${locale}/profile`} className="hover:text-green-700 transition">

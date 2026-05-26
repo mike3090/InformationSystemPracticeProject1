@@ -22,16 +22,26 @@ import type {
   TranslateTextOutput,
 } from "@/lib/ai/types";
 
+// ── Supported language map ────────────────────────────────────────────────────
+
+const LANGUAGE_LABELS: Record<string, string> = {
+  en: "English",
+  ja: "Japanese",
+  zh: "Chinese (Simplified)",
+  ko: "Korean",
+  es: "Spanish",
+  fr: "French",
+};
+
+function languageLabel(code: string): string {
+  return LANGUAGE_LABELS[code] ?? code;
+}
+
 // ── Mock output ───────────────────────────────────────────────────────────────
 
 function buildMockOutput(input: TranslateTextInput): TranslateTextOutput {
-  // In mock mode, return a placeholder that makes it obvious AI was bypassed.
-  // The original text is echoed so the UI still has something to display.
   return {
-    translation:
-      input.targetLocale === "en"
-        ? `[Mock translation → English] ${input.text}`
-        : `[モック翻訳 → 日本語] ${input.text}`,
+    translation: `[Mock → ${languageLabel(input.targetLocale)}] ${input.text}`,
     detectedSourceLocale: input.targetLocale === "en" ? "ja" : "en",
     nuanceNote: null,
   };
@@ -51,12 +61,12 @@ const RESPONSE_SCHEMA = {
 // ── Prompt builder ────────────────────────────────────────────────────────────
 
 function buildPrompt(input: TranslateTextInput): string {
-  const targetLangLabel = input.targetLocale === "en" ? "English" : "Japanese";
+  const targetLangLabel = languageLabel(input.targetLocale);
   const contextLine = input.context
     ? `Context about this text: ${input.context}`
     : "No additional context provided.";
 
-  return `You are a bilingual Japanese–English translator working for a community volunteer platform in Japan.
+  return `You are a multilingual translator working for a community volunteer platform in Japan.
 Translate the following text into ${targetLangLabel}.
 
 Text to translate:
