@@ -79,7 +79,7 @@ export async function updateOpportunity(formData: FormData) {
 
   const opportunity = await prisma.opportunity.findFirst({
     where: { id: opportunityId, requesterId: session.user.id },
-    select: { id: true, status: true },
+    select: { id: true, status: true, taskFlow: true },
   });
 
   if (!opportunity) {
@@ -94,7 +94,11 @@ export async function updateOpportunity(formData: FormData) {
       ? "OPEN"
       : opportunity.status;
   const volunteersNeeded = numberValue(formData, "volunteersNeeded", 1);
-  const taskFlow = parseTaskFlow(formData);
+  const editedFirstTask = parseTaskFlow(formData);
+  const existingAdditionalTasks = Array.isArray(opportunity.taskFlow)
+    ? opportunity.taskFlow.slice(1)
+    : [];
+  const taskFlow = [...editedFirstTask, ...existingAdditionalTasks];
   const thingsToBring = listValue(formData, "thingsToBring");
 
   if (startAt && endAt && endAt <= startAt) {
