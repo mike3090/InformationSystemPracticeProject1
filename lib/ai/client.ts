@@ -15,7 +15,7 @@ import { GoogleGenerativeAI, type GenerativeModel } from "@google/generative-ai"
 
 // The default model used by all agents unless they pass a different one.
 // Change this one constant to upgrade every agent at once.
-const DEFAULT_MODEL = "gemini-2.0-flash";
+const DEFAULT_MODEL = "gemini-2.5-flash";
 
 // ── Lazy singleton ────────────────────────────────────────────────────────────
 //
