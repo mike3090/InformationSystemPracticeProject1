@@ -10,6 +10,7 @@ import {
   getArrivalGuidance,
   sendEmailLater,
 } from "@/lib/preEventCommunication";
+import { buildConfirmation } from "@/lib/ai";
 
 type ReviewStatus = "ACCEPTED" | "WAITLISTED" | "REJECTED";
 export type ReviewActionState = {
@@ -108,7 +109,7 @@ export async function updateApplicationReview(
       ON CONFLICT ("applicationId") DO UPDATE
       SET "confirmedAt" = EXCLUDED."confirmedAt"
     `;
-    await sendConfirmationNotification(applicationId, locale);
+    await sendConfirmationNotification(applicationId, locale, session.user.id);
   } else {
     await prisma.$executeRaw`
       DELETE FROM "Booking"
@@ -197,7 +198,7 @@ export async function bulkUpdateApplicationReview(formData: FormData) {
         ON CONFLICT ("applicationId") DO UPDATE
         SET "confirmedAt" = EXCLUDED."confirmedAt"
       `;
-      await sendConfirmationNotification(applicationId, locale);
+      await sendConfirmationNotification(applicationId, locale, session.user.id);
     } else {
       await prisma.$executeRaw`
         DELETE FROM "Booking"
@@ -437,10 +438,15 @@ export async function updateParticipantManagement(
   };
 }
 
-async function sendConfirmationNotification(applicationId: string, locale: string) {
+async function sendConfirmationNotification(
+  applicationId: string,
+  locale: string,
+  requesterId: string,
+) {
   const rows = await prisma.$queryRaw<
     {
       volunteerId: string;
+      volunteerName: string | null;
       opportunityId: string;
       title: string;
       startAt: Date | null;
@@ -454,6 +460,7 @@ async function sendConfirmationNotification(applicationId: string, locale: strin
   >`
     SELECT
       a."volunteerId",
+      u."name" AS "volunteerName",
       a."opportunityId",
       a."selectedTaskItems" AS "selectedTaskItems",
       o."title",
@@ -465,6 +472,7 @@ async function sendConfirmationNotification(applicationId: string, locale: strin
       o."thingsToBring"
     FROM "Application" a
     INNER JOIN "Opportunity" o ON o."id" = a."opportunityId"
+    INNER JOIN "User" u ON u."id" = a."volunteerId"
     WHERE a."id" = ${applicationId}
     LIMIT 1
   `;
@@ -472,31 +480,58 @@ async function sendConfirmationNotification(applicationId: string, locale: strin
   if (!detail) return;
 
   const guidance = await getArrivalGuidance(detail.opportunityId);
-  const body = buildConfirmationBody({
-    eventName: detail.title,
-    dateTime: formatDateRange(detail.startAt, detail.endAt, locale),
-    location:
-      detail.address ||
-      [detail.city, detail.prefecture].filter(Boolean).join(", ") ||
-      "Location TBD",
-    task: selectedTaskLabel(detail.selectedTaskItems),
-    thingsToBring: detail.thingsToBring ?? [],
-    arrivalSummary:
-      guidance?.arrivalGuidance || guidance?.firstLandmarkDescription || null,
-  });
+  const location =
+    detail.address ||
+    [detail.city, detail.prefecture].filter(Boolean).join(", ") ||
+    "Location TBD";
+  const dateTime = formatDateRange(detail.startAt, detail.endAt, locale);
+  const taskNames = extractTaskNames(detail.selectedTaskItems);
+
+  const aiResult = await buildConfirmation(
+    {
+      eventName: detail.title,
+      dateTime,
+      location,
+      taskNames,
+      thingsToBring: detail.thingsToBring ?? [],
+      arrivalGuidance:
+        guidance?.arrivalGuidance || guidance?.firstLandmarkDescription || null,
+      volunteerName: detail.volunteerName,
+    },
+    { userId: requesterId, locale: locale === "en" ? "en" : "ja", opportunityId: detail.opportunityId },
+  );
+
+  let subject: string;
+  let body: string;
+
+  if (aiResult.ok) {
+    subject = aiResult.data.subject;
+    body = locale === "ja" ? aiResult.data.bodyJa : aiResult.data.bodyEn;
+  } else {
+    subject = `Confirmed: ${detail.title}`;
+    body = buildConfirmationBody({
+      eventName: detail.title,
+      dateTime,
+      location,
+      task: taskNames.join(", ") || "Task assignment pending",
+      thingsToBring: detail.thingsToBring ?? [],
+      arrivalSummary:
+        guidance?.arrivalGuidance || guidance?.firstLandmarkDescription || null,
+    });
+  }
 
   await createNotification({
     userId: detail.volunteerId,
     opportunityId: detail.opportunityId,
     applicationId,
     type: "CONFIRMATION",
-    title: `Confirmed: ${detail.title}`,
+    title: subject,
     body,
   });
 
   await sendEmailLater({
     toUserId: detail.volunteerId,
-    subject: `Confirmed: ${detail.title}`,
+    subject,
     body,
   });
 }
@@ -523,6 +558,17 @@ function selectedTaskLabel(value: unknown) {
     })
     .filter(Boolean);
   return names.join(", ") || "Task assignment pending";
+}
+
+function extractTaskNames(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => {
+      if (!item || typeof item !== "object") return "";
+      const name = (item as Record<string, unknown>).name;
+      return typeof name === "string" ? name : "";
+    })
+    .filter(Boolean);
 }
 
 function formatDateRange(startAt: Date | null, endAt: Date | null, locale: string) {

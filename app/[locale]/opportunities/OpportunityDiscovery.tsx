@@ -3,11 +3,31 @@
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import {
-  getOpportunityCoverImage,
-  type EffortLevel,
-  type MockOpportunity,
-} from "@/lib/mockOpportunities";
+
+export type EffortLevel = "low" | "medium" | "high";
+
+export type DiscoveryOpportunity = {
+  id: string;
+  title: string;
+  organizerName: string;
+  trustedOrganizer: boolean;
+  category: string;
+  city: string;
+  prefecture: string;
+  shortDescription: string;
+  description: string;
+  coverImageUrl: string | null;
+  startsAt: string;
+  endsAt: string;
+  volunteersNeeded: number;
+  spotsRemaining: number;
+  tags: string[];
+  physicalEffort: EffortLevel;
+  mentalEffort: EffortLevel;
+};
+
+const DEFAULT_COVER_IMAGE =
+  "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=1400&q=80";
 
 type DateFilter = "this-week" | "this-weekend" | "next-week";
 type DurationFilter = "under-2" | "half-day" | "full-day";
@@ -18,7 +38,7 @@ export default function OpportunityDiscovery({
   opportunities,
 }: {
   locale: string;
-  opportunities: MockOpportunity[];
+  opportunities: DiscoveryOpportunity[];
 }) {
   const t = useTranslations("opportunities.discovery");
   const [query, setQuery] = useState("");
@@ -54,11 +74,13 @@ export default function OpportunityDiscovery({
   const locations = useMemo(
     () =>
       unique(
-        opportunities.map((opportunity) =>
-          opportunity.city === opportunity.prefecture
-            ? opportunity.city
-            : `${opportunity.city}, ${opportunity.prefecture}`,
-        ),
+        opportunities
+          .filter((opportunity) => opportunity.city || opportunity.prefecture)
+          .map((opportunity) =>
+            !opportunity.city || opportunity.city === opportunity.prefecture
+              ? opportunity.prefecture
+              : `${opportunity.city}, ${opportunity.prefecture}`,
+          ),
       ),
     [opportunities],
   );
@@ -97,11 +119,8 @@ export default function OpportunityDiscovery({
       .filter((opportunity) =>
         selectedEfforts.length === 0
           ? true
-          : opportunity.taskFlow.some(
-              (task) =>
-                selectedEfforts.includes(task.physicalEffort) ||
-                selectedEfforts.includes(task.mentalEffort),
-            ),
+          : selectedEfforts.includes(opportunity.physicalEffort) ||
+            selectedEfforts.includes(opportunity.mentalEffort),
       )
       .filter((opportunity) => {
         const normalizedQuery = query.trim().toLowerCase();
@@ -116,13 +135,6 @@ export default function OpportunityDiscovery({
           opportunity.shortDescription,
           opportunity.description,
           ...opportunity.tags,
-          ...opportunity.taskFlow.flatMap((task) => [
-            task.name,
-            task.shortDescription,
-            task.fullDescription,
-            ...task.toolsProvided,
-            ...task.thingsToBring,
-          ]),
         ]
           .join(" ")
           .toLowerCase();
@@ -382,7 +394,7 @@ function OpportunityCard({
   labels,
 }: {
   locale: string;
-  opportunity: MockOpportunity;
+  opportunity: DiscoveryOpportunity;
   labels: {
     location: string;
     when: string;
@@ -397,7 +409,7 @@ function OpportunityCard({
   return (
     <article className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
       <img
-        src={getOpportunityCoverImage(opportunity)}
+        src={opportunity.coverImageUrl ?? DEFAULT_COVER_IMAGE}
         alt=""
         className="h-40 w-full object-cover"
       />
@@ -514,7 +526,7 @@ function unique(values: string[]) {
   );
 }
 
-function getDurationMinutes(opportunity: MockOpportunity) {
+function getDurationMinutes(opportunity: DiscoveryOpportunity) {
   return Math.round(
     (new Date(opportunity.endsAt).getTime() -
       new Date(opportunity.startsAt).getTime()) /

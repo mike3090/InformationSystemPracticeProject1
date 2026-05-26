@@ -7,6 +7,7 @@ import {
   parseSelectedTaskItems,
   type ApplicationStatusView,
 } from "../../applicationStatus";
+import AiMatchButton from "./AiMatchButton";
 import ApplicationReviewForm from "./ApplicationReviewForm";
 import { bulkUpdateApplicationReview } from "./actions";
 import {
@@ -41,6 +42,8 @@ type ApplicantReview = {
   experienceNote: string | null;
   message: string | null;
   waitlistPosition: number | null;
+  matchScore: number | null;
+  aiRecommended: boolean;
   participantGroup: string | null;
   participantRole: string;
   accessLevel: string;
@@ -198,6 +201,11 @@ export default async function RequesterOpportunityReviewPage({
                   : "ボランティアからの応募を確認し、ボランティア側に表示されるステータスを更新できます。"}
               </p>
             </div>
+            <AiMatchButton
+              opportunityId={opportunity.id}
+              locale={locale}
+              pendingCount={pendingCount}
+            />
           </div>
 
           <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_18rem]">
@@ -307,6 +315,8 @@ async function getApplicants(opportunityId: string): Promise<ApplicantReview[]> 
       a."experienceNote" AS "experienceNote",
       a."message",
       a."waitlistPosition" AS "waitlistPosition",
+      a."matchScore" AS "matchScore",
+      a."aiRecommended" AS "aiRecommended",
       a."participantGroup" AS "participantGroup",
       a."participantRole" AS "participantRole",
       a."accessLevel" AS "accessLevel",
@@ -331,6 +341,7 @@ async function getApplicants(opportunityId: string): Promise<ApplicantReview[]> 
         WHEN 'ACCEPTED' THEN 2
         ELSE 3
       END,
+      CASE WHEN a."status" = 'PENDING' THEN a."matchScore" END DESC NULLS LAST,
       a."createdAt" ASC
   `;
 
@@ -371,6 +382,24 @@ function ApplicantCard({
           {applicant.waitlistPosition && (
             <span className="rounded-full bg-sky-50 px-2.5 py-1 text-xs font-semibold text-sky-800">
               #{applicant.waitlistPosition}
+            </span>
+          )}
+          {applicant.matchScore !== null && (
+            <span
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                applicant.matchScore >= 75
+                  ? "bg-green-100 text-green-800"
+                  : applicant.matchScore >= 50
+                    ? "bg-amber-100 text-amber-800"
+                    : "bg-stone-100 text-stone-600"
+              }`}
+            >
+              AI {applicant.matchScore}
+            </span>
+          )}
+          {applicant.aiRecommended && (
+            <span className="rounded-full bg-green-700 px-2.5 py-1 text-xs font-semibold text-white">
+              {locale === "en" ? "Recommended" : "推薦"}
             </span>
           )}
         </div>
