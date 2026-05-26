@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { useActionState, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
+import UserAvatar from "@/components/UserAvatar";
 import {
   submitEventApplication,
   withdrawEventApplication,
@@ -672,8 +674,17 @@ function SuccessScreen({
   onClose: () => void;
 }) {
   const t = useTranslations("opportunities.applicationFlow");
+  const { data: session } = useSession();
   return (
     <div className="p-6">
+      {session?.user && (
+        <div className="mb-4 flex items-center gap-3">
+          <UserAvatar image={session.user.image} name={session.user.name} size="md" />
+          <span className="text-sm font-semibold text-stone-800">
+            {session.user.name ?? session.user.email}
+          </span>
+        </div>
+      )}
       <p className="text-xs font-semibold uppercase text-green-700">
         {isWaitlist ? t("success.waitlistJoined") : t("success.submitted")}
       </p>
