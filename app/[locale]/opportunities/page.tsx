@@ -1,8 +1,55 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import OpportunityDiscovery from "./OpportunityDiscovery";
-import { mockOpportunities } from "@/lib/mockOpportunities";
-import { localizeMockOpportunities } from "@/lib/mockOpportunityI18n";
+import { prisma } from "@/lib/db";
+import OpportunityDiscovery, { type DiscoveryOpportunity, type EffortLevel } from "./OpportunityDiscovery";
+
+async function getOpenOpportunities(): Promise<DiscoveryOpportunity[]> {
+  const rows = await prisma.opportunity.findMany({
+    where: { status: "OPEN", startAt: { gt: new Date() } },
+    orderBy: { startAt: "asc" },
+    take: 50,
+    select: {
+      id: true,
+      title: true,
+      category: true,
+      tags: true,
+      city: true,
+      prefecture: true,
+      shortDescription: true,
+      description: true,
+      coverImageUrl: true,
+      startAt: true,
+      endAt: true,
+      volunteersNeeded: true,
+      physicalEffort: true,
+      mentalEffort: true,
+      aiDrafted: true,
+      organization: { select: { name: true, certificationStatus: true } },
+      requester: { select: { name: true } },
+      _count: { select: { applications: { where: { status: "ACCEPTED" } } } },
+    },
+  });
+
+  return rows.map((row) => ({
+    id: row.id,
+    title: row.title,
+    organizerName: row.organization?.name ?? row.requester.name ?? "Unknown organizer",
+    trustedOrganizer: row.organization?.certificationStatus === "certified",
+    category: row.category ?? "",
+    city: row.city ?? "",
+    prefecture: row.prefecture ?? "",
+    shortDescription: row.shortDescription ?? "",
+    description: row.description,
+    coverImageUrl: row.coverImageUrl,
+    startsAt: row.startAt?.toISOString() ?? "",
+    endsAt: row.endAt?.toISOString() ?? "",
+    volunteersNeeded: row.volunteersNeeded,
+    spotsRemaining: Math.max(0, row.volunteersNeeded - row._count.applications),
+    tags: row.tags,
+    physicalEffort: (row.physicalEffort as EffortLevel) ?? "medium",
+    mentalEffort: (row.mentalEffort as EffortLevel) ?? "medium",
+  }));
+}
 
 export default async function OpportunitiesPage({
   params,
@@ -11,7 +58,7 @@ export default async function OpportunitiesPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations("opportunities");
-  const opportunities = localizeMockOpportunities(mockOpportunities, locale);
+  const opportunities = await getOpenOpportunities();
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
