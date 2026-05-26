@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import type { OpportunityStatus, UserRole } from "@/app/generated/prisma/client";
 import { auth } from "@/lib/auth";
@@ -9,45 +8,6 @@ import {
   submitOrganizationCertification,
   updateOpportunityStatus,
 } from "./actions";
-import VolunteerApplicationsPanel, {
-  type DashboardApplicationView,
-} from "./VolunteerApplicationsPanel";
-
-type DashboardApplication = {
-  id: string;
-  status: string;
-  selectedTaskItems: unknown;
-  confirmedTimeCommitment: boolean;
-  waitlistPosition: number | null;
-  createdAt: Date;
-  opportunity: {
-    id: string;
-    title: string;
-    city: string | null;
-    prefecture: string | null;
-    address: string | null;
-    startAt: Date | null;
-    endAt: Date | null;
-    status: OpportunityStatus;
-  };
-};
-
-type RawDashboardApplication = {
-  id: string;
-  status: string;
-  selectedTaskItems: unknown;
-  confirmedTimeCommitment: boolean;
-  waitlistPosition: number | null;
-  createdAt: Date;
-  opportunityTitle: string;
-  opportunityId: string;
-  opportunityCity: string | null;
-  opportunityPrefecture: string | null;
-  opportunityAddress: string | null;
-  opportunityStartAt: Date | null;
-  opportunityEndAt: Date | null;
-  opportunityStatus: OpportunityStatus;
-};
 
 type RequesterOpportunity = {
   id: string;
@@ -96,231 +56,68 @@ export default async function DashboardPage({
     redirect(`/${locale}/auth/signin?callbackUrl=/${locale}/dashboard`);
   }
 
-  const [t, user, applications, requesterOpportunities] = await Promise.all([
-    getTranslations("dashboard"),
-    prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: {
-        role: true,
-        name: true,
-        organization: {
-          select: {
-            id: true,
-            name: true,
-            certificationStatus: true,
-            certificationSubmittedAt: true,
-            certificationReviewedAt: true,
-            certificationReviewNote: true,
-            certificationSource: true,
-            certifiedAt: true,
-            managerPhone: true,
-            managerLegalName: true,
-            contactPersonEmail: true,
-            contactPersonPhone: true,
-            legalName: true,
-            legalAddress: true,
-            termsAccepted: true,
-            type: true,
-          },
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      role: true,
+      name: true,
+      organization: {
+        select: {
+          id: true,
+          name: true,
+          certificationStatus: true,
+          certificationSubmittedAt: true,
+          certificationReviewedAt: true,
+          certificationReviewNote: true,
+          certificationSource: true,
+          certifiedAt: true,
+          managerPhone: true,
+          managerLegalName: true,
+          contactPersonEmail: true,
+          contactPersonPhone: true,
+          legalName: true,
+          legalAddress: true,
+          termsAccepted: true,
+          type: true,
         },
       },
-    }),
-    getDashboardApplications(session.user.id),
-    prisma.opportunity.findMany({
-      where: { requesterId: session.user.id },
-      orderBy: [{ startAt: "asc" }, { createdAt: "desc" }],
-      select: {
-        id: true,
-        title: true,
-        status: true,
-        startAt: true,
-        endAt: true,
-        city: true,
-        prefecture: true,
-        volunteersNeeded: true,
-        applications: {
-          select: {
-            status: true,
-            attendanceStatus: true,
-          },
-        },
-        _count: { select: { applications: true } },
-      },
-    }),
-  ]);
+    },
+  });
 
   const role = user?.role ?? session.user.role;
-  const showVolunteerDashboard = canUseVolunteerDashboard(role);
-  const showRequesterDashboard = canUseRequesterDashboard(role);
-  const applicationViews = applications.map(serializeDashboardApplication);
-
-  if (showRequesterDashboard) {
-    return (
-      <RequesterDashboard
-        locale={locale}
-        opportunities={requesterOpportunities}
-        organization={user?.organization ?? null}
-        isAdmin={role === "ADMIN"}
-        showVolunteerPanel={showVolunteerDashboard}
-        volunteerApplications={applicationViews}
-        volunteerApplicationCount={applications.length}
-      />
-    );
+  if (!canUseRequesterDashboard(role)) {
+    redirect(`/${locale}/opportunities`);
   }
 
+  const requesterOpportunities = await prisma.opportunity.findMany({
+    where: { requesterId: session.user.id },
+    orderBy: [{ startAt: "asc" }, { createdAt: "desc" }],
+    select: {
+      id: true,
+      title: true,
+      status: true,
+      startAt: true,
+      endAt: true,
+      city: true,
+      prefecture: true,
+      volunteersNeeded: true,
+      applications: {
+        select: {
+          status: true,
+          attendanceStatus: true,
+        },
+      },
+      _count: { select: { applications: true } },
+    },
+  });
+
   return (
-    <div className="bg-stone-50">
-      <div className="mx-auto max-w-6xl px-6 py-10">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-green-700">
-              {t("eyebrow")}
-            </p>
-            <h1 className="mt-2 text-3xl font-bold text-stone-950">
-              {showVolunteerDashboard
-                ? t("volunteer.title")
-                : t("requester.title")}
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
-              {showVolunteerDashboard
-                ? t("volunteer.intro")
-                : t("requester.intro")}
-            </p>
-          </div>
-          <Link
-            href={
-              showVolunteerDashboard
-                ? `/${locale}/opportunities`
-                : `/${locale}/opportunities/new`
-            }
-            className="inline-flex items-center justify-center rounded-lg border border-green-700 px-4 py-2 text-sm font-semibold text-green-700 hover:bg-green-50"
-          >
-            {showVolunteerDashboard
-              ? t("volunteer.findMore")
-              : t("requester.postOpportunity")}
-          </Link>
-        </div>
-
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
-          {showVolunteerDashboard && (
-            <VolunteerApplicationsPanel
-              applications={applicationViews}
-              locale={locale}
-              labels={{
-                myApplications: t("volunteer.myApplications"),
-                applicationSummary: t("volunteer.applicationSummary", {
-                  count: applications.length,
-                }),
-                upcoming: t("volunteer.upcoming"),
-                past: t("volunteer.past"),
-                noUpcoming: t("volunteer.noUpcoming"),
-                noPast: t("volunteer.noPast"),
-                listView: t("volunteer.listView"),
-                calendarView: t("volunteer.calendarView"),
-                calendarEmpty: t("volunteer.calendarEmpty"),
-              }}
-            />
-          )}
-
-          <aside className="space-y-6">
-            {showRequesterDashboard && (
-              <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
-                <h2 className="text-lg font-bold text-stone-950">
-                  {t("requester.myOpportunities")}
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-stone-600">
-                  {t("requester.intro")}
-                </p>
-                <div className="mt-5 space-y-3">
-                  {requesterOpportunities.length === 0 ? (
-                    <p className="rounded-lg bg-stone-50 p-4 text-sm text-stone-600">
-                      {t("requester.empty")}
-                    </p>
-                  ) : (
-                    requesterOpportunities.map((opportunity) => (
-                      <RequesterOpportunityRow
-                        key={opportunity.id}
-                        opportunity={opportunity}
-                        locale={locale}
-                      />
-                    ))
-                  )}
-                </div>
-              </section>
-            )}
-
-            <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-bold text-stone-950">
-                {t("volunteer.recommended")}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-stone-600">
-                {t("volunteer.recommendedIntro")}
-              </p>
-              <Link
-                href={`/${locale}/opportunities`}
-                className="mt-4 inline-flex text-sm font-semibold text-green-700 hover:text-green-600"
-              >
-                {t("volunteer.findMore")}
-              </Link>
-            </section>
-
-            {showVolunteerDashboard && (
-              <section className="rounded-lg border border-rose-200 bg-white p-6 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-wide text-rose-600">
-                  {locale === "en" ? "Experience notes" : "体験ノート"}
-                </p>
-                <h2 className="mt-2 text-lg font-bold text-stone-950">
-                  {locale === "en" ? "Share after joining" : "参加後の経験を共有"}
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-stone-600">
-                  {locale === "en"
-                    ? "Turn a finished activity into a public post so other volunteers can understand the opportunity."
-                    : "参加した活動の感想を投稿し、他のユーザーが活動を知るきっかけにできます。"}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-3">
-                  <Link
-                    href={`/${locale}/experiences/new`}
-                    className="inline-flex rounded-lg bg-rose-600 px-4 py-2 text-sm font-semibold text-white hover:bg-rose-500"
-                  >
-                    {locale === "en" ? "Write a post" : "投稿する"}
-                  </Link>
-                  <Link
-                    href={`/${locale}/experiences`}
-                    className="inline-flex rounded-lg border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 hover:border-rose-300 hover:text-rose-700"
-                  >
-                    {locale === "en" ? "Browse posts" : "投稿を見る"}
-                  </Link>
-                </div>
-              </section>
-            )}
-
-            {showVolunteerDashboard && (
-              <section className="rounded-lg border border-green-200 bg-white p-6 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-wide text-green-700">
-                  {locale === "en"
-                    ? "Pre-event communication"
-                    : "活動前コミュニケーション"}
-                </p>
-                <h2 className="mt-2 text-lg font-bold text-stone-950">
-                  {locale === "en" ? "Prepare before you arrive" : "参加前の準備"}
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-stone-600">
-                  {locale === "en"
-                    ? "Confirmed events include arrival guidance, organizer updates, messages, reminders, and withdrawal controls."
-                    : "確認済み活動では、到着指引、主催者からの更新、メッセージ、提醒、辞退操作をまとめて確認できます。"}
-                </p>
-                <Link
-                  href={`/${locale}/my-events`}
-                  className="mt-4 inline-flex rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600"
-                >
-                  {locale === "en" ? "Open My Events" : "My Events を開く"}
-                </Link>
-              </section>
-            )}
-          </aside>
-        </div>
-      </div>
-    </div>
+    <RequesterDashboard
+      locale={locale}
+      opportunities={requesterOpportunities}
+      organization={user?.organization ?? null}
+      isAdmin={role === "ADMIN"}
+    />
   );
 }
 
@@ -329,17 +126,11 @@ function RequesterDashboard({
   opportunities,
   organization,
   isAdmin,
-  showVolunteerPanel,
-  volunteerApplications,
-  volunteerApplicationCount,
 }: {
   locale: string;
   opportunities: RequesterOpportunity[];
   organization: OrganizationCertificationSummary | null;
   isAdmin: boolean;
-  showVolunteerPanel: boolean;
-  volunteerApplications: DashboardApplicationView[];
-  volunteerApplicationCount: number;
 }) {
   const totalApplicants = opportunities.reduce(
     (sum, opportunity) => sum + opportunity._count.applications,
@@ -447,38 +238,6 @@ function RequesterDashboard({
               </div>
             </section>
 
-            {showVolunteerPanel && (
-              <section className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
-                <h2 className="font-bold text-stone-950">
-                  {locale === "en" ? "Volunteer side" : "ボランティア側"}
-                </h2>
-                <p className="mt-2 text-sm text-stone-600">
-                  {locale === "en"
-                    ? `${volunteerApplicationCount} application(s) on this account.`
-                    : `このアカウントの応募 ${volunteerApplicationCount} 件`}
-                </p>
-                <div className="mt-4">
-                  <VolunteerApplicationsPanel
-                    applications={volunteerApplications}
-                    locale={locale}
-                    labels={{
-                      myApplications: locale === "en" ? "My Applications" : "応募履歴",
-                      applicationSummary:
-                        locale === "en"
-                          ? `${volunteerApplicationCount} application(s)`
-                          : `応募 ${volunteerApplicationCount} 件`,
-                      upcoming: locale === "en" ? "Upcoming" : "今後",
-                      past: locale === "en" ? "Past" : "過去",
-                      noUpcoming: locale === "en" ? "No upcoming applications." : "今後の応募はありません。",
-                      noPast: locale === "en" ? "Past activities will be shown here." : "過去の活動が表示されます。",
-                      listView: locale === "en" ? "List" : "リスト",
-                      calendarView: locale === "en" ? "Calendar" : "カレンダー",
-                      calendarEmpty: locale === "en" ? "No applications this month." : "この月の応募はありません。",
-                    }}
-                  />
-                </div>
-              </section>
-            )}
           </aside>
         </div>
       </div>
@@ -898,109 +657,6 @@ function statusBadgeClass(status: OpportunityStatus) {
   if (status === "PAUSED") return "rounded-sm bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-800";
   if (status === "COMPLETED") return "rounded-sm bg-sky-100 px-2 py-1 text-xs font-semibold text-sky-800";
   return "rounded-sm bg-stone-200 px-2 py-1 text-xs font-semibold text-stone-700";
-}
-
-function serializeDashboardApplication(
-  application: DashboardApplication,
-): DashboardApplicationView {
-  return {
-    id: application.id,
-    status: application.status,
-    selectedTaskItems: application.selectedTaskItems,
-    waitlistPosition: application.waitlistPosition,
-    createdAt: application.createdAt.toISOString(),
-    opportunity: {
-      id: application.opportunity.id,
-      title: application.opportunity.title,
-      city: application.opportunity.city,
-      prefecture: application.opportunity.prefecture,
-      address: application.opportunity.address,
-      startAt: application.opportunity.startAt?.toISOString() ?? null,
-      endAt: application.opportunity.endAt?.toISOString() ?? null,
-      status: application.opportunity.status,
-    },
-  };
-}
-
-async function getDashboardApplications(userId: string): Promise<DashboardApplication[]> {
-  const rows = await prisma.$queryRaw<RawDashboardApplication[]>`
-    SELECT
-      a."id",
-      a."status"::text AS "status",
-      a."selectedTaskItems" AS "selectedTaskItems",
-      a."confirmedTimeCommitment" AS "confirmedTimeCommitment",
-      a."waitlistPosition" AS "waitlistPosition",
-      a."createdAt" AS "createdAt",
-      o."title" AS "opportunityTitle",
-      o."id" AS "opportunityId",
-      o."city" AS "opportunityCity",
-      o."prefecture" AS "opportunityPrefecture",
-      o."address" AS "opportunityAddress",
-      o."startAt" AS "opportunityStartAt",
-      o."endAt" AS "opportunityEndAt",
-      o."status" AS "opportunityStatus"
-    FROM "Application" a
-    INNER JOIN "Opportunity" o ON o."id" = a."opportunityId"
-    WHERE a."volunteerId" = ${userId}
-    ORDER BY o."startAt" ASC NULLS LAST, a."createdAt" DESC
-  `;
-
-  return rows.map((row) => ({
-    id: row.id,
-    status: row.status,
-    selectedTaskItems: row.selectedTaskItems,
-    confirmedTimeCommitment: row.confirmedTimeCommitment,
-    waitlistPosition: row.waitlistPosition,
-    createdAt: row.createdAt,
-    opportunity: {
-      title: row.opportunityTitle,
-      id: row.opportunityId,
-      city: row.opportunityCity,
-      prefecture: row.opportunityPrefecture,
-      address: row.opportunityAddress,
-      startAt: row.opportunityStartAt,
-      endAt: row.opportunityEndAt,
-      status: row.opportunityStatus,
-    },
-  }));
-}
-
-function RequesterOpportunityRow({
-  opportunity,
-  locale,
-}: {
-  opportunity: RequesterOpportunity;
-  locale: string;
-}) {
-  return (
-    <Link
-      href={`/${locale}/dashboard/opportunities/${opportunity.id}`}
-      className="block rounded-lg border border-stone-200 p-4 transition hover:border-green-300 hover:bg-green-50/40"
-    >
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold text-stone-950">{opportunity.title}</h3>
-        <span className="rounded-sm bg-stone-100 px-2 py-1 text-xs font-semibold text-stone-600">
-          {opportunity.status}
-        </span>
-      </div>
-      <p className="mt-2 text-sm text-stone-500">
-        {formatDateTime(opportunity.startAt, locale)} ·{" "}
-        {formatLocation(opportunity.city, opportunity.prefecture, locale)}
-      </p>
-      <p className="mt-2 text-sm font-medium text-stone-700">
-        {locale === "en"
-          ? `${opportunity._count.applications} applicant(s)`
-          : `応募者 ${opportunity._count.applications} 名`}
-      </p>
-      <p className="mt-2 text-sm font-semibold text-green-700">
-        {locale === "en" ? "Review applicants" : "応募者を確認"}
-      </p>
-    </Link>
-  );
-}
-
-function canUseVolunteerDashboard(role?: UserRole | null) {
-  return role === "VOLUNTEER" || role === "BOTH" || role === "ADMIN";
 }
 
 function canUseRequesterDashboard(role?: UserRole | null) {

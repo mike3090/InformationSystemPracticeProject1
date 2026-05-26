@@ -17,6 +17,10 @@
 import { auth } from "@/lib/auth";
 import { draftOpportunity } from "@/lib/ai";
 import type { AgentContext } from "@/lib/ai";
+import {
+  organizerToolForbiddenResponse,
+  userCanUseOrganizerTools,
+} from "@/lib/authz";
 
 export async function POST(request: Request) {
   // ── 1. Auth check ─────────────────────────────────────────────────────────
@@ -33,6 +37,10 @@ export async function POST(request: Request) {
       },
       { status: 401 },
     );
+  }
+
+  if (!(await userCanUseOrganizerTools(session.user.id))) {
+    return organizerToolForbiddenResponse();
   }
 
   // ── 2. Parse request body ─────────────────────────────────────────────────

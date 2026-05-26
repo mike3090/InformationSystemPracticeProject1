@@ -293,7 +293,7 @@ function CalendarApplicationChip({
 
   return (
     <Link
-      href={`/${locale}/dashboard/applications/${application.id}`}
+      href={`/${locale}/my-events/applications/${application.id}`}
       className={`block truncate rounded-md border px-2 py-1 text-xs font-semibold ${statusClass}`}
       title={application.opportunity.title}
     >
@@ -363,7 +363,7 @@ function ApplicationCard({
       href={
         linkTarget === "event"
           ? `/${locale}/opportunities/${application.opportunity.id}`
-          : `/${locale}/dashboard/applications/${application.id}`
+          : `/${locale}/my-events/applications/${application.id}`
       }
       className="grid gap-4 rounded-lg border border-stone-200 p-4 transition hover:border-green-300 hover:bg-green-50/40 md:grid-cols-[1fr_auto]"
     >

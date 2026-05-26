@@ -310,9 +310,9 @@
   "auth": {
     "signInTitle": "Sign in to Go Touch Grass",
     "volunteerSignInTitle": "Sign in as a volunteer",
-    "requesterSignInTitle": "Sign in as an employer",
+    "requesterSignInTitle": "Sign in as an organizer",
     "volunteerSignInIntro": "Use this entrance to find opportunities and apply as a volunteer.",
-    "requesterSignInIntro": "Use this entrance to post needs and manage volunteer opportunities.",
+    "requesterSignInIntro": "Use this entrance to create an organizer account, post needs, and manage volunteer opportunities.",
     "loginTab": "Sign in",
     "registerTab": "Register",
     "accountTypeLabel": "What kind of account do you want to create?",

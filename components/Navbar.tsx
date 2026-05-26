@@ -9,6 +9,11 @@ export default function Navbar({ locale }: { locale: string }) {
   const t = useTranslations("nav");
   const { data: session } = useSession();
   const pathname = usePathname();
+  const role = session?.user?.role;
+  const canUseRequesterTools =
+    role === "REQUESTER" || role === "BOTH" || role === "ADMIN";
+  const canUseVolunteerTools =
+    role === "VOLUNTEER" || role === "BOTH" || role === "ADMIN";
 
   const other = locale === "ja" ? "en" : "ja";
   const otherPath = pathname.replace(`/${locale}`, `/${other}`);
@@ -29,12 +34,16 @@ export default function Navbar({ locale }: { locale: string }) {
           </Link>
           {session && (
             <>
-              <Link href={`/${locale}/dashboard`} className="hover:text-green-700 transition">
-                {t("dashboard")}
-              </Link>
-              <Link href={`/${locale}/my-events`} className="hover:text-green-700 transition">
-                {locale === "en" ? "My Events" : "My Events"}
-              </Link>
+              {canUseRequesterTools && (
+                <Link href={`/${locale}/dashboard`} className="hover:text-green-700 transition">
+                  {t("dashboard")}
+                </Link>
+              )}
+              {canUseVolunteerTools && (
+                <Link href={`/${locale}/my-events`} className="hover:text-green-700 transition">
+                  {locale === "en" ? "My Events" : "My Events"}
+                </Link>
+              )}
               <Link href={`/${locale}/profile`} className="hover:text-green-700 transition">
                 {t("profile")}
               </Link>
@@ -53,12 +62,14 @@ export default function Navbar({ locale }: { locale: string }) {
 
           {session ? (
             <>
-              <Link
-                href={`/${locale}/opportunities/new`}
-                className="bg-green-700 text-white px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-green-600 transition"
-              >
-                {t("postOpportunity")}
-              </Link>
+              {canUseRequesterTools && (
+                <Link
+                  href={`/${locale}/opportunities/new`}
+                  className="bg-green-700 text-white px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-green-600 transition"
+                >
+                  {t("postOpportunity")}
+                </Link>
+              )}
               <button
                 onClick={() => signOut({ callbackUrl: `/${locale}` })}
                 className="text-stone-500 hover:text-red-600 transition"

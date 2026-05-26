@@ -44,6 +44,20 @@ function organizationTypeValue(formData: FormData) {
   return allowed.has(value) ? value : "INDIVIDUAL";
 }
 
+function environmentStyleValue(formData: FormData) {
+  const value = String(formData.get("environmentStyle") ?? "mixed");
+  const allowed = new Set(["mixed", "relaxed", "strict"]);
+
+  return allowed.has(value) ? value : "mixed";
+}
+
+function recruitmentStatusValue(formData: FormData) {
+  const value = String(formData.get("recruitmentStatus") ?? "recruiting");
+  const allowed = new Set(["recruiting", "paused", "internal_only"]);
+
+  return allowed.has(value) ? value : "recruiting";
+}
+
 function savedRedirectPath(next: string) {
   const target = next && next.startsWith("/") ? next : "/";
   const separator = target.includes("?") ? "&" : "?";
@@ -110,7 +124,7 @@ export async function saveProfile(formData: FormData) {
         description: textValue(formData, "description"),
         activityAreas: listValue(formData, "activityAreas"),
         activityRegions: listValue(formData, "activityRegions"),
-        environmentStyle: String(formData.get("environmentStyle") ?? "mixed"),
+        environmentStyle: environmentStyleValue(formData),
         prefecture: textValue(formData, "prefecture"),
         city: textValue(formData, "city"),
         address: textValue(formData, "address"),
@@ -120,7 +134,7 @@ export async function saveProfile(formData: FormData) {
         website: textValue(formData, "website"),
         snsLinks: listValue(formData, "snsLinks"),
         founded: textValue(formData, "founded"),
-        recruitmentStatus: String(formData.get("recruitmentStatus") ?? "recruiting"),
+        recruitmentStatus: recruitmentStatusValue(formData),
         hasWaterDispenser: checkboxValue(formData, "hasWaterDispenser"),
         hasRestRoom: checkboxValue(formData, "hasRestRoom"),
         hasAirConditioning: checkboxValue(formData, "hasAirConditioning"),
@@ -162,7 +176,7 @@ export async function saveProfile(formData: FormData) {
         description: textValue(formData, "description"),
         activityAreas: listValue(formData, "activityAreas"),
         activityRegions: listValue(formData, "activityRegions"),
-        environmentStyle: String(formData.get("environmentStyle") ?? "mixed"),
+        environmentStyle: environmentStyleValue(formData),
         prefecture: textValue(formData, "prefecture"),
         city: textValue(formData, "city"),
         address: textValue(formData, "address"),
@@ -172,7 +186,7 @@ export async function saveProfile(formData: FormData) {
         website: textValue(formData, "website"),
         snsLinks: listValue(formData, "snsLinks"),
         founded: textValue(formData, "founded"),
-        recruitmentStatus: String(formData.get("recruitmentStatus") ?? "recruiting"),
+        recruitmentStatus: recruitmentStatusValue(formData),
         hasWaterDispenser: checkboxValue(formData, "hasWaterDispenser"),
         hasRestRoom: checkboxValue(formData, "hasRestRoom"),
         hasAirConditioning: checkboxValue(formData, "hasAirConditioning"),

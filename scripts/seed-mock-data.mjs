@@ -568,7 +568,7 @@ async function main() {
         description: "Certified organizer for park care, composting workshops, and neighborhood greening.",
         activityAreas: ["Environment", "Disaster readiness"],
         activityRegions: ["Shimogyo Ward", "Kyoto City"],
-        environmentStyle: "outdoor",
+        environmentStyle: "mixed",
         prefecture: "Kyoto",
         city: "Shimogyo Ward",
         address: "Kawaramachi-dori, Shimogyo-ku, Kyoto",
@@ -775,12 +775,13 @@ async function main() {
       );
     }
 
-    const primaryOrgId = organizationIds.get("mock-org-primary");
+    const demoEmployerId = demoUserIds.get("mock-user-employer-kyoto");
+    const demoEmployerOrgId = organizationIds.get("mock-org-kyoto-green");
     const opportunities = [
       {
         id: "mock-opp-garden-open",
-        requesterId: primaryOrganizer.id,
-        organizationId: primaryOrgId,
+        requesterId: demoEmployerId,
+        organizationId: demoEmployerOrgId,
         title: "Saturday community garden refresh",
         shortDescription: "Beginner-friendly garden care near Yoshida.",
         description:
@@ -842,8 +843,8 @@ async function main() {
       },
       {
         id: "mock-opp-river-paused",
-        requesterId: primaryOrganizer.id,
-        organizationId: primaryOrgId,
+        requesterId: demoEmployerId,
+        organizationId: demoEmployerOrgId,
         title: "Kamo River litter mapping walk",
         shortDescription: "Map cleanup spots before a larger river event.",
         description:
@@ -905,8 +906,8 @@ async function main() {
       },
       {
         id: "mock-opp-workshop-draft",
-        requesterId: primaryOrganizer.id,
-        organizationId: primaryOrgId,
+        requesterId: demoEmployerId,
+        organizationId: demoEmployerOrgId,
         title: "Draft: bilingual seed workshop",
         shortDescription: "Prepare a small indoor workshop for families.",
         description:
@@ -968,8 +969,8 @@ async function main() {
       },
       {
         id: "mock-opp-completed",
-        requesterId: primaryOrganizer.id,
-        organizationId: primaryOrgId,
+        requesterId: demoEmployerId,
+        organizationId: demoEmployerOrgId,
         title: "Completed: compost sorting day",
         shortDescription: "Past event used to test completed status.",
         description: "A completed compost sorting event with accepted volunteers and messages.",
@@ -1219,7 +1220,7 @@ async function main() {
           questionAnswers: {
             "Do you have any pollen or outdoor work concerns?": "No major concerns.",
           },
-          reviewedByEmployerId: primaryOrgId,
+          reviewedByEmployerId: demoEmployerOrgId,
           rejectionReason: null,
           checkedInAt: null,
           checkinMethod: null,
@@ -1247,7 +1248,7 @@ async function main() {
           questionAnswers: {
             "Do you have any pollen or outdoor work concerns?": "Prefer lighter tasks if possible.",
           },
-          reviewedByEmployerId: primaryOrgId,
+          reviewedByEmployerId: demoEmployerOrgId,
           rejectionReason: null,
           checkedInAt: null,
           checkinMethod: null,
@@ -1273,7 +1274,7 @@ async function main() {
         "mock-app-completed-haruto",
         {
           questionAnswers: {},
-          reviewedByEmployerId: primaryOrgId,
+          reviewedByEmployerId: demoEmployerOrgId,
           rejectionReason: null,
           checkedInAt: daysFromNow(-6, 9, 52),
           checkinMethod: "manual",
@@ -1332,7 +1333,7 @@ async function main() {
         SET "message" = EXCLUDED."message",
             "highlightedDetail" = EXCLUDED."highlightedDetail"
       `,
-      [primaryOrganizer.id],
+      [demoEmployerId],
     );
 
     await client.query(
@@ -1344,7 +1345,7 @@ async function main() {
         ON CONFLICT ("id") DO UPDATE
         SET "body" = EXCLUDED."body"
       `,
-      [primaryOrganizer.id, demoUserIds.get("mock-user-volunteer-anna")],
+      [demoEmployerId, demoUserIds.get("mock-user-volunteer-anna")],
     );
 
     await client.query("COMMIT");

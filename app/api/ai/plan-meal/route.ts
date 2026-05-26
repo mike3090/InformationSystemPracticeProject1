@@ -5,11 +5,19 @@
 import { auth } from "@/lib/auth";
 import { planMeal } from "@/lib/ai";
 import type { AgentContext, PlanMealInput } from "@/lib/ai";
+import {
+  organizerToolForbiddenResponse,
+  userCanUseOrganizerTools,
+} from "@/lib/authz";
 
 export async function POST(request: Request) {
   const session = await auth();
   if (!session?.user?.id) {
     return Response.json({ ok: false, error: "You must be signed in.", code: "UNAUTHORIZED" }, { status: 401 });
+  }
+
+  if (!(await userCanUseOrganizerTools(session.user.id))) {
+    return organizerToolForbiddenResponse();
   }
 
   let body: PlanMealInput & { locale?: unknown };

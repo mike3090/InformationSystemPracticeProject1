@@ -14,6 +14,16 @@ function joinList(values: string[] | null | undefined) {
   return values?.join(", ") ?? "";
 }
 
+function optionValueOrDefault(
+  value: string | null | undefined,
+  options: [string, string][],
+  fallback: string,
+) {
+  return options.some(([optionValue]) => optionValue === value)
+    ? value ?? fallback
+    : fallback;
+}
+
 export default function ProfileForm({
   user,
   locale,
@@ -280,6 +290,11 @@ function RequesterFields({
     organization?.type ?? "INDIVIDUAL",
   );
   const showCertification = organizationType !== "INDIVIDUAL";
+  const environmentOptions: [string, string][] = [
+    ["mixed", labels.environmentMixed],
+    ["relaxed", labels.environmentRelaxed],
+    ["strict", labels.environmentStructured],
+  ];
 
   return (
     <>
@@ -415,12 +430,12 @@ function RequesterFields({
           <SelectField
             name="environmentStyle"
             label={labels.environment}
-            defaultValue={organization?.environmentStyle ?? "mixed"}
-            options={[
-              ["mixed", labels.environmentMixed],
-              ["relaxed", labels.environmentRelaxed],
-              ["strict", labels.environmentStructured],
-            ]}
+            defaultValue={optionValueOrDefault(
+              organization?.environmentStyle,
+              environmentOptions,
+              "mixed",
+            )}
+            options={environmentOptions}
           />
         </div>
 
