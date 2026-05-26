@@ -67,6 +67,12 @@ export type {
   // translateText
   TranslateTextInput,
   TranslateTextOutput,
+
+  // rankOpportunities
+  RankOpportunitiesInput,
+  RankOpportunitiesOutput,
+  OpportunityForRanking,
+  OpportunityRanking,
 } from "./types";
 
 // ── Agents ────────────────────────────────────────────────────────────────────
@@ -82,6 +88,7 @@ export { planRoute }           from "./agents/planRoute";
 export { planMeal }            from "./agents/planMeal";
 export { planAccommodations }  from "./agents/planAccommodations";
 export { translateText }       from "./agents/translateText";
+export { rankOpportunities }   from "./agents/rankOpportunities";
 
 // ── Internal helpers (not re-exported) ────────────────────────────────────────
 //

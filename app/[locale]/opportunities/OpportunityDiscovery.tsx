@@ -24,6 +24,7 @@ export type DiscoveryOpportunity = {
   tags: string[];
   physicalEffort: EffortLevel;
   mentalEffort: EffortLevel;
+  matchScore?: number; // 0–100, server-side Jaccard score; undefined = not signed in / no profile
 };
 
 const DEFAULT_COVER_IMAGE =
@@ -32,13 +33,19 @@ const DEFAULT_COVER_IMAGE =
 type DateFilter = "this-week" | "this-weekend" | "next-week";
 type DurationFilter = "under-2" | "half-day" | "full-day";
 type EffortFilter = EffortLevel;
+type SortMode = "date" | "match";
+
+type AiRanking = { score: number; aiPick: boolean; reason: string };
+type AiStatus = "idle" | "loading" | "done" | "error";
 
 export default function OpportunityDiscovery({
   locale,
   opportunities,
+  hasVolunteerProfile,
 }: {
   locale: string;
   opportunities: DiscoveryOpportunity[];
+  hasVolunteerProfile?: boolean;
 }) {
   const t = useTranslations("opportunities.discovery");
   const [query, setQuery] = useState("");
@@ -51,6 +58,15 @@ export default function OpportunityDiscovery({
   const [selectedEfforts, setSelectedEfforts] = useState<EffortFilter[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [currentTime] = useState(() => Date.now());
+  const [sortMode, setSortMode] = useState<SortMode>("date");
+
+  // AI recommendations state
+  const [aiRankings, setAiRankings] = useState<Record<string, AiRanking>>({});
+  const [aiStatus, setAiStatus] = useState<AiStatus>("idle");
+
+  const isEn = locale === "en";
+  const showMatchFeature = hasVolunteerProfile || opportunities.some((o) => o.matchScore !== undefined);
+
   const dateFilterLabels: Record<DateFilter, string> = {
     "this-week": t("date.thisWeek"),
     "this-weekend": t("date.thisWeekend"),
@@ -141,10 +157,14 @@ export default function OpportunityDiscovery({
 
         return searchableText.includes(normalizedQuery);
       })
-      .sort(
-        (first, second) =>
-          new Date(first.startsAt).getTime() - new Date(second.startsAt).getTime(),
-      )
+      .sort((first, second) => {
+        if (sortMode === "match") {
+          const scoreA = aiRankings[first.id]?.score ?? first.matchScore ?? 0;
+          const scoreB = aiRankings[second.id]?.score ?? second.matchScore ?? 0;
+          if (scoreA !== scoreB) return scoreB - scoreA;
+        }
+        return new Date(first.startsAt).getTime() - new Date(second.startsAt).getTime();
+      })
       .slice(0, 20);
   }, [
     currentTime,
@@ -157,6 +177,8 @@ export default function OpportunityDiscovery({
     dateRangeEnd,
     selectedDurations,
     selectedEfforts,
+    sortMode,
+    aiRankings,
   ]);
 
   const hasActiveFilters =
@@ -178,6 +200,37 @@ export default function OpportunityDiscovery({
     setDateRangeEnd("");
     setSelectedDurations([]);
     setSelectedEfforts([]);
+  }
+
+  async function fetchAiRecommendations() {
+    setAiStatus("loading");
+    try {
+      const res = await fetch("/api/ai/rank-opportunities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          opportunityIds: filteredOpportunities.map((o) => o.id),
+          locale,
+        }),
+      });
+      const result = await res.json() as
+        | { ok: true; data: { rankings: { opportunityId: string; score: number; aiPick: boolean; reason: string }[] } }
+        | { ok: false; error?: string };
+
+      if (result.ok) {
+        const map: Record<string, AiRanking> = {};
+        for (const r of result.data.rankings) {
+          map[r.opportunityId] = { score: r.score, aiPick: r.aiPick, reason: r.reason };
+        }
+        setAiRankings(map);
+        setAiStatus("done");
+        setSortMode("match");
+      } else {
+        setAiStatus("error");
+      }
+    } catch {
+      setAiStatus("error");
+    }
   }
 
   return (
@@ -339,10 +392,58 @@ export default function OpportunityDiscovery({
         )}
       </section>
 
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm font-medium text-stone-600">
           {t("showing", { count: filteredOpportunities.length })}
         </p>
+
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Sort toggle — visible when match scores exist */}
+          {showMatchFeature && (
+            <div className="flex rounded-lg border border-stone-300 text-sm font-medium overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setSortMode("date")}
+                className={`px-3 py-1.5 transition ${
+                  sortMode === "date"
+                    ? "bg-stone-800 text-white"
+                    : "text-stone-600 hover:bg-stone-100"
+                }`}
+              >
+                {isEn ? "By date" : "日付順"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSortMode("match")}
+                className={`px-3 py-1.5 transition ${
+                  sortMode === "match"
+                    ? "bg-green-700 text-white"
+                    : "text-stone-600 hover:bg-stone-100"
+                }`}
+              >
+                {isEn ? "Best match" : "マッチ順"}
+              </button>
+            </div>
+          )}
+
+          {/* AI Recommendations button */}
+          {showMatchFeature && (
+            <button
+              type="button"
+              onClick={fetchAiRecommendations}
+              disabled={aiStatus === "loading"}
+              className="rounded-lg bg-green-700 px-3 py-1.5 text-sm font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-stone-400"
+            >
+              {aiStatus === "loading"
+                ? isEn ? "Ranking…" : "分析中…"
+                : aiStatus === "done"
+                  ? isEn ? "AI ranked ✓" : "AI完了 ✓"
+                  : aiStatus === "error"
+                    ? isEn ? "Retry AI" : "再試行"
+                    : isEn ? "AI Recommendations" : "AIおすすめ"}
+            </button>
+          )}
+        </div>
       </div>
 
       {filteredOpportunities.length > 0 ? (
@@ -352,6 +453,7 @@ export default function OpportunityDiscovery({
               key={opportunity.id}
               locale={locale}
               opportunity={opportunity}
+              aiRanking={aiRankings[opportunity.id]}
               labels={{
                 location: t("card.location"),
                 when: t("card.when"),
@@ -391,10 +493,12 @@ export default function OpportunityDiscovery({
 function OpportunityCard({
   locale,
   opportunity,
+  aiRanking,
   labels,
 }: {
   locale: string;
   opportunity: DiscoveryOpportunity;
+  aiRanking?: AiRanking;
   labels: {
     location: string;
     when: string;
@@ -405,6 +509,10 @@ function OpportunityCard({
   };
 }) {
   const isFull = opportunity.spotsRemaining <= 0;
+  const isEn = locale === "en";
+
+  // Effective score: prefer AI score if available, fall back to server Jaccard
+  const effectiveScore = aiRanking?.score ?? opportunity.matchScore;
 
   return (
     <article className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
@@ -426,6 +534,26 @@ function OpportunityCard({
               {tag}
             </span>
           ))}
+          {/* AI Pick badge */}
+          {aiRanking?.aiPick && (
+            <span className="rounded-full bg-green-700 px-2.5 py-1 text-xs font-semibold text-white">
+              {isEn ? "AI Pick" : "AIおすすめ"}
+            </span>
+          )}
+          {/* Match score badge */}
+          {effectiveScore !== undefined && (
+            <span
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                effectiveScore >= 70
+                  ? "bg-green-100 text-green-800"
+                  : effectiveScore >= 40
+                    ? "bg-amber-100 text-amber-800"
+                    : "bg-stone-100 text-stone-600"
+              }`}
+            >
+              {isEn ? `${effectiveScore}% match` : `${effectiveScore}%マッチ`}
+            </span>
+          )}
         </div>
         <h2 className="text-lg font-semibold text-stone-900">
           {opportunity.title}
@@ -438,6 +566,12 @@ function OpportunityCard({
         <p className="mt-3 text-sm leading-6 text-stone-700">
           {opportunity.shortDescription}
         </p>
+        {/* AI reason tooltip (shown when AI ranking is available) */}
+        {aiRanking?.reason && (
+          <p className="mt-2 text-xs italic text-stone-500">
+            {aiRanking.reason}
+          </p>
+        )}
         <div className="mt-4 flex items-center justify-between gap-3">
           <span
             className={`rounded-sm px-2.5 py-1 text-xs font-semibold uppercase ${

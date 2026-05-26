@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import InlineTranslate from "@/components/InlineTranslate";
 import {
   getApplicationStatusCopy,
   parseSelectedTaskItems,
@@ -523,21 +524,26 @@ function ApplicantCard({
             ) : (
               <div className="mt-3 space-y-2">
                 {applicant.messages.map((message) => (
-                  <p
+                  <div
                     key={message.id}
-                    className="rounded-lg border border-stone-200 bg-white p-3 text-sm text-stone-700"
+                    className="rounded-lg border border-stone-200 bg-white p-3 text-sm"
                   >
-                    <span className="font-semibold text-stone-950">
+                    <p className="font-semibold text-stone-950">
                       {message.senderName ||
                         (message.senderId === applicant.volunteerId
                           ? volunteerName
                           : locale === "en"
                             ? "Organizer"
                             : "主催者")}
-                      :{" "}
-                    </span>
-                    {message.body}
-                  </p>
+                    </p>
+                    <InlineTranslate
+                      text={message.body}
+                      targetLocale={locale as "ja" | "en"}
+                      locale={locale}
+                      context="Direct message between a volunteer and event organizer"
+                      textClassName="mt-1 leading-6 text-stone-700"
+                    />
+                  </div>
                 ))}
               </div>
             )}
