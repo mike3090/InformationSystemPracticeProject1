@@ -97,7 +97,11 @@ export async function createOpportunity(formData: FormData) {
   const canPost =
     user.role === "REQUESTER" || user.role === "BOTH" || user.role === "ADMIN";
 
-  if (!canPost || !user.organization?.profileCompleted) {
+  if (!canPost) {
+    redirect(`/${locale}/opportunities`);
+  }
+
+  if (!user.organization?.profileCompleted) {
     redirect(`/${locale}/profile/setup?intent=requester&next=/${locale}/opportunities/new`);
   }
 

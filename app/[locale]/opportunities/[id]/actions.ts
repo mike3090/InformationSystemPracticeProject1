@@ -4,7 +4,8 @@ import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import { getMockOpportunity } from "@/lib/mockOpportunities";
+import { getMockOpportunity, type MockOpportunity } from "@/lib/mockOpportunities";
+import { getVolunteerOpportunity } from "@/lib/opportunityData";
 
 export type ApplicationFormState = {
   status: "idle" | "success" | "error";
@@ -38,6 +39,25 @@ export async function submitEventApplication(
     };
   }
 
+  const currentUser = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { role: true },
+  });
+
+  if (
+    currentUser?.role !== "VOLUNTEER" &&
+    currentUser?.role !== "BOTH" &&
+    currentUser?.role !== "ADMIN"
+  ) {
+    return {
+      status: "error",
+      message:
+        locale === "en"
+          ? "Only volunteer accounts can apply to events."
+          : "イベントに応募できるのはボランティアアカウントのみです。",
+    };
+  }
+
   const opportunityId = String(formData.get("opportunityId") ?? "");
   const selectedTaskIds = formData
     .getAll("selectedTaskIds")
@@ -48,7 +68,7 @@ export async function submitEventApplication(
   const skillTags = parseSkillTags(String(formData.get("skillTags") ?? ""));
   const experienceNote = String(formData.get("experienceNote") ?? "").trim();
 
-  const opportunity = getMockOpportunity(opportunityId);
+  const opportunity = await getVolunteerOpportunity(opportunityId);
 
   if (!opportunity) {
     return {
@@ -136,7 +156,9 @@ export async function submitEventApplication(
     };
   }
 
-  await ensureMockOpportunityExists(opportunity);
+  if (getMockOpportunity(opportunityId)) {
+    await ensureMockOpportunityExists(opportunity);
+  }
 
   const existingApplication = await prisma.$queryRaw<{ id: string }[]>`
     SELECT "id"
@@ -287,7 +309,7 @@ function parseSkillTags(value: string) {
 }
 
 async function ensureMockOpportunityExists(
-  opportunity: NonNullable<ReturnType<typeof getMockOpportunity>>,
+  opportunity: MockOpportunity,
 ) {
   await prisma.user.upsert({
     where: { id: systemRequesterId },

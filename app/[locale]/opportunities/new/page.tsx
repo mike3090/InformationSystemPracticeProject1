@@ -35,9 +35,7 @@ export default async function NewOpportunityPage({
     user.role !== "BOTH" &&
     user.role !== "ADMIN"
   ) {
-    redirect(
-      `/${locale}/profile/setup?intent=requester&next=/${locale}/opportunities/new`,
-    );
+    redirect(`/${locale}/opportunities`);
   }
 
   if (!user.organization?.profileCompleted) {

@@ -67,10 +67,10 @@ export default async function MyEventsPage({
             </p>
           </div>
           <Link
-            href={`/${locale}/dashboard`}
+            href={`/${locale}/opportunities`}
             className="inline-flex items-center justify-center rounded-lg border border-green-700 px-4 py-2 text-sm font-semibold text-green-700 hover:bg-green-50"
           >
-            {copy.dashboard}
+            {copy.opportunities}
           </Link>
         </div>
 
@@ -279,7 +279,7 @@ function MyEventCard({
             {copy.viewEvent}
           </Link>
           <Link
-            href={`/${locale}/dashboard/applications/${event.applicationId}`}
+            href={`/${locale}/my-events/applications/${event.applicationId}`}
             className="rounded-lg bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600"
           >
             {copy.communication}
@@ -320,7 +320,7 @@ const englishCopy = {
   title: "My Events",
   intro:
     "See confirmed volunteer commitments in one place, including schedule, location, task, and communication details.",
-  dashboard: "Back to dashboard",
+  opportunities: "Find more opportunities",
   upcoming: "Upcoming Events",
   past: "Past Events",
   cancelled: "Cancelled",
@@ -345,7 +345,7 @@ const japaneseCopy = {
   title: "My Events",
   intro:
     "確認済みの参加予定を一か所で確認できます。日時、場所、担当タスク、連絡情報をまとめて表示します。",
-  dashboard: "ダッシュボードへ戻る",
+  opportunities: "募集を探す",
   upcoming: "Upcoming Events",
   past: "Past Events",
   cancelled: "Cancelled",

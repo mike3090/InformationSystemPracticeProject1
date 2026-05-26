@@ -361,7 +361,7 @@ export async function replyToVolunteerMessage(
   });
 
   revalidatePath(`/${locale}/dashboard/opportunities/${opportunityId}`);
-  revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
+  revalidatePath(`/${locale}/my-events/applications/${applicationId}`);
 
   return {
     status: "success",
