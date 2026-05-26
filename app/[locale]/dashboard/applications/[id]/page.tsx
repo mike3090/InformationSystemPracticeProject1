@@ -22,11 +22,69 @@ import {
 } from "../../applicationStatus";
 import ApplicationCommunicationPanel from "./ApplicationCommunicationPanel";
 import DevApplicationTools from "./DevApplicationTools";
-import EventAccommodationsPanel from "./EventAccommodationsPanel";
 import EventCheckInPanel from "./EventCheckInPanel";
 import EventMealPlanPanel from "./EventMealPlanPanel";
 import EventRoutePlanPanel from "./EventRoutePlanPanel";
->>>>>>> 292aa08 (Add AI route, meal, and accommodation planning panels to confirmed event detail)
+
+type ApplicationDetail = {
+  id: string;
+  status: string;
+  selectedTaskItems: unknown;
+  confirmedTimeCommitment: boolean;
+  skillTags: string[];
+  experienceNote: string | null;
+  message: string | null;
+  waitlistPosition: number | null;
+  reviewedAt: Date | null;
+  createdAt: Date;
+  attendanceStatus: string;
+  checkedInAt: Date | null;
+  checkinMethod: string | null;
+  opportunity: {
+    id: string;
+    title: string;
+    description: string;
+    city: string | null;
+    prefecture: string | null;
+    address: string | null;
+    startAt: Date | null;
+    endAt: Date | null;
+    status: OpportunityStatus;
+    skills: string[];
+    instructions: string | null;
+    toolsProvided: string[];
+    thingsToBring: string[];
+  };
+};
+
+type RawApplicationDetail = {
+  id: string;
+  status: string;
+  selectedTaskItems: unknown;
+  confirmedTimeCommitment: boolean;
+  skillTags: string[];
+  experienceNote: string | null;
+  message: string | null;
+  waitlistPosition: number | null;
+  reviewedAt: Date | null;
+  createdAt: Date;
+  attendanceStatus: string;
+  checkedInAt: Date | null;
+  checkinMethod: string | null;
+  opportunityId: string;
+  opportunityTitle: string;
+  opportunityDescription: string;
+  opportunityCity: string | null;
+  opportunityPrefecture: string | null;
+  opportunityAddress: string | null;
+  opportunityStartAt: Date | null;
+  opportunityEndAt: Date | null;
+  opportunityStatus: OpportunityStatus;
+  opportunitySkills: string[];
+  opportunityInstructions: string | null;
+  opportunityToolsProvided: string[];
+  opportunityThingsToBring: string[];
+};
 
 export default async function LegacyDashboardApplicationPage({
   params,
@@ -79,89 +137,6 @@ export default async function LegacyDashboardApplicationPage({
     />
   );
 }
-
-async function getApplicationDetail(
-  id: string,
-  userId: string,
-): Promise<ApplicationDetail | null> {
-  const rows = await prisma.$queryRaw<RawApplicationDetail[]>`
-    SELECT
-      a."id",
-      import Link from "next/link";
-      import { notFound, redirect } from "next/navigation";
-      import type { OpportunityStatus } from "@/app/generated/prisma/client";
-      import { auth } from "@/lib/auth";
-      import { prisma } from "@/lib/db";
-      import {
-        getArrivalGuidance,
-        getEventMessages,
-        getEventUpdates,
-        hasArrivalGuidance,
-        type ArrivalGuidance,
-        type EventMessageView,
-        type EventUpdateView,
-      } from "@/lib/preEventCommunication";
-      import {
-        getApplicationStatusCopy,
-        getApplicationStatusView,
-        parseSelectedTaskItems,
-      } from "../../applicationStatus";
-      import ApplicationCommunicationPanel from "./ApplicationCommunicationPanel";
-      import DevApplicationTools from "./DevApplicationTools";
-      import EventAccommodationsPanel from "./EventAccommodationsPanel";
-      import EventCheckInPanel from "./EventCheckInPanel";
-      import EventMealPlanPanel from "./EventMealPlanPanel";
-      import EventRoutePlanPanel from "./EventRoutePlanPanel";
-
-      export default async function LegacyDashboardApplicationPage({
-        params,
-      }: {
-        params: Promise<{ locale: string; id: string }>;
-      }) {
-        const { locale, id } = await params;
-
-        const session = await auth();
-
-        if (!session?.user?.id) {
-          redirect(
-            `/${locale}/auth/signin?callbackUrl=/${locale}/dashboard/applications/${id}`,
-          );
-        }
-
-        const application = await getApplicationDetail(id, session.user.id);
-
-        if (!application) {
-          notFound();
-        }
-
-        const [arrivalGuidance, updates, messages, volunteerProfile, acceptedCount] =
-          await Promise.all([
-            getArrivalGuidance(application.opportunity.id),
-            getEventUpdates(application.opportunity.id),
-            getEventMessages(application.id),
-            prisma.volunteerProfile.findUnique({
-              where: { userId: session.user.id },
-              select: { city: true, prefecture: true },
-            }),
-            prisma.application.count({
-              where: { opportunityId: application.opportunity.id, status: "ACCEPTED" },
-            }),
-          ]);
-
-        return (
-          <ApplicationDetailView
-            application={application}
-            locale={locale}
-            currentUserId={session.user.id}
-            arrivalGuidance={arrivalGuidance}
-            updates={updates}
-            messages={messages}
-            volunteerCity={volunteerProfile?.city ?? null}
-            volunteerPrefecture={volunteerProfile?.prefecture ?? null}
-            acceptedCount={acceptedCount}
-          />
-        );
-      }
 
       async function getApplicationDetail(
         id: string,
@@ -237,35 +212,35 @@ async function getApplicationDetail(
         };
       }
 
-      function ApplicationDetailView({
-        application,
-        locale,
-        currentUserId,
-        arrivalGuidance,
-        updates,
-        messages,
-        volunteerCity,
-        volunteerPrefecture,
-        acceptedCount,
-      }: {
-        application: ApplicationDetail;
-        locale: string;
-        currentUserId: string;
-        arrivalGuidance: ArrivalGuidance | null;
-        updates: EventUpdateView[];
-        messages: EventMessageView[];
-        volunteerCity: string | null;
-        volunteerPrefecture: string | null;
-        acceptedCount: number;
-      }) {
-        const statusView = getApplicationStatusView(
-          application.status,
-          application.opportunity.status,
-          application.opportunity.endAt,
-        );
-        const status = getApplicationStatusCopy(statusView, locale);
-        const selectedTasks = parseSelectedTaskItems(application.selectedTaskItems);
-        const isConfirmed = statusView === "confirmed";
+function ApplicationDetailView({
+  application,
+  locale,
+  currentUserId,
+  arrivalGuidance,
+  updates,
+  messages,
+  volunteerCity,
+  volunteerPrefecture,
+  acceptedCount,
+}: {
+  application: ApplicationDetail;
+  locale: string;
+  currentUserId: string;
+  arrivalGuidance: ArrivalGuidance | null;
+  updates: EventUpdateView[];
+  messages: EventMessageView[];
+  volunteerCity: string | null;
+  volunteerPrefecture: string | null;
+  acceptedCount: number;
+}) {
+  const statusView = getApplicationStatusView(
+    application.status,
+    application.opportunity.status,
+    application.opportunity.endAt,
+  );
+  const status = getApplicationStatusCopy(statusView, locale);
+  const selectedTasks = parseSelectedTaskItems(application.selectedTaskItems);
+  const isConfirmed = statusView === "confirmed";
 
         return (
           <div className="bg-stone-50">
@@ -447,58 +422,58 @@ async function getApplicationDetail(
                 />
               )}
 
-              {isConfirmed && (
-                <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-                  <UpdatesPanel updates={updates} locale={locale} />
-                  <ApplicationCommunicationPanel
-                    applicationId={application.id}
-                    locale={locale}
-                    messages={messages}
-                    currentUserId={currentUserId}
-                    canMessage={isConfirmed}
-                  />
-                </div>
-              )}
-
-              {isConfirmed && (
-                <div className="mt-8 space-y-6">
-                  <p className="text-xs font-bold uppercase tracking-wide text-stone-500">
-                    {locale === "en" ? "AI Event Planning" : "AI活動プランニング"}
-                  </p>
-                  <EventRoutePlanPanel
-                    fromCity={volunteerCity}
-                    fromPrefecture={volunteerPrefecture}
-                    toAddress={application.opportunity.address}
-                    toCity={application.opportunity.city}
-                    toPrefecture={application.opportunity.prefecture}
-                    eventStartAt={application.opportunity.startAt?.toISOString() ?? null}
-                    locale={locale}
-                  />
-                  <EventMealPlanPanel
-                    volunteerCount={acceptedCount || 1}
-                    eventCity={application.opportunity.city}
-                    eventPrefecture={application.opportunity.prefecture}
-                    timeOfDay={deriveTimeOfDay(application.opportunity.startAt)}
-                    eventDurationHours={deriveEventDurationHours(
-                      application.opportunity.startAt,
-                      application.opportunity.endAt,
-                    )}
-                    locale={locale}
-                  />
-                  <EventAccommodationsPanel
-                    eventCity={application.opportunity.city}
-                    eventPrefecture={application.opportunity.prefecture}
-                    checkInDate={application.opportunity.startAt?.toISOString() ?? null}
-                    checkOutDate={application.opportunity.endAt?.toISOString() ?? null}
-                    volunteerCount={acceptedCount || 1}
-                    locale={locale}
-                  />
-                </div>
-              )}
-            </div>
+        {isConfirmed && (
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+            <UpdatesPanel updates={updates} locale={locale} />
+            <ApplicationCommunicationPanel
+              applicationId={application.id}
+              locale={locale}
+              messages={messages}
+              currentUserId={currentUserId}
+              canMessage={isConfirmed}
+            />
           </div>
-        );
-      }
+        )}
+
+        {isConfirmed && (
+          <div className="mt-8 space-y-6">
+            <p className="text-xs font-bold uppercase tracking-wide text-stone-500">
+              {locale === "en" ? "AI Event Planning" : "AI活動プランニング"}
+            </p>
+            <EventRoutePlanPanel
+              fromCity={volunteerCity}
+              fromPrefecture={volunteerPrefecture}
+              toAddress={application.opportunity.address}
+              toCity={application.opportunity.city}
+              toPrefecture={application.opportunity.prefecture}
+              eventStartAt={application.opportunity.startAt?.toISOString() ?? null}
+              locale={locale}
+            />
+            <EventMealPlanPanel
+              volunteerCount={acceptedCount || 1}
+              eventCity={application.opportunity.city}
+              eventPrefecture={application.opportunity.prefecture}
+              timeOfDay={deriveTimeOfDay(application.opportunity.startAt)}
+              eventDurationHours={deriveEventDurationHours(
+                application.opportunity.startAt,
+                application.opportunity.endAt,
+              )}
+              locale={locale}
+            />
+            <EventAccommodationsPanel
+              eventCity={application.opportunity.city}
+              eventPrefecture={application.opportunity.prefecture}
+              checkInDate={application.opportunity.startAt?.toISOString() ?? null}
+              checkOutDate={application.opportunity.endAt?.toISOString() ?? null}
+              volunteerCount={acceptedCount || 1}
+              locale={locale}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
       function ArrivalGuidanceDetails({
         guidance,
@@ -636,13 +611,29 @@ async function getApplicationDetail(
         ).format(endAt)}`;
       }
 
-      function formatLocation(
-        city: string | null,
-        prefecture: string | null,
-        locale: string,
-      ) {
-        return (
-          [city, prefecture].filter(Boolean).join(", ") ||
-          (locale === "en" ? "Location TBD" : "場所未定")
-        );
-      }
+function formatLocation(
+  city: string | null,
+  prefecture: string | null,
+  locale: string,
+) {
+  return (
+    [city, prefecture].filter(Boolean).join(", ") ||
+    (locale === "en" ? "Location TBD" : "場所未定")
+  );
+}
+
+function deriveTimeOfDay(
+  startAt: Date | null,
+): "morning" | "midday" | "afternoon" | "evening" {
+  if (!startAt) return "midday";
+  const hour = startAt.getHours();
+  if (hour < 10) return "morning";
+  if (hour < 14) return "midday";
+  if (hour < 17) return "afternoon";
+  return "evening";
+}
+
+function deriveEventDurationHours(startAt: Date | null, endAt: Date | null): number {
+  if (!startAt || !endAt) return 3;
+  return Math.max(1, Math.round((endAt.getTime() - startAt.getTime()) / 3_600_000));
+}
