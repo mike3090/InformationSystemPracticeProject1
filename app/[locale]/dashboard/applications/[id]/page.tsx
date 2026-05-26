@@ -19,7 +19,10 @@ import {
 } from "../../applicationStatus";
 import ApplicationCommunicationPanel from "./ApplicationCommunicationPanel";
 import DevApplicationTools from "./DevApplicationTools";
+import EventAccommodationsPanel from "./EventAccommodationsPanel";
 import EventCheckInPanel from "./EventCheckInPanel";
+import EventMealPlanPanel from "./EventMealPlanPanel";
+import EventRoutePlanPanel from "./EventRoutePlanPanel";
 
 type ApplicationDetail = {
   id: string;
@@ -101,11 +104,19 @@ export default async function ApplicationDetailPage({
     notFound();
   }
 
-  const [arrivalGuidance, updates, messages] = await Promise.all([
-    getArrivalGuidance(application.opportunity.id),
-    getEventUpdates(application.opportunity.id),
-    getEventMessages(application.id),
-  ]);
+  const [arrivalGuidance, updates, messages, volunteerProfile, acceptedCount] =
+    await Promise.all([
+      getArrivalGuidance(application.opportunity.id),
+      getEventUpdates(application.opportunity.id),
+      getEventMessages(application.id),
+      prisma.volunteerProfile.findUnique({
+        where: { userId: session.user.id },
+        select: { city: true, prefecture: true },
+      }),
+      prisma.application.count({
+        where: { opportunityId: application.opportunity.id, status: "ACCEPTED" },
+      }),
+    ]);
 
   return (
     <ApplicationDetailView
@@ -115,6 +126,9 @@ export default async function ApplicationDetailPage({
       arrivalGuidance={arrivalGuidance}
       updates={updates}
       messages={messages}
+      volunteerCity={volunteerProfile?.city ?? null}
+      volunteerPrefecture={volunteerProfile?.prefecture ?? null}
+      acceptedCount={acceptedCount}
     />
   );
 }
@@ -200,6 +214,9 @@ function ApplicationDetailView({
   arrivalGuidance,
   updates,
   messages,
+  volunteerCity,
+  volunteerPrefecture,
+  acceptedCount,
 }: {
   application: ApplicationDetail;
   locale: string;
@@ -207,6 +224,9 @@ function ApplicationDetailView({
   arrivalGuidance: ArrivalGuidance | null;
   updates: EventUpdateView[];
   messages: EventMessageView[];
+  volunteerCity: string | null;
+  volunteerPrefecture: string | null;
+  acceptedCount: number;
 }) {
   const statusView = getApplicationStatusView(
     application.status,
@@ -409,6 +429,42 @@ function ApplicationDetailView({
             />
           </div>
         )}
+
+        {isConfirmed && (
+          <div className="mt-8 space-y-6">
+            <p className="text-xs font-bold uppercase tracking-wide text-stone-500">
+              {locale === "en" ? "AI Event Planning" : "AI活動プランニング"}
+            </p>
+            <EventRoutePlanPanel
+              fromCity={volunteerCity}
+              fromPrefecture={volunteerPrefecture}
+              toAddress={application.opportunity.address}
+              toCity={application.opportunity.city}
+              toPrefecture={application.opportunity.prefecture}
+              eventStartAt={application.opportunity.startAt?.toISOString() ?? null}
+              locale={locale}
+            />
+            <EventMealPlanPanel
+              volunteerCount={acceptedCount || 1}
+              eventCity={application.opportunity.city}
+              eventPrefecture={application.opportunity.prefecture}
+              timeOfDay={deriveTimeOfDay(application.opportunity.startAt)}
+              eventDurationHours={deriveEventDurationHours(
+                application.opportunity.startAt,
+                application.opportunity.endAt,
+              )}
+              locale={locale}
+            />
+            <EventAccommodationsPanel
+              eventCity={application.opportunity.city}
+              eventPrefecture={application.opportunity.prefecture}
+              checkInDate={application.opportunity.startAt?.toISOString() ?? null}
+              checkOutDate={application.opportunity.endAt?.toISOString() ?? null}
+              volunteerCount={acceptedCount || 1}
+              locale={locale}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -559,4 +615,20 @@ function formatLocation(
     [city, prefecture].filter(Boolean).join(", ") ||
     (locale === "en" ? "Location TBD" : "場所未定")
   );
+}
+
+function deriveTimeOfDay(
+  startAt: Date | null,
+): "morning" | "midday" | "afternoon" | "evening" {
+  if (!startAt) return "midday";
+  const hour = startAt.getHours();
+  if (hour < 10) return "morning";
+  if (hour < 14) return "midday";
+  if (hour < 17) return "afternoon";
+  return "evening";
+}
+
+function deriveEventDurationHours(startAt: Date | null, endAt: Date | null): number {
+  if (!startAt || !endAt) return 3;
+  return Math.max(1, Math.round((endAt.getTime() - startAt.getTime()) / 3_600_000));
 }
