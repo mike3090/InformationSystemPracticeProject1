@@ -46,8 +46,6 @@
       "clearDates": "日付をクリア",
       "resetAll": "すべての絞り込みをリセット",
       "mapView": "マップ表示",
-      "mapPlaceholderTitle": "マップ準備中",
-      "mapPlaceholderBody": "データベースにイベントの緯度・経度が接続されると、ここにピンが表示されます。",
       "showing": "今後のイベント {count} 件を表示中",
       "noMatchingTitle": "条件に合うイベントがありません",
       "noMatchingBody": "検索条件を広げる、絞り込みを外す、別の日程を確認してみてください。",

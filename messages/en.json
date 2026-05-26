@@ -19,7 +19,7 @@
     "howItWorks": {
       "title": "How It Works",
       "step1Title": "Post a Need",
-      "step1Desc": "Residents, businesses, and organisations post volunteer opportunities with location, time, and skills needed.",
+      "step1Desc": "Residents, businesses, and organizations post volunteer opportunities with location, time, and skills needed.",
       "step2Title": "Browse & Apply",
       "step2Desc": "Volunteers browse nearby opportunities, filter by skill and schedule, and apply with a message.",
       "step3Title": "AI Matching",
@@ -47,8 +47,6 @@
       "clearDates": "Clear dates",
       "resetAll": "Reset all filters",
       "mapView": "Map view",
-      "mapPlaceholderTitle": "Map placeholder",
-      "mapPlaceholderBody": "Pins will appear here after the project connects event latitude and longitude from the database.",
       "showing": "Showing {count} upcoming event(s)",
       "noMatchingTitle": "No matching events",
       "noMatchingBody": "Try broadening the search, clearing a filter, or checking another date window.",

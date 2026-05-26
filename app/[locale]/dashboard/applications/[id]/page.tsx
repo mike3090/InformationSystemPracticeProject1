@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import { redirect } from "next/navigation";
-=======
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { OpportunityStatus } from "@/app/generated/prisma/client";
@@ -22,6 +19,7 @@ import {
 } from "../../applicationStatus";
 import ApplicationCommunicationPanel from "./ApplicationCommunicationPanel";
 import DevApplicationTools from "./DevApplicationTools";
+import EventAccommodationsPanel from "./EventAccommodationsPanel";
 import EventCheckInPanel from "./EventCheckInPanel";
 import EventMealPlanPanel from "./EventMealPlanPanel";
 import EventRoutePlanPanel from "./EventRoutePlanPanel";
@@ -92,9 +90,7 @@ export default async function LegacyDashboardApplicationPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
-<<<<<<< HEAD
-  redirect(`/${locale}/my-events/applications/${id}`);
-=======
+//  redirect(`/${locale}/my-events/applications/${id}`);
   const session = await auth();
 
   if (!session?.user?.id) {
