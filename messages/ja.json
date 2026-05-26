@@ -309,9 +309,9 @@
   "auth": {
     "signInTitle": "Go Touch Grass にログイン",
     "volunteerSignInTitle": "ボランティアとしてログイン",
-    "requesterSignInTitle": "依頼者としてログイン",
+    "requesterSignInTitle": "主催者としてログイン",
     "volunteerSignInIntro": "ボランティア募集を探して応募するための入口です。",
-    "requesterSignInIntro": "ボランティア募集を投稿・管理するための入口です。",
+    "requesterSignInIntro": "主催者アカウントを作成し、ボランティア募集を投稿・管理するための入口です。",
     "loginTab": "ログイン",
     "registerTab": "登録",
     "accountTypeLabel": "作成するアカウントの種類",

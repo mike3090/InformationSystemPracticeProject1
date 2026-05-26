@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import SignInForm from "@/components/SignInForm";
 
 export default async function SignInPage({
@@ -10,7 +9,6 @@ export default async function SignInPage({
 }) {
   const { locale } = await params;
   const { callbackUrl, intent } = await searchParams;
-  const t = await getTranslations("auth");
   const safeCallbackUrl =
     callbackUrl?.startsWith(`/${locale}/`) || callbackUrl === `/${locale}`
       ? callbackUrl
@@ -23,16 +21,6 @@ export default async function SignInPage({
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center mb-2">
-          {accountIntent === "requester"
-            ? t("requesterSignInTitle")
-            : t("volunteerSignInTitle")}
-        </h1>
-        <p className="text-stone-500 text-sm text-center mb-8">
-          {accountIntent === "requester"
-            ? t("requesterSignInIntro")
-            : t("volunteerSignInIntro")}
-        </p>
         <SignInForm
           locale={locale}
           callbackUrl={safeCallbackUrl}

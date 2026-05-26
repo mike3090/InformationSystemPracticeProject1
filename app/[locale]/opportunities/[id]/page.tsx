@@ -5,11 +5,9 @@ import EventApplicationPanel from "./EventApplicationPanel";
 import TaskDetailCards from "./TaskDetailCards";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import {
-  getMockOpportunity,
-  getOpportunityCoverImage,
-} from "@/lib/mockOpportunities";
+import { getOpportunityCoverImage, type MockOpportunity } from "@/lib/mockOpportunities";
 import { localizeMockOpportunity } from "@/lib/mockOpportunityI18n";
+import { getVolunteerOpportunity } from "@/lib/opportunityData";
 import {
   hasArrivalGuidance,
   type ArrivalGuidance,
@@ -39,7 +37,7 @@ export default async function OpportunityDetailPage({
 }) {
   const { locale, id } = await params;
   const t = await getTranslations("opportunities.detail");
-  const rawOpportunity = getMockOpportunity(id);
+  const rawOpportunity = await getVolunteerOpportunity(id);
 
   if (!rawOpportunity) {
     notFound();
@@ -375,7 +373,7 @@ function formatRating(value: number | null) {
 }
 
 function getMockArrivalGuidance(
-  opportunity: NonNullable<ReturnType<typeof getMockOpportunity>>,
+  opportunity: MockOpportunity,
 ): ArrivalGuidance {
   return {
     arrivalGuidance: opportunity.arrivalGuidance ?? null,

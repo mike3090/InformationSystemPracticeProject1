@@ -84,8 +84,8 @@ export async function sendOrganizerMessage(
     body,
   });
 
-  revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
-  redirect(`/${locale}/dashboard/applications/${applicationId}?message=sent`);
+  revalidatePath(`/${locale}/my-events/applications/${applicationId}`);
+  redirect(`/${locale}/my-events/applications/${applicationId}?message=sent`);
 }
 
 export async function withdrawConfirmedApplication(
@@ -158,7 +158,7 @@ export async function withdrawConfirmedApplication(
   });
 
   revalidatePath(`/${locale}/dashboard`);
-  revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
+  revalidatePath(`/${locale}/my-events/applications/${applicationId}`);
 
   return {
     status: "success",
@@ -255,9 +255,9 @@ export async function checkInToEvent(
     body: method === "QR" ? "Checked in with QR code." : "Checked in manually.",
   });
 
-  revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
+  revalidatePath(`/${locale}/my-events/applications/${applicationId}`);
   revalidatePath(`/${locale}/dashboard/opportunities/${application.opportunityId}`);
-  redirect(`/${locale}/dashboard/applications/${applicationId}?checkin=success`);
+  redirect(`/${locale}/my-events/applications/${applicationId}?checkin=success`);
 }
 
 function isWithinCheckInWindow(startAt: Date | null, endAt: Date | null) {
@@ -363,7 +363,7 @@ export async function devConfirmOwnApplication(
   });
 
   revalidatePath(`/${locale}/dashboard`);
-  revalidatePath(`/${locale}/dashboard/applications/${applicationId}`);
+  revalidatePath(`/${locale}/my-events/applications/${applicationId}`);
   revalidatePath(`/${locale}/opportunities/${application.opportunityId}`);
 
   return {

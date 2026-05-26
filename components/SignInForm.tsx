@@ -30,6 +30,8 @@ export default function SignInForm({
     registerAccount,
     initialRegisterState
   );
+  const headerAccountType =
+    mode === "register" ? registerAccountType : accountIntent;
 
   async function handlePasswordLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -54,6 +56,19 @@ export default function SignInForm({
 
   return (
     <div className="space-y-4">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-2">
+          {headerAccountType === "requester"
+            ? t("requesterSignInTitle")
+            : t("volunteerSignInTitle")}
+        </h1>
+        <p className="text-stone-500 text-sm">
+          {headerAccountType === "requester"
+            ? t("requesterSignInIntro")
+            : t("volunteerSignInIntro")}
+        </p>
+      </div>
+
       <div className="grid grid-cols-2 rounded-lg border border-stone-200 bg-stone-100 p-1 text-sm font-medium">
         <button
           type="button"
