@@ -51,6 +51,14 @@ export default async function ProfileSetupPage({
   const needsVolunteerRole =
     profileType === "volunteer" &&
     !canUseVolunteerProfile;
+  const profileAlreadyCompleted =
+    profileType === "requester"
+      ? Boolean(user.organization?.profileCompleted)
+      : Boolean(user.profile?.profileCompleted);
+
+  if (!needsRequesterRole && !needsVolunteerRole && profileAlreadyCompleted) {
+    redirect(safeNext);
+  }
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-10">

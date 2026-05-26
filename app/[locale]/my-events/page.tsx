@@ -44,12 +44,8 @@ export default async function MyEventsPage({
       event.opportunityStatus === "CANCELLED",
   );
   const active = rows.filter((event) => !cancelled.includes(event));
-  const upcoming = active.filter(
-    (event) => !event.opportunityEndAt || event.opportunityEndAt >= now,
-  );
-  const past = active.filter(
-    (event) => event.opportunityEndAt && event.opportunityEndAt < now,
-  );
+  const upcoming = active.filter((event) => !isPastEvent(event, now));
+  const past = active.filter((event) => isPastEvent(event, now));
 
   return (
     <main className="bg-stone-50">
@@ -219,7 +215,7 @@ function MyEventCard({
   const cancelled =
     event.applicationStatus === "WITHDRAWN" ||
     event.opportunityStatus === "CANCELLED";
-  const isPast = Boolean(event.opportunityEndAt && event.opportunityEndAt < new Date());
+  const isPast = isPastEvent(event, new Date());
 
   return (
     <article className="rounded-lg border border-stone-200 p-4">
@@ -263,24 +259,34 @@ function MyEventCard({
               href={`/${locale}/reflections/${event.applicationId}`}
               className="rounded-lg bg-emerald-700 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
             >
-              {event.reflectionId
-                ? locale === "en"
-                  ? "View reflection"
-                  : "振り返りを見る"
-                : locale === "en"
-                  ? "Reflect"
-                  : "振り返る"}
+              {locale === "en"
+                ? event.reflectionId
+                  ? "View record"
+                  : "Participation record"
+                : "参加記録"}
+            </Link>
+          )}
+          {isPast && !cancelled && (
+            <Link
+              href={`/${locale}/experiences/new?applicationId=${event.applicationId}`}
+              className="rounded-lg border border-rose-600 px-3 py-2 text-sm font-semibold text-rose-700 hover:bg-rose-50"
+            >
+              {locale === "en" ? "Write experience" : "経験投稿"}
             </Link>
           )}
           <Link
             href={`/${locale}/opportunities/${event.opportunityId}`}
-            className="rounded-lg border border-green-700 px-3 py-2 text-sm font-semibold text-green-700 hover:bg-green-50"
+            className={`rounded-lg border border-green-700 px-3 py-2 text-sm font-semibold text-green-700 hover:bg-green-50 ${
+              isPast && !cancelled ? "hidden" : ""
+            }`}
           >
             {copy.viewEvent}
           </Link>
           <Link
             href={`/${locale}/my-events/applications/${event.applicationId}`}
-            className="rounded-lg bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600"
+            className={`rounded-lg bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600 ${
+              isPast || cancelled ? "hidden" : ""
+            }`}
           >
             {copy.communication}
           </Link>
@@ -298,6 +304,13 @@ function InfoItem({ label, value }: { label: string; value: string }) {
       </dt>
       <dd className="mt-1 font-medium text-stone-800">{value}</dd>
     </div>
+  );
+}
+
+function isPastEvent(event: MyEventRow, now: Date) {
+  return (
+    event.opportunityStatus === "COMPLETED" ||
+    Boolean(event.opportunityEndAt && event.opportunityEndAt < now)
   );
 }
 
