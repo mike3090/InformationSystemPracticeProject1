@@ -221,5 +221,8 @@ function profileLabels(t: Awaited<ReturnType<typeof getTranslations>>) {
     certificationChangesRequested: t("certificationStatus.changesRequested"),
     finishSetup: t("finishSetup"),
     saveChanges: t("saveChanges"),
+    changePhoto: t("changePhoto"),
+    addPhoto: t("addPhoto"),
+    photoHint: t("photoHint"),
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -63,6 +63,32 @@ export default function OpportunityDiscovery({
   // AI recommendations state
   const [aiRankings, setAiRankings] = useState<Record<string, AiRanking>>({});
   const [aiStatus, setAiStatus] = useState<AiStatus>("idle");
+
+  // Restore AI rankings from sessionStorage on mount (survives page refresh)
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem("opportunity-ai-rankings");
+      if (saved) {
+        const parsed = JSON.parse(saved) as Record<string, AiRanking>;
+        setAiRankings(parsed);
+        setAiStatus("done");
+        setSortMode("match");
+      }
+    } catch {
+      // ignore — storage unavailable or corrupt
+    }
+  }, []);
+
+  // Persist AI rankings to sessionStorage whenever they are updated
+  useEffect(() => {
+    if (aiStatus === "done" && Object.keys(aiRankings).length > 0) {
+      try {
+        sessionStorage.setItem("opportunity-ai-rankings", JSON.stringify(aiRankings));
+      } catch {
+        // ignore — storage quota or unavailable
+      }
+    }
+  }, [aiRankings, aiStatus]);
 
   const isEn = locale === "en";
   const showMatchFeature = hasVolunteerProfile || opportunities.some((o) => o.matchScore !== undefined);
@@ -515,8 +541,9 @@ function OpportunityCard({
   const isFull = opportunity.spotsRemaining <= 0;
   const isEn = locale === "en";
 
-  // Effective score: prefer AI score if available, fall back to server Jaccard
-  const effectiveScore = aiRanking?.score ?? opportunity.matchScore;
+  // Badge score: only show when AI has ranked (avoids showing low Jaccard defaults)
+  // The raw matchScore still powers sorting silently via the parent component.
+  const displayScore = aiRanking?.score;
 
   return (
     <article className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
@@ -544,18 +571,18 @@ function OpportunityCard({
               {isEn ? "AI Pick" : "AIおすすめ"}
             </span>
           )}
-          {/* Match score badge */}
-          {effectiveScore !== undefined && (
+          {/* Match score badge — only shown after AI ranking has been run */}
+          {displayScore !== undefined && (
             <span
               className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                effectiveScore >= 70
+                displayScore >= 70
                   ? "bg-green-100 text-green-800"
-                  : effectiveScore >= 40
+                  : displayScore >= 40
                     ? "bg-amber-100 text-amber-800"
                     : "bg-stone-100 text-stone-600"
               }`}
             >
-              {isEn ? `${effectiveScore}% match` : `${effectiveScore}%マッチ`}
+              {isEn ? `${displayScore}% match` : `${displayScore}%マッチ`}
             </span>
           )}
         </div>

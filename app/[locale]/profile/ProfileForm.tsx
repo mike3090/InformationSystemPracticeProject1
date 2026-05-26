@@ -3,7 +3,8 @@
 import { saveProfile } from "./actions";
 import type { Organization, User, VolunteerProfile } from "@/app/generated/prisma/client";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import UserAvatar from "@/components/UserAvatar";
 
 type ProfileUser = User & {
   profile: VolunteerProfile | null;
@@ -46,6 +47,8 @@ export default function ProfileForm({
       <input type="hidden" name="next" value={next} />
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="profileType" value={profileType} />
+
+      <PhotoUpload currentImage={user.image ?? null} name={user.name ?? null} labels={labels} />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
@@ -813,4 +816,82 @@ function CommaInput({
       />
     </label>
   );
+}
+
+// ---------------------------------------------------------------------------
+// Photo upload widget
+// ---------------------------------------------------------------------------
+
+function PhotoUpload({
+  currentImage,
+  name,
+  labels,
+}: {
+  currentImage: string | null;
+  name: string | null;
+  labels: Record<string, string>;
+}) {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(currentImage);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file || !file.type.startsWith("image/")) return;
+    const dataUrl = await resizeImage(file, 256);
+    setPreviewUrl(dataUrl);
+  }
+
+  // Only submit new data URLs — leave Google/OAuth URLs untouched server-side
+  const submitValue = previewUrl?.startsWith("data:") ? previewUrl : "";
+
+  return (
+    <div className="flex items-center gap-4 pb-2">
+      <UserAvatar image={previewUrl} name={name} size="md" />
+      <div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleFileChange}
+        />
+        {/* Submitted only when a new file has been selected */}
+        <input type="hidden" name="imageDataUrl" value={submitValue} />
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700"
+        >
+          {previewUrl
+            ? (labels.changePhoto ?? "Change photo")
+            : (labels.addPhoto ?? "Add photo")}
+        </button>
+        <p className="mt-1 text-xs text-stone-400">
+          {labels.photoHint ?? "JPG or PNG"}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+async function resizeImage(file: File, maxSize: number): Promise<string> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      const canvas = document.createElement("canvas");
+      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        resolve(objectUrl);
+        return;
+      }
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL("image/jpeg", 0.85));
+    };
+    img.src = objectUrl;
+  });
 }

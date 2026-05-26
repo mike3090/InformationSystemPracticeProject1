@@ -98,10 +98,13 @@ export async function saveProfile(formData: FormData) {
     throw new Error("Unauthorized");
   }
 
+  const imageDataUrl = String(formData.get("imageDataUrl") ?? "").trim();
   await prisma.user.update({
     where: { id: userId },
     data: {
       name: name || undefined,
+      // Only overwrite the image when the user uploaded a new one (data URL)
+      ...(imageDataUrl.startsWith("data:") ? { image: imageDataUrl } : {}),
     },
   });
 
