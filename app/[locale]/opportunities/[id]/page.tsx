@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import InlineTranslate from "@/components/InlineTranslate";
 import EventApplicationPanel from "./EventApplicationPanel";
 import TaskDetailCards from "./TaskDetailCards";
 import { auth } from "@/lib/auth";
@@ -139,9 +140,13 @@ export default async function OpportunityDetailPage({
                     </span>
                   )}
                 </p>
-                <p className="mt-4 text-base leading-7 text-stone-700">
-                  {opportunity.description}
-                </p>
+                <InlineTranslate
+                  text={opportunity.description}
+                  targetLocale={locale as "ja" | "en"}
+                  locale={locale}
+                  context="Volunteer opportunity description on a Japanese community platform"
+                  textClassName="mt-4 text-base leading-7 text-stone-700"
+                />
               </div>
               <dl className="grid gap-3 text-sm sm:grid-cols-2 md:grid-cols-1">
                 <InfoItem

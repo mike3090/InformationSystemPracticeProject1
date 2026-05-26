@@ -80,7 +80,8 @@ export type AiInteractionType =
   | "PLAN_ROUTE"
   | "PLAN_MEAL"
   | "PLAN_ACCOMMODATIONS"
-  | "TRANSLATE_TEXT";
+  | "TRANSLATE_TEXT"
+  | "RANK_OPPORTUNITIES";
 
 // ── Agent: draftOpportunity ───────────────────────────────────────────────────
 //
@@ -266,6 +267,47 @@ export type PlanAccommodationsOutput = {
   options: AccommodationOption[];   // 2–3 options at different price points
   bookingAdvice: string[];          // General tips: book early, cancellation policy, etc.
   disclaimer: string;
+};
+
+// ── Agent: rankOpportunities ──────────────────────────────────────────────────
+//
+// Input:  volunteer profile + list of open opportunities
+// Output: scored and ranked list with an "AI Pick" flag for the top matches
+//
+// Used by the "AI Recommendations" button on the opportunity discovery page.
+// Scores are computed per-session in the client — they are NOT persisted to DB.
+
+export type OpportunityForRanking = {
+  opportunityId: string;
+  title: string;
+  category: string;
+  tags: string[];
+  skills: string[];
+  shortDescription: string;
+  city: string;
+  prefecture: string;
+};
+
+export type RankOpportunitiesInput = {
+  volunteerBio: string | null;
+  volunteerSkills: string[];
+  volunteerInterests: string[];
+  volunteerPreferredTaskTypes: string[];
+  volunteerPreferredEnvironment: string | null;
+  volunteerCity: string | null;
+  volunteerPrefecture: string | null;
+  opportunities: OpportunityForRanking[];
+};
+
+export type OpportunityRanking = {
+  opportunityId: string;
+  score: number;   // 0–100 — how well the opportunity matches this volunteer
+  aiPick: boolean; // true for the top 3 recommendations
+  reason: string;  // 1–2 sentences addressed to the volunteer
+};
+
+export type RankOpportunitiesOutput = {
+  rankings: OpportunityRanking[];
 };
 
 // ── Agent: translateText ──────────────────────────────────────────────────────

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import InlineTranslate from "@/components/InlineTranslate";
 import {
   sendOrganizerMessage,
   withdrawConfirmedApplication,
@@ -70,7 +71,13 @@ export default function ApplicationCommunicationPanel({
                       : message.senderName ||
                         (locale === "en" ? "Organizer" : "主催者")}
                   </p>
-                  <p className="mt-1 leading-6 text-stone-700">{message.body}</p>
+                  <InlineTranslate
+                    text={message.body}
+                    targetLocale={locale as "ja" | "en"}
+                    locale={locale}
+                    context="Direct message between a volunteer and event organizer"
+                    textClassName="mt-1 leading-6 text-stone-700"
+                  />
                 </div>
               );
             })
