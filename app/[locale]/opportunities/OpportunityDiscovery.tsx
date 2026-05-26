@@ -359,24 +359,28 @@ export default function OpportunityDiscovery({
               )}
             </div>
 
-            <aside className="min-h-56 rounded-lg border border-dashed border-stone-300 bg-stone-50 p-4">
-              <div className="flex h-full flex-col justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase text-stone-500">
-                    {t("mapView")}
-                  </p>
-                  <h2 className="mt-2 text-lg font-semibold text-stone-950">
-                    {t("mapPlaceholderTitle")}
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-stone-600">
-                    {t("mapPlaceholderBody")}
-                  </p>
-                </div>
-                <div className="mt-6 grid grid-cols-3 gap-2">
-                  {filteredOpportunities.slice(0, 6).map((opportunity, index) => (
+            <aside className="overflow-hidden rounded-lg border border-stone-200 shadow-sm">
+              <div className="flex items-center justify-between border-b border-stone-200 bg-white px-4 py-2">
+                <p className="text-xs font-semibold uppercase text-stone-500">
+                  {t("mapView")}
+                </p>
+                <p className="text-xs text-stone-400">
+                  {filteredOpportunities.length}{" "}
+                  {isEn ? "shown" : "件表示中"}
+                </p>
+              </div>
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=135.58%2C34.88%2C135.90%2C35.12&layer=mapnik"
+                className="h-52 w-full border-0"
+                title={t("mapView")}
+                loading="lazy"
+              />
+              {filteredOpportunities.length > 0 && (
+                <div className="flex flex-wrap gap-2 border-t border-stone-200 bg-white px-4 py-2">
+                  {filteredOpportunities.slice(0, 9).map((opportunity, index) => (
                     <span
                       key={opportunity.id}
-                      className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold ${
+                      className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
                         opportunity.spotsRemaining === 0
                           ? "bg-stone-300 text-stone-700"
                           : "bg-green-700 text-white"
@@ -386,7 +390,7 @@ export default function OpportunityDiscovery({
                     </span>
                   ))}
                 </div>
-              </div>
+              )}
             </aside>
           </div>
         )}

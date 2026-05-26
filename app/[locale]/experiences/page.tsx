@@ -6,7 +6,9 @@ import {
   type ExperienceView,
 } from "@/lib/experienceDemo";
 import { ExperienceLikeButton } from "./ExperienceLikeButton";
-import ExperienceRecommendations from "./ExperienceRecommendations";
+import ExperienceRecommendations, {
+  type RecommendationOpportunity,
+} from "./ExperienceRecommendations";
 
 export default async function ExperiencesPage({
   params,
@@ -15,7 +17,10 @@ export default async function ExperiencesPage({
 }) {
   const { locale } = await params;
   const session = await auth();
-  const savedExperiences = await getExperiences();
+  const [savedExperiences, recommendationOpportunities] = await Promise.all([
+    getExperiences(),
+    getRecommendationOpportunities(),
+  ]);
   const experiences =
     savedExperiences.length > 0 ? savedExperiences : getDemoExperiences(locale);
   const isDemoFeed = savedExperiences.length === 0;
@@ -56,7 +61,7 @@ export default async function ExperiencesPage({
           </section>
         )}
 
-        <ExperienceRecommendations locale={locale} />
+        <ExperienceRecommendations locale={locale} opportunities={recommendationOpportunities} />
 
         <section className="mt-8 columns-1 gap-5 sm:columns-2 lg:columns-3">
           {experiences.map((experience) => (
@@ -149,6 +154,30 @@ export default async function ExperiencesPage({
       </div>
     </main>
   );
+}
+
+async function getRecommendationOpportunities(): Promise<RecommendationOpportunity[]> {
+  try {
+    return await prisma.$queryRaw<RecommendationOpportunity[]>`
+      SELECT
+        o."id",
+        o."title",
+        o."category",
+        o."city",
+        o."prefecture",
+        o."shortDescription",
+        o."description",
+        o."tags",
+        o."coverImageUrl"
+      FROM "Opportunity" o
+      WHERE o."status" = 'OPEN'::"OpportunityStatus"
+        AND o."startsAt" > NOW()
+      ORDER BY o."startsAt" ASC
+      LIMIT 50
+    `;
+  } catch {
+    return [];
+  }
 }
 
 async function getExperiences() {

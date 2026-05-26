@@ -7,15 +7,25 @@ import {
   listenForLikedExperienceUpdates,
   type LikedExperience,
 } from "./ExperienceLikeButton";
-import {
-  getOpportunityCoverImage,
-  mockOpportunities,
-} from "@/lib/mockOpportunities";
+
+export type RecommendationOpportunity = {
+  id: string;
+  title: string;
+  category: string | null;
+  city: string;
+  prefecture: string;
+  shortDescription: string | null;
+  description: string;
+  tags: string[];
+  coverImageUrl: string | null;
+};
 
 export default function ExperienceRecommendations({
   locale,
+  opportunities,
 }: {
   locale: string;
+  opportunities: RecommendationOpportunity[];
 }) {
   const [likedExperiences, setLikedExperiences] = useState<LikedExperience[]>([]);
   const copy = locale === "en" ? englishCopy : japaneseCopy;
@@ -35,12 +45,12 @@ export default function ExperienceRecommendations({
     const likedOpportunityIds = new Set(
       likedExperiences.map((experience) => experience.opportunityId),
     );
-    const likedSourceOpportunities = mockOpportunities.filter((opportunity) =>
+    const likedSourceOpportunities = opportunities.filter((opportunity) =>
       likedOpportunityIds.has(opportunity.id),
     );
     const interestTerms = getInterestTerms(likedExperiences, likedSourceOpportunities);
 
-    const scoredOpportunities = mockOpportunities
+    const scoredOpportunities = opportunities
       .filter((opportunity) => !likedOpportunityIds.has(opportunity.id))
       .map((opportunity) => ({
         opportunity,
@@ -49,7 +59,7 @@ export default function ExperienceRecommendations({
       .sort((first, second) => second.score - first.score)
       .filter(({ score }) => score > 0);
 
-    const fallbackOpportunities = mockOpportunities
+    const fallbackOpportunities = opportunities
       .filter((opportunity) => !likedOpportunityIds.has(opportunity.id))
       .filter(
         (opportunity) =>
@@ -70,7 +80,7 @@ export default function ExperienceRecommendations({
       )
       .slice(0, 3)
       .map(({ opportunity }) => opportunity);
-  }, [likedExperiences]);
+  }, [likedExperiences, opportunities]);
 
   return (
     <section className="mt-8 rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
@@ -106,13 +116,19 @@ export default function ExperienceRecommendations({
               href={`/${locale}/opportunities/${opportunity.id}`}
               className="overflow-hidden rounded-lg border border-stone-200 bg-stone-50 transition hover:border-green-300 hover:bg-green-50"
             >
-              <div
-                className="aspect-[16/10] bg-stone-200 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(${getOpportunityCoverImage(opportunity)})`,
-                }}
-                aria-hidden="true"
-              />
+              {opportunity.coverImageUrl ? (
+                <div
+                  className="aspect-[16/10] bg-stone-200 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${opportunity.coverImageUrl})`,
+                  }}
+                  aria-hidden="true"
+                />
+              ) : (
+                <div className="flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-green-100 via-amber-50 to-rose-100 px-4 text-center text-xs font-semibold text-stone-600">
+                  {opportunity.category ?? opportunity.title}
+                </div>
+              )}
               <div className="p-3">
                 <h3 className="text-sm font-bold leading-snug text-stone-950">
                   {opportunity.title}
@@ -134,7 +150,7 @@ export default function ExperienceRecommendations({
 
 function getInterestTerms(
   likedExperiences: LikedExperience[],
-  likedSourceOpportunities: typeof mockOpportunities,
+  likedSourceOpportunities: RecommendationOpportunity[],
 ) {
   const terms = new Set<string>();
 
@@ -145,20 +161,12 @@ function getInterestTerms(
   }
 
   for (const opportunity of likedSourceOpportunities) {
-    addTerm(terms, opportunity.category);
+    if (opportunity.category) addTerm(terms, opportunity.category);
     addTerm(terms, opportunity.city);
     addTerm(terms, opportunity.prefecture);
 
     for (const tag of opportunity.tags) {
       addTerm(terms, tag);
-    }
-
-    for (const task of opportunity.taskFlow) {
-      addTerm(terms, task.name);
-      addTerm(terms, task.physicalEffort);
-      addTerm(terms, task.mentalEffort);
-      addTerm(terms, task.typeColor);
-      addTerm(terms, task.environmentShape);
     }
   }
 
@@ -174,26 +182,17 @@ function addTerm(terms: Set<string>, value: string) {
 }
 
 function scoreOpportunity(
-  opportunity: (typeof mockOpportunities)[number],
+  opportunity: RecommendationOpportunity,
   interestTerms: string[],
 ) {
   const searchableText = [
     opportunity.title,
-    opportunity.category,
+    opportunity.category ?? "",
     opportunity.city,
     opportunity.prefecture,
-    opportunity.shortDescription,
+    opportunity.shortDescription ?? "",
     opportunity.description,
     ...opportunity.tags,
-    ...opportunity.taskFlow.flatMap((task) => [
-      task.name,
-      task.shortDescription,
-      task.fullDescription,
-      task.physicalEffort,
-      task.mentalEffort,
-      task.environmentShape,
-      task.typeColor,
-    ]),
   ]
     .join(" ")
     .toLowerCase();
@@ -219,7 +218,7 @@ const japaneseCopy = {
   title: "好きな経験からおすすめ",
   basedOn: "好きな投稿数:",
   empty:
-    "経験投稿に好きボタンを押すと、そのタグや活動スタイルをもとに関連する志愿活动をここにおすすめします。",
+    "経験投稿に好きボタンを押すと、そのタグや活動スタイルをもとに関連するボランティア活動をここにおすすめします。",
   noMatches:
     "近い活動はまだ見つかりませんが、好きな経験は推薦用に保存されています。",
 };
