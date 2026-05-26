@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -21,8 +22,15 @@ export default function Navbar({ locale }: { locale: string }) {
   return (
     <header className="border-b border-stone-200 bg-white sticky top-0 z-40">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-14">
-        <Link href={`/${locale}`} className="font-bold text-green-700 text-lg tracking-tight">
-          🌿 Go Touch Grass
+        <Link href={`/${locale}`} className="flex items-center gap-2 font-bold text-green-700 text-lg tracking-tight">
+          <Image
+            src="/gtg_logo1.png"
+            alt="Go Touch Grass"
+            width={28}
+            height={28}
+            className="rounded"
+          />
+          Go Touch Grass
         </Link>
 
         <nav className="hidden sm:flex items-center gap-6 text-sm font-medium text-stone-600">
