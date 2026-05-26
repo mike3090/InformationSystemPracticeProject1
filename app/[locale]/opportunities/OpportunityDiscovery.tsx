@@ -587,7 +587,12 @@ function OpportunityCard({
           )}
         </div>
         <h2 className="text-lg font-semibold text-stone-900">
-          {opportunity.title}
+          <Link
+            href={`/${locale}/opportunities/${opportunity.id}`}
+            className="hover:text-green-700 transition-colors"
+          >
+            {opportunity.title}
+          </Link>
         </h2>
         <dl className="mt-3 grid gap-2 text-sm text-stone-600">
           <CardFact label={labels.location} value={`${opportunity.city}, ${opportunity.prefecture}`} />
