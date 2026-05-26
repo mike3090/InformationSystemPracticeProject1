@@ -52,7 +52,6 @@ export default function Navbar({ locale }: { locale: string }) {
         </nav>
 
         <div className="flex items-center gap-3 text-sm">
-          {/* Locale switcher */}
           <Link
             href={otherPath}
             className="text-xs text-stone-500 border border-stone-200 rounded px-2 py-0.5 hover:border-green-500 transition"

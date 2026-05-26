@@ -127,6 +127,22 @@ type GuideAnswerKey =
 
 type GuideAnswers = Record<GuideAnswerKey, string>;
 
+type TaskCardValue = {
+  id: string;
+  name: string;
+  startTime: string;
+  durationMinutes: string;
+  peopleNeeded: string;
+  shortDescription: string;
+  steps: string;
+  toolsProvided: string;
+  thingsToBring: string;
+  typeColor: string;
+  environmentShape: string;
+  physicalEffort: string;
+  mentalEffort: string;
+};
+
 const initialValues: FormValues = {
   title: "",
   category: "",
@@ -177,6 +193,22 @@ const initialGuideAnswers: GuideAnswers = {
   arrival: "",
 };
 
+const initialTaskCard: TaskCardValue = {
+  id: "task-1",
+  name: "",
+  startTime: "",
+  durationMinutes: "60",
+  peopleNeeded: "1",
+  shortDescription: "",
+  steps: "",
+  toolsProvided: "",
+  thingsToBring: "",
+  typeColor: "green",
+  environmentShape: "relaxed",
+  physicalEffort: "medium",
+  mentalEffort: "medium",
+};
+
 export default function NewOpportunityForm({
   locale,
 }: {
@@ -187,12 +219,45 @@ export default function NewOpportunityForm({
   const [roughDescription, setRoughDescription] = useState("");
   const [guideAnswers, setGuideAnswers] = useState<GuideAnswers>(initialGuideAnswers);
   const [organizerContext, setOrganizerContext] = useState("");
+  const [tasks, setTasks] = useState<TaskCardValue[]>([initialTaskCard]);
   const [draft, setDraft] = useState<DraftOpportunityOutput | null>(null);
   const [draftError, setDraftError] = useState("");
   const [isPending, startTransition] = useTransition();
 
   function updateValue<K extends keyof FormValues>(key: K, value: FormValues[K]) {
     setValues((current) => ({ ...current, [key]: value }));
+  }
+
+  function updateTask<K extends keyof TaskCardValue>(
+    id: string,
+    key: K,
+    value: TaskCardValue[K],
+  ) {
+    setTasks((current) =>
+      current.map((task) => (task.id === id ? { ...task, [key]: value } : task)),
+    );
+  }
+
+  function updateFirstTask<K extends keyof TaskCardValue>(
+    key: K,
+    value: TaskCardValue[K],
+  ) {
+    setTasks((current) =>
+      current.map((task, index) => (index === 0 ? { ...task, [key]: value } : task)),
+    );
+  }
+
+  function addTask() {
+    setTasks((current) => [
+      ...current,
+      { ...initialTaskCard, id: `task-${Date.now()}` },
+    ]);
+  }
+
+  function removeTask(id: string) {
+    setTasks((current) =>
+      current.length === 1 ? current : current.filter((task) => task.id !== id),
+    );
   }
 
   function updateGuideAnswer(key: GuideAnswerKey, value: string) {
@@ -207,11 +272,14 @@ export default function NewOpportunityForm({
     if (key === "firstTask") {
       updateValue("taskName", value);
       updateValue("taskShortDescription", value);
+      updateFirstTask("name", value);
+      updateFirstTask("shortDescription", value);
       return;
     }
 
     if (key === "thingsToBring") {
       updateValue("thingsToBring", value);
+      updateFirstTask("thingsToBring", value);
       return;
     }
 
@@ -302,6 +370,27 @@ export default function NewOpportunityForm({
       firstContactRole: data.firstContactRole || current.firstContactRole,
       instructions: buildTaskFlowNote(data.taskFlow, locale) || current.instructions,
     }));
+
+    if (data.taskFlow.length) {
+      setTasks(
+        data.taskFlow.map((task, index) => ({
+          id: `task-${index + 1}`,
+          name: locale === "ja" ? task.nameJa : task.name,
+          startTime: task.startTime,
+          durationMinutes: task.durationMinutes ? String(task.durationMinutes) : "60",
+          peopleNeeded: task.peopleNeeded ? String(task.peopleNeeded) : "1",
+          shortDescription:
+            locale === "ja" ? task.shortDescriptionJa : task.shortDescription,
+          steps: task.steps.join(", "),
+          toolsProvided: data.toolsProvided.join(", "),
+          thingsToBring: data.thingsToBring.join(", "),
+          typeColor: data.display.taskTypeColor,
+          environmentShape: data.display.environmentShape,
+          physicalEffort: data.display.physicalEffort,
+          mentalEffort: data.display.mentalEffort,
+        })),
+      );
+    }
   }
 
   function requestDraft() {
@@ -318,7 +407,7 @@ export default function NewOpportunityForm({
           }),
         });
         const result = (await response.json()) as DraftResult;
-        if (!result.ok) {
+        if (result.ok === false) {
           setDraftError(result.error);
           return;
         }
@@ -337,6 +426,7 @@ export default function NewOpportunityForm({
     >
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="aiDrafted" value={draft ? "true" : "false"} />
+      <input type="hidden" name="taskFlowJson" value={JSON.stringify(tasks)} />
 
       <section className="grid gap-6 border-b border-stone-200 pb-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
         <div className="space-y-5">
@@ -490,39 +580,28 @@ export default function NewOpportunityForm({
             title={copy.taskTitle}
             description={copy.taskDescription}
           >
-            <div className="grid gap-5 sm:grid-cols-2">
-              <TextInput name="taskName" label={copy.taskName} required value={values.taskName} onChange={(value) => updateValue("taskName", value)} />
-              <TextInput name="taskStartTime" label={copy.taskStartTime} placeholder="10:00" required value={values.taskStartTime} onChange={(value) => updateValue("taskStartTime", value)} />
-              <TextInput name="taskDurationMinutes" label={copy.taskDurationMinutes} type="number" min="1" required value={values.taskDurationMinutes} onChange={(value) => updateValue("taskDurationMinutes", value)} />
-              <TextInput name="taskPeopleNeeded" label={copy.taskPeopleNeeded} type="number" min="1" required value={values.taskPeopleNeeded} onChange={(value) => updateValue("taskPeopleNeeded", value)} />
+            <div className="space-y-5">
+              {tasks.map((task, index) => (
+                <TaskCardEditor
+                  key={task.id}
+                  copy={copy}
+                  index={index}
+                  task={task}
+                  canRemove={tasks.length > 1}
+                  onChange={updateTask}
+                  onRemove={removeTask}
+                />
+              ))}
             </div>
-            <TextareaInput
-              name="taskShortDescription"
-              label={copy.taskShortDescription}
-              rows={3}
-              required
-              value={values.taskShortDescription}
-              onChange={(value) => updateValue("taskShortDescription", value)}
-            />
-            <div className="grid gap-5 sm:grid-cols-2">
-              <TextInput name="taskSteps" label={copy.taskSteps} placeholder={copy.commaPlaceholder} value={values.taskSteps} onChange={(value) => updateValue("taskSteps", value)} />
-              <TextInput name="toolsProvided" label={copy.toolsProvided} placeholder={copy.commaPlaceholder} value={values.toolsProvided} onChange={(value) => updateValue("toolsProvided", value)} />
-              <TextInput name="thingsToBring" label={copy.thingsToBring} placeholder={copy.commaPlaceholder} value={values.thingsToBring} onChange={(value) => updateValue("thingsToBring", value)} />
-              <TextInput name="preApplicationQuestions" label={copy.preApplicationQuestions} placeholder={copy.commaPlaceholder} value={values.preApplicationQuestions} onChange={(value) => updateValue("preApplicationQuestions", value)} />
-            </div>
-          </FormSection>
-
-          <FormSection
-            eyebrow={copy.cardEyebrow}
-            title={copy.cardTitle}
-            description={copy.cardDescription}
-          >
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              <SelectInput name="taskTypeColor" label={copy.taskTypeColor} value={values.taskTypeColor} onChange={(value) => updateValue("taskTypeColor", value)} options={[["green", copy.green], ["blue", copy.blue], ["orange", copy.orange]]} />
-              <SelectInput name="environmentShape" label={copy.environmentShape} value={values.environmentShape} onChange={(value) => updateValue("environmentShape", value)} options={[["relaxed", copy.relaxed], ["structured", copy.structured]]} />
-              <SelectInput name="physicalEffort" label={copy.physicalEffort} value={values.physicalEffort} onChange={(value) => updateValue("physicalEffort", value)} options={[["low", copy.low], ["medium", copy.medium], ["high", copy.high]]} />
-              <SelectInput name="mentalEffort" label={copy.mentalEffort} value={values.mentalEffort} onChange={(value) => updateValue("mentalEffort", value)} options={[["low", copy.low], ["medium", copy.medium], ["high", copy.high]]} />
-            </div>
+            <button
+              type="button"
+              onClick={addTask}
+              className="inline-flex items-center gap-2 rounded-lg border border-green-700 px-4 py-2.5 text-sm font-semibold text-green-700 hover:bg-green-50"
+            >
+              <span aria-hidden="true" className="text-lg leading-none">+</span>
+              {copy.addTask}
+            </button>
+            <TextInput name="preApplicationQuestions" label={copy.preApplicationQuestions} placeholder={copy.commaPlaceholder} value={values.preApplicationQuestions} onChange={(value) => updateValue("preApplicationQuestions", value)} />
           </FormSection>
 
           <FormSection
@@ -788,6 +867,65 @@ function PreviewRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+function TaskCardEditor({
+  copy,
+  index,
+  task,
+  canRemove,
+  onChange,
+  onRemove,
+}: {
+  copy: ReturnType<typeof opportunityFormCopy>;
+  index: number;
+  task: TaskCardValue;
+  canRemove: boolean;
+  onChange: <K extends keyof TaskCardValue>(
+    id: string,
+    key: K,
+    value: TaskCardValue[K],
+  ) => void;
+  onRemove: (id: string) => void;
+}) {
+  return (
+    <div className="rounded-lg border border-stone-200 bg-stone-50 p-5">
+      <div className="mb-5 flex items-center justify-between gap-3">
+        <h3 className="text-base font-semibold text-stone-900">
+          {copy.taskCardLabel} {index + 1}
+        </h3>
+        {canRemove && (
+          <button
+            type="button"
+            onClick={() => onRemove(task.id)}
+            className="text-sm font-medium text-stone-500 hover:text-red-700"
+          >
+            {copy.removeTask}
+          </button>
+        )}
+      </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <TextInput name={`${task.id}-name`} label={copy.taskName} required value={task.name} onChange={(value) => onChange(task.id, "name", value)} />
+        <TextInput name={`${task.id}-startTime`} label={copy.taskStartTime} placeholder="10:00" required value={task.startTime} onChange={(value) => onChange(task.id, "startTime", value)} />
+        <TextInput name={`${task.id}-durationMinutes`} label={copy.taskDurationMinutes} type="number" min="1" required value={task.durationMinutes} onChange={(value) => onChange(task.id, "durationMinutes", value)} />
+        <TextInput name={`${task.id}-peopleNeeded`} label={copy.taskPeopleNeeded} type="number" min="1" required value={task.peopleNeeded} onChange={(value) => onChange(task.id, "peopleNeeded", value)} />
+      </div>
+      <div className="mt-5">
+        <TextareaInput name={`${task.id}-shortDescription`} label={copy.taskShortDescription} rows={3} required value={task.shortDescription} onChange={(value) => onChange(task.id, "shortDescription", value)} />
+      </div>
+      <div className="mt-5 grid gap-5 sm:grid-cols-2">
+        <TextInput name={`${task.id}-steps`} label={copy.taskSteps} placeholder={copy.commaPlaceholder} value={task.steps} onChange={(value) => onChange(task.id, "steps", value)} />
+        <TextInput name={`${task.id}-toolsProvided`} label={copy.toolsProvided} placeholder={copy.commaPlaceholder} value={task.toolsProvided} onChange={(value) => onChange(task.id, "toolsProvided", value)} />
+        <TextInput name={`${task.id}-thingsToBring`} label={copy.thingsToBring} placeholder={copy.commaPlaceholder} value={task.thingsToBring} onChange={(value) => onChange(task.id, "thingsToBring", value)} />
+      </div>
+      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <SelectInput name={`${task.id}-typeColor`} label={copy.taskTypeColor} value={task.typeColor} onChange={(value) => onChange(task.id, "typeColor", value)} options={[["green", copy.green], ["blue", copy.blue], ["orange", copy.orange]]} />
+        <SelectInput name={`${task.id}-environmentShape`} label={copy.environmentShape} value={task.environmentShape} onChange={(value) => onChange(task.id, "environmentShape", value)} options={[["relaxed", copy.relaxed], ["structured", copy.structured]]} />
+        <SelectInput name={`${task.id}-physicalEffort`} label={copy.physicalEffort} value={task.physicalEffort} onChange={(value) => onChange(task.id, "physicalEffort", value)} options={[["low", copy.low], ["medium", copy.medium], ["high", copy.high]]} />
+        <SelectInput name={`${task.id}-mentalEffort`} label={copy.mentalEffort} value={task.mentalEffort} onChange={(value) => onChange(task.id, "mentalEffort", value)} options={[["low", copy.low], ["medium", copy.medium], ["high", copy.high]]} />
+      </div>
+    </div>
+  );
+}
+
 function FormSection({
   eyebrow,
   title,
@@ -1047,7 +1185,10 @@ export function opportunityFormCopy(locale: string) {
       googleMapsUrl: "Google Maps URL",
       taskEyebrow: "作業",
       taskTitle: "タスクカード",
-      taskDescription: "最初の具体的な作業カードを登録します。",
+      taskDescription: "活動を複数の具体的な作業に分けて登録できます。応募者は自分に合う内容を確認できます。",
+      taskCardLabel: "タスク",
+      addTask: "タスクを追加",
+      removeTask: "削除",
       taskName: "タスク名",
       taskStartTime: "開始時刻",
       taskDurationMinutes: "所要時間（分）",
@@ -1196,8 +1337,11 @@ export function opportunityFormCopy(locale: string) {
     address: "Address",
     googleMapsUrl: "Google Maps URL",
     taskEyebrow: "Task flow",
-    taskTitle: "First task card",
-    taskDescription: "Create the first concrete task volunteers can understand and choose.",
+    taskTitle: "Task cards",
+    taskDescription: "Break a larger opportunity into concrete tasks volunteers can understand and choose from.",
+    taskCardLabel: "Task",
+    addTask: "Add task",
+    removeTask: "Remove",
     taskName: "Task name",
     taskStartTime: "Start time",
     taskDurationMinutes: "Duration minutes",

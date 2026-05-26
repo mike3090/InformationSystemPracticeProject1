@@ -175,6 +175,6 @@ const japaneseCopy = {
   ratingPrefix: "満足度",
   related: "関連する活動",
   relatedIntro:
-    "この経験に興味を持ったら、元の志愿活动ページを開いて参加方法を確認できます。",
-  viewOpportunity: "志愿活动を見る",
+    "この経験に興味を持ったら、元のボランティア活動ページを開いて参加方法を確認できます。",
+  viewOpportunity: "ボランティア活動を見る",
 };

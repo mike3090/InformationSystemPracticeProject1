@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -63,6 +63,32 @@ export default function OpportunityDiscovery({
   // AI recommendations state
   const [aiRankings, setAiRankings] = useState<Record<string, AiRanking>>({});
   const [aiStatus, setAiStatus] = useState<AiStatus>("idle");
+
+  // Restore AI rankings from sessionStorage on mount (survives page refresh)
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem("opportunity-ai-rankings");
+      if (saved) {
+        const parsed = JSON.parse(saved) as Record<string, AiRanking>;
+        setAiRankings(parsed);
+        setAiStatus("done");
+        setSortMode("match");
+      }
+    } catch {
+      // ignore — storage unavailable or corrupt
+    }
+  }, []);
+
+  // Persist AI rankings to sessionStorage whenever they are updated
+  useEffect(() => {
+    if (aiStatus === "done" && Object.keys(aiRankings).length > 0) {
+      try {
+        sessionStorage.setItem("opportunity-ai-rankings", JSON.stringify(aiRankings));
+      } catch {
+        // ignore — storage quota or unavailable
+      }
+    }
+  }, [aiRankings, aiStatus]);
 
   const isEn = locale === "en";
   const showMatchFeature = hasVolunteerProfile || opportunities.some((o) => o.matchScore !== undefined);
@@ -359,24 +385,28 @@ export default function OpportunityDiscovery({
               )}
             </div>
 
-            <aside className="min-h-56 rounded-lg border border-dashed border-stone-300 bg-stone-50 p-4">
-              <div className="flex h-full flex-col justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase text-stone-500">
-                    {t("mapView")}
-                  </p>
-                  <h2 className="mt-2 text-lg font-semibold text-stone-950">
-                    {t("mapPlaceholderTitle")}
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-stone-600">
-                    {t("mapPlaceholderBody")}
-                  </p>
-                </div>
-                <div className="mt-6 grid grid-cols-3 gap-2">
-                  {filteredOpportunities.slice(0, 6).map((opportunity, index) => (
+            <aside className="overflow-hidden rounded-lg border border-stone-200 shadow-sm">
+              <div className="flex items-center justify-between border-b border-stone-200 bg-white px-4 py-2">
+                <p className="text-xs font-semibold uppercase text-stone-500">
+                  {t("mapView")}
+                </p>
+                <p className="text-xs text-stone-400">
+                  {filteredOpportunities.length}{" "}
+                  {isEn ? "shown" : "件表示中"}
+                </p>
+              </div>
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=135.58%2C34.88%2C135.90%2C35.12&layer=mapnik"
+                className="h-52 w-full border-0"
+                title={t("mapView")}
+                loading="lazy"
+              />
+              {filteredOpportunities.length > 0 && (
+                <div className="flex flex-wrap gap-2 border-t border-stone-200 bg-white px-4 py-2">
+                  {filteredOpportunities.slice(0, 9).map((opportunity, index) => (
                     <span
                       key={opportunity.id}
-                      className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold ${
+                      className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
                         opportunity.spotsRemaining === 0
                           ? "bg-stone-300 text-stone-700"
                           : "bg-green-700 text-white"
@@ -386,7 +416,7 @@ export default function OpportunityDiscovery({
                     </span>
                   ))}
                 </div>
-              </div>
+              )}
             </aside>
           </div>
         )}
@@ -511,8 +541,9 @@ function OpportunityCard({
   const isFull = opportunity.spotsRemaining <= 0;
   const isEn = locale === "en";
 
-  // Effective score: prefer AI score if available, fall back to server Jaccard
-  const effectiveScore = aiRanking?.score ?? opportunity.matchScore;
+  // Badge score: only show when AI has ranked (avoids showing low Jaccard defaults)
+  // The raw matchScore still powers sorting silently via the parent component.
+  const displayScore = aiRanking?.score;
 
   return (
     <article className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
@@ -540,23 +571,28 @@ function OpportunityCard({
               {isEn ? "AI Pick" : "AIおすすめ"}
             </span>
           )}
-          {/* Match score badge */}
-          {effectiveScore !== undefined && (
+          {/* Match score badge — only shown after AI ranking has been run */}
+          {displayScore !== undefined && (
             <span
               className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                effectiveScore >= 70
+                displayScore >= 70
                   ? "bg-green-100 text-green-800"
-                  : effectiveScore >= 40
+                  : displayScore >= 40
                     ? "bg-amber-100 text-amber-800"
                     : "bg-stone-100 text-stone-600"
               }`}
             >
-              {isEn ? `${effectiveScore}% match` : `${effectiveScore}%マッチ`}
+              {isEn ? `${displayScore}% match` : `${displayScore}%マッチ`}
             </span>
           )}
         </div>
         <h2 className="text-lg font-semibold text-stone-900">
-          {opportunity.title}
+          <Link
+            href={`/${locale}/opportunities/${opportunity.id}`}
+            className="hover:text-green-700 transition-colors"
+          >
+            {opportunity.title}
+          </Link>
         </h2>
         <dl className="mt-3 grid gap-2 text-sm text-stone-600">
           <CardFact label={labels.location} value={`${opportunity.city}, ${opportunity.prefecture}`} />
