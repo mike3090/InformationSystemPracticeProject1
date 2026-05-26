@@ -12,18 +12,18 @@
   "home": {
     "hero": {
       "title": "Connect with Your Community",
-      "subtitle": "Go Touch Grass bridges volunteers and local needs across small-town Japan.",
+      "subtitle": "From park cleanups and harvest help to elderly care and local festivals — Go Touch Grass connects people who want to help with the communities that need them most.",
       "ctaVolunteer": "Find Opportunities",
       "ctaRequester": "Post a Need"
     },
     "howItWorks": {
       "title": "How It Works",
       "step1Title": "Post a Need",
-      "step1Desc": "Residents, businesses, and organizations post volunteer opportunities with location, time, and skills needed.",
+      "step1Desc": "Describe what you need, set a date, location, and any helpful skills. Our AI drafts a clear, welcoming listing in seconds — so you spend less time writing and more time doing.",
       "step2Title": "Browse & Apply",
-      "step2Desc": "Volunteers browse nearby opportunities, filter by skill and schedule, and apply with a message.",
-      "step3Title": "AI Matching",
-      "step3Desc": "Our AI agent reviews applicants, scores matches, and helps requesters confirm the best fit."
+      "step2Desc": "Filter by town, date, category, or effort level. Read honest posts from past volunteers before you commit. Apply with a short personal message — takes less than a minute.",
+      "step3Title": "AI Assistance",
+      "step3Desc": "Your skill and interest profile is scored against every open opportunity so the best matches surface first. Organizers get AI-drafted descriptions; volunteers get tailored picks."
     },
     "stats": {
       "opportunities": "Opportunities",
