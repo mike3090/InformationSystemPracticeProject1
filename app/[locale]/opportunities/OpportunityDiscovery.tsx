@@ -38,6 +38,16 @@ type SortMode = "date" | "match";
 type AiRanking = { score: number; aiPick: boolean; reason: string };
 type AiStatus = "idle" | "loading" | "done" | "error";
 
+function readSavedAiRankings() {
+  if (typeof window === "undefined") return null;
+  try {
+    const saved = window.sessionStorage.getItem("opportunity-ai-rankings");
+    return saved ? JSON.parse(saved) as Record<string, AiRanking> : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function OpportunityDiscovery({
   locale,
   opportunities,
@@ -58,26 +68,18 @@ export default function OpportunityDiscovery({
   const [selectedEfforts, setSelectedEfforts] = useState<EffortFilter[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [currentTime] = useState(() => Date.now());
-  const [sortMode, setSortMode] = useState<SortMode>("date");
+  const [initialAiRankings] = useState(() => readSavedAiRankings());
+  const [sortMode, setSortMode] = useState<SortMode>(
+    initialAiRankings ? "match" : "date",
+  );
 
   // AI recommendations state
-  const [aiRankings, setAiRankings] = useState<Record<string, AiRanking>>({});
-  const [aiStatus, setAiStatus] = useState<AiStatus>("idle");
-
-  // Restore AI rankings from sessionStorage on mount (survives page refresh)
-  useEffect(() => {
-    try {
-      const saved = sessionStorage.getItem("opportunity-ai-rankings");
-      if (saved) {
-        const parsed = JSON.parse(saved) as Record<string, AiRanking>;
-        setAiRankings(parsed);
-        setAiStatus("done");
-        setSortMode("match");
-      }
-    } catch {
-      // ignore — storage unavailable or corrupt
-    }
-  }, []);
+  const [aiRankings, setAiRankings] = useState<Record<string, AiRanking>>(
+    initialAiRankings ?? {},
+  );
+  const [aiStatus, setAiStatus] = useState<AiStatus>(
+    initialAiRankings ? "done" : "idle",
+  );
 
   // Persist AI rankings to sessionStorage whenever they are updated
   useEffect(() => {

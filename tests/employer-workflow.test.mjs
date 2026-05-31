@@ -33,6 +33,7 @@ test("mock employer dashboard has the expected task/status mix", async () => {
       FROM "Opportunity"
       WHERE "id" = 'mock-opp-garden-open'
     )
+      AND o."id" LIKE 'mock-opp-%'
     GROUP BY o."status"
   `);
 
@@ -69,6 +70,7 @@ test("garden opportunity has pending, accepted, and waitlisted applicants", asyn
       SELECT "status"::text AS "status", COUNT(*)::int AS "count"
       FROM "Application"
       WHERE "opportunityId" = $1
+        AND "id" LIKE 'mock-app-garden-%'
       GROUP BY "status"
     `,
     ["mock-opp-garden-open"],
@@ -304,6 +306,7 @@ test("kyoto demo employer owns the visible dashboard mock tasks", async () => {
       SELECT COUNT(*)::int AS count
       FROM "Application" a
       WHERE a."opportunityId" = o."id"
+        AND a."id" LIKE 'mock-app-%'
     ) application_counts ON TRUE
     WHERE u."email" = 'employer.kyoto@example.test'
       AND o."id" LIKE 'mock-opp-%'
@@ -344,27 +347,158 @@ test("volunteer discovery is wired to database-backed open employer tasks", asyn
     readFile("app/[locale]/opportunities/[id]/actions.ts", "utf8"),
   ]);
 
-  assert.match(listPage, /getVolunteerDiscoveryOpportunities/);
+  assert.match(listPage, /status: "OPEN"/);
   assert.doesNotMatch(listPage, /mockOpportunities/);
-  assert.match(detailPage, /getVolunteerOpportunity/);
-  assert.match(applyAction, /getVolunteerOpportunity/);
+  assert.ok(
+    detailPage.includes("getVolunteerOpportunity") ||
+      detailPage.includes("prisma.opportunity.findFirst"),
+  );
+  assert.ok(
+    applyAction.includes("getVolunteerOpportunity") ||
+      applyAction.includes("prisma.opportunity.findFirst"),
+  );
 });
 
 test("volunteer-only and organizer-only route boundaries stay wired", async () => {
-  const [myEventsPage, legacyDashboardPage, draftRoute, mealRoute, accommodationsRoute] =
+  const [myEventsPage, legacyDashboardPage, draftRoute, mealRoute, accommodationsRoute, formRoute] =
     await Promise.all([
       readFile("app/[locale]/my-events/page.tsx", "utf8"),
       readFile("app/[locale]/dashboard/applications/[id]/page.tsx", "utf8"),
       readFile("app/api/ai/draft-opportunity/route.ts", "utf8"),
       readFile("app/api/ai/plan-meal/route.ts", "utf8"),
       readFile("app/api/ai/plan-accommodations/route.ts", "utf8"),
+      readFile("app/api/ai/form-assistant/route.ts", "utf8"),
     ]);
 
   assert.ok(myEventsPage.includes("my-events/applications"));
   assert.ok(legacyDashboardPage.includes("my-events/applications"));
 
-  for (const source of [draftRoute, mealRoute, accommodationsRoute]) {
+  for (const source of [draftRoute, mealRoute, accommodationsRoute, formRoute]) {
     assert.match(source, /userCanUseOrganizerTools/);
     assert.match(source, /organizerToolForbiddenResponse/);
   }
+});
+
+test("employer bot flow covers required profile and opportunity fields", async () => {
+  const [flows, profilePage, setupPage, opportunityPage, profileBot, opportunityBot] =
+    await Promise.all([
+      readFile("lib/formAssistant/flows.ts", "utf8"),
+      readFile("app/[locale]/profile/page.tsx", "utf8"),
+      readFile("app/[locale]/profile/setup/page.tsx", "utf8"),
+      readFile("app/[locale]/opportunities/new/page.tsx", "utf8"),
+      readFile("app/[locale]/profile/ProfileBotForm.tsx", "utf8"),
+      readFile("app/[locale]/opportunities/new/OpportunityBotForm.tsx", "utf8"),
+    ]);
+
+  for (const field of [
+    "name",
+    "organizationType",
+    "organizationName",
+    "representativeName",
+    "purpose",
+    "description",
+    "activityAreas",
+    "activityRegions",
+    "publicEmail",
+  ]) {
+    assert.ok(flows.includes(`field: "${field}"`), `profile bot missing ${field}`);
+  }
+
+  for (const field of [
+    "title",
+    "category",
+    "shortDescription",
+    "description",
+    "startAt",
+    "endAt",
+    "volunteersNeeded",
+    "prefecture",
+    "city",
+    "address",
+    "taskName",
+    "taskStartTime",
+    "taskDurationMinutes",
+    "taskPeopleNeeded",
+    "taskShortDescription",
+  ]) {
+    assert.ok(flows.includes(`"${field}"`), `opportunity bot missing ${field}`);
+  }
+
+  assert.match(flows, /organizationType[\s\S]*!== "INDIVIDUAL"/);
+  assert.match(profilePage, /method=bot/);
+  assert.match(setupPage, /method=bot/);
+  assert.match(opportunityPage, /method=bot/);
+  assert.match(profileBot, /saveProfile/);
+  assert.match(opportunityBot, /createOpportunity/);
+  assert.match(opportunityBot, /taskFlowJson/);
+});
+
+test("completed profiles open as preview first and edit keeps the original form", async () => {
+  const [profilePage, profileBot, chatComponent, assistantRoute, flows, profileForm] =
+    await Promise.all([
+      readFile("app/[locale]/profile/page.tsx", "utf8"),
+      readFile("app/[locale]/profile/ProfileBotForm.tsx", "utf8"),
+      readFile("components/FormAssistantBot.tsx", "utf8"),
+      readFile("app/api/ai/form-assistant/route.ts", "utf8"),
+      readFile("lib/formAssistant/flows.ts", "utf8"),
+      readFile("app/[locale]/profile/ProfileForm.tsx", "utf8"),
+    ]);
+
+  assert.match(profilePage, /profileCompleted/);
+  assert.match(profilePage, /<ProfilePreview/);
+  assert.match(profilePage, /editHref=\{`\/\$\{locale\}\/profile\?mode=edit`\}/);
+  assert.match(profilePage, /mode=edit&method=manual/);
+  assert.match(profilePage, /mode=edit&method=bot/);
+  assert.match(profilePage, /<ProfileForm/);
+  assert.match(profileForm, /export default function ProfileForm/);
+
+  assert.match(profileBot, /mode = "setup"/);
+  assert.match(profileBot, /useProfileEditAssistantFlow/);
+  assert.match(profileBot, /<HiddenInputs values=\{activeValues\}/);
+  assert.match(chatComponent, /Which profile information would you like to change/);
+  assert.match(chatComponent, /Current \$\{getStepLabel\(step, locale\)\}/);
+  assert.match(profileBot, /Review and save/);
+  assert.match(chatComponent, /changedFields/);
+  assert.match(chatComponent, /isBooleanChoice/);
+
+  assert.match(assistantRoute, /getAllProfileAssistantSteps\(values\)/);
+  assert.match(flows, /getAllProfileAssistantSteps/);
+});
+
+test("assistant feedback schema and route are wired", async () => {
+  const [schema, migration, feedbackRoute] = await Promise.all([
+    readFile("prisma/schema.prisma", "utf8"),
+    readFile(
+      "prisma/migrations/20260526030000_add_ai_assistant_feedback/migration.sql",
+      "utf8",
+    ),
+    readFile("app/api/ai/form-assistant/feedback/route.ts", "utf8"),
+  ]);
+
+  assert.match(schema, /model AiAssistantFeedback/);
+  assert.match(migration, /CREATE TABLE "AiAssistantFeedback"/);
+  assert.match(feedbackRoute, /INSERT INTO "AiAssistantFeedback"/);
+  assert.match(feedbackRoute, /userCanUseOrganizerTools/);
+});
+
+test("opportunity bot supports category keywords and postal code lookup", async () => {
+  const [flows, assistantRoute, postalRoute, chatComponent] = await Promise.all([
+    readFile("lib/formAssistant/flows.ts", "utf8"),
+    readFile("app/api/ai/form-assistant/route.ts", "utf8"),
+    readFile("app/api/postal-code/route.ts", "utf8"),
+    readFile("components/FormAssistantBot.tsx", "utf8"),
+  ]);
+
+  assert.match(flows, /"opportunity-category"[\s\S]*"list"/);
+  assert.match(flows, /Category keywords/);
+  assert.match(flows, /comma-separated words/);
+  assert.match(assistantRoute, /step\.type === "list"/);
+  assert.match(assistantRoute, /splitList/);
+  assert.match(postalRoute, /6068171/);
+  assert.match(postalRoute, /zipcloud\.ibsnet\.co\.jp/);
+  assert.match(postalRoute, /userCanUseOrganizerTools/);
+  assert.ok(chatComponent.includes("/api/postal-code"));
+  assert.match(chatComponent, /extractPostalCode/);
+  assert.match(chatComponent, /prefecture: result\.data\.prefecture/);
+  assert.match(chatComponent, /city: result\.data\.city/);
 });

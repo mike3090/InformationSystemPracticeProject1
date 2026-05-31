@@ -110,6 +110,7 @@ model User {
   opportunities         Opportunity[]
   applications          Application[]
   aiInteractions        AiInteraction[]
+  aiAssistantFeedback   AiAssistantFeedback[]
   notifications         Notification[]
   eventUpdates          EventUpdate[]
   sentEventMessages     EventMessage[]    @relation("SentEventMessages")
@@ -454,4 +455,21 @@ model AiInteraction {
   createdAt     DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id])
+}
+
+model AiAssistantFeedback {
+  id         String   @id @default(cuid())
+  userId     String
+  flowType   String
+  stepId     String
+  locale     String
+  userAnswer String?  @db.Text
+  botMessage String?  @db.Text
+  context    Json     @default("{}")
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([flowType])
 }
