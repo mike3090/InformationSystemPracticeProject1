@@ -177,7 +177,7 @@ const englishCopy = {
 };
 
 const japaneseCopy = {
-  back: "My Events に戻る",
+  back: "マイイベントに戻る",
   eyebrow: "活動後の振り返り",
   intro:
     "参加した内容を、具体的な成果として短時間で記録できます。",

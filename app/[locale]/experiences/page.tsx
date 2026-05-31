@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import InlineTranslate from "@/components/InlineTranslate";
 import {
   getDemoExperiences,
   type ExperienceView,
@@ -123,9 +124,13 @@ export default async function ExperiencesPage({
                     {experience.title}
                   </h2>
                 </Link>
-                <p className="mt-2 line-clamp-5 text-sm leading-6 text-stone-700">
-                  {experience.body}
-                </p>
+                <InlineTranslate
+                  text={experience.body}
+                  targetLocale={locale as "ja" | "en"}
+                  locale={locale}
+                  context="Personal reflection written by a volunteer after attending a community event in Japan"
+                  textClassName="mt-2 line-clamp-5 text-sm leading-6 text-stone-700"
+                />
                 <div className="mt-3 flex flex-wrap gap-2">
                   {experience.rating && (
                     <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">

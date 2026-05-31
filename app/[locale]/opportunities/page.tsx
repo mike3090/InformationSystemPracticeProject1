@@ -78,6 +78,10 @@ type VolunteerProfile = {
   prefecture: string | null;
 };
 
+type ProfileRecommendationHint = {
+  missingFields: string[];
+};
+
 function jaccard(a: string[], b: string[]): number {
   const setA = new Set(a.map((s) => s.toLowerCase().trim()).filter(Boolean));
   const setB = new Set(b.map((s) => s.toLowerCase().trim()).filter(Boolean));
@@ -147,6 +151,7 @@ export default async function OpportunitiesPage({
     (profile.skills.length > 0 ||
       profile.interests.length > 0 ||
       profile.preferredTaskTypes.length > 0);
+  const profileHint = buildProfileRecommendationHint(profile, locale);
 
   const opportunities: DiscoveryOpportunity[] = rawOpps
     .map((row) => {
@@ -196,6 +201,71 @@ export default async function OpportunitiesPage({
         opportunities={opportunities}
         hasVolunteerProfile={hasProfile}
       />
+
+      {profileHint && (
+        <aside className="fixed bottom-5 right-5 z-40 w-[min(22rem,calc(100vw-2.5rem))]">
+          <div className="rounded-lg border border-emerald-200 bg-white p-4 shadow-xl">
+            <div className="flex items-start gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-sm font-bold text-white shadow-sm">
+                AI
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">
+                  {locale === "en" ? "Recommendation bot" : "おすすめBot"}
+                </p>
+                <h2 className="mt-1 text-sm font-bold leading-5 text-stone-950">
+                  {locale === "en"
+                    ? "Want better activity matches?"
+                    : "より合う活動を見つけませんか？"}
+                </h2>
+                <p className="mt-1 text-xs leading-5 text-stone-600">
+                  {locale === "en"
+                    ? `Add ${profileHint.missingFields.join(", ")} to improve AI recommendations.`
+                    : `${profileHint.missingFields.join("、")}を追加すると、AIおすすめの精度が上がります。`}
+                </p>
+                <Link
+                  href={`/${locale}/profile?recommendationHint=1`}
+                  className="mt-3 inline-flex rounded-lg bg-emerald-700 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600"
+                >
+                  {locale === "en" ? "Update profile" : "プロフィールを編集"}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </aside>
+      )}
     </div>
   );
+}
+
+function buildProfileRecommendationHint(
+  profile: VolunteerProfile | null,
+  locale: string,
+): ProfileRecommendationHint | null {
+  if (!profile) return null;
+
+  const missingFields: string[] = [];
+  const labels =
+    locale === "en"
+      ? {
+          skills: "skills",
+          interests: "interests",
+          taskTypes: "preferred task types",
+          location: "city or prefecture",
+        }
+      : {
+          skills: "スキル",
+          interests: "興味",
+          taskTypes: "希望するタスク",
+          location: "地域",
+        };
+
+  if (profile.skills.length === 0) missingFields.push(labels.skills);
+  if (profile.interests.length === 0) missingFields.push(labels.interests);
+  if (profile.preferredTaskTypes.length === 0) {
+    missingFields.push(labels.taskTypes);
+  }
+  if (!profile.city && !profile.prefecture) missingFields.push(labels.location);
+
+  return missingFields.length > 0 ? { missingFields } : null;
 }
