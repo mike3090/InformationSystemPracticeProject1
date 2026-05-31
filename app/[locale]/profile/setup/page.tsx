@@ -1,7 +1,9 @@
 import ProfileForm from "../ProfileForm";
+import ProfileBotForm from "../ProfileBotForm";
 import { addRequesterRole, addVolunteerRole } from "../actions";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import MethodChoice from "@/components/MethodChoice";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 
@@ -10,10 +12,10 @@ export default async function ProfileSetupPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ next?: string; saved?: string; intent?: string }>;
+  searchParams: Promise<{ next?: string; saved?: string; intent?: string; method?: string }>;
 }) {
   const { locale } = await params;
-  const { next, saved, intent } = await searchParams;
+  const { next, saved, intent, method } = await searchParams;
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -88,6 +90,34 @@ export default async function ProfileSetupPage({
           title={t("becomeVolunteerTitle")}
           body={t("becomeVolunteerBody")}
           submitLabel={t("becomeVolunteerSubmit")}
+        />
+      ) : profileType === "requester" && method !== "manual" && method !== "bot" ? (
+        <MethodChoice
+          title={locale === "ja" ? "プロフィールの入力方法" : "Choose profile setup method"}
+          body={
+            locale === "ja"
+              ? "通常フォームで入力するか、bot と会話しながら organizer profile を作成できます。"
+              : "Use the regular form, or let the bot guide you through organizer profile setup."
+          }
+          manualHref={`/${locale}/profile/setup?intent=requester&next=${encodeURIComponent(safeNext)}&method=manual`}
+          botHref={`/${locale}/profile/setup?intent=requester&next=${encodeURIComponent(safeNext)}&method=bot`}
+          manualTitle={locale === "ja" ? "通常フォーム" : "Regular form"}
+          manualBody={
+            locale === "ja"
+              ? "現在のフォームで全項目を直接入力します。"
+              : "Fill the existing profile form directly."
+          }
+          botTitle={locale === "ja" ? "bot を使う" : "Use bot"}
+          botBody={
+            locale === "ja"
+              ? "必須項目から順番に会話形式で入力します。"
+              : "Answer guided questions, review, then save."
+          }
+        />
+      ) : profileType === "requester" && method === "bot" ? (
+        <ProfileBotForm
+          locale={locale}
+          next={safeNext}
         />
       ) : (
         <ProfileForm

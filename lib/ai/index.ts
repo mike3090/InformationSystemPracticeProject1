@@ -73,6 +73,10 @@ export type {
   RankOpportunitiesOutput,
   OpportunityForRanking,
   OpportunityRanking,
+
+  // formAssistant
+  FormAssistantInput,
+  FormAssistantOutput,
 } from "./types";
 
 // ── Agents ────────────────────────────────────────────────────────────────────
@@ -89,6 +93,7 @@ export { planMeal }            from "./agents/planMeal";
 export { planAccommodations }  from "./agents/planAccommodations";
 export { translateText }       from "./agents/translateText";
 export { rankOpportunities }   from "./agents/rankOpportunities";
+export { formAssistant }       from "./agents/formAssistant";
 
 // ── Internal helpers (not re-exported) ────────────────────────────────────────
 //

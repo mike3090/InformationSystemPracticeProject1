@@ -81,7 +81,8 @@ export type AiInteractionType =
   | "PLAN_MEAL"
   | "PLAN_ACCOMMODATIONS"
   | "TRANSLATE_TEXT"
-  | "RANK_OPPORTUNITIES";
+  | "RANK_OPPORTUNITIES"
+  | "FORM_ASSISTANT";
 
 // ── Agent: draftOpportunity ───────────────────────────────────────────────────
 //
@@ -174,6 +175,23 @@ export type DraftMissingDetail = {
 export type DraftConfidence = {
   overall: "low" | "medium" | "high";
   notes: string[];
+};
+
+// ── Agent: formAssistant ─────────────────────────────────────────────────────
+
+export type FormAssistantInput = {
+  flowType: "profile" | "opportunity";
+  stepId: string;
+  fieldLabel: string;
+  fieldType: string;
+  rawValue: string;
+  locale: "ja" | "en";
+};
+
+export type FormAssistantOutput = {
+  isValid: boolean;
+  normalizedValue: string;
+  assistantMessage: string;
 };
 
 // ── Agent: scoreApplicants ────────────────────────────────────────────────────
