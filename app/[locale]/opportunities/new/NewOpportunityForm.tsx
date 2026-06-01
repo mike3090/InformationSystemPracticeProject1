@@ -222,6 +222,7 @@ export default function NewOpportunityForm({
   const [tasks, setTasks] = useState<TaskCardValue[]>([initialTaskCard]);
   const [draft, setDraft] = useState<DraftOpportunityOutput | null>(null);
   const [draftError, setDraftError] = useState("");
+  const [areFormalFieldsOpen, setAreFormalFieldsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   function updateValue<K extends keyof FormValues>(key: K, value: FormValues[K]) {
@@ -413,6 +414,7 @@ export default function NewOpportunityForm({
         }
         setDraft(result.data);
         applyDraft(result.data);
+        setAreFormalFieldsOpen(true);
       } catch {
         setDraftError(copy.aiNetworkError);
       }
@@ -474,10 +476,8 @@ export default function NewOpportunityForm({
               disabled={isPending || roughDescription.trim().length < 10}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-stone-950 px-5 py-3 text-sm font-semibold text-white hover:bg-stone-800 disabled:cursor-not-allowed disabled:bg-stone-300"
             >
-              <span aria-hidden="true">AI</span>
               {isPending ? copy.aiDrafting : copy.aiDraftButton}
             </button>
-            <p className="text-xs leading-5 text-stone-500">{copy.aiHint}</p>
           </div>
           {draftError && (
             <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -499,12 +499,13 @@ export default function NewOpportunityForm({
         </div>
       </section>
 
-      <details className="rounded-lg border border-stone-200 bg-stone-50 p-5">
+      <details
+        open={areFormalFieldsOpen}
+        onToggle={(event) => setAreFormalFieldsOpen(event.currentTarget.open)}
+        className="rounded-lg border border-stone-200 bg-stone-50 p-5"
+      >
         <summary className="cursor-pointer text-sm font-semibold text-stone-900">
           {copy.detailsSummary}
-          <span className="mt-1 block text-xs font-normal leading-5 text-stone-600">
-            {copy.detailsDescription}
-          </span>
         </summary>
         <div className="mt-6 space-y-8 rounded-lg border border-stone-200 bg-white p-5">
           <FormSection
@@ -1102,7 +1103,6 @@ export function opportunityFormCopy(locale: string) {
       aiOrganizerPlaceholder: "例: 小さな商店会、京都市左京区、地域イベントが中心",
       aiDraftButton: "AIで整理する",
       aiDrafting: "整理中...",
-      aiHint: "Gemini API の既存エンドポイントを使います。MOCK_AI=true ならモックで動きます。",
       aiNetworkError: "AI下書きに接続できませんでした。もう一度試してください。",
       aiGuideEyebrow: "書き方のヒント",
       aiGuideTitle: "同僚に説明するように書いてください",
@@ -1151,7 +1151,6 @@ export function opportunityFormCopy(locale: string) {
       aiMissingArrival: "到着後の案内や最初に会う人を追加すると安心です。",
       aiReadyToReview: "主要な内容はそろっています。下の正式欄で確認・調整してください。",
       detailsSummary: "正式な入力欄を確認・編集する",
-      detailsDescription: "AI が埋めた内容を細かく直したいときだけ開いてください。",
       basicEyebrow: "公開情報",
       basicTitle: "基本情報",
       basicDescription: "募集一覧と詳細ページに表示される主要な説明です。",
@@ -1255,7 +1254,6 @@ export function opportunityFormCopy(locale: string) {
     aiOrganizerPlaceholder: "Example: small shopping association, Sakyo-ku Kyoto, mostly local events",
     aiDraftButton: "Structure with AI",
     aiDrafting: "Structuring...",
-    aiHint: "Uses the existing Gemini endpoint. Set MOCK_AI=true for local UI work without API calls.",
     aiNetworkError: "Could not reach the AI drafting service. Please try again.",
     aiGuideEyebrow: "Writing guide",
     aiGuideTitle: "Write it like a message to a teammate",
@@ -1304,7 +1302,6 @@ export function opportunityFormCopy(locale: string) {
     aiMissingArrival: "Add arrival guidance or the first person volunteers should meet.",
     aiReadyToReview: "The main pieces are present. Review and tune the formal fields below.",
     detailsSummary: "Review or edit the formal fields",
-    detailsDescription: "Open this only when you want to fine-tune what AI filled in.",
     basicEyebrow: "Public",
     basicTitle: "Basic task information",
     basicDescription: "This is the core copy volunteers see in discovery and detail pages.",
