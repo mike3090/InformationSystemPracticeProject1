@@ -1,6 +1,6 @@
 # Go Touch Grass — 地域ボランティアプラットフォーム
 
-A bilingual (Japanese / English) volunteer-matching platform for small Japanese towns. Residents, small businesses, and community organisations post volunteer opportunities; volunteers browse, filter, and apply. An AI agent layer (Google Gemini) assists with drafting posts, writing personalised booking confirmations, matching applicants, translation, and event planning.
+A bilingual (Japanese / English) volunteer-matching platform for small Japanese towns. Residents, small businesses, and community organisations post volunteer opportunities; volunteers browse, filter, and apply. Google Gemini LLM features assist with drafting posts, scoring and ranking applicants, writing personalised booking confirmations, real-time translation, and event-day planning.
 
 > Kyoto University — Practice Information Systems, Project 1
 
@@ -18,7 +18,7 @@ A bilingual (Japanese / English) volunteer-matching platform for small Japanese 
 | Driver adapter | @prisma/adapter-pg | 7.8 |
 | Auth | NextAuth v5 + Google OAuth + password + magic link | 5.0.0-beta |
 | i18n | next-intl (ja / en) | 4.9 |
-| AI | Google Gemini (`gemini-2.0-flash`) via `@google/generative-ai` | 0.24 |
+| AI | Google Gemini (`gemini-2.5-flash`) via `@google/generative-ai` | 0.24 |
 | Deployment | Vercel (region: Tokyo `nrt1`) | — |
 
 ---
@@ -107,10 +107,12 @@ app/
     auth/[...nextauth]/        # NextAuth route handler
     ai/draft-opportunity/      # POST — AI-assisted opportunity drafting
     ai/score-applicants/       # POST — AI applicant matching + score write-back
+    ai/rank-opportunities/     # POST — Personalised opportunity ranking for volunteers
     ai/translate/              # POST — Ja ↔ En translation
     ai/plan-route/             # POST — Route planning for confirmed volunteers
     ai/plan-meal/              # POST — Meal suggestions near the event venue
     ai/plan-accommodations/    # POST — Accommodation options near the venue
+    ai/form-assistant/         # POST — Guided profile-setup chatbot (onboarding bot)
   generated/prisma/            # Auto-generated Prisma client (do not edit)
 
 components/
@@ -134,10 +136,12 @@ lib/ai/
     draftOpportunity.ts        # Expand a rough description into a bilingual posting
     scoreApplicants.ts         # Score and rank pending applicants (0–100)
     buildConfirmation.ts       # Write a personalised bilingual booking confirmation
+    rankOpportunities.ts       # Rank all visible opportunities by fit for a volunteer
     translateText.ts           # Ja ↔ En translation with cultural nuance notes
     planRoute.ts               # Route options from volunteer's city to event venue
     planMeal.ts                # Meal suggestions near the event venue
     planAccommodations.ts      # Accommodation options near the event venue
+    formAssistant.ts           # Conversational profile-setup bot (guided onboarding)
 
 i18n/
   routing.ts                   # next-intl locale routing config
@@ -178,31 +182,31 @@ vercel.json                    # Build command + Tokyo region config
 
 ---
 
-## AI Agent Layer
+## Gemini LLM Features
 
-All agents live under `lib/ai/agents/`. Import them exclusively through `lib/ai/index.ts`.
+All LLM call functions live under `lib/ai/agents/`. Import them exclusively through `lib/ai/index.ts`.
 
-Every agent function follows the same contract:
+Every function follows the same contract:
 
 ```ts
-async function agentName(input: AgentInput, ctx: AgentContext): Promise<AgentResult<AgentOutput>>
+async function featureName(input: FeatureInput, ctx: AgentContext): Promise<AgentResult<FeatureOutput>>
 ```
 
 `AgentResult` is a discriminated union — always check `result.ok` before reading `result.data`.
 
-### Agents
-
-| Agent | Trigger | Status |
+| Function | Trigger | Notes |
 |---|---|---|
-| `draftOpportunity` | "Draft with AI" on the new opportunity form | Agent + API route ✅ |
-| `scoreApplicants` | "Run AI Match" on the applicant review page | Agent + API route ✅ |
-| `buildConfirmation` | Automatically called when an application is ACCEPTED | Agent + server action ✅ |
-| `translateText` | Translate button on opportunity detail / messages | Agent + API route ✅ |
-| `planRoute` | Route planning panel on confirmed event detail | Agent + API route ✅ |
-| `planMeal` | Meal panel on confirmed event detail | Agent + API route ✅ |
-| `planAccommodations` | Accommodation panel on confirmed event detail | Agent + API route ✅ |
+| `draftOpportunity` | "Draft with AI" on the new opportunity form | Receives short description → returns full bilingual post |
+| `scoreApplicants` | "Run AI Match" on the applicant review page | Returns 0–100 score + reason per applicant; writes back to DB |
+| `buildConfirmation` | Auto-called when an application is ACCEPTED (server action) | Returns personalised bilingual welcome message |
+| `rankOpportunities` | "AI Recommendations" button on the browse page | Ranks all visible opportunities by volunteer fit; returns score + reason + `aiPick` flag |
+| `translateText` | Translate button on opportunity detail and messages | Single Gemini call, target language inferred from locale |
+| `planRoute` | Route panel on confirmed event detail | Volunteer home city → event venue transport options |
+| `planMeal` | Meal panel on confirmed event detail | Nearby restaurants and convenience stores on event day |
+| `planAccommodations` | Accommodation panel on confirmed event detail | Nearby overnight stays for multi-day events |
+| `formAssistant` | Guided onboarding chatbot on profile setup page | Step-by-step Q&A; fills profile fields from natural-language answers |
 
-Set `MOCK_AI=true` in `.env` to bypass real Gemini calls during UI development. All agents return realistic mock data in that mode and the flag is ignored in production.
+Set `MOCK_AI=true` in `.env` to bypass real Gemini calls during development. All functions return deterministic mock data in that mode; the flag is stripped at build time.
 
 ---
 
@@ -222,11 +226,11 @@ node node_modules/typescript/lib/tsc.js --noEmit
 
 **Adding a translation key** — Add the key to both `messages/en.json` and `messages/ja.json`, then use `getTranslations()` (server components) or `useTranslations()` (client components).
 
-**Adding a new AI agent:**
-1. Create `lib/ai/agents/yourAgent.ts` following the pattern in existing agents
-2. Add your input/output types to `lib/ai/types.ts`
+**Adding a new Gemini LLM feature:**
+1. Create `lib/ai/agents/yourFeature.ts` following the pattern of existing files
+2. Add input/output types to `lib/ai/types.ts`
 3. Export the function from `lib/ai/index.ts`
-4. Create an API route at `app/api/ai/your-agent/route.ts` if a client button needs to call it
+4. Create an API route at `app/api/ai/your-feature/route.ts` if a client button needs to call it
 
 ---
 
@@ -236,14 +240,17 @@ node node_modules/typescript/lib/tsc.js --noEmit
 |---|---|---|
 | 1 — Foundation | Next.js scaffold, Prisma schema, auth, i18n, deployment config | ✅ Complete |
 | 2 — Manual MVP | Full requester→volunteer loop: post, browse, apply, accept, book | ✅ Complete |
-| 3 — AI Agent | Gemini layer: draft posts, applicant scoring, booking confirmations, translation, event planning | 🔄 In progress |
+| 3 — AI & Community | Gemini LLM features, hybrid matching, experience sharing, post-event reflection, skill badges, onboarding bot | ✅ Complete |
 
-### Sprint 3 remaining work
+---
 
-| Task | Notes |
+## Known Gaps
+
+These are intentional scope cuts for the academic prototype — not bugs.
+
+| Gap | Detail |
 |---|---|
-| "Draft with AI" button on new opportunity form | API route ready; needs client-side UI component |
-| "Run AI Match" button on applicant review page | API route ready; needs button in the dashboard |
-| Translate toggle on opportunity detail + messages | API route ready; needs UI button |
-| Route / meal / accommodation panels on confirmed event detail | API routes ready; needs UI panels |
-| Wire Resend email in `sendEmailLater` | Stub in `lib/preEventCommunication.ts` |
+| Email delivery | `sendEmailLater()` in `lib/preEventCommunication.ts` is a no-op stub. `RESEND_API_KEY` is configured; wiring Resend takes ~15 lines. |
+| Map integration | The route planning panel renders numbered placeholders. Real geocoding / map tiles are not connected. |
+| Experience recommendations | `ExperienceRecommendations` scores against `lib/mockOpportunities.ts` instead of live DB opportunities. |
+| Experience likes | `ExperienceLikeButton` stores likes in `localStorage` only — no DB model. |
